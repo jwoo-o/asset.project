@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="asset">
+  <select id="selectList" resultType="assetViewDto">
+  select
+		a.aNo,
+		a.assetNo,
+		(select cmNm from cmcd c4 where c4.cmCd='category' and c4.cmNo=a.category) category,
+		(select cmNm from cmcd c where c.cmCd='status' and c.cmNo=a.status) status,
+		a.modelNm,
+		e.name userName,
+		(select cmNm from cmcd c2 where c2.cmCd='position' and c2.cmNo=e.position) position,
+		(select cmNm from cmcd c1 where c1.cmCd='division' and c1.cmNo=e.division) division,
+		a.buying,
+		(select cmNm from cmcd c3 where c3.cmCd='mInch' and c3.cmNo=a.mInch) mInch,
+		a.note
+	from asset a left outer join employee e on a.empNo=e.employeeNumber
+    
+	<where>
+		<if test="status==null and status==''">
+			and a.status not in('d')
+		</if>
+		<if test="status!=null and status!=''">
+			and a.status=#{status}
+		</if>
+		<if test="userName!=null and userName!=''">
+			and e.name like CONCAT('%',#{userName},'%')
+		</if>
+		<if test="assetNo!=null and assetNo!=''">
+			and a.assetNo like CONCAT('%',#{assetNo},'%')
+		</if>
+		<if test="category!=null and category!=''">
+			and a.category=#{category}
+		</if>
+		<if test="position!=null and position!=''">
+			and e.position=#{position}
+		</if>
+		<if test="division!=null and division!=''">
+			and e.division=#{division}
+		</if>
+		<if test="re_time!=null and re_time!=''">
+			and re_time=#{re_time}
+		</if>
+		<if test="note!=null and note!=''">
+			and a.note like CONCAT ('%',#{note},'%')
+		</if>
+	</where>
+		<if test="sort!=null and sort!=''">
+			order by ${sort} ${key}
+		</if>
+    
+    	
+  </select>
+  <insert id="insert">
+  	insert into asset (assetNo,serialNo,modelNm,userName,empNo,position,division,buying,re_time,status,price,category,mInch,note,fstRgtWkrNm,fstRgtDtm,lstMdfWkrNm,lstMdfDtm) values(#{assetNo},#{serialNo},#{modelNm},#{userName},#{empNo},#{position},#{division},#{buying},#{re_time},#{status},#{price},#{category},#{mInch},#{note},#{fstRgtWkrNm},now(),#{lstMdfWkrNm},now())
+  </insert>
+  <update id="update">
+  	update asset 
+  	set 
+  	userName=#{userName},empNo=#{empNo},
+  	position=#{position},division=#{division},status=#{status},note=#{note},
+  	lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where aNo=#{aNo}
+  </update>
+  <update id="updateDl">
+  	update asset set status='d',
+  	lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where aNo=#{aNo}
+  </update>
+  <select id="select" resultType="assetVo">
+  	select 
+	a.aNo,a.assetNo,a.category,a.serialNo,a.buying,a.price,a.status,a.modelNm,a.note,
+    e.name userName,
+    e.employeeNumber empNo,e.position,e.division
+    from asset a left outer join employee e on a.empNo=e.employeeNumber where a.aNo=#{aNo}
+  </select>
+  <select id="asNo" resultType="String">
+  	select max(assetNo) from asset where category=#{category} order by assetNo desc
+  </select>
+  <delete id="delete">
+  	delete from asset where aNo=#{aNo}
+  </delete>
+</mapper>
