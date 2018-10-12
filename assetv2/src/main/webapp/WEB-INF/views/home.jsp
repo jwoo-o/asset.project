@@ -66,7 +66,7 @@
 				window.open('/empRgt','Employee Search','width=610,height=430,left='+popupX+',top='+popupY+'','_blank');
 			})
 			$("#myPage").click(function() {
-				alert("jenkinsTest")
+				alert("성공")
 			})
 			
 			$("input[type='text']").keypress(function(e){
