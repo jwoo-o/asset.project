@@ -66,7 +66,7 @@
 				window.open('/empRgt','Employee Search','width=610,height=430,left='+popupX+',top='+popupY+'','_blank');
 			})
 			$("#myPage").click(function() {
-				alert("ok");
+				alert("test1234")
 			})
 			
 			$("input[type='text']").keypress(function(e){
