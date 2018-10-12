@@ -66,7 +66,7 @@
 				window.open('/empRgt','Employee Search','width=610,height=430,left='+popupX+',top='+popupY+'','_blank');
 			})
 			$("#myPage").click(function() {
-				alert("test1234")
+				alert("jenkinsTest")
 			})
 			
 			$("input[type='text']").keypress(function(e){
