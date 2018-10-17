@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.asset.service.AssetService;
 import com.asset.service.dao.AssetDao;
+import com.asset.vo.AssetDownDto;
 import com.asset.vo.AssetDto;
 import com.asset.vo.AssetSearchDto;
 import com.asset.vo.AssetViewDto;
@@ -79,6 +80,12 @@ public class AssetServiceImpl implements AssetService {
 	public void assetDlY(AssetDto dto) {
 		// TODO Auto-generated method stub
 		dao.deleteY(dto);
+	}
+
+	@Override
+	public List<AssetDownDto> assetDown(AssetSearchDto dto) {
+		// TODO Auto-generated method stub
+		return dao.selectDown(dto);
 	}
 
 }

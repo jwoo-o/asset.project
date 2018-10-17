@@ -97,9 +97,8 @@
 			$("#download").click(function() {
 				if($("#view").find("tr").length>0){
 					
-					var sort = $("<input type='hidden' name='sort'>").val(s);
-					var key = $("<input type='hidden' name='key'>").val(k);
-					$("#asset_search").append(sort,key);
+					$("#sort").val(s);
+					$("#key").val(k);
 					$("#asset_search").serialize();
 					$("#asset_search").attr("action", "/excelDownload");
 					$("#asset_search").attr("method","post");
@@ -111,10 +110,9 @@
 	
 			$.ajx = function(sort,key){
 				
-				var data = $("#asset_search").serializeObject() 
-				data.sort=sort;
-				data.key=key;
-				var dataStr = JSON.stringify(data);
+				$("#sort").val(sort);
+				$("#key").val(key);
+				var data = $("#asset_search").serializeObject(),dataStr = JSON.stringify(data);
 				
 				$.ajax({
 					url:"/list/proc",
@@ -224,6 +222,8 @@
 							
 						<div class="box-body">
 							<form id="asset_search">
+							<input type='hidden' name='sort' id='sort'>
+							<input type='hidden' name='key' id='key'>
 							<table class="table table-bordered text-sm">
 						       <tbody><tr height="18">
 						      		<td class="tdBack" style="width: 13%;">&nbsp;<strong class="list_title">구매일</strong></td>
