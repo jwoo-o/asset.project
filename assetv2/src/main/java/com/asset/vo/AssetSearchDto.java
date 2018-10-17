@@ -12,6 +12,8 @@ public class AssetSearchDto {
 	private String note;
 	private String key;
 	private String sort;
+	private String start_dt;
+	private String end_dt;
 	
 	public String getUserName() {
 		return userName;
@@ -74,12 +76,28 @@ public class AssetSearchDto {
 	public void setNote(String note) {
 		this.note = note;
 	}
+	
+	
+	public String getStart_dt() {
+		return start_dt;
+	}
+	public void setStart_dt(String start_dt) {
+		this.start_dt = start_dt;
+	}
+	public String getEnd_dt() {
+		return end_dt;
+	}
+	public void setEnd_dt(String end_dt) {
+		this.end_dt = end_dt;
+	}
 	@Override
 	public String toString() {
 		return "AssetSearchDto [userName=" + userName + ", assetNo=" + assetNo + ", category=" + category
 				+ ", position=" + position + ", division=" + division + ", status=" + status + ", re_time=" + re_time
-				+ ", note=" + note + ", key=" + key + ", sort=" + sort + "]";
+				+ ", note=" + note + ", key=" + key + ", sort=" + sort + ", start_dt=" + start_dt + ", end_dt=" + end_dt
+				+ "]";
 	}
+	
 	
 	
 	

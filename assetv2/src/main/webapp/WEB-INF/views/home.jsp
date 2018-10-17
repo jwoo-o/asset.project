@@ -228,8 +228,8 @@
 						       <tbody><tr height="18">
 						      		<td class="tdBack" style="width: 13%;">&nbsp;<strong class="list_title">구매일</strong></td>
 						            <td align="left" width="200">&nbsp;
-						               <input type="text"  size="7" id="datepicker" name="start_dt"  disabled="disabled">~
-								       <input type="text"  size="7" id="datepicker1" name="end_dt" disabled="disabled">
+						               <input type="text"  size="7" id="datepicker" name="start_dt" >~
+								       <input type="text"  size="7" id="datepicker1" name="end_dt">
 						            </td>
 						            <td class="tdBack" style="width: 13%;">&nbsp;<strong class="list_title">사용자</strong></td>
 						            <td align="left">&nbsp;

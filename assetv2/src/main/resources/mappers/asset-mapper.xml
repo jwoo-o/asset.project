@@ -46,6 +46,12 @@
 		<if test="note!=null and note!=''">
 			and a.note like CONCAT ('%',#{note},'%')
 		</if>
+		<if test="start_dt!=null and start_dt!=''">
+			<![CDATA[and buying >= #{start_dt} ]]>
+		</if>
+		<if test="end_dt!=null and end_dt!=''">
+			<![CDATA[and buying <= #{end_dt} ]]>
+		</if>	
 	</where>
 		<if test="sort!=null and sort!=''">
 			order by ${sort} ${key}
