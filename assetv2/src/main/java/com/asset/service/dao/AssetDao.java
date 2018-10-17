@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.asset.vo.AssetDownDto;
 import com.asset.vo.AssetDto;
 import com.asset.vo.AssetSearchDto;
 import com.asset.vo.AssetViewDto;
@@ -44,5 +45,10 @@ public class AssetDao {
 	public void deleteY(AssetDto dto) {
 		// TODO Auto-generated method stub
 		session.delete("asset.delete",dto);
+	}
+
+	public List<AssetDownDto> selectDown(AssetSearchDto dto) {
+		// TODO Auto-generated method stub
+		return session.selectList("asset.selectDown",dto);
 	}
 }

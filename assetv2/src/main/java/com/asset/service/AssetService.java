@@ -2,6 +2,7 @@ package com.asset.service;
 
 import java.util.List;
 
+import com.asset.vo.AssetDownDto;
 import com.asset.vo.AssetDto;
 import com.asset.vo.AssetSearchDto;
 import com.asset.vo.AssetViewDto;
@@ -17,4 +18,5 @@ public interface AssetService {
 	public void assetDl(AssetDto dto, ManagerDto manager);
 	public String assetNo(String category);
 	public void assetDlY(AssetDto dto);
+	public List<AssetDownDto> assetDown(AssetSearchDto dto);
 }

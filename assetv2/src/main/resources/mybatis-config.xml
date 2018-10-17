@@ -8,6 +8,7 @@
   	<typeAlias type="com.asset.vo.AssetVo" alias="assetVo"/>
   	<typeAlias type="com.asset.vo.AssetViewDto" alias="assetViewDto"/>
   	<typeAlias type="com.asset.vo.AssetDto" alias="assetDto"/>
+  	<typeAlias type="com.asset.vo.AssetDownDto" alias="assetDownDto"/>
   	<!-- 관리자 -->
   	<typeAlias type="com.asset.vo.AssetSearchDto" alias="assetSearchDto"/>
   	<typeAlias type="com.core.vo.ManagerVo" alias="managerVo"/>

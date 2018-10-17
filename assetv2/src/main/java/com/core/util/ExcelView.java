@@ -11,6 +11,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.asset.vo.AssetDownDto;
 import com.asset.vo.AssetViewDto;
 
 public class ExcelView extends AbstractExcelPOIView{
@@ -27,7 +28,7 @@ public class ExcelView extends AbstractExcelPOIView{
 			HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		
-		List<AssetViewDto> list = (List<AssetViewDto>) model.get("list");
+		List<AssetDownDto> list = (List<AssetDownDto>) model.get("list");
 		
 		Sheet sheet = workbook.createSheet("asset");
 		Row row = null;
@@ -40,6 +41,7 @@ public class ExcelView extends AbstractExcelPOIView{
 		row.createCell(cellCount++).setCellValue("종류");
 		row.createCell(cellCount++).setCellValue("상태");
 		row.createCell(cellCount++).setCellValue("모델명");
+		row.createCell(cellCount++).setCellValue("시리얼번호");
 		row.createCell(cellCount++).setCellValue("사용자");
 		row.createCell(cellCount++).setCellValue("직위");
 		row.createCell(cellCount++).setCellValue("부서");
@@ -47,13 +49,14 @@ public class ExcelView extends AbstractExcelPOIView{
 		row.createCell(cellCount++).setCellValue("모니터크기");
 		row.createCell(cellCount++).setCellValue("참고");
 		
-		for (AssetViewDto dto : list) {
+		for (AssetDownDto dto : list) {
 			row = sheet.createRow(rowCount++);
 			cellCount = 0;
 			row.createCell(cellCount++).setCellValue(dto.getAssetNo());
 			row.createCell(cellCount++).setCellValue(dto.getCategory());
 			row.createCell(cellCount++).setCellValue(dto.getStatus());
 			row.createCell(cellCount++).setCellValue(dto.getModelNm());
+			row.createCell(cellCount++).setCellValue(dto.getSerialNo());
 			row.createCell(cellCount++).setCellValue(dto.getUserName());
 			row.createCell(cellCount++).setCellValue(dto.getPosition());
 			row.createCell(cellCount++).setCellValue(dto.getDivision());

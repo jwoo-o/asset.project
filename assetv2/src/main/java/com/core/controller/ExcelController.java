@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.asset.service.AssetService;
+import com.asset.vo.AssetDownDto;
 import com.asset.vo.AssetSearchDto;
 import com.asset.vo.AssetViewDto;
 
@@ -36,7 +37,7 @@ public class ExcelController {
 		
 		response.setHeader("Content-disposition", "attachment; filename="+fileName+".xlsx");
 		
-		List<AssetViewDto> excelList = service.assetLst(dto);
+		List<AssetDownDto> excelList = service.assetDown(dto);
 		map.put("list",excelList);
 		return "excelView";
 	}

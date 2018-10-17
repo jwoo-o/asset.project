@@ -86,4 +86,60 @@
   <delete id="delete">
   	delete from asset where aNo=#{aNo}
   </delete>
+  
+  <select id="selectDown" resultType="assetDownDto">
+  select
+		a.aNo,
+		a.assetNo,
+		(select cmNm from cmcd c4 where c4.cmCd='category' and c4.cmNo=a.category) category,
+		(select cmNm from cmcd c where c.cmCd='status' and c.cmNo=a.status) status,
+		a.modelNm,
+		a.serialNo,
+		e.name userName,
+		(select cmNm from cmcd c2 where c2.cmCd='position' and c2.cmNo=e.position) position,
+		(select cmNm from cmcd c1 where c1.cmCd='division' and c1.cmNo=e.division) division,
+		a.buying,
+		(select cmNm from cmcd c3 where c3.cmCd='mInch' and c3.cmNo=a.mInch) mInch,
+		a.note
+	from asset a left outer join employee e on a.empNo=e.employeeNumber
+    
+	<where>
+		<if test="status==null and status==''">
+			and a.status not in('d')
+		</if>
+		<if test="status!=null and status!=''">
+			and a.status=#{status}
+		</if>
+		<if test="userName!=null and userName!=''">
+			and e.name like CONCAT('%',#{userName},'%')
+		</if>
+		<if test="assetNo!=null and assetNo!=''">
+			and a.assetNo like CONCAT('%',#{assetNo},'%')
+		</if>
+		<if test="category!=null and category!=''">
+			and a.category=#{category}
+		</if>
+		<if test="position!=null and position!=''">
+			and e.position=#{position}
+		</if>
+		<if test="division!=null and division!=''">
+			and e.division=#{division}
+		</if>
+		<if test="re_time!=null and re_time!=''">
+			and re_time=#{re_time}
+		</if>
+		<if test="note!=null and note!=''">
+			and a.note like CONCAT ('%',#{note},'%')
+		</if>
+		<if test="start_dt!=null and start_dt!=''">
+			<![CDATA[and buying >= #{start_dt} ]]>
+		</if>
+		<if test="end_dt!=null and end_dt!=''">
+			<![CDATA[and buying <= #{end_dt} ]]>
+		</if>	
+	</where>
+		<if test="sort!=null and sort!=''">
+			order by ${sort} ${key}
+		</if>   	
+  </select>
 </mapper>
