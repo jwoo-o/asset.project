@@ -62,9 +62,9 @@
 			
 			$("#empSearch").click(function() {
 				
-				var popupX = (window.screen.width/2) - (600/2);
-				var popupY = (window.screen.height/2) - (400/2);
-				window.open('/empRgt','Employee Search','width=610,height=430,left='+popupX+',top='+popupY+'','_blank');
+				var popupX = (window.screen.width/2) - (1000/2);
+				var popupY = (window.screen.height/2) - (700/2);
+				window.open('/emp','Employee Search','width=1000,height=700,left='+popupX+',top='+popupY+',scrollbars = yes','_blank');
 			})
 			$("#myPage").click(function() {
 				alert("성공")
