@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.emp.vo.EmpVo;
+import com.emp.vo.SearchDto;
 
 @Repository
 public class EmpDao {
@@ -15,9 +16,9 @@ public class EmpDao {
 	@Inject
 	private SqlSession session;
 	
-	public List<EmpVo> selectList(){
+	public List<EmpVo> selectList(SearchDto dto){
 	
-		return session.selectList("emp.list");
+		return session.selectList("emp.list",dto);
 	}
 	
 	public EmpVo selectEmp(String empNo) {
@@ -38,5 +39,10 @@ public class EmpDao {
 	public void delete(String empNo) {
 		
 		session.delete("emp.delete",empNo);
+	}
+
+	public int selectCount(SearchDto dto) {
+		// TODO Auto-generated method stub
+		return session.selectOne("emp.count",dto);
 	}
 }

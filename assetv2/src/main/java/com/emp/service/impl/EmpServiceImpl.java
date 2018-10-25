@@ -1,14 +1,18 @@
 package com.emp.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.core.util.PageUtility;
 import com.emp.service.EmpService;
 import com.emp.service.dao.EmpDao;
 import com.emp.vo.EmpVo;
+import com.emp.vo.SearchDto;
 
 @Service
 public class EmpServiceImpl implements EmpService {
@@ -17,9 +21,13 @@ public class EmpServiceImpl implements EmpService {
 	private EmpDao dao;
 	
 	@Override
-	public List<EmpVo> empList() {
+	public Map<String, Object> empList(SearchDto dto) {
 		// TODO Auto-generated method stub
-		return dao.selectList();
+		PageUtility.calc(dto);
+		Map<String, Object> map = new HashMap<>();
+		map.put("total", dao.selectCount(dto));
+		map.put("records", dao.selectList(dto));
+		return map;
 	}
 
 	@Override

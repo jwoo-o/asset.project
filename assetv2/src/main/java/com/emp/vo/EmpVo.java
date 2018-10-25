@@ -3,22 +3,40 @@ package com.emp.vo;
 public class EmpVo {
 
 	private String empNo;
-	private String userName;
+	private String name;
 	private String division;
 	private String position;
 	private String gender;
 	private String joinDate;
+	private String pcode;
+	private String dcode;
+	private String status;
+	
+	
+	public String getPcode() {
+		return pcode;
+	}
+	public void setPcode(String pcode) {
+		this.pcode = pcode;
+	}
+	public String getDcode() {
+		return dcode;
+	}
+	public void setDcode(String dcode) {
+		this.dcode = dcode;
+	}
 	public String getEmpNo() {
 		return empNo;
 	}
 	public void setEmpNo(String empNo) {
 		this.empNo = empNo;
 	}
-	public String getUserName() {
-		return userName;
+	
+	public String getName() {
+		return name;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getDivision() {
 		return division;
@@ -44,11 +62,21 @@ public class EmpVo {
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	@Override
 	public String toString() {
-		return "EmpVo [empNo=" + empNo + ", userName=" + userName + ", division=" + division + ", position=" + position
-				+ ", gender=" + gender + ", joinDate=" + joinDate + "]";
+		return "EmpVo [empNo=" + empNo + ", name=" + name + ", division=" + division + ", position=" + position
+				+ ", gender=" + gender + ", joinDate=" + joinDate + ", pcode=" + pcode + ", dcode=" + dcode
+				+ ", status=" + status + "]";
 	}
+	
+	
 	
 	
 }

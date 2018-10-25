@@ -19,8 +19,8 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/js/jquery.form.js" type="text/javascript"></script>
-    <script src="js/jquery.session.js" type="text/javascript"></script>
-    <script src="js/jquery.serializeObject.js" type="text/javascript"></script>
+    <script src="/js/jquery.session.js" type="text/javascript"></script>
+    <script src="/js/jquery.serializeObject.js" type="text/javascript"></script>
     <script type="text/javascript">
 		
 		$(function(){

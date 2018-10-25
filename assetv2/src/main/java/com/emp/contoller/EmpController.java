@@ -1,6 +1,7 @@
 package com.emp.contoller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.emp.service.EmpService;
 import com.emp.vo.EmpDto;
 import com.emp.vo.EmpVo;
+import com.emp.vo.SearchDto;
 
 @Controller
 public class EmpController {
@@ -40,9 +42,21 @@ public class EmpController {
 		return map;
 	}
 	
-	@RequestMapping(value="/empRgt")
-	public String empRst() {
-		return "emp";
+	@RequestMapping(value="/emp")
+	public String emp() {
+		return "manager";
+	}
+	@RequestMapping(value="/empLst/proc")
+	public @ResponseBody Map<String,Object> empLst(SearchDto dto) {
+		logger.info(dto.toString());
+		Map<String,Object> map = null;
+		try {
+			map =  service.empList(dto);
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.debug(e.getMessage());
+		}
+		return map;
 	}
 	
 	
@@ -75,11 +89,11 @@ public class EmpController {
 		return map;
 	}
 	@RequestMapping(value="/empDl/proc",method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> empDlProc(@RequestBody String empNo) {
-		logger.info(empNo);
+	public @ResponseBody Map<String, Object> empDlProc(@RequestBody EmpVo vo) {
+		logger.info(vo.toString());
 		Map<String, Object> map = new HashMap<>();
 		try {
-			service.empDl(empNo);
+			service.empDl(vo.getEmpNo());
 			map.put("msg","0001");
 		}catch (Exception e) {
 			// TODO: handle exception

@@ -5,13 +5,25 @@
 <mapper namespace="emp">
   <select id="list" resultType="empVo">
     	select 
-    	e.employeeNumber as empno,
-    	e.name as userName,
-    	(select cmNm from cmcd c where c.cmCd='position' and c2.cmNo=e.position) as position,
-        (select cmNm from cmcd c1 where c1.cmCd='division' and c3.cmNo=e.division) as division,
-        gender,
-        joinDate
-        from employee
+    	e.employeeNumber as empNo,
+    	e.name as name,
+    	(select cmNm from cmcd c where c.cmCd='position' and c.cmNo=e.position) as position,
+        (select cmNm from cmcd c1 where c1.cmCd='division' and c1.cmNo=e.division) as division,
+        e.division as dcode,
+        e.position as pcode,
+        e.gender,
+        e.joinDate,
+        e.status
+        from employee e
+        <where>
+        	<if test="search!=null and search!='' and keyword!=null and keyword!=''">
+        		${keyword}=#{search}
+        	</if>
+        </where>
+        <if test="sortBy!= null and sortBy!=''">
+         order by ${sortBy} ${direction}
+        </if>
+        limit ${page},${limit}
   </select>
   <select id="detail" resultType="empVo">
   	select employeeNumber as empNo,
@@ -23,13 +35,21 @@
   	from employee where name=#{userName}
   </select>
   <insert id="insert">
-  	insert into employee values(#{empNo},#{userName},#{division},#{position},#{gender},#{joinDate},'y')
+  	insert into employee values(#{empNo},#{name},#{division},#{position},#{gender},#{joinDate},'y')
   </insert>
   <update id="update">
-  	update employee set division=#{division},position=#{position} where employeeNumber=#{empNo}
+  	update employee set division=#{division},position=#{position},status=#{status} where employeeNumber=#{empNo}
   </update>
   <delete id="delete">
   	delete from employee where employeeNumber=#{empNo}
   </delete>
+  <select id="count" resultType="int">
+  	select count(*) from employee
+  	<where>
+        	<if test="search!=null and search!='' and keyword!=null and keyword!=''">
+        		${keyword}=#{search}
+        	</if>
+   </where>
+  </select>
   
 </mapper>
