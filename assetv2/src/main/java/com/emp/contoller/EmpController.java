@@ -93,7 +93,7 @@ public class EmpController {
 		logger.info(vo.toString());
 		Map<String, Object> map = new HashMap<>();
 		try {
-			service.empDl(vo.getEmpNo());
+			service.empDl(vo);
 			map.put("msg","0001");
 		}catch (Exception e) {
 			// TODO: handle exception
