@@ -17,7 +17,14 @@
         from employee e
         <where>
         	<if test="search!=null and search!='' and keyword!=null and keyword!=''">
-        		${keyword}=#{search}
+	        	<choose>
+	        		<when test="keyword=='name'">
+	        			${keyword} like concat('%',#{search},'%')
+	        		</when>
+	        		<otherwise>
+	        			${keyword}=#{search}
+	        		</otherwise>
+	        	</choose>
         	</if>
         </where>
         <if test="sortBy!= null and sortBy!=''">
@@ -47,9 +54,16 @@
   	select count(*) from employee
   	<where>
         	<if test="search!=null and search!='' and keyword!=null and keyword!=''">
-        		${keyword}=#{search}
+	        	<choose>
+	        		<when test="keyword=='name'">
+	        			${keyword} like concat('%',#{search},'%')
+	        		</when>
+	        		<otherwise>
+	        			${keyword}=#{search}
+	        		</otherwise>
+	        	</choose>
         	</if>
-   </where>
+        </where>
   </select>
   
 </mapper>

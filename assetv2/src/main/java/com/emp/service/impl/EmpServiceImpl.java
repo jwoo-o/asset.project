@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.asset.service.dao.AssetDao;
 import com.core.util.PageUtility;
 import com.emp.service.EmpService;
 import com.emp.service.dao.EmpDao;
@@ -19,6 +20,7 @@ public class EmpServiceImpl implements EmpService {
 
 	@Inject
 	private EmpDao dao;
+	@Inject AssetDao assetDao;
 	
 	@Override
 	public Map<String, Object> empList(SearchDto dto) {
@@ -43,9 +45,11 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public void empDl(String empNo) {
+	public void empDl(EmpVo vo) {
 		// TODO Auto-generated method stub
-		dao.delete(empNo);
+		vo.setName(vo.getName()+" 퇴사");
+		assetDao.updateEmpDl(vo);
+		dao.delete(vo.getEmpNo());
 	}
 
 	@Override

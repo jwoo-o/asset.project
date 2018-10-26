@@ -142,4 +142,8 @@
 			order by ${sort} ${key}
 		</if>   	
   </select>
+  
+  <update id="empDl">
+  	update asset set status='s',note=#{name} where empNo=#{empNo} 
+  </update>
 </mapper>

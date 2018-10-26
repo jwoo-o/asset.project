@@ -185,7 +185,6 @@
         function frmchk() {
 			var frm=$("#regForm").find("input");
 			var num=frm.length;
-			alert(num);
 			for(i=0;i<=num;i++){
 				if($(frm[i]).val()==""){
 					return false;	
@@ -237,7 +236,7 @@
         function Delete(e) {
         	
             if (confirm('Are you sure?')) {
-            	var data = { empNo: e.data.id }, dataStr = JSON.stringify(data);
+            	var data = { empNo: e.data.id,name: e.data.record.name }, dataStr = JSON.stringify(data);
                 $.ajax({ url: '/empDl/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
                     .done(function () {
                         grid.reload();
@@ -337,7 +336,8 @@
             	var select = $("<select id='search' class='form-control mb-2 mr-sm-2 mb-sm-0'></select>");
             	switch(keyword){
             		case '':
-            			
+            			$("#search").remove();
+            			break;
             		case 'name':
             			
             			var input = $('<input id="search" type="text" placeholder="name...." class="form-control mb-2 mr-sm-2 mb-sm-0" />');
