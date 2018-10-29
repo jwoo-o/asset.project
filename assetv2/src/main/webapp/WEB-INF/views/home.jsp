@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
     
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -29,6 +29,13 @@
     <style type="text/css">
 		body{
 			background: #ecf0f5;
+		}
+		#assetChart:hover {
+			background-color: #172d44;
+		}
+		
+		#assetChart:visited {
+			background-color: #172d44;
 		}
 	</style>
 	<script type="text/javascript">
@@ -66,6 +73,13 @@
 				var popupY = (window.screen.height/2) - (700/2);
 				window.open('/emp','Employee Search','width=1000,height=700,left='+popupX+',top='+popupY+',scrollbars = yes','_blank');
 			})
+			$("#assetChart").click(function() {
+				var popupX = (window.screen.width/2) - (800/2);
+				var popupY = (window.screen.height/2) - (800/2);
+				window.open('/chart','chart search','width=800,height=800,left='+popupX+',top='+popupY+',scrollbars = yes','_blank');
+			})
+			
+			
 			$("#myPage").click(function() {
 				alert("성공")
 			})
@@ -192,11 +206,14 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav bs-glyphicons">
              <!-- User Account Menu -->
-	            <li style="padding-top: 19px; padding-bottom: 15px; padding-right:10px">
+	            <li style="padding-top: 15px; padding-bottom: 15px; padding-right:10px">
 	              	<span class="hidden-xs"><font color="white"><c:out value="${mgr.division }"></c:out></font></span>
 	              </li>
-	              <li style="padding-top: 3px">
+	              <li style="padding-top: 1px">
 	                <a href="#" id="myPage" name="myPage" title="My page"><span ><font color="white"><c:out value="${mgr.mName }"></c:out></font></span></a>
+	            </li>
+	            <li style="padding-top: 2px">
+	                <a href="#" id="assetChart" name="assetChart" title="인원 및 자산 현황"><span class="fa fa-pie-chart na" style="color: white; font-size:large;"></span></a>
 	            </li>
 	            <li>
 	                <a href="#" id="empSearch" name="empSearch" title="사원 검색"><span class="glyphicon glyphicon-user na" style="color: white; font-size:large;"></span></a>
