@@ -27,9 +27,15 @@
 	        	</choose>
         	</if>
         </where>
-        <if test="sortBy!= null and sortBy!=''">
-         order by ${sortBy} ${direction}
-        </if>
+        <choose>
+        	<when test="sortBy!= null and sortBy!=''">
+        	order by ${sortBy} ${direction}
+        	</when>
+        	<otherwise>
+        	order by joindate asc
+        	</otherwise>
+        </choose>
+        
         limit ${page},${limit}
   </select>
   <select id="detail" resultType="empVo">
