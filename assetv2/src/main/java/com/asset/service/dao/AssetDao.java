@@ -12,6 +12,7 @@ import com.asset.vo.AssetDto;
 import com.asset.vo.AssetSearchDto;
 import com.asset.vo.AssetViewDto;
 import com.asset.vo.AssetVo;
+import com.asset.vo.ChartDto;
 import com.emp.vo.EmpVo;
 
 @Repository
@@ -56,5 +57,12 @@ public class AssetDao {
 	public void updateEmpDl(EmpVo vo) {
 		// TODO Auto-generated method stub
 		session.update("asset.empDl",vo);
+	}
+
+	public List<ChartDto> selectRow(ChartDto dto) {
+		// TODO Auto-generated method stub
+		//System.out.println("dao :"+key);
+		
+		return session.selectList("asset.row",dto);
 	}
 }
