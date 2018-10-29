@@ -19,27 +19,51 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
-        ]);
+	google.charts.load("current", {packages:["corechart"]});
+	
+	
+     function drawChart(keyword) {
+			var category = keyword
+			var data = new google.visualization.DataTable();
+			data.addColumn('string','category');
+			data.addColumn('number','count');
+			
+	       	if(keyword==undefined){
+	       		category = 'division';
+	       	}
+			$.ajax({
+				url:"/chart/proc",
+				dataType:"json",
+				contentType:"application/json; charset=UTF-8",
+				method:'post',
+				data : JSON.stringify({"category" : category})
+			}).done(function(d) {
+					$.each(d.rows, function(i, elt) {
+						var category = elt.category;
+						var count = elt.count;
+						data.addRows([[category,count]]);
+					});
+					var options = {
+						       title: 'chart of '+keyword,
+						       is3D: true
+						       };       
+					var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+					chart.draw(data,options);	
+				
+			});
+			
+	       
+	      }
+     $(function(){
+    	 
+    	 google.charts.setOnLoadCallback(drawChart);
+    	 
+ 		$("input:radio[name=keyword]").click(function() {
+ 		   google.charts.setOnLoadCallback(drawChart($(this).val()));
+ 	   })
 
-        var options = {
-          title: 'My Daily Activities',
-          pieHole: 0.8,
-          is3D: true,
-        };
-       
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-        chart.draw(data, options);
-      }
+ 	      
+ 	})
     </script>
 </head>
 <body  class="content-wrapper2">
@@ -55,9 +79,8 @@
 		                  <h3 class="box-title"><strong>Asset Chart</strong></h3>
 		                </div><!-- /.box-header -->
 		                <div class="box-header">
-			                 <label class="radio-inline"><input type="radio" name="keyword"checked>division</label>
-							 <label class="radio-inline"><input type="radio" name="keyword">Option 2</label>
-							 <label class="radio-inline"><input type="radio" name="keyword">Option 3</label> 
+			                 <label class="radio-inline"><input type="radio" name="keyword" checked value="division">division</label>
+							 <label class="radio-inline"><input type="radio" name="keyword" value="position">position</label>
 		                </div><!-- /.box-header -->
 		                
 						<div class="box-body" id="donutchart" style="height: 600px;">  	

@@ -146,4 +146,12 @@
   <update id="empDl">
   	update asset set status='s',note=#{name} where empNo=#{empNo} 
   </update>
+  
+  <select id="row" resultType="chartDto">
+  	<!--  select 
+	(select cmNm from cmcd c1 where c1.cmCd=#{key} and c1.cmNo=e.#{key}) as key
+	,count(${key}) as count from asset group by ${key}-->
+	select IFNULL((select cmNm from cmcd c1 where c1.cmCd=#{category} and c1.cmNo=${category}),'보관') category ,count(${category}) as count from asset group by ${category}
+
+  </select>
 </mapper>

@@ -1,6 +1,8 @@
 package com.asset.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -13,6 +15,7 @@ import com.asset.vo.AssetDto;
 import com.asset.vo.AssetSearchDto;
 import com.asset.vo.AssetViewDto;
 import com.asset.vo.AssetVo;
+import com.asset.vo.ChartDto;
 import com.core.util.DateUtillity;
 import com.core.vo.ManagerDto;
 
@@ -87,5 +90,16 @@ public class AssetServiceImpl implements AssetService {
 		// TODO Auto-generated method stub
 		return dao.selectDown(dto);
 	}
+
+	@Override
+	public Map<String, Object> assetChart(ChartDto dto) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		List<ChartDto> list = dao.selectRow(dto);
+		map.put("rows", list);
+		
+		return map;
+	}
+
 
 }
