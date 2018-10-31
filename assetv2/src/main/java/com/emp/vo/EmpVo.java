@@ -11,6 +11,9 @@ public class EmpVo {
 	private String pcode;
 	private String dcode;
 	private String status;
+	private String email;
+	private String manager;
+	private String auth;
 	
 	
 	public String getPcode() {
@@ -69,12 +72,39 @@ public class EmpVo {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getManager() {
+		return manager;
+	}
+	public void setManager(String manager) {
+		this.manager = manager;
+	}
+	
+	
+	public String getAuth() {
+		return auth;
+	}
+	public void setAuth(String auth) {
+		this.auth = auth;
+	}
 	@Override
 	public String toString() {
 		return "EmpVo [empNo=" + empNo + ", name=" + name + ", division=" + division + ", position=" + position
 				+ ", gender=" + gender + ", joinDate=" + joinDate + ", pcode=" + pcode + ", dcode=" + dcode
-				+ ", status=" + status + "]";
+				+ ", status=" + status + ", email=" + email + ", manager=" + manager + ", auth=" + auth + "]";
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

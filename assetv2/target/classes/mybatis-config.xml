@@ -17,5 +17,8 @@
   	<typeAlias type="com.emp.vo.EmpDto" alias="empDto"/>
   	<typeAlias type="com.emp.vo.EmpVo" alias="empVo"/>
   	
+  	<!-- Common -->
+  	<typeAlias type="com.core.vo.CommonVo" alias="commonVo"/>
+  	
   </typeAliases>
 </configuration>

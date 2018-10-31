@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,16 +69,10 @@
              <div class="form-group">
                 <label for="position">직위</label>
                 <select class="form-control" id="position" name="position">
-	                <option value=""></option> 
-	                <option value="0">Dispatched</option>
-					<option value="1">Staff</option>
-					<option value="2">Senior Staff</option>
-					<option value="3">Manager</option>
-					<option value="4">Senior Manager</option>
-					<option value="5">General Manager</option>
-					<option value="6">Director</option>
-					<option value="7">Managing Director</option>
-					<option value="8">C.E.O</option>
+	                <option value=""></option>
+	                <c:forEach var="position" items="${common.position }">
+	                	<option value="${position.cCode }">${position.cName }</option>
+	                </c:forEach>
                 </select>
 
             </div>
@@ -85,20 +80,9 @@
                 <label for="division">부서</label>
                 <select class="form-control" id="division" name="division">
 	                <option value=""></option>
-	                <option value="0">Corporate Development Division</option>
-					<option value="1">Development Unit</option>
-					<option value="2">FA Division</option>
-					<option value="3">Fulfillment Operation Group</option>
-					<option value="4">Global Biz Division</option>
-					<option value="5">Global JP Group</option>
-					<option value="6">Global P.Planning Division</option>
-					<option value="7">KR GA & ER Division</option>
-					<option value="8">KRSG Beauty & Fashion Division</option>
-					<option value="9">Live10 Division</option>
-					<option value="10">Platform Planning Division</option>
-					<option value="11">SQM Division</option>
-					<option value="12">Technology Unit</option>
-					<option value="13">US & EU Biz Division</option> 	
+	                <c:forEach var="division" items="${common.division }">
+	                	<option value="${division.cCode }">${division.cName }</option>
+	                </c:forEach>
                 </select>
             </div>
              <div class="form-group">
@@ -107,6 +91,10 @@
                 	<option value="M">남성</option> 
 					<option value="F">여성</option>       
                 </select>
+            </div>
+             <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="text" class="form-control" id="email" name="email" value="@qoo10.com"/>
             </div>
             <div class="form-group">
                 <label for="joinDate">입사일</label>
@@ -119,6 +107,7 @@
     <div id="modify" style="display: none">
         <form id="mdfForm">
             <input type="hidden" class="form-control" id="eempNo" name="empNo">
+            <input type="hidden" class="form-control" id="eemail" name="email">
             <div class="form-group">
                 <label for="ename">이름</label>
                 <input type="text" class="form-control" id="ename" readonly="readonly" name="name"/>
@@ -127,35 +116,18 @@
                 <label for="eposition">직위</label>
                 <select class="form-control" id="eposition" name="position">
                 	<option value=""></option> 
-	                <option value="0">Dispatched</option>
-					<option value="1">Staff</option>
-					<option value="2">Senior Staff</option>
-					<option value="3">Manager</option>
-					<option value="4">Senior Manager</option>
-					<option value="5">General Manager</option>
-					<option value="6">Director</option>
-					<option value="7">Managing Director</option>
-					<option value="8">C.E.O</option>
+	                <c:forEach var="position" items="${common.position }">
+	                	<option value="${position.cCode }">${position.cName }</option>
+	                </c:forEach>
                 </select>
             </div>
              <div class="form-group">
                 <label for="edivision">부서</label>
                 <select class="form-control" id="edivision" name="division">
                 	<option value=""></option>
-	                <option value="0">Corporate Development Division</option>
-					<option value="1">Development Unit</option>
-					<option value="2">FA Division</option>
-					<option value="3">Fulfillment Operation Group</option>
-					<option value="4">Global Biz Division</option>
-					<option value="5">Global JP Group</option>
-					<option value="6">Global P.Planning Division</option>
-					<option value="7">KR GA & ER Division</option>
-					<option value="8">KRSG Beauty & Fashion Division</option>
-					<option value="9">Live10 Division</option>
-					<option value="10">Platform Planning Division</option>
-					<option value="11">SQM Division</option>
-					<option value="12">Technology Unit</option>
-					<option value="13">US & EU Biz Division</option>
+	                <c:forEach var="division" items="${common.division }">
+	                	<option value="${division.cCode }">${division.cName }</option>
+	                </c:forEach>
                 </select>
             </div>
             <div class="form-group">
@@ -163,6 +135,17 @@
                 <select class="form-control" id="estatus" name="status">
                 	<option value="y">정상</option>
 					<option value="n">휴직</option>
+                </select>
+            </div>
+            <div class="form-group" id="managerCr">
+                <label for="">계정생성</label>
+                <input type="checkbox" id="manager" name="manager" value="y">
+            </div>
+            <div class="form-group" id="managerDiv" style="display: none">
+                <label for="managerAuth">계정권한</label>
+                <select class="form-control" id="auth" name="auth">
+                	<option value="0">일반</option>
+					<option value="1">관리자</option>
                 </select>
             </div>
             <button type="button" id="btnRevise" class="btn btn-default">Revise</button>
@@ -180,6 +163,14 @@
             $("#eposition").val(e.data.record.pcode).prop("selected",true);
             $("#edivision").val(e.data.record.dcode).prop("selected",true);
             $("#estatus").val(e.data.record.status).prop("selected",true);
+            $("#eemail").val(e.data.record.email);
+            if(e.data.record.manager=='y'){
+            	$("#managerDiv").show();
+            	$("#manager").prop("checked",true);
+            	$("#auth").val(e.data.record.auth).prop("selected",true);
+            }else{
+            	$("#managerDiv").hide();
+            }
             modify.open('사원 수정');
         }
         function frmchk() {
@@ -204,13 +195,16 @@
 	            $.ajax({ url: '/empRgt/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
 	                .done(function () {
 	                    regist.close();
-	                    grid.reload();
+	                    var keyword = $("#keyword").val();
+                    	var search = $("#search").val();
+        				grid.reload({ keyword : keyword, search : search,page : 1 });
 	                })
 	                .fail(function (e) {
 	                	if(e.status == 401){
 	                		alert("세션이 만료되었습니다. 다시로그인 하세요");
-	        				opener.parent.location.reload();
-	        				window.close();
+	                		regist.close();
+	        				opener.parent.parent.location.reload();
+	        				opener.window.close();
 	                	}
 	                });
         	}
@@ -226,8 +220,9 @@
                 .fail(function (e) {
                 	if(e.status == 401){
                 		alert("세션이 만료되었습니다. 다시로그인 하세요");
-        				opener.parent.location.reload();
-        				window.close();
+                		modify.close();
+                		opener.parent.parent.location.reload();
+        				opener.window.close();
                 	}
                 });
         }
@@ -236,7 +231,7 @@
         function Delete(e) {
         	
             if (confirm('Are you sure?')) {
-            	var data = { empNo: e.data.id,name: e.data.record.name }, dataStr = JSON.stringify(data);
+            	var data = { empNo: e.data.id,name: e.data.record.name,manager:e.data.record.manager }, dataStr = JSON.stringify(data);
                 $.ajax({ url: '/empDl/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
                     .done(function () {
                         grid.reload();
@@ -250,6 +245,50 @@
                     });
             }
         }
+        /*function DeleteMgt(record){
+        	
+        	var data = {"empNo":record.empNo},dataStr = JSON.stringify(data);
+        	 $.ajax({ url: '/managerDl/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
+             .done(function (data) {
+            	 if(data.msg=='0001'){
+             		alert("계정 삭제 완료");
+             		
+             	}else{
+            		alert(data.msg);
+            	}
+             })
+             .fail(function (e,data) {
+             	if(e.status == 401){
+             		alert("세션이 만료되었습니다. 다시로그인 하세요");
+     				opener.parent.location.reload();
+     				window.close();
+             	}
+             });
+        }*/
+        
+        /*function RegisterMgt(record){
+        	 var data = {"mId":record.email,"mName":record.name,"empNo":record.empNo,"position":record.position,"dept":record.division},dataStr = JSON.stringify(data);
+        	$.ajax({
+            	url:"/managerRgt/proc",
+            	data:dataStr,
+            	dataType:"json",
+            	contentType:"application/json;charset=utf-8",
+            	method:"post"
+            }).done(function(data) {
+            	if(data.msg=='0001'){
+            		alert("계정 등록 완료");
+            		
+            	}else{
+            		alert(data.msg);
+            	}
+            }).fail(function (e) {
+             	if(e.status == 401){
+             		alert("세션이 만료되었습니다. 다시로그인 하세요");
+     				opener.parent.location.reload();
+     				window.close();
+             	}
+             });
+        }*/
         
         function onErrorFunc(e){
         	if(e.status == 401){
@@ -287,6 +326,8 @@
                 ],
                 pager: { limit: 10, sizes: [10, 20, 50] }
             });
+            
+
             
 
 
@@ -368,6 +409,31 @@
             			
             	}
             })
+            $("#manager").change(function() {
+            	if($("#manager").is(":checked")){
+            		$("#managerDiv").show();
+            	}else{
+            		$("#managerDiv").hide();
+            		
+            		var data = {"empNo":$("#eempNo").val()},dataStr = JSON.stringify(data);
+               	 $.ajax({ url: '/managerDl/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
+                    .done(function (data) {
+	                   	 if(data.msg=='0001'){
+	                    	alert("계정 삭제 완료");
+	                    	
+	                   	}
+                    })
+                    .fail(function (e,data) {
+                    	if(e.status == 401){
+                    		alert("세션이 만료되었습니다. 다시로그인 하세요");
+            				opener.parent.location.reload();
+            				window.close();
+                    	}
+                    });
+            	}
+            })
+            
+
             
         });
     </script>

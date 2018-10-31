@@ -9,6 +9,7 @@ public class ManagerVo {
 	private String dept;
 	private String position;
 	private String pwd;
+	private String auth;
 	
 	public String getmNo() {
 		return mNo;
@@ -52,11 +53,22 @@ public class ManagerVo {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
+	
+	public String getAuth() {
+		return auth;
+	}
+	public void setAuth(String auth) {
+		this.auth = auth;
+	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "ManagerVo [mNo=" + mNo + ", mName=" + mName + ", mId=" + mId + ", empNo=" + empNo + ", dept=" + dept
-				+ ", position=" + position + "]";
+				+ ", position=" + position + ", pwd=" + pwd + ", auth=" + auth +"]";
 	}
+	
 	
 	
 	

@@ -262,60 +262,42 @@
 						      	<tr>
 						      	   <td class="tdBack" align="left" width="80">&nbsp;<strong class="list_title">종류</strong></td>
 						           <td align="left" width="120">&nbsp;
-						              	<select class="SelectBox" id="category" name="category"> 
-						              	
-									        	 	<option value="">All</option>
-									        	 	<option value="0">PC</option>
-									        	 	<option value="1">MONITOR</option>
-									        	 	<option value="2">MOBILE</option>
-									        	 	<option value="3">NOTEBOOK</option>
+						              	<select class="SelectBox" id="category" name="category">
+						              		<option value="">All</option>
+						              		<c:forEach var="category" items="${common.category }">
+						              			<option value="${category.cCode }">${category.cName}</option>
+						              		</c:forEach>
+									        	 
 										</select>
 									</td>
 									<td class="tdBack" align="left" style="width: 14%;">&nbsp;<strong class="list_title">직위</strong></td>
 						            <td align="left" width="80">&nbsp;
 						              	<select class="SelectBox" id="position" name="position"> 
 						              	<option value="">All</option>
-						              	<option value="0">Dispatched</option>
-						              	<option value="1">Staff</option>
-						              	<option value="2">Senior Staff</option>
-						              	<option value="3">Manager</option>
-						              	<option value="4">Senior Manager</option>
-						              	<option value="5">General Manager</option>
-						              	<option value="6">Director</option>
-						              	<option value="7">Managing Director </option>
-						              	<option value="8">C.E.O</option>
+						              	<c:forEach var="position" items="${common.position }">
+						              			<option value="${position.cCode }">${position.cName}</option>
+						              	</c:forEach>
+						              	
 						              	
 						              	</select>
 						             </td>
 						           	<td class="tdBack" align="left" width="80">&nbsp;<strong class="list_title">부서</strong></td>
 							        <td align="left" width="80">&nbsp; 
 							             <select class="SelectBox" id="division" name="division"> 
-								              	<option value="" selected="">All</option>
-								              	<option value="0">Corporate Development Division</option>
-								              	<option value="1">Development Unit</option>
-								              	<option value="2">FA Division</option>
-								              	<option value="3">Fulfillment Operation Group</option>
-								              	<option value="4">Global Biz Division</option>
-								              	<option value="5">Global JP Group</option>
-								              	<option value="6">Global P.Planning Division</option>
-								              	<option value="7">KR GA & ER Division</option>
-								              	<option value="8">KRSG Beauty & Fashion Division</option>
-								              	<option value="9">Live10 Division</option>
-								              	<option value="10">Platform Planning Division</option>
-								              	<option value="11">SQM Division</option>
-								              	<option value="12">Technology Unit</option>
-								              	<option value="13">US & EU Biz Division</option> 	
+								            <option value="">All</option>
+						              		<c:forEach var="division" items="${common.division }">
+						              			<option value="${division.cCode }">${division.cName}</option>
+						              		</c:forEach> 	
 							             </select>
 							        </td>
 						      	</tr>
 						      	<tr>
 						           <td class="tdBack" align="left" width="100">&nbsp;<strong class="list_title">상태</strong></td>
 						           <td align="left" width="80" >&nbsp;<select class="SelectBox" id="status" name="status">
-						           				<option value="" selected="">All</option>
-								              	<option value="y">사용</option>
-								              	<option value="s">보관</option>
-												<option value="c">공용</option>
-								              	<option value="d">폐기</option>
+						           				<option value="">All</option>
+								              	<c:forEach var="status" items="${common.status }">
+						              				<option value="${status.cCode }">${status.cName}</option>
+						              			</c:forEach> 
 							             </select></td>
 							        <td class="tdBack" align="left" width="100">&nbsp;<strong class="list_title">교체시기</strong></td>
 						           <td align="left" width="80">&nbsp;<select class="SelectBox" id="re_time" name="re_time"> 

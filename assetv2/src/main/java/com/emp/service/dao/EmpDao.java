@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.core.vo.ManagerVo;
 import com.emp.vo.EmpVo;
 import com.emp.vo.SearchDto;
 
@@ -44,5 +45,15 @@ public class EmpDao {
 	public int selectCount(SearchDto dto) {
 		// TODO Auto-generated method stub
 		return session.selectOne("emp.count",dto);
+	}
+
+	public void updateMgt(ManagerVo vo) {
+		// TODO Auto-generated method stub
+		session.update("emp.mgt",vo);
+	}
+
+	public String exiManager(String empNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("emp.exiManager",empNo);
 	}
 }

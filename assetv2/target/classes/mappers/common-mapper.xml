@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common">
+	<select id="selectDiv" resultType="commonVo">
+		select cmNm as cName,cmNo as cCode from cmcd where cmCd='division'
+	</select>
+	<select id="selectPos" resultType="commonVo">
+		select cmNm as cName,cmNo as cCode from cmcd where cmCd='position'
+	</select>
+	<select id="selectCat" resultType="commonVo">
+		select cmNm as cName,cmNo as cCode from cmcd where cmCd='category'
+	</select>
+	<select id="selectStt" resultType="commonVo">
+		select cmNm as cName,cmNo as cCode from cmcd where cmCd='status'
+	</select>
+</mapper>

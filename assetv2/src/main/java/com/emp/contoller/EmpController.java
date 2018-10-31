@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.core.service.CommonServie;
 import com.emp.service.EmpService;
 import com.emp.vo.EmpDto;
 import com.emp.vo.EmpVo;
@@ -27,6 +28,7 @@ public class EmpController {
 	
 	@Inject
 	private EmpService service;
+	@Inject CommonServie cService;
 	
 	@RequestMapping(value="/empSC/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> searchEmp(@RequestBody EmpDto dto){
@@ -43,7 +45,8 @@ public class EmpController {
 	}
 	
 	@RequestMapping(value="/emp")
-	public String emp() {
+	public String emp(Model model) {
+		model.addAttribute("common", cService.commonLst());
 		return "manager";
 	}
 	@RequestMapping(value="/empLst/proc")
@@ -103,7 +106,7 @@ public class EmpController {
 		return map;
 	}
 	@RequestMapping(value="/empDtl")
-	public String empDtl(String empNo,Model model) {
+	public String empDtl(String empNo,Model model) throws Exception {
 		
 		model.addAttribute("vo", service.getEmp(empNo));
 		return "emp";
