@@ -13,7 +13,10 @@
         e.position as pcode,
         e.gender,
         e.joinDate,
-        e.status
+        e.status,
+        e.manager,
+        (select auth from manager m where m.empNo=e.employeeNumber) as auth,
+        e.email
         from employee e
         <where>
         	<if test="search!=null and search!='' and keyword!=null and keyword!=''">
@@ -48,10 +51,10 @@
   	from employee where name=#{userName}
   </select>
   <insert id="insert">
-  	insert into employee values(#{empNo},#{name},#{division},#{position},#{gender},#{joinDate},'y')
+  	insert into employee values(#{empNo},#{name},#{division},#{position},#{gender},#{joinDate},'y',#{email},'n')
   </insert>
   <update id="update">
-  	update employee set division=#{division},position=#{position},status=#{status} where employeeNumber=#{empNo}
+  	update employee set division=#{division},position=#{position},status=#{status},manager=#{manager} where employeeNumber=#{empNo}
   </update>
   <delete id="delete">
   	delete from employee where employeeNumber=#{empNo}
@@ -71,5 +74,10 @@
         	</if>
         </where>
   </select>
-  
+  <update id="mgt">
+  	update employee set manager='n' where employeeNumber=#{empNo}
+  </update>
+  <select id="exiManager" resultType="String">
+  	select manager from employee where employeeNumber=#{empNo}
+  </select>
 </mapper>

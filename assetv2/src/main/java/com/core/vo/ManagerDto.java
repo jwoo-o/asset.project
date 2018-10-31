@@ -6,6 +6,7 @@ public class ManagerDto {
 	private String mName;
 	private String mId;
 	private String division;
+	private String auth;
 	
 	public String getmNo() {
 		return mNo;
@@ -32,10 +33,19 @@ public class ManagerDto {
 	public void setDivision(String division) {
 		this.division = division;
 	}
+	
+	public String getAuth() {
+		return auth;
+	}
+	public void setAuth(String auth) {
+		this.auth = auth;
+	}
 	@Override
 	public String toString() {
-		return "ManagerDto [mNo=" + mNo + ", mName=" + mName + ", mId=" + mId + ", division=" + division + "]";
+		return "ManagerDto [mNo=" + mNo + ", mName=" + mName + ", mId=" + mId + ", division=" + division + ", auth="
+				+ auth + "]";
 	}
+	
 	
 	
 	
