@@ -1,12 +1,16 @@
 package com.core.service;
 
+import java.sql.SQLException;
 import java.util.Map;
 
+import com.core.vo.ManagerVo;
 import com.core.vo.MgrLgnDto;
 
 public interface ManagerService {
 
-	public Map<String, Object> logonProc(MgrLgnDto dto);
+	public Map<String, Object> logonProc(MgrLgnDto dto) throws SQLException;
+
+	public String DeleteProc(ManagerVo vo) throws SQLException;
 
 	
 }

@@ -24,6 +24,7 @@ import com.asset.service.AssetService;
 import com.asset.vo.AssetDto;
 import com.asset.vo.AssetSearchDto;
 import com.asset.vo.AssetVo;
+import com.core.service.CommonServie;
 import com.core.vo.ManagerDto;
 
 /**
@@ -36,12 +37,17 @@ public class AssetController {
 
 	@Inject
 	private AssetService service;
+	
+	@Inject
+	private CommonServie cService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping("/home")
-	public void home() {}
+	public void home(Model model) {
+		model.addAttribute("common",cService.commonLst());
+	}
 	
 	@RequestMapping(value = "/list/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetLst(@RequestBody AssetSearchDto dto,HttpSession session) {

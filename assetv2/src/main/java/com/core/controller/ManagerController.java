@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.core.service.ManagerService;
+import com.core.util.SessionUtility;
 import com.core.vo.ManagerDto;
 import com.core.vo.ManagerVo;
 import com.core.vo.MgrLgnDto;
@@ -48,13 +49,8 @@ public class ManagerController {
 				if(map.get("msg").equals("0001")) {
 					ManagerVo vo= (ManagerVo) map.get("managerVo");
 					
-					ManagerDto sDto = new ManagerDto();
-					
-					sDto.setmId(vo.getmId());
-					sDto.setmName(vo.getmName());
-					sDto.setmNo(vo.getmNo());
-					sDto.setDivision(vo.getDept());
-					
+					ManagerDto sDto = SessionUtility.setSessionAttribute(vo);
+							
 					request.getSession().setAttribute("mgr", sDto);
 					logger.info(sDto.toString());
 				}else {
@@ -64,6 +60,21 @@ public class ManagerController {
 		}catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg","오류가 발생하였습니다 관리자에게 문의하세요");
+		}
+		return map;
+	}
+	
+	@RequestMapping(value="/managerDl/proc",method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> managerDlProc(@RequestBody ManagerVo vo){
+		Map<String, Object> map = new HashMap<>();
+		logger
+		.info(vo.toString());
+		try {
+			map.put("msg", service.DeleteProc(vo));
+		}catch (Exception e) {
+			// TODO: handle exception
+			map.put("msg", "오류가 발생하였습니다 관리자에게 문의하세요");
+			
 		}
 		return map;
 	}

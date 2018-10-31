@@ -8,5 +8,13 @@
     	(select cmNm from cmcd c where c.cmCd='division' and c.cmNo=dept) dept,
     	position from manager where mId = #{mId} and pwd = SHA2(#{pwd},256)
   </select>
-  
+  <insert id="insert">
+  	insert into manager (mName,mId,empNo,dept,position,pwd,auth) values(#{mName},#{mId},#{empNo},#{dept},#{position},SHA2(#{pwd},256),#{auth})
+  </insert>
+  <delete id="delete">
+  	delete from manager where empNo=#{empNo}
+  </delete>
+  <update id="update">
+  	update manager set dept=#{division},position=#{position},auth=#{auth} where empNo=#{empNo}
+  </update>
 </mapper>
