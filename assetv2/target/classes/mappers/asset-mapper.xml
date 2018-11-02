@@ -19,12 +19,14 @@
 	from asset a left outer join employee e on a.empNo=e.employeeNumber
     
 	<where>
-		<if test="status==null and status==''">
-			and a.status not in('d')
-		</if>
-		<if test="status!=null and status!=''">
-			and a.status=#{status}
-		</if>
+		<choose>
+			<when test="status!=null and status!=''">
+				and a.status=#{status}
+			</when>
+			<otherwise>
+				and not a.status='d'
+			</otherwise>
+		</choose>
 		<if test="userName!=null and userName!=''">
 			and e.name like CONCAT('%',#{userName},'%')
 		</if>
@@ -75,7 +77,7 @@
   </update>
   <select id="select" resultType="assetVo">
   	select 
-	a.aNo,a.assetNo,a.category,a.serialNo,a.buying,a.price,a.status,a.modelNm,a.note,
+	a.aNo,a.assetNo,a.category,a.serialNo,a.buying,a.price,a.status,a.modelNm,a.note,a.mInch,
     e.name userName,
     e.employeeNumber empNo,e.position,e.division
     from asset a left outer join employee e on a.empNo=e.employeeNumber where a.aNo=#{aNo}
@@ -104,12 +106,14 @@
 	from asset a left outer join employee e on a.empNo=e.employeeNumber
     
 	<where>
-		<if test="status==null and status==''">
-			and a.status not in('d')
-		</if>
-		<if test="status!=null and status!=''">
-			and a.status=#{status}
-		</if>
+		<choose>
+			<when test="status!=null and status!=''">
+				and a.status=#{status}
+			</when>
+			<otherwise>
+				and a.status not in('d')
+			</otherwise>
+		</choose>
 		<if test="userName!=null and userName!=''">
 			and e.name like CONCAT('%',#{userName},'%')
 		</if>
@@ -143,8 +147,15 @@
 		</if>   	
   </select>
   
-  <update id="empDl">
-  	update asset set status='s',note=#{name} where empNo=#{empNo} 
+  <update id="empMdf">
+  	update asset
+  	<set>
+  	<if test="name==null">
+  	empNo='',
+  	</if>
+  	status=#{status},division=#{division},position=#{position},userName=#{name},note=#{note},lstMdfDtm=now(),lstMdfWkrNm=#{lstMdfWkrNm}
+  	</set> 
+  	where empNo=#{empNo} 
   </update>
   
   <select id="row" resultType="chartDto">
@@ -152,6 +163,6 @@
 	(select cmNm from cmcd c1 where c1.cmCd=#{key} and c1.cmNo=e.#{key}) as key
 	,count(${key}) as count from asset group by ${key}-->
 	select IFNULL((select cmNm from cmcd c1 where c1.cmCd=#{category} and c1.cmNo=${category}),'보관') category ,count(${category}) as count from asset group by ${category}
-
   </select>
+  
 </mapper>

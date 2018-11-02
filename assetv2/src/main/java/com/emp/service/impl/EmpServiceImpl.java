@@ -13,6 +13,7 @@ import com.asset.service.dao.AssetDao;
 import com.core.service.dao.ManagerDao;
 import com.core.util.ManagerUtility;
 import com.core.util.PageUtility;
+import com.core.vo.ManagerDto;
 import com.core.vo.ManagerVo;
 import com.emp.service.EmpService;
 import com.emp.service.dao.EmpDao;
@@ -47,9 +48,9 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public void empMdf(EmpVo vo) throws SQLException {
+	public void empMdf(EmpVo vo,ManagerDto dto) throws SQLException {
 		// TODO Auto-generated method stub
-
+		
 		if(dao.exiManager(vo.getEmpNo()).equals("n")) {
 			if(vo.getManager()!=null) {
 				ManagerVo mVo = ManagerUtility.create(vo);
@@ -60,17 +61,38 @@ public class EmpServiceImpl implements EmpService {
 		}else {
 			managerDao.updateMgt(vo);
 		}
+		Map<String, Object> map = new HashMap<>();
+		map.put("lstMdfWkrNm", dto.getmName());
+		map.put("empNo", vo.getEmpNo());
+		map.put("division", vo.getDivision());
+		map.put("position", vo.getPosition());
+		map.put("name", vo.getName());
+		if(vo.getStatus().equals("n")) {
+			map.put("note", vo.getName()+" 휴직");
+			map.put("status", "s");
+		}else {
+			map.put("note", "");
+			map.put("status", "y");
+		}
+		assetDao.updateEmp(map);
 		dao.update(vo);
 		
 	}
 
 	@Override
-	public void empDl(EmpVo vo)  throws SQLException {
+	public void empDl(EmpVo vo,ManagerDto dto)  throws SQLException {
 		// TODO Auto-generated method stub
-		vo.setName(vo.getName()+" 퇴사");
-		assetDao.updateEmpDl(vo);
+		Map<String, Object> map = new HashMap<>();
+		map.put("lstMdfWkrNm", dto.getmName());
+		map.put("empNo", vo.getEmpNo());
+		map.put("note", vo.getName()+" 퇴사");
+		map.put("status", "s");
+		map.put("division", "");
+		map.put("position", "");
+		map.put("name", "");
+		assetDao.updateEmp(map);
 		dao.delete(vo.getEmpNo());
-		if(vo.getManager().equals('y'))
+		if(vo.getManager().equals("y"))
 			managerDao.deleteMgt(vo.getEmpNo());
 	}
 
