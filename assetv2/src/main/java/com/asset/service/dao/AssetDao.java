@@ -1,6 +1,7 @@
 package com.asset.service.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -54,9 +55,9 @@ public class AssetDao {
 		return session.selectList("asset.selectDown",dto);
 	}
 
-	public void updateEmpDl(EmpVo vo) {
+	public void updateEmp(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		session.update("asset.empDl",vo);
+		session.update("asset.empMdf",map);
 	}
 
 	public List<ChartDto> selectRow(ChartDto dto) {
@@ -65,4 +66,5 @@ public class AssetDao {
 		
 		return session.selectList("asset.row",dto);
 	}
+
 }

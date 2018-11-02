@@ -44,7 +44,7 @@
 						data.addRows([[category,count]]);
 					});
 					var options = {
-						       title: 'chart of '+keyword,
+						       title: 'chart of '+category,
 						       is3D: true
 						       };       
 					var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
