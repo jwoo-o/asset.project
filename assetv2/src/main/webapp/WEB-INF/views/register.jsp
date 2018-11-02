@@ -26,7 +26,7 @@
 		$(function(){
 			
 			var assetNo;
-			var mInch = $('<tr height="22" id="inch"><td class="tdBack" align="left" width="15%"><strong class="list_title">종류</strong></td><td align="left">&nbsp;<select class="SelectBox" id="mInch" name="mInch"><option value="">선택하세요</option><option value="0">none</option><option value="1">17인치</option><option value="2">19인치</option><option value="3">24인치</option><option value="4">27인치</option></select></td></tr>');
+			//var mInch = $('<tr height="22" id="inch"><td class="tdBack" align="left" width="15%"><strong class="list_title">종류</strong></td><td align="left">&nbsp;<select class="SelectBox" id="mInch" name="mInch"><option value="">선택하세요</option><option value="0">none</option><option value="1">17인치</option><option value="2">19인치</option><option value="3">24인치</option><option value="4">27인치</option></select></td></tr>');
 			var url='/register/proc';
 			if("${vo.assetNo}"!=""){
 				
@@ -38,14 +38,19 @@
 				$("#assetForm").find("input").prop('readonly',true);
 				$("#category option").not(":selected").remove();
 				$("#buying").prop('disabled','disabled');
+				if("${vo.category}"=="1"){
+					$("#inch").show();
+					$("#mInch").val("${vo.mInch}").prop("selected", true);
+					$("#mInch option").not(":selected").remove();
+				}
 				url = '/update/proc' 
 			}
 			$("#category").change(function() {
 				var category = $("#category option:selected").val();
 				if(category=='1'){
-					$("#assetbody").append(mInch);
+					$("#inch").show();
 				}else{
-					$("#inch").remove();
+					$("#inch").hide();
 				}
 				if(category==''){
 					$("#assetNo").val("");
@@ -253,10 +258,9 @@
 												&nbsp;
 						              			<select class="SelectBox" id="category" name="category">
 						              				<option value="">선택하세요</option>
-									        	 	<option value="0">PC</option>
-									        	 	<option value="1">MONITOR</option>
-									        	 	<option value="2">MOBILE</option>
-									        	 	<option value="3">NOTEBOOK</option>
+						              				<c:forEach var="category" items="${common.category }">
+									        	 		<option value="${category.cCode }">${category.cName }</option>
+									        	 	</c:forEach>
 												</select>
 											</td>
 										</tr>
@@ -273,6 +277,19 @@
 											<td class="tdBack" align="left"><strong class="list_title">모델명</strong></td>
 											<td align="left">
 												&nbsp;&nbsp;<input type="text" size="20" name="modelNm" id="modelNm" value="${vo.modelNm }">											
+											</td>
+										</tr>
+										<tr height="22" id="inch" style="display: none;">
+											<td class="tdBack" align="left" width="15%"><strong class="list_title">종류</strong></td>
+											<td align="left">
+												&nbsp;&nbsp;<select class="SelectBox" id="mInch" name="mInch">
+												<option value="">선택하세요</option>
+												<option value="0">none</option>
+												<option value="1">17인치</option>
+												<option value="2">19인치</option>
+												<option value="3">24인치</option>
+												<option value="4">27인치</option>
+												</select>
 											</td>
 										</tr>
 										<tr height="22">
@@ -320,16 +337,10 @@
 											<td class="tdBack" align="left"><strong class="list_title">직위</strong></td>
 						            		<td align="left" width="80">&nbsp;
 								              	<select class="SelectBox" id="position" name="position">
-								              		<option value=""></option> 
-									              	<option value="0">Dispatched</option>
-									              	<option value="1">Staff</option>
-									              	<option value="2">Senior Staff</option>
-									              	<option value="3">Manager</option>
-									              	<option value="4">Senior Manager</option>
-									              	<option value="5">General Manager</option>
-									              	<option value="6">Director</option>
-									              	<option value="7">Managing Director </option>
-									              	<option value="8">C.E.O</option>
+								              		<option value=""></option>
+								              		<c:forEach var="position" items="${common.position }">
+									        	 		<option value="${position.cCode }">${position.cName }</option>
+									        	 	</c:forEach>
 								              	</select></td>
 										</tr>
 										
@@ -338,20 +349,9 @@
 											<td align="left">&nbsp; 
 							             <select class="SelectBox" id="division" name="division">
 							             		<option value=""></option> 
-								              	<option value="0">Corporate Development Division</option>
-								              	<option value="1">Development Unit</option>
-								              	<option value="2">FA Division</option>
-								              	<option value="3">Fulfillment Operation Group</option>
-								              	<option value="4">Global Biz Division</option>
-								              	<option value="5">Global JP Group</option>
-								              	<option value="6">Global P.Planning Division</option>
-								              	<option value="7">KR GA & ER Division</option>
-								              	<option value="8">KRSG Beauty & Fashion Division</option>
-								              	<option value="9">Live10 Division</option>
-								              	<option value="10">Platform Planning Division</option>
-								              	<option value="11">SQM Division</option>
-								              	<option value="12">Technology Unit</option>
-								              	<option value="13">US & EU Biz Division</option> 	
+								              	<c:forEach var="division" items="${common.division }">
+									        	 	<option value="${division.cCode }">${division.cName }</option>
+									        	 </c:forEach>
 							             </select></td>
 										</tr>
 										</tbody>

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.core.service.CommonServie;
+import com.core.vo.ManagerDto;
 import com.emp.service.EmpService;
 import com.emp.vo.EmpDto;
 import com.emp.vo.EmpVo;
@@ -78,11 +81,12 @@ public class EmpController {
 		return map;
 	}
 	@RequestMapping(value="/empMdf/proc",method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> empMdfProc(@RequestBody EmpVo vo) {
+	public @ResponseBody Map<String, Object> empMdfProc(@RequestBody EmpVo vo,HttpSession session) {
 		logger.info(vo.toString());
+		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		Map<String, Object> map = new HashMap<>();
 		try {
-			service.empMdf(vo);
+			service.empMdf(vo,manager);
 			map.put("msg","0001");
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -92,11 +96,12 @@ public class EmpController {
 		return map;
 	}
 	@RequestMapping(value="/empDl/proc",method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> empDlProc(@RequestBody EmpVo vo) {
+	public @ResponseBody Map<String, Object> empDlProc(@RequestBody EmpVo vo,HttpSession session) {
 		logger.info(vo.toString());
+		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		Map<String, Object> map = new HashMap<>();
 		try {
-			service.empDl(vo);
+			service.empDl(vo,manager);
 			map.put("msg","0001");
 		}catch (Exception e) {
 			// TODO: handle exception

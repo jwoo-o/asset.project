@@ -50,12 +50,10 @@ public class AssetController {
 	}
 	
 	@RequestMapping(value = "/list/proc", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> assetLst(@RequestBody AssetSearchDto dto,HttpSession session) {
+	public @ResponseBody Map<String, Object> assetLst(@RequestBody AssetSearchDto dto) {
 		logger.info(dto.toString());
-		if(session.getAttribute("search") != null) {
-			
-		}
-			
+		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			map.put("list", service.assetLst(dto));
@@ -69,10 +67,12 @@ public class AssetController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public void assetRst() throws Exception{}
+	public void assetRst(Model model) throws Exception{
+		model.addAttribute("common",cService.commonLst());
+	}
 
 	@RequestMapping(value = "/register/proc", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> assetRst(@RequestBody AssetVo vo, HttpSession session) throws Exception {
+	public @ResponseBody Map<String, Object> assetRst(@RequestBody AssetVo vo, HttpSession session) {
 		logger.info(vo.toString());
 		
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
@@ -94,6 +94,7 @@ public class AssetController {
 		AssetDto dto = new AssetDto();
 		dto.setaNo(aNo);
 		logger.info(dto.toString());
+		model.addAttribute("common",cService.commonLst());
 		model.addAttribute("vo", service.assetDtl(dto));
 		return "/register";
 	}
