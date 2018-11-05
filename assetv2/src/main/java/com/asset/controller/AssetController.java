@@ -134,7 +134,7 @@ public class AssetController {
 	public @ResponseBody Map<String, Object> assetDlY(@RequestBody AssetDto dto) {
 
 		
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			service.assetDlY(dto);
 			map.put("msg","0001");
