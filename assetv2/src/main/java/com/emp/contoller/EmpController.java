@@ -36,7 +36,7 @@ public class EmpController {
 	@RequestMapping(value="/empSC/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> searchEmp(@RequestBody EmpDto dto){
 		logger.info(dto.toString());
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			map.put("emp", service.getEmp(dto.getUserName()));
 		}catch (Exception e) {
@@ -69,7 +69,7 @@ public class EmpController {
 	@RequestMapping(value="/empRgt/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> empRstProc(@RequestBody EmpVo vo) {
 		logger.info(vo.toString());
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			service.empRst(vo);
 			map.put("msg","0001");
@@ -84,7 +84,7 @@ public class EmpController {
 	public @ResponseBody Map<String, Object> empMdfProc(@RequestBody EmpVo vo,HttpSession session) {
 		logger.info(vo.toString());
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			service.empMdf(vo,manager);
 			map.put("msg","0001");
@@ -99,7 +99,7 @@ public class EmpController {
 	public @ResponseBody Map<String, Object> empDlProc(@RequestBody EmpVo vo,HttpSession session) {
 		logger.info(vo.toString());
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			service.empDl(vo,manager);
 			map.put("msg","0001");
