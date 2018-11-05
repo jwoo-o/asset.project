@@ -28,7 +28,7 @@ public class ManagerServiceImpl implements ManagerService{
 	@Override
 	public Map<String, Object> logonProc(MgrLgnDto dto) throws SQLException {
 		// TODO Auto-generated method stub
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		ManagerVo vo = dao.selectLogon(dto);
 		if(vo != null) {
 			
