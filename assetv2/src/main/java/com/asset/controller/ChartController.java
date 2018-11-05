@@ -33,7 +33,7 @@ public class ChartController {
 	@RequestMapping(value="/chart/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> chartData(@RequestBody ChartDto dto) {
 		logger.info(dto.toString());
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			map = service.assetChart(dto);
 		}catch (Exception e) {

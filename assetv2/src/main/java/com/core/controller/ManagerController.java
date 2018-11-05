@@ -42,7 +42,7 @@ public class ManagerController {
 	
 	@RequestMapping(value="/login/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> managerLogonProc(@RequestBody MgrLgnDto dto,HttpServletRequest request){
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			map = service.logonProc(dto);
 			if(map != null) {
@@ -66,7 +66,7 @@ public class ManagerController {
 	
 	@RequestMapping(value="/managerDl/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> managerDlProc(@RequestBody ManagerVo vo){
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		logger
 		.info(vo.toString());
 		try {

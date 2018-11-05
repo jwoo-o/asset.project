@@ -76,7 +76,7 @@ public class AssetController {
 		logger.info(vo.toString());
 		
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			service.assetRgt(vo, manager);
 			map.put("msg","0001");
@@ -103,7 +103,7 @@ public class AssetController {
 	public @ResponseBody Map<String, Object> assetMdf(@RequestBody AssetVo vo, HttpSession session) {
 		logger.info(vo.toString());
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			service.assetMdf(vo, manager);
 			map.put("msg","0001");
@@ -119,7 +119,7 @@ public class AssetController {
 	public @ResponseBody Map<String, Object> assetDl(@RequestBody AssetDto dto, HttpSession session) {
 
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			service.assetDl(dto, manager);
 			map.put("msg","0001");
@@ -147,7 +147,7 @@ public class AssetController {
 	}
 	@RequestMapping(value="/assetNoSearch/proc")
 	public @ResponseBody Map<String, Object> assetNo(@RequestBody String category){
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			map.put("assetNo", service.assetNo(category));
 			map.put("msg", "0001");
