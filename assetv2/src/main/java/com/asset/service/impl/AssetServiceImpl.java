@@ -94,7 +94,7 @@ public class AssetServiceImpl implements AssetService {
 	@Override
 	public Map<String, Object> assetChart(ChartDto dto) {
 		// TODO Auto-generated method stub
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		List<ChartDto> list = dao.selectRow(dto);
 		map.put("rows", list);
 		

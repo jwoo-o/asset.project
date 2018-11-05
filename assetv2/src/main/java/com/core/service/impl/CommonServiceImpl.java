@@ -19,7 +19,7 @@ public class CommonServiceImpl implements CommonServie {
 	@Override
 	public Map<String, Object> commonLst() {
 		// TODO Auto-generated method stub
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("division", dao.selectDiv());
 		map.put("position", dao.selectPos());
 		map.put("category", dao.selectCat());

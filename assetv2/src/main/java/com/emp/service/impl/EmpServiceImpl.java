@@ -35,7 +35,7 @@ public class EmpServiceImpl implements EmpService {
 	public Map<String, Object> empList(SearchDto dto) throws SQLException {
 		// TODO Auto-generated method stub
 		PageUtility.calc(dto);
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("total", dao.selectCount(dto));
 		map.put("records", dao.selectList(dto));
 		return map;
@@ -61,7 +61,7 @@ public class EmpServiceImpl implements EmpService {
 		}else {
 			managerDao.updateMgt(vo);
 		}
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lstMdfWkrNm", dto.getmName());
 		map.put("empNo", vo.getEmpNo());
 		map.put("division", vo.getDivision());
@@ -82,7 +82,7 @@ public class EmpServiceImpl implements EmpService {
 	@Override
 	public void empDl(EmpVo vo,ManagerDto dto)  throws SQLException {
 		// TODO Auto-generated method stub
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lstMdfWkrNm", dto.getmName());
 		map.put("empNo", vo.getEmpNo());
 		map.put("note", vo.getName()+" 퇴사");
