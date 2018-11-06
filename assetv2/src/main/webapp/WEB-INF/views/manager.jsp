@@ -214,7 +214,7 @@
 	                .fail(function (e) {
 	                	if(e.status == 401){
 	                		regist.close();
-	        				oonErrorFunc(e);
+	        				onErrorFunc(e);
 	                	}
 	                });
         	}
