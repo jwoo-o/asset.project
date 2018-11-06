@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.core.vo.ManagerVo;
 import com.core.vo.MgrLgnDto;
+import com.core.vo.MgrPwdDto;
 import com.emp.vo.EmpVo;
 
 @Repository
@@ -35,6 +36,11 @@ public class ManagerDao {
 	public void updateMgt(EmpVo vo) {
 		// TODO Auto-generated method stub
 		session.update("manager.update",vo);
+	}
+
+	public int updatePwd(MgrPwdDto dto) {
+		// TODO Auto-generated method stub
+		return session.update("manager.updatePwd",dto);
 	}
 
 }

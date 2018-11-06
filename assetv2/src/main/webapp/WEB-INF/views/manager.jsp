@@ -24,6 +24,7 @@
 	</style>
 	
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="/js/common.js" type="text/javascript"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   	<script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.js" type="text/javascript"></script>
   	<script src="js/jquery.serializeObject.js" type="text/javascript"></script>
@@ -39,6 +40,9 @@
                 		<option value="division">부서</option>
                 		<option value="position">직위</option>
                 		<option value="status">상태</option>
+                		<c:if test="${mgr.auth==1 }">
+                		<option value="manager">계정</option>
+                		</c:if>
                 	</select>
                 	<span id="s"></span>
                      <button id="btnSearch" type="button" class="btn btn-default">Search</button> &nbsp;
@@ -155,23 +159,31 @@
 
     <script type="text/javascript">
         var grid, regist,modify;
-      
+      	
+        if("${mgr.auth}"==0){
+        	$("#btnAdd").remove();
+        }
+        
+        
         function Edit(e) {
-        	
-            $("#eempNo").val(e.data.id);
-            $("#ename").val(e.data.record.name);
-            $("#eposition").val(e.data.record.pcode).prop("selected",true);
-            $("#edivision").val(e.data.record.dcode).prop("selected",true);
-            $("#estatus").val(e.data.record.status).prop("selected",true);
-            $("#eemail").val(e.data.record.email);
-            if(e.data.record.manager=='y'){
-            	$("#managerDiv").show();
-            	$("#manager").prop("checked",true);
-            	$("#auth").val(e.data.record.auth).prop("selected",true);
-            }else{
-            	$("#managerDiv").hide();
-            }
-            modify.open('사원 수정');
+        	if("${mgr.auth}"!=0){
+	            $("#eempNo").val(e.data.id);
+	            $("#ename").val(e.data.record.name);
+	            $("#eposition").val(e.data.record.pcode).prop("selected",true);
+	            $("#edivision").val(e.data.record.dcode).prop("selected",true);
+	            $("#estatus").val(e.data.record.status).prop("selected",true);
+	            $("#eemail").val(e.data.record.email);
+	            if(e.data.record.manager=='y'){
+	            	$("#managerDiv").show();
+	            	$("#manager").prop("checked",true);
+	            	$("#auth").val(e.data.record.auth).prop("selected",true);
+	            }else{
+	            	$("#managerDiv").hide();
+	            }
+	            modify.open('사원 수정');
+        	}else{
+        		alert("Not Authorization");
+        	}
         }
         function frmchk() {
 			var frm=$("#regForm").find("input");
@@ -201,10 +213,8 @@
 	                })
 	                .fail(function (e) {
 	                	if(e.status == 401){
-	                		alert("세션이 만료되었습니다. 다시로그인 하세요");
 	                		regist.close();
-	        				opener.parent.parent.location.reload();
-	        				opener.window.close();
+	        				oonErrorFunc(e);
 	                	}
 	                });
         	}
@@ -219,31 +229,29 @@
                 })
                 .fail(function (e) {
                 	if(e.status == 401){
-                		alert("세션이 만료되었습니다. 다시로그인 하세요");
                 		modify.close();
-                		opener.parent.parent.location.reload();
-        				opener.window.close();
+                		onErrorFunc(e);
+                		
                 	}
                 });
         }
         
         
         function Delete(e) {
-        	
-            if (confirm('Are you sure?')) {
-            	var data = { empNo: e.data.id,name: e.data.record.name,manager:e.data.record.manager }, dataStr = JSON.stringify(data);
-                $.ajax({ url: '/empDl/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
-                    .done(function () {
-                        grid.reload();
-                    })
-                    .fail(function (e) {
-                    	if(e.status == 401){
-                    		alert("세션이 만료되었습니다. 다시로그인 하세요");
-            				opener.parent.location.reload();
-            				window.close();
-                    	}
-                    });
-            }
+        	if("${mgr.auth}"!=0){
+	            if (confirm('Are you sure?')) {
+	            	var data = { empNo: e.data.id,name: e.data.record.name,manager:e.data.record.manager }, dataStr = JSON.stringify(data);
+	                $.ajax({ url: '/empDl/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
+	                    .done(function () {
+	                        grid.reload();
+	                    })
+	                    .fail(function (e) {
+	                    	onErrorFunc(e);
+	                    });
+	            }
+        	}else{
+        		alert("Not Authorization");
+        	}
         }
         /*function DeleteMgt(record){
         	
@@ -290,13 +298,6 @@
              });
         }*/
         
-        function onErrorFunc(e){
-        	if(e.status == 401){
-        		alert("세션이 만료되었습니다. 다시로그인 하세요");
-				opener.parent.location.reload();
-				window.close();
-        	}
-        }
         
         
         $(document).ready(function () {
@@ -389,9 +390,9 @@
             			$(select).append("<option value=''>선택</option>");
             			for(var i=0;i<division_data.length;i++){
             				var option = $("<option value='"+i+"'>"+division_data[i]+"</option>")
-            				$(select).append(option);
+            				$(select).append(option).show();
             			}
-            			$("#s").append(select);
+            			$("#s").append(select).show();;
             			//alert(division_data.length);
                 		break;
             		case 'position':
@@ -400,12 +401,17 @@
             				var option = $("<option value='"+i+"'>"+position_data[i]+"</option>")
             				$(select).append(option);
             			}
-            			$("#s").append(select);
+            			$("#s").append(select).show();;
             			//alert(division_data.size());
                 		break;
             		case 'status':
             			$(select).append("<option value='y'>정상</option><option value='n'>휴직</option>");
-            			$("#s").append(select);
+            			$("#s").append(select).show();;
+            			break;
+            		case 'manager':
+            			$(select).append("<option value='y'></option>");
+            			$("#s").append(select).hide();
+            			break;
             			
             	}
             })
@@ -416,7 +422,7 @@
             		$("#managerDiv").hide();
             		
             		var data = {"empNo":$("#eempNo").val()},dataStr = JSON.stringify(data);
-               	 $.ajax({ url: '/managerDl/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
+               	 	$.ajax({ url: '/managerDl/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
                     .done(function (data) {
 	                   	 if(data.msg=='0001'){
 	                    	alert("계정 삭제 완료");
@@ -425,9 +431,7 @@
                     })
                     .fail(function (e,data) {
                     	if(e.status == 401){
-                    		alert("세션이 만료되었습니다. 다시로그인 하세요");
-            				opener.parent.location.reload();
-            				window.close();
+                    		onErrorFunc(e);
                     	}
                     });
             	}

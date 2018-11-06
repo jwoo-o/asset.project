@@ -8,43 +8,22 @@
     <title>GIOSIS MANAGER</title>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<!-- Bootstrap -->
-	<link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-	<!-- Font Awesome -->
-    <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<!-- iCheck -->
-    <link href="/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+	
     <!-- Custom Theme Style -->
-    <link href="/css/custom.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- jQuery -->
-	<script src="/vendors/jquery/dist/jquery.min.js"></script>
-	<!-- Bootstrap javascript -->
-	<script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-	<!-- bootstrap-daterangepicker -->
-    <script src="/vendors/moment/moment.js"></script>
-    <script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-    	<!-- iCheck -->
-	<script src="/vendors/iCheck/icheck.min.js"></script>
-	<!-- FastClick -->
-	<script src="/vendors/fastclick/lib/fastclick.js"></script>
-	<!-- Validator -->
-	<script src="/vendors/validator/validator.js"></script>
-	<!-- Combo Options -->
-    <script src="/js/lib/comboCodes.js"></script>
-	<!-- Function Utils -->
-	<script src="/js/functionutils.js?v=20180823"></script>
-	<script src="/js/ajax_error.js"></script>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link href="/css/custom.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]--	>
-    <script src="/vendors/bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/js/jquery.form.js" type="text/javascript"></script>
+    <script src="js/jquery.session.js" type="text/javascript"></script>
+    <script src="js/jquery.serializeObject.js" type="text/javascript"></script>
+   
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
     
     <title>Welcome GIOSIS</title>
     <script type="text/javascript">
@@ -107,7 +86,6 @@
 		</form>
     </div>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../vendors/bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
+ 
   
 </body></html>

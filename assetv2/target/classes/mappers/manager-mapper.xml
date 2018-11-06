@@ -4,9 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="manager">
   <select id="login" resultType="managerVo">
-    	select mNo,mName,mId,empNo,
+    	select mNo,mName,mId,empNo,auth,
     	(select cmNm from cmcd c where c.cmCd='division' and c.cmNo=dept) dept,
-    	position from manager where mId = #{mId} and pwd = SHA2(#{pwd},256)
+    	(select cmNm from cmcd c1 where c1.cmCd='position' and c1.cmNo=position) position
+    	from manager where mId = #{mId} and pwd = SHA2(#{pwd},256)
   </select>
   <insert id="insert">
   	insert into manager (mName,mId,empNo,dept,position,pwd,auth) values(#{mName},#{mId},#{empNo},#{dept},#{position},SHA2(#{pwd},256),#{auth})
@@ -16,5 +17,8 @@
   </delete>
   <update id="update">
   	update manager set dept=#{division},position=#{position},auth=#{auth} where empNo=#{empNo}
+  </update>
+  <update id="updatePwd">
+  	update manager set pwd=#{newPwd} where mId=#{mId} and pwd=#{pwd}
   </update>
 </mapper>

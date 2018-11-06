@@ -21,8 +21,6 @@
 	<resources location="/resources/build/js/" mapping="/js/**" />
 	<resources location="/resources/build/images/"
 		mapping="/images/**" />
-	<resources location="/resources/vendors/"
-		mapping="/vendors/**" />
 
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
@@ -63,7 +61,6 @@
 			<exclude-mapping path="/css/**" />
 			<exclude-mapping path="/js/**" />
 			<exclude-mapping path="/images/**" />
-			<exclude-mapping path="/vendors/**" />
 			<exclude-mapping path="/resources/**" />
 			<exclude-mapping path="/upload/**" />
 			<exclude-mapping path="/login/proc" />

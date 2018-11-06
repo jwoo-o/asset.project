@@ -37,13 +37,24 @@
 				
 				$("#assetForm").find("input").prop('readonly',true);
 				$("#category option").not(":selected").remove();
-				$("#buying").prop('disabled','disabled');
+				//$("#buying").prop('disabled','disabled');
 				if("${vo.category}"=="1"){
 					$("#inch").show();
 					$("#mInch").val("${vo.mInch}").prop("selected", true);
 					$("#mInch option").not(":selected").remove();
 				}
+				if("${mgr.auth}"==0){
+					$("#empBt").remove();
+					$("#deleteBt").remove();
+					$("#requestBt").remove();
+					$("#empForm").find("input").prop('readonly', true);
+					$("#status option").not(":selected").remove();
+					$("#position option").not(":selected").remove();
+					$("#division option").not(":selected").remove();
+				}
 				url = '/update/proc' 
+			}else{
+				$("#buying").datepicker();
 			}
 			$("#category").change(function() {
 				var category = $("#category option:selected").val();
@@ -84,7 +95,7 @@
                 ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
 			})
 			
-			$("#buying").datepicker();
+			
 			
 			$("#deleteBt").click(function() {
 				var url = "/delete/proc";
@@ -161,8 +172,10 @@
 					
 			})
 			$("#userName").keypress(function(e) {
-				if(e.which==13)
-					$.empSearch();
+				if("${mgr.auth}"!=0){
+					if(e.which==13)
+						$.empSearch();
+				}
 			})
 			
 			$.empSearch = function(){
@@ -188,11 +201,7 @@
 					}
 						
 				}).fail(function(e) {
-					if(e.status==401){
-						alert("세션이 만료되어 입력에 실패하였습니다. 다시로그인 하세요");
-						opener.parent.location.reload();
-						window.close();
-					}
+					onErrorFunc(e);
 				})
 			}
 			$.frmchk = function() {
