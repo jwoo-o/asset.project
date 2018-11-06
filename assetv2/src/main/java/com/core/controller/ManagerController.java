@@ -22,6 +22,7 @@ import com.core.util.SessionUtility;
 import com.core.vo.ManagerDto;
 import com.core.vo.ManagerVo;
 import com.core.vo.MgrLgnDto;
+import com.core.vo.MgrPwdDto;
 
 
 @Controller
@@ -67,8 +68,7 @@ public class ManagerController {
 	@RequestMapping(value="/managerDl/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> managerDlProc(@RequestBody ManagerVo vo){
 		Map<String, Object> map = new HashMap<String, Object>();
-		logger
-		.info(vo.toString());
+		logger.info(vo.toString());
 		try {
 			map.put("msg", service.DeleteProc(vo));
 		}catch (Exception e) {
@@ -77,5 +77,22 @@ public class ManagerController {
 			
 		}
 		return map;
+	}
+	@RequestMapping("password")
+	public void pwdChange() throws Exception {
+		
+	}
+	@RequestMapping(value="password/proc",method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> pwdChange(@RequestBody MgrPwdDto dto){
+		Map<String, Object> map = new HashMap<String,Object>();
+		logger.info(dto.toString());
+		try {
+			map = service.pwdMdf(dto);
+		}catch (Exception e) {
+			// TODO: handle exception
+			map.put("msg", "오류가 발생하였습니다 관리자에게 문의하세요");
+		}
+		return map;
+		
 	}
 }

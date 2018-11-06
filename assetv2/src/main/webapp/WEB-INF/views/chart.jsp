@@ -16,6 +16,7 @@
 </style>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="/js/common.js" type="text/javascript"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -50,10 +51,12 @@
 					var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
 					chart.draw(data,options);	
 				
-			});
+			}).fail(function (e) {
+            	onErrorFunc(e);
+            });
 			
 	       
-	      }
+	 }
      $(function(){
     	 
     	 google.charts.setOnLoadCallback(drawChart);
