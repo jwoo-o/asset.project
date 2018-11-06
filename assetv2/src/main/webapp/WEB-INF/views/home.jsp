@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="/js/common.js" type="text/javascript"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/js/jquery.form.js" type="text/javascript"></script>
     <script src="js/jquery.session.js" type="text/javascript"></script>
@@ -40,6 +41,10 @@
 	</style>
 	<script type="text/javascript">
 		
+		
+			
+	
+	
 		$(function(){
 			
 			var s = 'assetNo';
@@ -63,25 +68,43 @@
 			$("#datepicker1").datepicker();
 			
 			$("#requestBt").click(function(){
-				$.popup('/register');
+				
+				var x = 600;
+				var y = 830;
+				var url = '/register';
+				var title = 'Asset Register';
+				
+				popup(url, title, x, y);
 			})
 			
 			
 			$("#empSearch").click(function() {
+				var x = 1000;
+				var y = 700;
+				var title='Employee Search';
+				var url = '/emp';
 				
-				var popupX = (window.screen.width/2) - (1000/2);
-				var popupY = (window.screen.height/2) - (700/2);
-				window.open('/emp','Employee Search','width=1000,height=700,left='+popupX+',top='+popupY+',scrollbars = yes','_blank');
+				popup(url, title, x, y);
 			})
 			$("#assetChart").click(function() {
-				var popupX = (window.screen.width/2) - (800/2);
-				var popupY = (window.screen.height/2) - (800/2);
-				window.open('/chart','chart search','width=800,height=800,left='+popupX+',top='+popupY+',scrollbars = yes','_blank');
+				
+				var x = 800;
+				var y = 800;
+				var title='Chart Search';
+				var url = '/chart';
+				
+				popup(url, title, x, y);
+				
 			})
 			
 			
 			$("#myPage").click(function() {
-				alert("성공")
+				var x = 300;
+				var y = 360;
+				var title='Password Change';
+				var url = '/password';
+				
+				popup(url, title, x, y);
 			})
 			
 			$("input[type='text']").keypress(function(e){
@@ -156,8 +179,13 @@
 								$("#view").append(tr);
 								$(tr).click(function() {
 									var tds = $(this).find("td");
+									
 									var url = '/detail?aNo='+$(tds[0]).html();
-									$.popup(url);
+									var x = 600;
+									var y = 850;
+									var title = 'Asset Modify';
+									
+									popup(url, title, x, y);
 								})
 							})
 						}else{
@@ -172,6 +200,9 @@
 						location.href="/"
 				})	
 			}
+			if("${mgr.auth}"==0){
+				$("#requestBt").remove();
+			}
 
 		})
 		
@@ -184,12 +215,7 @@
 			}
 			
 		}
-		$.popup = function(url) {
-			var popupX = (window.screen.width/2) - (600/2);
-			var popupY = (window.screen.height/2) - (1000/2);
-
-			window.open(url,'Asset Register','width=600,height=830,left='+popupX+',top='+popupY+'','_blank');
-		}
+		
 	</script>
 </head>
 	<body>

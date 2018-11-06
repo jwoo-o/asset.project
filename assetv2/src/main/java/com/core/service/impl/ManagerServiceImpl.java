@@ -13,6 +13,7 @@ import com.core.service.ManagerService;
 import com.core.service.dao.ManagerDao;
 import com.core.vo.ManagerVo;
 import com.core.vo.MgrLgnDto;
+import com.core.vo.MgrPwdDto;
 import com.emp.service.dao.EmpDao;
 
 @Service
@@ -50,6 +51,19 @@ public class ManagerServiceImpl implements ManagerService{
 		}
 		eDao.updateMgt(vo);
 		return mgr;
+	}
+
+
+	@Override
+	public Map<String, Object> pwdMdf(MgrPwdDto dto) throws SQLException {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("msg", "0000");
+		if(dao.updatePwd(dto)>0)
+				map.put("msg", "0001");
+			return map;
+		
+		
 	}
 
 }
