@@ -4501,3 +4501,21 @@ table.text-center, table.text-center td, table.text-center th {
 .radio-wrapper label span {
 	padding: 5px;
 }
+#load {
+	width: 100%;
+	height: 100%;
+	top: 30%;
+	left: 0;
+	position: fixed;
+	display: block;
+	opacity: 0.8;
+	background: white;
+	z-index: 99;
+	text-align: center;
+}
+
+#load > img {
+	position: relative;
+	top: 20%;
+	z-index: 100;
+}
