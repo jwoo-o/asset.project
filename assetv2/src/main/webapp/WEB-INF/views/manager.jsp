@@ -51,7 +51,6 @@
                 </form>
             </div>
             <div class="col-3">
-                <button id="btnDown" type="button" class="btn btn-default pull-right">Download</button>
                 <button id="btnAdd" type="button" class="btn btn-default pull-right">New</button>
             </div>
         </div>
