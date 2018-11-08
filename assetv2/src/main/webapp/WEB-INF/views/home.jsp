@@ -24,7 +24,7 @@
     <script src="/js/jquery.form.js" type="text/javascript"></script>
     <script src="js/jquery.session.js" type="text/javascript"></script>
     <script src="js/jquery.serializeObject.js" type="text/javascript"></script>
-    
+     <script src="/js/home.js" type="text/javascript"></script>
     
     <title>GIOSIS</title>
     <style type="text/css">
@@ -39,184 +39,6 @@
 			background-color: #172d44;
 		}
 	</style>
-	<script type="text/javascript">
-		
-		
-			
-	
-	
-		$(function(){
-			
-			var s = 'assetNo';
-			var k = 'asc';
-			$.years();
-			
-			$.datepicker.setDefaults({
-				dateFormat:'yy-mm-dd'
-				,showButtonPanel: true
-				,changeYear: true //콤보박스에서 년 선택 가능
-	            ,changeMonth: true //콤보박스에서 월 선택 가능          
-				,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-				,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
-                ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
-                ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
-                ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
-                ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
-			})
-			
-			$("#datepicker").datepicker();
-			$("#datepicker1").datepicker();
-			
-			$("#requestBt").click(function(){
-				
-				var x = 600;
-				var y = 830;
-				var url = '/register';
-				var title = 'Asset Register';
-				
-				popup(url, title, x, y);
-			})
-			
-			
-			$("#empSearch").click(function() {
-				var x = 1000;
-				var y = 700;
-				var title='Employee Search';
-				var url = '/emp';
-				
-				popup(url, title, x, y);
-			})
-			$("#assetChart").click(function() {
-				
-				var x = 800;
-				var y = 800;
-				var title='Chart Search';
-				var url = '/chart';
-				
-				popup(url, title, x, y);
-				
-			})
-			
-			
-			$("#myPage").click(function() {
-				var x = 300;
-				var y = 360;
-				var title='Password Change';
-				var url = '/password';
-				
-				popup(url, title, x, y);
-			})
-			
-			$("input[type='text']").keypress(function(e){
-    			if (e.which == 13) {
-    				$.ajx(s,k);
-    			}
-    		});
-			
-			
-			$("#searchBt").click(function() {
-				
-				$.ajx(s,k);
-				
-			})
-			
-			var tds = $("thead tr td");
-			$(tds).click(function() {
-				if(k=="asc")
-					k = "desc";
-				else if(k=="desc")
-					k = "asc"
-					
-				if($("#view").find("tr").length>1){
-					s = $(this).attr("data-value");
-					$.ajx(s,k);
-				}
-			})
-			$("#download").click(function() {
-				if($("#view").find("tr").length>0){
-					
-					$("#sort").val(s);
-					$("#key").val(k);
-					$("#asset_search").serialize();
-					$("#asset_search").attr("action", "/excelDownload");
-					$("#asset_search").attr("method","post");
-					$("#asset_search").submit();
-					
-					
-				}
-			})
-	
-			$.ajx = function(sort,key){
-				
-				$("#sort").val(sort);
-				$("#key").val(key);
-				var data = $("#asset_search").serializeObject(),dataStr = JSON.stringify(data);
-				
-				$.ajax({
-					url:"/list/proc",
-					method: "post",
-					dataType: "json",
-					data : dataStr,
-					contentType:"application/json; charset=UTF-8"
-				}).done(function(data) {
-					
-					if(data.msg == "0001"){
-						
-						var list = data.list;
-						$("#view").empty();
-						if(list.length>0){
-							$.each(list, function(i, elt) {
-								var tr = $("<tr></tr>");
-								$.each(elt, function(key, val) {
-									if(key=="aNo"){
-										var td = $("<td align='center'></td>").css({display:"none"}).html(val);
-										$(tr).append(td);
-									}else{
-										var td = $("<td align='center'></td>").html(val);
-										$(tr).append(td);
-									}
-								})
-								$("#view").append(tr);
-								$(tr).click(function() {
-									var tds = $(this).find("td");
-									
-									var url = '/detail?aNo='+$(tds[0]).html();
-									var x = 600;
-									var y = 850;
-									var title = 'Asset Modify';
-									
-									popup(url, title, x, y);
-								})
-							})
-						}else{
-							$("#view").append("<tr height='18'><td align='center' width='70' colspan='10'>NO DATA</td></tr>")
-						}	
-						
-					}else{
-						alert(data.msg);
-					}
-				}).fail(function(e) {
-					if(e.status==401)
-						location.href="/"
-				})	
-			}
-			if("${mgr.auth}"==0){
-				$("#requestBt").remove();
-			}
-
-		})
-		
-		$.years = function(){
-			var date = new Date();
-			var year = date.getFullYear();
-			$("#re_time").append("<option value=''>년도</option>");
-			for(var y=year;y<=(year+10);y++){
-				$("#re_time").append("<option value='"+y+"'>"+y+"년"+"</option>");
-			}
-			
-		}
-		
-	</script>
 </head>
 	<body>
 	
@@ -341,46 +163,46 @@
 						    
 						</div>
 					</div><br>
-						
-					<div class="box">
-						  
-						  
-						  <div class="box-body">
-						  <table align="right" style="width:100px;margin-bottom:10px;" class="no-bordered">					
-									<tbody><tr><td align="right"><input type="button" class="btn bg-navy btn-sm" id="download" name="download" value="download" alt="New Request"></td></tr>
-								</tbody></table>
-						  
-						  	<div id="searchResultDiv">
-								<table class="table table-hover text-sm" style="table-layout: fixed" id="resultTable">
-									<thead><tr height="35">
-										<td class="tdBack" align="center" style="width:7%;"data-value="assetNo"><strong class="list_title">자산번호</strong></td>
-										<td class="tdBack" align="center" style="width:5%;"data-value="category"><strong class="list_title">종류</strong></td>
-										<td class="tdBack" align="center" style="width:5%;"data-value="status"><strong class="list_title">상태</strong></td>										
-										<td class="tdBack" align="center" style="width:10%;" data-value="modelNm"><strong class="list_title">모델명</strong></td>										
-										<td class="tdBack" align="center" style="width:7%;" data-value="userName"><strong class="list_title">사용자</strong></td>
-										<td class="tdBack" align="center" style="width:8%;" data-value="position"><strong class="list_title">직위</strong></td>
-										<td class="tdBack" align="center" style="width:12%;" data-value="division"><strong class="list_title">부서</strong></td>
-										<td class="tdBack" align="center" style="width:8%;" data-value="buying"><strong class="list_title">구매일</strong></td>
-										<td class="tdBack" align="center" style="width:7%;" data-value="mInch"><strong class="list_title">모니터크기</strong></td>	
-										<td class="tdBack" align="center" style="width:15%;" data-value="note"><strong class="list_title">참고</strong></td>
-									</tr>
-									</thead>
-									<tbody id="view">
-										<tr height="18">
-											<td align="center" width="70" colspan="10">NO DATA</td>
+					
+						<div class="box">
+							  
+							  
+							  <div class="box-body">
+							  <table align="right" style="width:100px;margin-bottom:10px;" class="no-bordered">					
+										<tbody><tr><td align="right"><input type="button" class="btn bg-navy btn-sm" id="download" name="download" value="download" alt="New Request"></td></tr>
+									</tbody></table>
+							  
+							  	<div id="searchResultDiv">
+									<table class="table table-hover text-sm" style="table-layout: fixed" id="resultTable">
+										<thead><tr height="35">
+											<td class="tdBack" align="center" style="width:7%;"data-value="assetNo"><strong class="list_title">자산번호</strong></td>
+											<td class="tdBack" align="center" style="width:5%;"data-value="category"><strong class="list_title">종류</strong></td>
+											<td class="tdBack" align="center" style="width:5%;"data-value="status"><strong class="list_title">상태</strong></td>										
+											<td class="tdBack" align="center" style="width:10%;" data-value="modelNm"><strong class="list_title">모델명</strong></td>										
+											<td class="tdBack" align="center" style="width:7%;" data-value="userName"><strong class="list_title">사용자</strong></td>
+											<td class="tdBack" align="center" style="width:8%;" data-value="position"><strong class="list_title">직위</strong></td>
+											<td class="tdBack" align="center" style="width:12%;" data-value="division"><strong class="list_title">부서</strong></td>
+											<td class="tdBack" align="center" style="width:8%;" data-value="buying"><strong class="list_title">구매일</strong></td>
+											<td class="tdBack" align="center" style="width:7%;" data-value="mInch"><strong class="list_title">모니터크기</strong></td>	
+											<td class="tdBack" align="center" style="width:15%;" data-value="note"><strong class="list_title">참고</strong></td>
 										</tr>
+										</thead>
+										<tbody id="view">
+											<tr height="18">
+												<td align="center" width="70" colspan="10">NO DATA</td>
+											</tr>
+										
+									</tbody></table><br><br>
 									
-								</tbody></table><br><br>
-								
-								
-								<table align="right" style="width:100px;margin-bottom:10px;" class="no-bordered">					
-									<tbody><tr><td align="right"><input type="button" class="btn bg-navy btn-sm" id="requestBt" name="requestBt" value="New Request" alt="New Request"></td></tr>
-								</tbody></table>
-							</div><!--  list box end -->
+									
+									<table align="right" style="width:100px;margin-bottom:10px;" class="no-bordered">					
+										<tbody><tr><td align="right"><input type="button" class="btn bg-navy btn-sm" id="requestBt" name="requestBt" value="New Request" alt="New Request"></td></tr>
+									</tbody></table>
+								</div><!--  list box end -->
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 	   </section>
 	   
 	</body>	

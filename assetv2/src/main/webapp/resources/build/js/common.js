@@ -150,6 +150,6 @@
 		var popupX = curX+(curWidth/2) - (x/2);
 		var popupY = curY+(curHeight/2) - (y/2);
 
-		window.open(url,title,'width='+x+',height='+y+',left='+popupX+',scrollbars = yes,alwaysReised=yes','_blank');
+		window.open(url,title,'width='+x+',height='+y+',left='+popupX+',top=0,scrollbars = yes,alwaysReised=yes','_blank');
 }
  

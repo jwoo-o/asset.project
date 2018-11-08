@@ -25,86 +25,13 @@
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  	<script src="/js/functionutils.js" type="text/javascript"></script>
   	<script src="/js/common.js" type="text/javascript"></script>
     <script src="/js/jquery.form.js" type="text/javascript"></script>
     <script src="js/jquery.session.js" type="text/javascript"></script>
     <script src="js/jquery.serializeObject.js" type="text/javascript"></script>
-    <script type="text/javascript">
-    	$(function () {
-    		var key = false;
-    		var isPwd = false;
-    		$("#reNewPwd").keypress(function() {
-				$("#tr2").hide();
-			})
-			$("#reNewPwd").focusout(function(){
-				if($("#newPwd").val()==$(this).val()){
-					isPwd = true;
-				}else{
-					$("#reNewPwd").val('');
-					$("#tr2").show();
-					isPwd = false;
-				}
-			})
-			
-			$("#newPwd").focusout(function(){
-				if($(this).val().length<7){
-					$("#tr1").show();
-					key = false;
-				}else{
-					key = true;
-				}
-			})
-			$("#newPwd").keypress(function() {
-				$("#tr1").hide();
-			})
-			
-			$("#reviseBt").click(function() {
-			 	if(!$.isNull()){
-			 		alert("필수정보를 입력하세요");
-			 		$("#pwd").focus();
-			 	}else{
-			 		if(!isPwd || !key){
-			 			alert("필수정보를 확인하세요");
-			 		}else{
-			 			var pwd = SHA256($("#pwd").val());
-			 			var newPwd = SHA256($("#newPwd").val());
-			 			var mId = $("#mId").val();
-			 			var data = {"mId":mId,"pwd":pwd,"newPwd":newPwd},dataStr = JSON.stringify(data);
-			 			$.ajax({
-			 				url:"password/proc",
-			 				data:dataStr,
-			 				dataType:"json",
-			 				contentType:"application/json; charset=utf-8",
-			 				method:"post"
-			 			}).done(function(data) {
-			 			  
-			 				if(data.msg=="0000"){
-			 					alert("이전패스워드를 확인하세요");
-			 					$("#pwd").val('').focus();
-			 				}else if(data.msg="0001"){
-			 					alert("Request Success");
-			 					window.close();
-			 				}else{
-			 					alert(data.msg);
-			 				}
-			 			}).fail(function(e) {
-							if(e.status==401){
-								onErrorFunc(e);
-							}
-						})
-			 		}
-			 	}
-			})
-			$.isNull = function(){
-    			var form = $("#passForm").find("input");
-    			for(i=0;i<form.length;i++){
-    				if($(form[i]).val()=='')
-    					return false;
-    			}
-    			return true;
-    		}
-		})
-    </script>
+    <script src="/js/password.js" type="text/javascript"></script>
+   
     </head>
     <body>
     <div class="content-wrapper2" style="width: 300px">
@@ -117,9 +44,11 @@
 					
 						<div class="box-header with-border">
 		                  <h3 class="box-title"><strong>Password Change</strong></h3>
+		             
 		                </div><!-- /.box-header -->
 		                
 						<div class="box-body">
+						      <div id="alert-message-center"></div>
 							  <div id="writeDiv">
 										<form name="passForm" id="passForm">
 										<input type="hidden" id="mId" value="${mgr.mId }">

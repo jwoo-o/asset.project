@@ -62,28 +62,33 @@
     </script>
   </head>
   <body class="body-signin">
-    <div class="container">
-		<form class="form-signin" id="form-signin" action="/login/proc" method="post">
-			<h3 class="form-signin-heading">GIOSIS<br> Asset Management</h3>
-			<div class="form-group">
-				<label class="sr-only">아이디</label>
-				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-user"></i></span><input name="mId" class="form-control" aria-describedby="basic-addon1" autofocus="" required="" type="text" placeholder="아이디">
+    <div class="container" style="text-align: center;">
+    	<div style="width: 500px; height: 400px; border: 2px solid; display: inline-block;">
+			<form class="form-signin" id="form-signin" action="/login/proc" method="post">
+				<h3 class="form-signin-heading">GIOSIS<br> Asset Management</h3>
+				<div class="form-group">
+					<label class="sr-only">아이디</label>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-user"></i></span><input name="mId" class="form-control" aria-describedby="basic-addon1" autofocus="" required="" type="text" placeholder="Pc Login ID ">
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label class="sr-only">비밀번호</label>
-				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon2"><i class="glyphicon glyphicon-lock"></i></span><input name="pwd" class="form-control" aria-describedby="basic-addon2" required="" type="password" placeholder="비밀번호">
+				<div class="form-group">
+					<label class="sr-only">비밀번호</label>
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon2"><i class="glyphicon glyphicon-lock"></i></span><input name="pwd" class="form-control" aria-describedby="basic-addon2" required="" type="password" placeholder="Password">
+					</div>
 				</div>
-			</div>
-			<button class="btn btn-lg btn-primary btn-block" id="btn-submit" type="button">로그인</button>
-			<div class="text-info">
-				<p>
-					계정이 없는 경우 운영 담당자에게 요청하십시오.
-				</p>
-			</div>
-		</form>
+				<button class="btn btn-lg btn-primary btn-block" id="btn-submit" type="button">로그인</button>
+				<div class="text-info">
+					<p>
+						계정이 없는 경우 운영 담당자에게 요청하십시오.
+					</p>
+				</div>
+			</form>
+			<div style="text-align: center;">
+	    	<img src="/images/common/logo.jpg"/>
+	    	</div>
+    	</div>
     </div>
 
  
