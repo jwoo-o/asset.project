@@ -162,7 +162,24 @@
   	<!--  select 
 	(select cmNm from cmcd c1 where c1.cmCd=#{key} and c1.cmNo=e.#{key}) as key
 	,count(${key}) as count from asset group by ${key}-->
-	select IFNULL((select cmNm from cmcd c1 where c1.cmCd=#{category} and c1.cmNo=${category}),'보관') category ,count(${category}) as count from asset group by ${category}
+	select 
+		<choose>
+			<when test="categorys=='buying'">
+				year(${categorys}) categorys,
+			</when>
+			<when test="categorys=='position' or categorys=='division'">
+				IFNULL((select cmNm from cmcd c1 where c1.cmCd=#{categorys} and c1.cmNo=${categorys}),'보관') categorys,
+			</when>
+			
+		</choose>
+			count(${categorys}) as count from asset 
+		<choose>
+			<when test="categorys=='buying'">
+				group by categorys
+			</when>
+			<when test="categorys=='position' or categorys=='division'">
+				group by ${categorys}
+			</when>
+		</choose>
   </select>
-  
 </mapper>

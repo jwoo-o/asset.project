@@ -2,14 +2,14 @@ package com.asset.vo;
 
 public class ChartDto {
 
-	private String category;
+	private String categorys;
 	private int count;
 	
-	public String getCategory() {
-		return category;
+	public String getCategorys() {
+		return categorys;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCategorys(String categorys) {
+		this.categorys = categorys;
 	}
 	public int getCount() {
 		return count;
@@ -19,8 +19,9 @@ public class ChartDto {
 	}
 	@Override
 	public String toString() {
-		return "ChartDto [category=" + category + ", count=" + count + "]";
+		return "ChartDto [categorys=" + categorys + ", count=" + count + "]";
 	}
+	
 	
 	
 	

@@ -26,7 +26,7 @@
      function drawChart(keyword) {
 			var category = keyword
 			var data = new google.visualization.DataTable();
-			data.addColumn('string','category');
+			data.addColumn('string','categorys');
 			data.addColumn('number','count');
 			
 	       	if(keyword==undefined){
@@ -37,10 +37,10 @@
 				dataType:"json",
 				contentType:"application/json; charset=UTF-8",
 				method:'post',
-				data : JSON.stringify({"category" : category})
+				data : JSON.stringify({"categorys" : category})
 			}).done(function(d) {
 					$.each(d.rows, function(i, elt) {
-						var category = elt.category;
+						var category = elt.categorys;
 						var count = elt.count;
 						data.addRows([[category,count]]);
 					});
@@ -84,6 +84,7 @@
 		                <div class="box-header">
 			                 <label class="radio-inline"><input type="radio" name="keyword" checked value="division">division</label>
 							 <label class="radio-inline"><input type="radio" name="keyword" value="position">position</label>
+							 <label class="radio-inline"><input type="radio" name="keyword" value="buying">purchase</label>
 		                </div><!-- /.box-header -->
 		                
 						<div class="box-body" id="donutchart" style="height: 600px;">  	
