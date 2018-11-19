@@ -40,7 +40,7 @@
 				
 				popup(url, title, x, y);
 			})
-			$("#calendar").click(function() {
+			$("#plan").click(function() {
 			    var x = 1000;
 			    var y = 1000;
 			    var url = '/calendar';
