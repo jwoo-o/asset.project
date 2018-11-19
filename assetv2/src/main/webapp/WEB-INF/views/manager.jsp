@@ -34,7 +34,9 @@
     <div class="container-fluid">
         <div class="row" style="background: #ffffff">
             <div class="col-9">
+            <input type="hidden" id="auth" value="${mgr.auth }">
                 <form class="form-inline" id="srchForm">
+                	
                 	<select id="keyword" class="form-control mb-2 mr-sm-2 mb-sm-0">
                 		<option value="">선택</option>
                 		<option value="name">이름</option>

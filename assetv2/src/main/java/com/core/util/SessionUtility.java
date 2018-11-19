@@ -14,6 +14,7 @@ public class SessionUtility {
 		dto.setmNo(vo.getmNo());
 		dto.setDivision(vo.getDept());
 		dto.setAuth(vo.getAuth());
+		dto.setdCode(vo.getdCode());
 		
 		return dto;
 	}
