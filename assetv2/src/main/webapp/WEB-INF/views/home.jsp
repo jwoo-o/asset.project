@@ -24,7 +24,7 @@
     <script src="/js/jquery.form.js" type="text/javascript"></script>
     <script src="js/jquery.session.js" type="text/javascript"></script>
     <script src="js/jquery.serializeObject.js" type="text/javascript"></script>
-     <script src="/js/home.js" type="text/javascript"></script>
+    <script src="/js/home.js" type="text/javascript"></script>
     
     <title>GIOSIS</title>
     <style type="text/css">
@@ -36,6 +36,13 @@
 		}
 		
 		#assetChart:visited {
+			background-color: #172d44;
+		}
+		#calendar:hover {
+			background-color: #172d44;
+		}
+		
+		#calendar:visited {
 			background-color: #172d44;
 		}
 	</style>
@@ -62,6 +69,9 @@
 	            </li>
 	            <li style="padding-top: 2px">
 	                <a href="#" id="assetChart" name="assetChart" title="인원 및 자산 현황"><span class="fa fa-pie-chart na" style="color: white; font-size:large;"></span></a>
+	            </li>
+	            <li>
+	                <a href="#" id="calendar" name="calendar" title="입사 예정"><span class="glyphicon glyphicon-calendar" style="color: white; font-size:large;"></span></a>
 	            </li>
 	            <li>
 	                <a href="#" id="empSearch" name="empSearch" title="사원 검색"><span class="glyphicon glyphicon-user na" style="color: white; font-size:large;"></span></a>

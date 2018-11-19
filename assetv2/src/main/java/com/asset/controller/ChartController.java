@@ -38,7 +38,7 @@ public class ChartController {
 			map = service.assetChart(dto);
 		}catch (Exception e) {
 			// TODO: handle exception
-			logger.debug(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return map;
 	}

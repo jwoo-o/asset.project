@@ -61,7 +61,7 @@ public class AssetController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg", "목록을 가져오는데 실패하셨습니다. 관리자에게 문의하세요");
-			logger.debug(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return map;
 	}
@@ -83,7 +83,7 @@ public class AssetController {
 		}catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
-			logger.debug(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return map;
 
@@ -110,7 +110,7 @@ public class AssetController {
 		}catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
-			logger.debug(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return map;
 	}
@@ -126,7 +126,7 @@ public class AssetController {
 		}catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
-			logger.debug(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return map;
 	}
@@ -141,7 +141,7 @@ public class AssetController {
 		}catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
-			logger.debug(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return map;
 	}
@@ -154,7 +154,7 @@ public class AssetController {
 		}catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
-			logger.debug(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return map;
 	}
