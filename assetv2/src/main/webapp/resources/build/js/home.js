@@ -167,7 +167,7 @@
 						location.href="/"
 				})	
 			}
-			if("${mgr.auth}"==0){
+			if("${mgr.auth}"=='0'){
 				$("#requestBt").remove();
 			}
 
