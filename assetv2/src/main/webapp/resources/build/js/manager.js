@@ -3,13 +3,11 @@
  */
    var grid, regist,modify;
       	
-        if("${mgr.auth}"==0){
-        	$("#btnAdd").remove();
-        }
+       
         
         
         function Edit(e) {
-        	if("${mgr.auth}"!=0){
+        	if($("#auth").val()!=0){
 	            $("#eempNo").val(e.data.id);
 	            $("#ename").val(e.data.record.name);
 	            $("#eposition").val(e.data.record.pcode).prop("selected",true);
@@ -34,7 +32,7 @@
 			var num=frm.length;
 			for(i=0;i<=num;i++){
 				if($(frm[i]).val()==""){
-					return false;	
+					return false;
 				}
 			}
 			return true;
@@ -82,7 +80,7 @@
         
         
         function Delete(e) {
-        	if("${mgr.auth}"!=0){
+        	if($("#auth").val()!=0){
 	            if (confirm('Are you sure?')) {
 	            	var data = { empNo: e.data.id,name: e.data.record.name,manager:e.data.record.manager }, dataStr = JSON.stringify(data);
 	                $.ajax({ url: '/empDl/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
@@ -153,10 +151,9 @@
         	
         	
         	$("#joinDate").datepicker({format:'yyyy-mm-dd',header: true, modal: true, footer: true });
-        	
-        	
-        	
-        	
+        	 if($("#auth").val()==0){
+             	$("#btnAdd").remove();
+             }
         	var keyword,search;
         	var division_data = ['Corporate Development Division','Development Unit','FA Division','Fulfillment Operation Group','Global Biz Division','Global JP Group','Global P.Planning Division','KR GA & ER Division','KRSG Beauty & Fashion Division','Live10 Division','Platform Planning Division','SQM Division','Technology Unit','US & EU Biz Division'];
             var position_data = ['Dispatched','Staff','Senior Staff','Manager','Senior Manager','General Manager','Director','Managing Director'];

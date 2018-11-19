@@ -10,6 +10,7 @@ public class ManagerVo {
 	private String position;
 	private String pwd;
 	private String auth;
+	private String dCode;
 	
 	public String getmNo() {
 		return mNo;
@@ -63,11 +64,19 @@ public class ManagerVo {
 	
 	
 	
+	
+	public String getdCode() {
+		return dCode;
+	}
+	public void setdCode(String dCode) {
+		this.dCode = dCode;
+	}
 	@Override
 	public String toString() {
 		return "ManagerVo [mNo=" + mNo + ", mName=" + mName + ", mId=" + mId + ", empNo=" + empNo + ", dept=" + dept
-				+ ", position=" + position + ", pwd=" + pwd + ", auth=" + auth +"]";
+				+ ", position=" + position + ", pwd=" + pwd + ", auth=" + auth + ", dCode=" + dCode + "]";
 	}
+	
 	
 	
 	
