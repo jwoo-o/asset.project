@@ -29,7 +29,7 @@
 			$("#requestBt").click(function(){
 				
 				var x = 600;
-				var y = 830;
+				var y = 825;
 				var url = '/register';
 				var title = 'Asset Register';
 				
@@ -37,7 +37,7 @@
 			})
 			$("#calendar").click(function() {
 			    var x = 1000;
-			    var y = 1000;
+			    var y = 900;
 			    var url = '/calendar';
 			    var title = 'Planned to join';
 			    
@@ -149,7 +149,7 @@
 									
 									var url = '/detail?aNo='+$(tds[0]).html();
 									var x = 600;
-									var y = 850;
+									var y = 860;
 									var title = 'Asset Modify';
 									
 									popup(url, title, x, y);
