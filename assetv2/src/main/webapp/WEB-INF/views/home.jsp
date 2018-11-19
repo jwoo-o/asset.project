@@ -24,8 +24,18 @@
     <script src="/js/jquery.form.js" type="text/javascript"></script>
     <script src="js/jquery.session.js" type="text/javascript"></script>
     <script src="js/jquery.serializeObject.js" type="text/javascript"></script>
-     <script src="/js/home.js" type="text/javascript"></script>
-    
+    <script src="/js/home.js" type="text/javascript"></script>
+    <script type="text/javascript">
+	    $(function(){
+	    	if("${mgr.auth}"==0){
+	 			$("#requestBt").remove();
+	 		}
+	    	if("${mgr.dCode}"!=7){
+	    		$("#calendar").hide();
+	    	}
+	    })
+   
+    </script>
     <title>GIOSIS</title>
     <style type="text/css">
 		body{

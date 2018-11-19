@@ -7,6 +7,7 @@ public class ManagerDto {
 	private String mId;
 	private String division;
 	private String auth;
+	private String dCode;
 	
 	public String getmNo() {
 		return mNo;
@@ -40,10 +41,17 @@ public class ManagerDto {
 	public void setAuth(String auth) {
 		this.auth = auth;
 	}
+	
+	public String getdCode() {
+		return dCode;
+	}
+	public void setdCode(String dCode) {
+		this.dCode = dCode;
+	}
 	@Override
 	public String toString() {
 		return "ManagerDto [mNo=" + mNo + ", mName=" + mName + ", mId=" + mId + ", division=" + division + ", auth="
-				+ auth + "]";
+				+ auth + ", dCode=" + dCode + "]";
 	}
 	
 	
