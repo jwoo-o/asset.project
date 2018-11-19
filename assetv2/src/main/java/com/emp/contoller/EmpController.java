@@ -1,11 +1,9 @@
 package com.emp.contoller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -41,6 +39,7 @@ public class EmpController {
 			map.put("emp", service.getEmp(dto.getUserName()));
 		}catch (Exception e) {
 			// TODO: handle exception
+			logger.error(e.getMessage());
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
 		}
 		
@@ -60,7 +59,7 @@ public class EmpController {
 			map =  service.empList(dto);
 		}catch (Exception e) {
 			// TODO: handle exception
-			logger.debug(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return map;
 	}
@@ -76,7 +75,7 @@ public class EmpController {
 		}catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
-			logger.debug(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return map;
 	}
@@ -91,7 +90,7 @@ public class EmpController {
 		}catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
-			logger.debug(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return map;
 	}
@@ -105,8 +104,9 @@ public class EmpController {
 			map.put("msg","0001");
 		}catch (Exception e) {
 			// TODO: handle exception
+			
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
-			logger.debug(e.getMessage());
+			logger.error(e.getMessage());
 		}
 		return map;
 	}
@@ -116,4 +116,5 @@ public class EmpController {
 		model.addAttribute("vo", service.getEmp(empNo));
 		return "emp";
 	}
+	
 }

@@ -50,6 +50,8 @@
 	<context:component-scan base-package="com.core.service.impl"></context:component-scan>
 	<context:component-scan base-package="com.emp.service.impl"></context:component-scan>
 	<context:component-scan base-package="com.emp.service.dao"></context:component-scan>
+	<context:component-scan base-package="com.calendar.service.dao"></context:component-scan>
+	<context:component-scan base-package="com.calendar.service.impl"></context:component-scan>
 	
 	
 </beans>

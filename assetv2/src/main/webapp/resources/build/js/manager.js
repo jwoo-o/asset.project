@@ -22,6 +22,7 @@
 	            	$("#auth").val(e.data.record.auth).prop("selected",true);
 	            }else{
 	            	$("#managerDiv").hide();
+	            	$("#manager").prop("checked",false);
 	            }
 	            modify.open('사원 수정');
         	}else{

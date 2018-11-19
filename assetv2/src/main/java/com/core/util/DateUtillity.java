@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.calendar.vo.CalendarVo;
+
 public class DateUtillity {
 
 	public static String yearsInput(String date,String category) {
@@ -26,5 +28,15 @@ public class DateUtillity {
 		
 		return cal.get(Calendar.YEAR)+"";
 		
+	}
+	public static void calendarFormat(CalendarVo vo) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			vo.setStart(format.parse(vo.getStart()).toString());
+			vo.setEnd(format.parse(vo.getEnd()).toString());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

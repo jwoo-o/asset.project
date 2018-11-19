@@ -3,6 +3,12 @@
  */
 		$(function(){
 			
+			if("${mgr.auth"}==0){
+				$("#requestBt").remove();
+				
+				
+			}
+			
 			var s = 'assetNo';
 			var k = 'asc';
 			$.years();
@@ -25,7 +31,6 @@
 			$("#datepicker1").datepicker();
 			
 			
-			
 			$("#requestBt").click(function(){
 				
 				var x = 600;
@@ -34,6 +39,14 @@
 				var title = 'Asset Register';
 				
 				popup(url, title, x, y);
+			})
+			$("#calendar").click(function() {
+			    var x = 1000;
+			    var y = 1000;
+			    var url = '/calendar';
+			    var title = 'Planned to join';
+			    
+			    popup(url,title,x,y);
 			})
 			
 			
