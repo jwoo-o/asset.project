@@ -1,12 +1,13 @@
 {
-  "plugins": {
-    "guess-types": {
-      
-    }
-  },
+  "ecmaVersion": 5,
   "libs": [
     "ecma5",
     "browser",
     "jquery"
-  ]
+  ],
+  "plugins": {
+    "guess-types": {
+      
+    }
+  }
 }
