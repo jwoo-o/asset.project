@@ -29,7 +29,7 @@ public class CalendarServiceImpl implements CalendarService {
 	@Override
 	public Map<String, Object> calendarRgt(CalendarVo vo) throws SQLException {
 		// TODO Auto-generated method stub
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("msg", "0001");
 		vo.setTitle(vo.getName());
 		//DateUtillity.calendarFormat(vo);
@@ -41,7 +41,7 @@ public class CalendarServiceImpl implements CalendarService {
 	@Override
 	public Map<String, Object> calendarMdf(CalendarVo vo) throws SQLException {
 		// TODO Auto-generated method stub
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		vo.setTitle(vo.getName());
 		if(dao.updateCal(vo)>0)
 			map.put("msg", "0001");
@@ -51,7 +51,7 @@ public class CalendarServiceImpl implements CalendarService {
 	@Override
 	public Map<String, Object> dateMdf(CalendarVo vo) throws SQLException {
 		// TODO Auto-generated method stub
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		//DateUtillity.calendarFormat(vo);
 		
 		if(dao.updateDate(vo)>0)
@@ -62,7 +62,7 @@ public class CalendarServiceImpl implements CalendarService {
 	@Override
 	public Map<String, Object> calendarDl(CalendarVo vo) throws SQLException {
 		// TODO Auto-generated method stub
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		vo.setTitle(vo.getName());
 		if(dao.updateDl(vo)>0)
 			map.put("msg", "0001");
