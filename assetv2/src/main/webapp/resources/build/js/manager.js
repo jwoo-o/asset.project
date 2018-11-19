@@ -7,7 +7,7 @@
         
         
         function Edit(e) {
-        	if($("#auth").val()!=0){
+        	if($("#mgrAuth").val()!=0){
 	            $("#eempNo").val(e.data.id);
 	            $("#ename").val(e.data.record.name);
 	            $("#eposition").val(e.data.record.pcode).prop("selected",true);
@@ -80,7 +80,7 @@
         
         
         function Delete(e) {
-        	if($("#auth").val()!=0){
+        	if($("#mgrAuth").val()!=0){
 	            if (confirm('Are you sure?')) {
 	            	var data = { empNo: e.data.id,name: e.data.record.name,manager:e.data.record.manager }, dataStr = JSON.stringify(data);
 	                $.ajax({ url: '/empDl/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
@@ -151,7 +151,7 @@
         	
         	
         	$("#joinDate").datepicker({format:'yyyy-mm-dd',header: true, modal: true, footer: true });
-        	 if($("#auth").val()==0){
+        	 if($("#mgrAuth").val()==0){
              	$("#btnAdd").remove();
              }
         	var keyword,search;
