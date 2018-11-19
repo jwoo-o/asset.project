@@ -3,12 +3,6 @@
  */
 		$(function(){
 			
-			if("${mgr.auth"}==0){
-				$("#requestBt").remove();
-				
-				
-			}
-			
 			var s = 'assetNo';
 			var k = 'asc';
 			$.years();
@@ -31,6 +25,7 @@
 			$("#datepicker1").datepicker();
 			
 			
+			
 			$("#requestBt").click(function(){
 				
 				var x = 600;
@@ -40,7 +35,7 @@
 				
 				popup(url, title, x, y);
 			})
-			$("#plan").click(function() {
+			$("#calendar").click(function() {
 			    var x = 1000;
 			    var y = 1000;
 			    var url = '/calendar';
