@@ -66,8 +66,8 @@
              <div class="form-group">
                 <label for="gender">증원/충원</label>
                 <select class="form-control" id="addNrein" name="addNrein">
-                	<option value="A">증원</option> 
-					<option value="R">충원</option>       
+                	<option value="증원">증원</option> 
+					<option value="충원">충원</option>       
                 </select>
             </div>
              <div class="form-group">

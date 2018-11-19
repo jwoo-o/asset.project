@@ -31,7 +31,7 @@ public class CalendarServiceImpl implements CalendarService {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("msg", "0001");
-		vo.setTitle(vo.getName());
+		vo.setTitle("["+vo.getAddNrein()+"]"+vo.getName());
 		//DateUtillity.calendarFormat(vo);
 		dao.insertCal(vo);
 		
@@ -42,7 +42,7 @@ public class CalendarServiceImpl implements CalendarService {
 	public Map<String, Object> calendarMdf(CalendarVo vo) throws SQLException {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
-		vo.setTitle(vo.getName());
+		vo.setTitle("["+vo.getAddNrein()+"]"+vo.getName());
 		if(dao.updateCal(vo)>0)
 			map.put("msg", "0001");
 		return map;
