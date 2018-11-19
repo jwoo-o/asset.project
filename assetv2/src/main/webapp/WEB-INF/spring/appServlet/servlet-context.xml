@@ -78,6 +78,8 @@
 		base-package="com.core.controller" />
 	<context:component-scan
 		base-package="com.emp.contoller" />
+	<context:component-scan
+		base-package="com.calendar.controller" />
 
 
 </beans:beans>

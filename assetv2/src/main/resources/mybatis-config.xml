@@ -16,6 +16,7 @@
   	<!-- 사용자 -->
   	<typeAlias type="com.emp.vo.EmpDto" alias="empDto"/>
   	<typeAlias type="com.emp.vo.EmpVo" alias="empVo"/>
+  	<typeAlias type="com.calendar.vo.CalendarVo" alias="calendarVo"/>
   	
   	<!-- Common -->
   	<typeAlias type="com.core.vo.CommonVo" alias="commonVo"/>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="calendar">
+	<select id="selectLst" resultType="calendarVo">
+		select * from planned
+	</select>
+	<insert id="insertCal">
+		insert into planned (name,division,addNrein,seat,title,start,end) values(#{name},#{division},#{addNrein},#{seat},#{title},#{start},#{end})
+	</insert>
+	<update id="updateCal">
+		update planned set name=#{name},division=#{division},addNrein=#{addNrein},seat=#{seat},title=#{title} where no=#{no}
+	</update>
+	<update id="updateDate">
+		update planned set start=#{start},end=#{end} where no=#{no}
+	</update>
+	<delete id="deleteCal">
+		delete from planned where no=#{no}
+	</delete>
+</mapper>
