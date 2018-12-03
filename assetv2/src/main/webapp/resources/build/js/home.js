@@ -100,7 +100,8 @@
 				}
 			})
 			$("#download").click(function() {
-				if($("#view").find("tr").length>0){
+				var len = $("#view").find("tr").find("td").length;
+				if(len>1){
 					
 					$("#sort").val(s);
 					$("#key").val(k);
@@ -132,19 +133,18 @@
 						var list = data.list;
 						$("#view").empty();
 						if(list.length>0){
+							var tag = "";
 							$.each(list, function(i, elt) {
-								var tr = $("<tr></tr>");
+								tag += "<tr>";
 								$.each(elt, function(key, val) {
 									if(key=="aNo"){
-										var td = $("<td align='center'></td>").css({display:"none"}).html(val);
-										$(tr).append(td);
+										tag +="<td align='center' style='display: none;'>"+val+"</td>";
 									}else{
-										var td = $("<td align='center'></td>").html(val);
-										$(tr).append(td);
+										tag +="<td align='center'>"+val+"</td>";
 									}
 								})
-								$("#view").append(tr);
-								$(tr).click(function() {
+								tag += "</tr>";
+								/*$(tr).click(function() {
 									var tds = $(this).find("td");
 									
 									var url = '/detail?aNo='+$(tds[0]).html();
@@ -153,7 +153,17 @@
 									var title = 'Asset Modify';
 									
 									popup(url, title, x, y);
-								})
+								})*/
+							})
+							$("#view").append(tag);
+							$("#view").find("tr").click(function() {
+									var tds = $(this).find("td");
+									var url = '/detail?aNo='+$(tds[0]).html();
+									var x = 600;
+									var y = 860;
+									var title = 'Asset Modify';
+									
+									popup(url, title, x, y);
 							})
 						}else{
 							$("#view").append("<tr height='18'><td align='center' width='70' colspan='10'>NO DATA</td></tr>")

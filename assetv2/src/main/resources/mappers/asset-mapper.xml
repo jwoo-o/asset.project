@@ -10,11 +10,11 @@
 		(select cmNm from cmcd c4 where c4.cmCd='category' and c4.cmNo=a.category) category,
 		(select cmNm from cmcd c where c.cmCd='status' and c.cmNo=a.status) status,
 		a.modelNm,
-		e.name userName,
-		(select cmNm from cmcd c2 where c2.cmCd='position' and c2.cmNo=e.position) position,
-		(select cmNm from cmcd c1 where c1.cmCd='division' and c1.cmNo=e.division) division,
+		IFNULL(e.name,'') userName,
+		IFNULL((select cmNm from cmcd c2 where c2.cmCd='position' and c2.cmNo=e.position),'') position,
+		IFNULL((select cmNm from cmcd c1 where c1.cmCd='division' and c1.cmNo=e.division),'') division,
 		a.buying,
-		(select cmNm from cmcd c3 where c3.cmCd='mInch' and c3.cmNo=a.mInch) mInch,
+		IFNULL((select cmNm from cmcd c3 where c3.cmCd='mInch' and c3.cmNo=a.mInch),'') mInch,
 		a.note
 	from asset a left outer join employee e on a.empNo=e.employeeNumber
     
@@ -150,7 +150,7 @@
   <update id="empMdf">
   	update asset
   	<set>
-  	<if test="name==null">
+  	<if test="name==null or name==''">
   	empNo='',
   	</if>
   	status=#{status},division=#{division},position=#{position},userName=#{name},note=#{note},lstMdfDtm=now(),lstMdfWkrNm=#{lstMdfWkrNm}
