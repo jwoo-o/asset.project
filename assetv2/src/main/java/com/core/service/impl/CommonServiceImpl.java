@@ -24,6 +24,7 @@ public class CommonServiceImpl implements CommonServie {
 		map.put("position", dao.selectPos());
 		map.put("category", dao.selectCat());
 		map.put("status", dao.selectStt());
+		map.put("office", dao.selectOfc());
 		return map;
 	}
 	

@@ -157,9 +157,11 @@
         	var keyword,search;
         	var division_data = ['Corporate Development Division','Development Unit','FA Division','Fulfillment Operation Group','Global Biz Division','Global JP Group','Global P.Planning Division','KR GA & ER Division','KRSG Beauty & Fashion Division','Live10 Division','Platform Planning Division','SQM Division','Technology Unit','US & EU Biz Division'];
             var position_data = ['Dispatched','Staff','Senior Staff','Manager','Senior Manager','General Manager','Director','Managing Director'];
+            var office_data = ['SAMWON','KG','N 3F','N 13F'];
+            
             grid = $('#grid').grid({
                 primaryKey: 'empNo',
-                dataSource: {url:'/empLst/proc',error:onErrorFunc },
+                dataSource: {url:'/empLst/proc'},
                 uiLibrary: 'bootstrap4',
                 columns: [
                     { field: 'empNo',title: '사번', width: 100, align: 'center' },
@@ -256,6 +258,13 @@
             		case 'manager':
             			$(select).append("<option value='y'></option>");
             			$("#s").append(select).hide();
+            			break;
+            		case 'office':
+            			for(var i=0;i<office_data.length;i++){
+            				var option = $("<option value='"+i+"'>"+office_data[i]+"</option>")
+            				$(select).append(option);
+            			}
+            			$("#s").append(select).show();;
             			break;
             			
             	}

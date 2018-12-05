@@ -42,6 +42,7 @@
                 		<option value="name">이름</option>
                 		<option value="division">부서</option>
                 		<option value="position">직위</option>
+                		<option value="office">사무실</option>
                 		<option value="status">상태</option>
                 		<c:if test="${mgr.auth==1 }">
                 		<option value="manager">계정</option>
