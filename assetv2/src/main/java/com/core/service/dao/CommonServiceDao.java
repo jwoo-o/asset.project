@@ -31,4 +31,8 @@ public class CommonServiceDao {
 		
 		return session.selectList("common.selectStt");
 	}
+public List<CommonVo> selectOfc(){
+		
+		return session.selectList("common.selectOfc");
+	}
 }
