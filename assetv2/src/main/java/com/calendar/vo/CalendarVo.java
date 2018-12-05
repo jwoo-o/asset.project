@@ -11,6 +11,8 @@ public class CalendarVo {
 	private String division;
 	private String addNrein;
 	private String seat;
+	private String id;
+	private String divNm;
 	
 	
 	
@@ -62,11 +64,27 @@ public class CalendarVo {
 	public void setEnd(String end) {
 		this.end = end;
 	}
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getDivNm() {
+		return divNm;
+	}
+	public void setDivNm(String divNm) {
+		this.divNm = divNm;
+	}
 	@Override
 	public String toString() {
-		return "CalendarVo [name=" + name + ", division=" + division + ", addNrein=" + addNrein + ", seat=" + seat
-				+ ", title=" + title + ", start=" + start + ", end=" + end + "]";
+		return "CalendarVo [title=" + title + ", start=" + start + ", end=" + end + ", no=" + no + ", name=" + name
+				+ ", division=" + division + ", addNrein=" + addNrein + ", seat=" + seat + ", id=" + id + ", divNm="
+				+ divNm + "]";
 	}
+	
+	
 	
 	
 	

@@ -15,4 +15,7 @@
 	<select id="selectStt" resultType="commonVo">
 		select cmNm as cName,cmNo as cCode from cmcd where cmCd='status'
 	</select>
+	<select id="selectOfc" resultType="commonVo">
+		select cmNm as cName,cmNo as cCode from cmcd where cmCd='office'
+	</select>
 </mapper>
