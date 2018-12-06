@@ -1,5 +1,6 @@
 package com.asset.service.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -22,45 +23,45 @@ public class AssetDao {
 	@Inject
 	private SqlSession session;
 	
-	public List<AssetViewDto> selectList(AssetSearchDto dto){
+	public List<AssetViewDto> selectList(AssetSearchDto dto) throws SQLException{
 		return session.selectList("asset.selectList",dto);
 	}
 	
-	public AssetVo select(int aNo) {
+	public AssetVo select(int aNo) throws SQLException{
 		return session.selectOne("asset.select",aNo);
 	}
 	
-	public void insert(AssetVo vo) {
+	public void insert(AssetVo vo) throws SQLException{
 		session.insert("asset.insert",vo);
 	}
-	public void update(AssetVo vo) {
+	public void update(AssetVo vo) throws SQLException{
 		session.update("asset.update",vo);
 	}
-	public void delete(AssetDto dto) {
+	public void delete(AssetDto dto) throws SQLException{
 		session.update("asset.updateDl",dto);
 	}
 
-	public String selectAsNo(String category) {
+	public String selectAsNo(String category) throws SQLException{
 		// TODO Auto-generated method stub
 		return session.selectOne("asset.asNo",category);
 	}
 
-	public void deleteY(AssetDto dto) {
+	public void deleteY(AssetDto dto) throws SQLException{
 		// TODO Auto-generated method stub
 		session.delete("asset.delete",dto);
 	}
 
-	public List<AssetDownDto> selectDown(AssetSearchDto dto) {
+	public List<AssetDownDto> selectDown(AssetSearchDto dto) throws SQLException{
 		// TODO Auto-generated method stub
 		return session.selectList("asset.selectDown",dto);
 	}
 
-	public void updateEmp(Map<String, Object> map) {
+	public void updateEmp(Map<String, Object> map) throws SQLException{
 		// TODO Auto-generated method stub
 		session.update("asset.empMdf",map);
 	}
 
-	public List<ChartDto> selectRow(ChartDto dto) {
+	public List<ChartDto> selectRow(ChartDto dto) throws SQLException{
 		// TODO Auto-generated method stub
 		//System.out.println("dao :"+key);
 		

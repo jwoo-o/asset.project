@@ -1,5 +1,6 @@
 package com.asset.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -13,13 +14,13 @@ import com.core.vo.ManagerDto;
 
 public interface AssetService {
 
-	public List<AssetViewDto> assetLst(AssetSearchDto dto);
-	public AssetVo assetDtl(AssetDto dto);
-	public void assetRgt(AssetVo vo, ManagerDto manager);
-	public void assetMdf(AssetVo vo, ManagerDto manager);
-	public void assetDl(AssetDto dto, ManagerDto manager);
-	public String assetNo(String category);
-	public void assetDlY(AssetDto dto);
-	public List<AssetDownDto> assetDown(AssetSearchDto dto);
-	public Map<String, Object> assetChart(ChartDto dto);
+	public List<AssetViewDto> assetLst(AssetSearchDto dto) throws SQLException;
+	public AssetVo assetDtl(AssetDto dto) throws SQLException;
+	public void assetRgt(AssetVo vo, ManagerDto manager) throws SQLException;
+	public void assetMdf(AssetVo vo, ManagerDto manager) throws SQLException;
+	public void assetDl(AssetDto dto, ManagerDto manager) throws SQLException;
+	public String assetNo(String category) throws SQLException;
+	public void assetDlY(AssetDto dto) throws SQLException;
+	public List<AssetDownDto> assetDown(AssetSearchDto dto) throws SQLException;
+	public Map<String, Object> assetChart(ChartDto dto) throws SQLException;
 }
