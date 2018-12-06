@@ -1,5 +1,6 @@
 package com.asset.service.impl;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,19 +27,19 @@ public class AssetServiceImpl implements AssetService {
 	private AssetDao dao;
 	
 	@Override
-	public List<AssetViewDto> assetLst(AssetSearchDto dto) {
+	public List<AssetViewDto> assetLst(AssetSearchDto dto) throws SQLException{
 		// TODO Auto-generated method stub
 		return dao.selectList(dto);
 	}
 
 	@Override
-	public AssetVo assetDtl(AssetDto dto) {
+	public AssetVo assetDtl(AssetDto dto) throws SQLException{
 		// TODO Auto-generated method stub
 		return dao.select(dto.getaNo());
 	}
 
 	@Override
-	public void assetRgt(AssetVo vo,ManagerDto manager) {
+	public void assetRgt(AssetVo vo,ManagerDto manager) throws SQLException {
 		
 		// TODO Auto-generated method stub
 		vo.setFstRgtWkrNm(manager.getmName());
@@ -49,7 +50,7 @@ public class AssetServiceImpl implements AssetService {
 	}
 
 	@Override
-	public void assetMdf(AssetVo vo,ManagerDto manager) {
+	public void assetMdf(AssetVo vo,ManagerDto manager) throws SQLException{
 		// TODO Auto-generated method stub
 		vo.setLstMdfWkrNm(manager.getmName());
 		
@@ -57,22 +58,21 @@ public class AssetServiceImpl implements AssetService {
 	}
 
 	@Override
-	public void assetDl(AssetDto dto,ManagerDto manager) {
+	public void assetDl(AssetDto dto,ManagerDto manager) throws SQLException{
 		// TODO Auto-generated method stub
 		dto.setLstMdfWkrNm(manager.getmName());
 		dao.delete(dto);
 	}
 
 	@Override
-	public String assetNo(String category) {
+	public String assetNo(String category) throws SQLException{
 		// TODO Auto-generated method stub
 		if(category.equals("3"))
 			category = "0";
 		
 		String assetNo = dao.selectAsNo(category);
 		
-		if(category.equals("2"))
-			return "";
+		
 		int no = Integer.parseInt(assetNo.substring(2))+1;
 		String nextAsset = assetNo.substring(0, 2)+String.format("%04d", no);
 		
@@ -80,19 +80,19 @@ public class AssetServiceImpl implements AssetService {
 	}
 
 	@Override
-	public void assetDlY(AssetDto dto) {
+	public void assetDlY(AssetDto dto) throws SQLException{
 		// TODO Auto-generated method stub
 		dao.deleteY(dto);
 	}
 
 	@Override
-	public List<AssetDownDto> assetDown(AssetSearchDto dto) {
+	public List<AssetDownDto> assetDown(AssetSearchDto dto) throws SQLException{
 		// TODO Auto-generated method stub
 		return dao.selectDown(dto);
 	}
 
 	@Override
-	public Map<String, Object> assetChart(ChartDto dto) {
+	public Map<String, Object> assetChart(ChartDto dto) throws SQLException{
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<ChartDto> list = dao.selectRow(dto);
