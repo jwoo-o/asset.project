@@ -21,4 +21,7 @@
   <update id="updatePwd">
   	update manager set pwd=#{newPwd} where mId=#{mId} and pwd=#{pwd}
   </update>
+  <select id="selectId" resultType="managerVo">
+  	select * from manager where auth='1' and empno not in('root')
+  </select>
 </mapper>

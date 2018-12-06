@@ -1,5 +1,6 @@
 package com.core.controller;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +38,13 @@ public class ExcelController {
 		
 		response.setHeader("Content-disposition", "attachment; filename="+fileName+".xlsx");
 		
-		List<AssetDownDto> excelList = service.assetDown(dto);
+		List<AssetDownDto> excelList = null;
+		try {
+			excelList = service.assetDown(dto);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		map.put("list",excelList);
 		return "excelView";
 	}
