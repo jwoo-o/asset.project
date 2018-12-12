@@ -13,12 +13,13 @@
     <link href="css/style.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <link href='/css/fullcalendar.css' rel='stylesheet' />
     <link href='/css/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src='/js/moment.min.js'></script>
     <script src='/js/jquery.min.js'></script>
+    <script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.js" type="text/javascript"></script>
     <script src='/js/fullcalendar.min.js'></script>
@@ -62,6 +63,10 @@
 	                	<option value="${division.cCode }">${division.cName }</option>
 	                </c:forEach>
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="name">관리자</label>
+                <input type="text" class="form-control" id="mgr" name="mgr"/>
             </div>
              <div class="form-group">
                 <label for="gender">증원/충원</label>
