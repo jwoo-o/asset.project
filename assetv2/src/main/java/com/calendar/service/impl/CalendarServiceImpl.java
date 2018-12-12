@@ -13,8 +13,6 @@ import com.calendar.service.CalendarService;
 import com.calendar.service.dao.CalendarDao;
 import com.calendar.vo.CalendarVo;
 import com.core.service.dao.ManagerDao;
-import com.core.util.DateUtillity;
-import com.core.util.MailUtility;
 import com.core.vo.ManagerVo;
 
 @Service
@@ -39,7 +37,7 @@ public class CalendarServiceImpl implements CalendarService {
 	public Map<String, Object> calendarRgt(CalendarVo vo) throws SQLException {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<ManagerVo> list = mDao.selectManagerId();
+		//List<ManagerVo> list = mDao.selectManagerId();
 		
 		map.put("msg", "0001");
 		vo.setTitle("["+vo.getAddNrein()+"]"+vo.getName());
