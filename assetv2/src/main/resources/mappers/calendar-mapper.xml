@@ -7,10 +7,10 @@
 		select * from planned
 	</select>
 	<insert id="insertCal">
-		insert into planned (name,division,addNrein,seat,title,start,end) values(#{name},#{division},#{addNrein},#{seat},#{title},#{start},#{end})
+		insert into planned (name,division,addNrein,seat,title,start,end,mgr) values(#{name},#{division},#{addNrein},#{seat},#{title},#{start},#{end},#{mgr})
 	</insert>
 	<update id="updateCal">
-		update planned set name=#{name},division=#{division},addNrein=#{addNrein},seat=#{seat},title=#{title} where no=#{no}
+		update planned set name=#{name},division=#{division},addNrein=#{addNrein},seat=#{seat},title=#{title},mgr=#{mgr} where no=#{no}
 	</update>
 	<update id="updateDate">
 		update planned set start=#{start},end=#{end} where no=#{no}
