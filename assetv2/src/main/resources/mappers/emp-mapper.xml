@@ -51,10 +51,10 @@
   	from employee where name=#{userName}
   </select>
   <insert id="insert">
-  	insert into employee values(#{empNo},#{name},#{division},#{position},#{gender},#{joinDate},'y',#{email},'n')
+  	insert into employee values(#{empNo},#{name},#{division},#{position},#{gender},#{joinDate},'y',#{email},'n',#{office})
   </insert>
   <update id="update">
-  	update employee set division=#{division},position=#{position},status=#{status},manager=#{manager} where employeeNumber=#{empNo}
+  	update employee set division=#{division},position=#{position},status=#{status},manager=#{manager},office=#{office} where employeeNumber=#{empNo}
   </update>
   <delete id="delete">
   	delete from employee where employeeNumber=#{empNo}
@@ -79,5 +79,8 @@
   </update>
   <select id="exiManager" resultType="String">
   	select manager from employee where employeeNumber=#{empNo}
+  </select>
+  <select id="mgrList" resultType="String">
+  	select name from employee where name like concat('%',#{mgr},'%') and division=#{division}
   </select>
 </mapper>

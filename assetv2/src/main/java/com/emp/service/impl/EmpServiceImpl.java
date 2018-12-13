@@ -10,8 +10,10 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.asset.service.dao.AssetDao;
+import com.calendar.vo.CalendarVo;
 import com.core.service.dao.ManagerDao;
 import com.core.util.ManagerUtility;
+import com.core.util.OfficeUtility;
 import com.core.util.PageUtility;
 import com.core.vo.ManagerDto;
 import com.core.vo.ManagerVo;
@@ -59,6 +61,7 @@ public class EmpServiceImpl implements EmpService {
 				vo.setManager("n");
 			}
 		}else {
+			OfficeUtility.input(vo);
 			managerDao.updateMgt(vo);
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -99,7 +102,14 @@ public class EmpServiceImpl implements EmpService {
 	@Override
 	public void empRst(EmpVo vo) throws SQLException {
 		// TODO Auto-generated method stub
+		OfficeUtility.input(vo);
 		dao.insert(vo);
+	}
+
+	@Override
+	public List<String> mgrList(CalendarVo vo) throws SQLException {
+		// TODO Auto-generated method stub
+		return dao.selectMgr(vo);
 	}
 
 }
