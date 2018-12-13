@@ -1,6 +1,8 @@
 package com.emp.contoller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.calendar.vo.CalendarVo;
 import com.core.service.CommonServie;
 import com.core.vo.ManagerDto;
 import com.emp.service.EmpService;
@@ -115,6 +118,19 @@ public class EmpController {
 		
 		model.addAttribute("vo", service.getEmp(empNo));
 		return "emp";
+	}
+	
+	@RequestMapping(value="/mgrSearch/proc",method=RequestMethod.POST)
+	public @ResponseBody List<String> mgrSearchProc(@RequestBody CalendarVo vo){
+		logger.info(vo.toString());
+		List<String> list = new ArrayList<String>();
+		try {
+			list = service.mgrList(vo);
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage());
+		}
+		return list;
 	}
 	
 }
