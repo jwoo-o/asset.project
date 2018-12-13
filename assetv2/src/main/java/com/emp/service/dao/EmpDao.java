@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.calendar.vo.CalendarVo;
 import com.core.vo.ManagerVo;
 import com.emp.vo.EmpVo;
 import com.emp.vo.SearchDto;
@@ -55,5 +56,10 @@ public class EmpDao {
 	public String exiManager(String empNo) {
 		// TODO Auto-generated method stub
 		return session.selectOne("emp.exiManager",empNo);
+	}
+
+	public List<String> selectMgr(CalendarVo vo) {
+		// TODO Auto-generated method stub
+		return session.selectList("emp.mgrList",vo);
 	}
 }

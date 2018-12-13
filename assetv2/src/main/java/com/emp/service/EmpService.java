@@ -2,8 +2,10 @@ package com.emp.service;
 
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
+import com.calendar.vo.CalendarVo;
 import com.core.vo.ManagerDto;
 import com.emp.vo.EmpVo;
 import com.emp.vo.SearchDto;
@@ -15,4 +17,5 @@ public interface EmpService {
 	public void empMdf(EmpVo vo, ManagerDto manager) throws SQLException;
 	public void empDl(EmpVo vo, ManagerDto manager) throws SQLException;
 	public void empRst(EmpVo vo) throws SQLException;
+	public List<String> mgrList(CalendarVo vo) throws SQLException;
 }
