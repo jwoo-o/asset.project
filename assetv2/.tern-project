@@ -8,6 +8,9 @@
   "plugins": {
     "guess-types": {
       
+    },
+    "jquery-ui1-12": {
+      
     }
   }
 }

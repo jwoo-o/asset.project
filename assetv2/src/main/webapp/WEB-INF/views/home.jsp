@@ -9,7 +9,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="Content-Style-Type" content="text/css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -26,15 +26,22 @@
     <script src="js/jquery.serializeObject.js" type="text/javascript"></script>
     <script src="/js/home.js" type="text/javascript"></script>
     <script type="text/javascript">
-	    $(function(){
+	    
+	    
+		$(function(){
+	    	
 	    	if("${mgr.auth}"==0){
 	 			$("#requestBt").remove();
 	 		}
 	    	if("${mgr.dCode}"!=7){
 	    		$("#calendar").hide();
 	    	}
+	    	
 	    })
-   
+    		
+
+
+
     </script>
     <title>GIOSIS</title>
     <style type="text/css">
@@ -101,7 +108,7 @@
 				<div class="col-md-12">
 				
 					<!-- Search Div -->
-					<div class="box">
+					<div class="box" style="min-width: 1200px;">
 						<div class="box-header with-border">
 							<h3 class="box-title"><strong>Search</strong></h3>
 						</div><!-- /.box-header -->
@@ -184,7 +191,7 @@
 						</div>
 					</div><br>
 					
-						<div class="box">
+						<div class="box" style="min-width: 1200px;">
 							  
 							  
 							  <div class="box-body">
