@@ -1,6 +1,7 @@
 package com.core.service.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -41,6 +42,11 @@ public class ManagerDao {
 	public int updatePwd(MgrPwdDto dto) {
 		// TODO Auto-generated method stub
 		return session.update("manager.updatePwd",dto);
+	}
+
+	public List<ManagerVo> selectManagerId() {
+		// TODO Auto-generated method stub
+		return session.selectList("manager.selectId");
 	}
 
 }

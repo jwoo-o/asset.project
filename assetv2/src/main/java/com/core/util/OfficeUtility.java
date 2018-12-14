@@ -8,10 +8,14 @@ public class OfficeUtility {
 		// TODO Auto-generated method stub
 		String division = vo.getDivision();
 		
-		if(division.equals("1") || division.equals("1") || division.equals("3") || division.equals("7") || division.equals("9") || division.equals("10") || division.equals("12"))
+		switch (division) {
+		case "1":case"3":case"7":case"9":case"10":case"12":
 			vo.setOffice("0");
-		else
+			break;
+		default:
 			vo.setOffice("1");
+			break;
+		}
 	}
 
 }

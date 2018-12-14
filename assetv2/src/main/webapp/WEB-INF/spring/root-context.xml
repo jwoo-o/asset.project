@@ -43,6 +43,26 @@
 		<aop:pointcut id="requiredTx" expression="execution(* com.**.service.impl.*Impl.*(..))"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="requiredTx" />
 	</aop:config>
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.naver.com"/>
+		<property name="port" value="587"/>
+		<property name="username" value="angerstar7"/>
+		<property name="password" value="dkwjtlehd1"/>
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<property name="javaMailProperties">
+			<props>
+               	<prop key="mail.smtp.auth">true</prop>
+               	<prop key="mail.smtp.starttls.enable">true</prop>
+              	<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+	<bean class="com.core.util.MailUtility">
+		<property name="sender" ref="mailSender"></property>
+	</bean>
+
+	
+	
 	
 	<context:component-scan base-package="com.asset.service.dao"></context:component-scan>
 	<context:component-scan base-package="com.asset.service.impl"></context:component-scan>
