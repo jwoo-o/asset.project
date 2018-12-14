@@ -51,10 +51,7 @@
 
 	<beans:bean name="excelView" class="com.core.util.ExcelView" />
 	
-	<beans:bean id="CalendarHandler" class="com.core.handler.WebSocketHandler"></beans:bean>
-	<websocket:handlers>
-		<websocket:mapping handler="CalendarHandler" path="/count"/>
-	</websocket:handlers>
+
 	
 	
 	
