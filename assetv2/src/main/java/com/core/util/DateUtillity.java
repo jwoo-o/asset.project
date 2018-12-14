@@ -25,6 +25,8 @@ public class DateUtillity {
 			cal.add(Calendar.YEAR, 5);
 		else if(category.equals("1"))
 			cal.add(Calendar.YEAR, 8);
+		else
+			return "";
 		
 		return cal.get(Calendar.YEAR)+"";
 		
