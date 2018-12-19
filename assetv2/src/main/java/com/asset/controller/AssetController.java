@@ -161,7 +161,7 @@ public class AssetController {
 	}
 	@RequestMapping("/chart")
 	public String chartView() {
-		return "/chart";
+		return "chart";
 	}
 	@RequestMapping(value="/chart/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> chartData(@RequestBody ChartDto dto) {
