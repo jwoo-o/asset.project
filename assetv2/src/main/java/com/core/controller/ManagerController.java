@@ -82,7 +82,7 @@ public class ManagerController {
 	}
 	@RequestMapping("/password")
 	public String pwdChange() throws Exception {
-		return "/password";
+		return "password";
 	}
 	@RequestMapping(value="/password/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> pwdChange(@RequestBody MgrPwdDto dto){
