@@ -24,6 +24,7 @@ import com.asset.service.AssetService;
 import com.asset.vo.AssetDto;
 import com.asset.vo.AssetSearchDto;
 import com.asset.vo.AssetVo;
+import com.asset.vo.ChartDto;
 import com.core.service.CommonServie;
 import com.core.vo.ManagerDto;
 
@@ -158,6 +159,21 @@ public class AssetController {
 		}
 		return map;
 	}
-	
+	@RequestMapping("/chart")
+	public void chartView() {
+		
+	}
+	@RequestMapping(value="/chart/proc",method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> chartData(@RequestBody ChartDto dto) {
+		logger.info(dto.toString());
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			map = service.assetChart(dto);
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage());
+		}
+		return map;
+	}
 
 }

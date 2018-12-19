@@ -80,11 +80,11 @@ public class ManagerController {
 		}
 		return map;
 	}
-	@RequestMapping("password")
+	@RequestMapping("/password")
 	public void pwdChange() throws Exception {
 		
 	}
-	@RequestMapping(value="password/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/password/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> pwdChange(@RequestBody MgrPwdDto dto){
 		Map<String, Object> map = new HashMap<String,Object>();
 		logger.info(dto.toString());
