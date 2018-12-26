@@ -14,6 +14,7 @@ public class AssetDownDto {
 	private String mInch;
 	private String note;
 	private String serialNo;
+	private String price;
 	
 	public int getaNo() {
 		return aNo;
@@ -87,13 +88,21 @@ public class AssetDownDto {
 	public void setSerialNo(String serialNo) {
 		this.serialNo = serialNo;
 	}
+	
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
 	@Override
 	public String toString() {
 		return "AssetDownDto [aNo=" + aNo + ", assetNo=" + assetNo + ", category=" + category + ", status=" + status
 				+ ", modelNm=" + modelNm + ", userName=" + userName + ", position=" + position + ", division="
 				+ division + ", buying=" + buying + ", mInch=" + mInch + ", note=" + note + ", serialNo=" + serialNo
-				+ "]";
+				+ ", price=" + price + "]";
 	}
+	
 	
 	
 	

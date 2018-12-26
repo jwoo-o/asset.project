@@ -47,6 +47,7 @@ public class ExcelView extends AbstractExcelPOIView{
 		row.createCell(cellCount++).setCellValue("부서");
 		row.createCell(cellCount++).setCellValue("구매일");
 		row.createCell(cellCount++).setCellValue("모니터크기");
+		row.createCell(cellCount++).setCellValue("가격");
 		row.createCell(cellCount++).setCellValue("참고");
 		
 		for (AssetDownDto dto : list) {
@@ -62,6 +63,7 @@ public class ExcelView extends AbstractExcelPOIView{
 			row.createCell(cellCount++).setCellValue(dto.getDivision());
 			row.createCell(cellCount++).setCellValue(dto.getBuying());
 			row.createCell(cellCount++).setCellValue(dto.getmInch());
+			row.createCell(cellCount++).setCellValue(dto.getPrice());
 			row.createCell(cellCount++).setCellValue(dto.getNote());
 		}
 	}
