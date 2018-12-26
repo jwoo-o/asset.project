@@ -102,6 +102,7 @@
 		(select cmNm from cmcd c1 where c1.cmCd='division' and c1.cmNo=e.division) division,
 		a.buying,
 		(select cmNm from cmcd c3 where c3.cmCd='mInch' and c3.cmNo=a.mInch) mInch,
+		a.price,
 		a.note
 	from asset a left outer join employee e on a.empNo=e.employeeNumber
     
