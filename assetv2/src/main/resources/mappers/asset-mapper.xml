@@ -72,7 +72,7 @@
   	lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where aNo=#{aNo}
   </update>
   <update id="updateDl">
-  	update asset set status='d',
+  	update asset set status='d',position='',division='',userName='',empNo='',
   	lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where aNo=#{aNo}
   </update>
   <select id="select" resultType="assetVo">

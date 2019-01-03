@@ -32,10 +32,12 @@
 	    	
 	    	if("${mgr.auth}"==0){
 	 			$("#requestBt").remove();
+	 			$("#setCommon").remove();
 	 		}
 	    	if("${mgr.dCode}"!=7){
 	    		$("#calendar").hide();
 	    	}
+	    	
 	    	
 	    })
     		
@@ -48,20 +50,13 @@
 		body{
 			background: #ecf0f5;
 		}
-		#assetChart:hover {
-			background-color: #172d44;
-		}
-		
-		#assetChart:visited {
-			background-color: #172d44;
-		}
 		#calendar:hover {
 			background-color: #172d44;
 		}
 		
 		#calendar:visited {
 			background-color: #172d44;
-		}
+}
 	</style>
 </head>
 	<body>
@@ -82,22 +77,22 @@
 	              	<span class="hidden-xs"><font color="white"><c:out value="${mgr.division }"></c:out></font></span>
 	              </li>
 	              <li style="padding-top: 1px">
-	                <a href="#" id="myPage" name="myPage" title="My page"><span ><font color="white"><c:out value="${mgr.mName }"></c:out></font></span></a>
+	                <a href="#" id="myPage"title="My page"><span ><font color="white"><c:out value="${mgr.mName }"></c:out></font></span></a>
 	            </li>
 	            <li style="padding-top: 2px">
-	                <a href="#" id="assetChart" name="assetChart" title="인원 및 자산 현황"><span class="fa fa-pie-chart na" style="color: white; font-size:large;"></span></a>
+	                <a id="assetChart"  title="인원 및 자산 현황"><span class="fa fa-pie-chart na" style="color: white; font-size:large;"></span></a>
 	            </li>
 	            <li>
-	                <a href="#" id="calendar" name="calendar" title="입사 예정"><span class="glyphicon glyphicon-calendar" style="color: white; font-size:large;"></span></a>
+	                <a id="calendar" title="입사 예정"><span class="glyphicon glyphicon-calendar na" style="color: white; font-size:large;"></span></a>
 	            </li>
 	            <li>
-	                <a href="#" id="empSearch" name="empSearch" title="사원 검색"><span class="glyphicon glyphicon-user na" style="color: white; font-size:large;"></span></a>
+	                <a id="empSearch"  title="사원 검색"><span class="glyphicon glyphicon-user na" style="color: white; font-size:large;"></span></a>
 	            </li>
-             
-              
-              	
+             	<li>
+	                <a id="setCommon" title="설정"><span class="glyphicon glyphicon-cog na" style="color: white; font-size:large;"></span></a>
+	            </li>
             	<li>
-                	<a href="/" id="logout_bt" name="logout_bt" title="Log out"><span class="glyphicon glyphicon-log-out na" style="color: white; font-size:large;"></span></a>
+                	<a href="/" id="logout_bt"  title="Log out"><span class="glyphicon glyphicon-log-out na" style="color: white; font-size:large;"></span></a>
               	</li>
              </ul>
            </div>
