@@ -61,15 +61,17 @@ public class EmpServiceImpl implements EmpService {
 				vo.setManager("n");
 			}
 		}else {
-			OfficeUtility.input(vo);
+			
 			managerDao.updateMgt(vo);
 		}
+		OfficeUtility.input(vo);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lstMdfWkrNm", dto.getmName());
 		map.put("empNo", vo.getEmpNo());
 		map.put("division", vo.getDivision());
 		map.put("position", vo.getPosition());
 		map.put("name", vo.getName());
+		map.put("office", vo.getOffice());
 		if(vo.getStatus().equals("n")) {
 			map.put("note", vo.getName()+" 휴직");
 			map.put("status", "s");
