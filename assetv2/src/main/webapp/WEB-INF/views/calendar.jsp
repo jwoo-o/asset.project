@@ -53,7 +53,7 @@
         	<input type="hidden" name="no" id="no">
             <div class="form-group">
                 <label for="name">이름</label>
-                <input type="text" class="form-control" id="name" name="name"/>
+                <input type="text" class="form-control" id="name" name="name" maxlength="10"/>
             </div>
              <div class="form-group">
                 <label for="division">부서</label>
@@ -66,7 +66,7 @@
             </div>
             <div class="form-group">
                 <label for="name">관리자</label>
-                <input type="text" class="form-control" id="mgr" name="mgr"/>
+                <input type="text" class="form-control" id="mgr" name="mgr" maxlength="10"/>
             </div>
              <div class="form-group">
                 <label for="gender">증원/충원</label>
@@ -77,7 +77,7 @@
             </div>
              <div class="form-group">
                 <label for="seat">예정 좌석</label>
-                <input type="text" class="form-control" id="seat" name="seat"/>
+                <input type="text" class="form-control" id="seat" name="seat" maxlength="200"/>
             </div>
             
             <button type="button" id="btnSave" class="btn btn-default">Save</button>

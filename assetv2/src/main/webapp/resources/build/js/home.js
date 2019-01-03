@@ -25,6 +25,9 @@
 			$("#datepicker1").datepicker();
 			
 			
+			$("#setCommon").click(function() {
+			 
+			})
 			
 			$("#requestBt").click(function(){
 				
