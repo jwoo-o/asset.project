@@ -4,7 +4,6 @@ public class CommonVo {
 
 	private String cCode;
 	private String cName;
-	
 	public String getcCode() {
 		return cCode;
 	}
