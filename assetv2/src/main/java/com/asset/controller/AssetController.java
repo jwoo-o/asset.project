@@ -46,7 +46,7 @@ public class AssetController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping("/home")
-	public void home(Model model) {
+	public void home(Model model) throws Exception {
 		model.addAttribute("common",cService.commonLst());
 	}
 	
@@ -118,7 +118,7 @@ public class AssetController {
 
 	@RequestMapping(value = "/delete/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetDl(@RequestBody AssetDto dto, HttpSession session) {
-
+		
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
