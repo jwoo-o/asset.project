@@ -28,7 +28,7 @@ var calendar;
             		
     	            var data = $("#regForm").serializeObject()
     	          
-    	            data.divNm = $("#division").val();
+    	            data.divNm = $("#division").data('div');
     	            var dataStr = JSON.stringify(data); 
     	               
     	            
