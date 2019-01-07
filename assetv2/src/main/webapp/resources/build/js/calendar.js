@@ -27,8 +27,8 @@ var calendar;
             	}else{
             		
     	            var data = $("#regForm").serializeObject()
-    	            data.id = "${mgr.mId}";
-    	            data.divNm = div[Number($("#division").val())];
+    	          
+    	            data.divNm = $("#division").val();
     	            var dataStr = JSON.stringify(data); 
     	               
     	            

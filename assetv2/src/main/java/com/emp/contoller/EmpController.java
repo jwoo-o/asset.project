@@ -50,7 +50,7 @@ public class EmpController {
 	}
 	
 	@RequestMapping(value="/emp")
-	public String emp(Model model) {
+	public String emp(Model model) throws Exception {
 		model.addAttribute("common", cService.commonLst());
 		return "manager";
 	}

@@ -60,7 +60,7 @@
                 <select class="form-control" id="division" name="division">
 	                <option value=""></option>
 	                <c:forEach var="division" items="${common.division }">
-	                	<option value="${division.cCode }">${division.cName }</option>
+	                	<option value="${division.cName }">${division.cName }</option>
 	                </c:forEach>
                 </select>
             </div>
