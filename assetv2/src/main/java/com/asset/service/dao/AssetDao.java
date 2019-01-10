@@ -41,9 +41,9 @@ public class AssetDao {
 		session.update("asset.updateDl",dto);
 	}
 
-	public String selectAsNo(String category) throws SQLException{
+	public String selectAsNo(Map<String, Object> map) throws SQLException{
 		// TODO Auto-generated method stub
-		return session.selectOne("asset.asNo",category);
+		return session.selectOne("asset.asNo",map);
 	}
 
 	public void deleteY(AssetDto dto) throws SQLException{
