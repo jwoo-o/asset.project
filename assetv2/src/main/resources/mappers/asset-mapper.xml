@@ -83,7 +83,10 @@
     from asset a left outer join employee e on a.empNo=e.employeeNumber where a.aNo=#{aNo}
   </select>
   <select id="asNo" resultType="String">
-  	select max(assetNo) from asset where category=#{category} order by assetNo desc
+  	select max(assetNo) from asset where category=#{category}
+  	<if test="category1!=null and category!=''">
+  		or category=#{category1}
+  	</if>
   </select>
   <delete id="delete">
   	delete from asset where aNo=#{aNo}

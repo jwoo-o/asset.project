@@ -67,10 +67,17 @@ public class AssetServiceImpl implements AssetService {
 	@Override
 	public String assetNo(String category) throws SQLException{
 		// TODO Auto-generated method stub
-		if(category.equals("3"))
-			category = "0";
+		Map<String, Object> map = new HashMap<String,Object>();
 		
-		String assetNo = dao.selectAsNo(category);
+		if(category.equals("3")) {
+			map.put("category1","0");
+		}else if(category.equals("0")) {
+			map.put("category1","3");
+		}
+		
+		
+		map.put("category", category);
+		String assetNo = dao.selectAsNo(map);
 		
 		
 		int no = Integer.parseInt(assetNo.substring(2))+1;
