@@ -5,8 +5,8 @@
 <mapper namespace="manager">
   <select id="login" resultType="managerVo">
     	select mNo,mName,mId,empNo,auth,dept dcode,
-    	(select cmNm from cmcd c where c.cmCd='division' and c.cmNo=dept) dept,
-    	(select cmNm from cmcd c1 where c1.cmCd='position' and c1.cmNo=position) position
+    	(select DTL_C_NM from CMCDDTLM c where c.GRP_C='division' and c.DTL_C=dept) dept,
+    	(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='position' and c1.DTL_C=position) position
     	from manager where mId = #{mId} and pwd = SHA2(#{pwd},256)
   </select>
   <insert id="insert">

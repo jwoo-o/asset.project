@@ -18,4 +18,78 @@
 	<select id="selectOfc" resultType="commonVo">
 		select cmNm as cName,cmNo as cCode from cmcd where cmCd='office'
 	</select>
+	<select id="selectCode" resultType="commonVo">
+		select DTL_C_NM as cName,DTL_C as cCode from CMCDDTLM where GRP_C=#{grpC}
+	</select>
+	<select id="selectGrpC" resultType="cmcdGrpmDto">
+		select 
+			GRP_C as grpC,
+			GRP_C_NM as grpCNm,
+			WK_C as wkC,
+			GRP_C_EXPL as grpCExpl,
+			LST_MDF_DTM as lstMdfDtm
+			from CMCDGRPM
+			<where>
+				<if test="search!=null and search!=''">
+					${keyword} like concat('%',#{search},'%')
+				</if>
+			</where>
+			limit ${next},10
+			
+	</select>
+	<select id="selectGrpCCount" resultType="int">
+		select count(*) from CMCDGRPM
+		<where>
+				<if test="search!=null and search!=''">
+					${keyword} like concat('%',#{search},'%')
+				</if>
+		</where>
+	</select>
+	<insert id="insertCommon">
+		insert into CMCDGRPM values(#{grpC},#{grpCNm},#{wkC},#{grpCExpl},#{fstRgtWkrNm},now(),#{lstMdfWkrNm},now())
+	</insert>
+	<select id="selectGrpCDtl" resultType="cmcdGrpmVo">
+		select 
+			GRP_C as grpC,
+			GRP_C_NM as grpCNm,
+			WK_C as wkC,
+			GRP_C_EXPL as grpCExpl
+		from CMCDGRPM
+		where
+			GRP_C = #{grpC}
+	</select>
+	<select id="selectDtlC" resultType="cmcdDtlmDto">
+		select 
+			DTL_C as dtlC,
+			DTL_C_NM as dtlCNm
+		from CMCDDTLM
+		where
+			GRP_C = #{grpC}
+		order by ORD_SN asc
+	</select>
+	
+	<insert id="insertDtlC">
+		insert into CMCDDTLM
+			values(#{grpC},#{dtlC},#{dtlCNm},#{ordSn},#{fstRgtWkrNm},now(),#{lstMdfWkrNm},now())
+	</insert>
+	<update id="updateDtlC">
+		update CMCDDTLM 
+		set 
+			DTL_C_NM=#{dtlCNm},
+			ORD_SN=#{ordSn},
+			LST_MDF_WKR_ID=#{lstMdfWkrNm},
+			LST_MDF_DTM=now()
+		where
+			GRP_C=#{grpC}
+	</update>
+	<delete id="deleteDtlC">
+		delete from CMCDDTLM
+		where 
+			GRP_C=#{grpC}
+		and
+			DTL_C=#{dtlC}
+	</delete>
+	
+	
+	
 </mapper>

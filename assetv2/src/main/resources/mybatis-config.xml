@@ -20,6 +20,10 @@
   	
   	<!-- Common -->
   	<typeAlias type="com.core.vo.CommonVo" alias="commonVo"/>
+  	<typeAlias type="com.core.vo.CmcdGrpmVo" alias="cmcdGrpmVo"/>
+  	<typeAlias type="com.core.vo.CmcdGrpmDto" alias="cmcdGrpmDto"/>
+  	<typeAlias type="com.core.vo.CmcdDtlmVo" alias="cmcdDtlmVo"/>
+  	<typeAlias type="com.core.vo.CmcdDtlmDto" alias="cmcdDtlmDto"/>
   	
   </typeAliases>
 </configuration>
