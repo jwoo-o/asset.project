@@ -1,6 +1,7 @@
 package com.core.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -8,16 +9,29 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.core.service.CommonServie;
+import com.core.service.dao.CommonDtlDao;
 import com.core.service.dao.CommonServiceDao;
+import com.core.vo.CmcdDtlmDto;
+import com.core.vo.CmcdDtlmVo;
+import com.core.vo.CmcdGrpmDto;
+import com.core.vo.CmcdGrpmVo;
+import com.core.vo.CommonDto;
+import com.core.vo.ManagerDto;
 
 @Service
 public class CommonServiceImpl implements CommonServie {
 
 	@Inject
 	private CommonServiceDao dao;
+	
+	@Inject
+	private CommonDtlDao dDao;
+	
+	
+	
 
 	@Override
-	public Map<String, Object> commonLst() {
+	public Map<String, Object> commonLst() throws Exception{
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("division", dao.selectDiv());
@@ -25,6 +39,110 @@ public class CommonServiceImpl implements CommonServie {
 		map.put("category", dao.selectCat());
 		map.put("status", dao.selectStt());
 		map.put("office", dao.selectOfc());
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> commonSearch(CommonDto dto) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		dto.setNext((dto.getNext()-1)*10);
+		List<CmcdGrpmDto> list = dao.selectGrpC(dto);
+		int next = dao.selectGrpCCount(dto);
+		
+		if(next%10>0) {
+			next = next/10+1;
+		}else {
+			next = next/10;
+		}
+		
+		if(list != null) {
+			map.put("msg", "0001");
+			map.put("list", list);
+			map.put("next", next);
+		}
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> commonDtl(String grpC) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("cmcdGrpm", dao.selectGrpCDtl(grpC));
+		map.put("cmcdDtlm", dDao.selectDtlC(grpC));
+		
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> commonWriteProc(CmcdGrpmVo vo, ManagerDto manager) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String,Object>();
+		vo.setFstRgtWkrNm(manager.getmId());
+		vo.setLstMdfWkrNm(manager.getmId());
+		switch (vo.getVldStC()) {
+		case "C":
+			dao.insertCommon(vo);
+			map.put("msg", "0001");
+			break;
+
+		case "U":
+			if(dao.updateCommon(vo)>0) {
+				map.put("msg", "0001");
+			}
+			break;
+			
+		}
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> commonSubWriterProc(List<CmcdDtlmDto> list, ManagerDto manager) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String,Object>();
+		CmcdDtlmVo vo = null;
+		int idx = 0;
+		int applyCount = 0;
+		for(CmcdDtlmDto dto : list) {
+			vo = new CmcdDtlmVo();
+			switch (dto.getVldStC()) {
+			
+			case "C":
+				vo.setDtlC(dto.getDtlC());
+				vo.setDtlCNm(dto.getDtlCNm());
+				vo.setGrpC(dto.getGrpC());
+				vo.setOrdSn(++idx);
+				vo.setFstRgtWkrNm(manager.getmId());
+				vo.setLstMdfWkrNm(manager.getmId());
+				
+				dDao.insertDtlC(vo);
+				applyCount++;
+				break;
+
+			case "U":
+				vo.setDtlCNm(dto.getDtlCNm());
+				vo.setDtlC(dto.getDtlC());
+				vo.setGrpC(dto.getGrpC());
+				vo.setOrdSn(++idx);
+				vo.setLstMdfWkrNm(manager.getmId());
+				
+				applyCount += dDao.updateDtlC(vo);
+				break;
+			case "D":
+				vo.setDtlC(dto.getDtlC());
+				vo.setGrpC(dto.getGrpC());
+				
+				applyCount += dDao.deleteDtlC(vo);
+				break;
+			}
+			
+			if(applyCount>0) {
+				map.put("msg", "0001");
+			}
+			
+		}
+		
 		return map;
 	}
 	

@@ -128,6 +128,13 @@
 					}
 				})
 			})
+			$("#empdelBt").click(function() {
+				$("#status").val('s').prop("selected", true);
+				$("#empNo").val('');
+				$("#userName").val('');
+				$("#position").val('').prop("selected", true);
+				$("#division").val('').prop("selected", true);		
+			})
 			
 			$("#requestBt").click(function() {
 				if(!$.frmchk()){
@@ -197,6 +204,7 @@
 						$("#empNo").val(emp.empNo);
 						$("#position").val(emp.position).prop("selected", true);
 						$("#division").val(emp.division).prop("selected", true);
+						$("#status").val('y').prop("selected",true);
 					}else{
 						alert("찾는 직원이 없습니다.");
 					}
@@ -239,6 +247,7 @@
 				$('.delete').click(function(){
 				    yesnodialog('Yes', 'No', $(this));
 				})
+				
 		})
 		
 		
@@ -334,7 +343,7 @@
 										<tr height="22">
 											<td class="tdBack" align="left" width="15%"><strong class="list_title">이름</strong></td>
 											<td align="left">&nbsp;&nbsp;<input type="text" size="10" name="userName" id="userName" value="${vo.userName }">
-											&nbsp;&nbsp;<input type="button" class="btn bg-navy btn-sm" id="empBt" name="empBt" value="확인">&nbsp;
+											&nbsp;&nbsp;<input type="button" class="btn bg-navy btn-sm" id="empBt" name="empBt" value="확인">&nbsp;<input type="button" class="btn bg-red btn-sm" id="empdelBt" value="삭제">
 											</td>
 											
 										</tr>

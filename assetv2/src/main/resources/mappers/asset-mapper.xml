@@ -7,14 +7,14 @@
   select
 		a.aNo,
 		a.assetNo,
-		(select cmNm from cmcd c4 where c4.cmCd='category' and c4.cmNo=a.category) category,
-		(select cmNm from cmcd c where c.cmCd='status' and c.cmNo=a.status) status,
+		(select DTL_C_NM from CMCDDTLM c4 where c4.GRP_C='category' and c4.DTL_C=a.category) category,
+		(select DTL_C_NM from CMCDDTLM c where c.GRP_C='status' and c.DTL_C=a.status) status,
 		a.modelNm,
 		IFNULL(e.name,'') userName,
-		IFNULL((select cmNm from cmcd c2 where c2.cmCd='position' and c2.cmNo=e.position),'') position,
-		IFNULL((select cmNm from cmcd c1 where c1.cmCd='division' and c1.cmNo=e.division),'') division,
+		IFNULL((select DTL_C_NM from CMCDDTLM c2 where c2.GRP_C='position' and c2.DTL_C=e.position),'') position,
+		IFNULL((select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='division' and c1.DTL_C=e.division),'') division,
 		a.buying,
-		IFNULL((select cmNm from cmcd c3 where c3.cmCd='mInch' and c3.cmNo=a.mInch),'') mInch,
+		IFNULL((select DTL_C_NM from CMCDDTLM c3 where c3.GRP_C='mInch' and c3.DTL_C=a.mInch),'') mInch,
 		a.note
 	from asset a left outer join employee e on a.empNo=e.employeeNumber
     
@@ -96,15 +96,15 @@
   select
 		a.aNo,
 		a.assetNo,
-		(select cmNm from cmcd c4 where c4.cmCd='category' and c4.cmNo=a.category) category,
-		(select cmNm from cmcd c where c.cmCd='status' and c.cmNo=a.status) status,
+		(select DTL_C_NM from CMCDDTLM c4 where c4.GRP_C='category' and c4.DTL_C=a.category) category,
+		(select DTL_C_NM from CMCDDTLM c where c.GRP_C='status' and c.DTL_C=a.status) status,
 		a.modelNm,
 		a.serialNo,
 		e.name userName,
-		(select cmNm from cmcd c2 where c2.cmCd='position' and c2.cmNo=e.position) position,
-		(select cmNm from cmcd c1 where c1.cmCd='division' and c1.cmNo=e.division) division,
+		IFNULL((select DTL_C_NM from CMCDDTLM c2 where c2.GRP_C='position' and c2.DTL_C=e.position),'') position,
+		IFNULL((select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='division' and c1.DTL_C=e.division),'') division,
 		a.buying,
-		(select cmNm from cmcd c3 where c3.cmCd='mInch' and c3.cmNo=a.mInch) mInch,
+		IFNULL((select DTL_C_NM from CMCDDTLM c3 where c3.GRP_C='mInch' and c3.DTL_C=a.mInch),'') mInch,
 		a.price,
 		a.note
 	from asset a left outer join employee e on a.empNo=e.employeeNumber
@@ -172,11 +172,13 @@
 				year(${categorys}) categorys,
 			</when>
 			<when test="categorys=='position' or categorys=='division'">
-				IFNULL((select cmNm from cmcd c1 where c1.cmCd=#{categorys} and c1.cmNo=${categorys}),'보관') categorys,
+				IFNULL((select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C=#{categorys} and c1.DTL_C=${categorys}),'보관') categorys,
 			</when>
 			
 		</choose>
 			count(${categorys}) as count from asset 
+			where
+				not status='d'
 		<choose>
 			<when test="categorys=='buying'">
 				group by categorys
