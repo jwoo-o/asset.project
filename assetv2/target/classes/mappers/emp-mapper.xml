@@ -7,8 +7,8 @@
     	select 
     	e.employeeNumber as empNo,
     	e.name as name,
-    	(select cmNm from cmcd c where c.cmCd='position' and c.cmNo=e.position) as position,
-        (select cmNm from cmcd c1 where c1.cmCd='division' and c1.cmNo=e.division) as division,
+    	(select DTL_C_NM from CMCDDTLM c where c.GRP_C='division' and c.DTL_C=dept) as division,
+    	(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='position' and c1.DTL_C=position) as position,
         e.division as dcode,
         e.position as pcode,
         e.gender,
