@@ -80,7 +80,7 @@
 			LST_MDF_WKR_ID=#{lstMdfWkrNm},
 			LST_MDF_DTM=now()
 		where
-			GRP_C=#{grpC}
+			GRP_C=#{grpC} and DTL_C=#{dtlC}
 	</update>
 	<delete id="deleteDtlC">
 		delete from CMCDDTLM
