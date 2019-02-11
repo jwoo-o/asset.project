@@ -19,7 +19,7 @@
 		select cmNm as cName,cmNo as cCode from cmcd where cmCd='office'
 	</select>
 	<select id="selectCode" resultType="commonVo">
-		select DTL_C_NM as cName,DTL_C as cCode from CMCDDTLM where GRP_C=#{grpC}
+		select DTL_C_NM as cName,DTL_C as cCode from CMCDDTLM where GRP_C=#{grpC} order by ORD_SN asc
 	</select>
 	<select id="selectGrpC" resultType="cmcdGrpmDto">
 		select 
@@ -89,7 +89,12 @@
 		and
 			DTL_C=#{dtlC}
 	</delete>
-	
+	<select id="selectList" resultType="cmcdGrpmVo">
+		select 
+			GRP_C as grpC
+		from CMCDGRPM
+			
+	</select>
 	
 	
 </mapper>

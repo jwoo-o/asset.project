@@ -1,6 +1,5 @@
 package com.asset.service.impl;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +16,8 @@ import com.asset.vo.AssetSearchDto;
 import com.asset.vo.AssetViewDto;
 import com.asset.vo.AssetVo;
 import com.asset.vo.ChartDto;
+import com.core.service.dao.CommonDtlDao;
+import com.core.service.dao.CommonGrpDao;
 import com.core.util.DateUtillity;
 import com.core.vo.ManagerDto;
 
@@ -26,20 +27,23 @@ public class AssetServiceImpl implements AssetService {
 	@Inject
 	private AssetDao dao;
 	
+	@Inject
+	private CommonGrpDao cDao;
+	
 	@Override
-	public List<AssetViewDto> assetLst(AssetSearchDto dto) throws SQLException{
+	public List<AssetViewDto> assetLst(AssetSearchDto dto) throws Exception{
 		// TODO Auto-generated method stub
 		return dao.selectList(dto);
 	}
 
 	@Override
-	public AssetVo assetDtl(AssetDto dto) throws SQLException{
+	public AssetVo assetDtl(AssetDto dto) throws Exception{
 		// TODO Auto-generated method stub
 		return dao.select(dto.getaNo());
 	}
 
 	@Override
-	public void assetRgt(AssetVo vo,ManagerDto manager) throws SQLException {
+	public void assetRgt(AssetVo vo,ManagerDto manager) throws Exception {
 		
 		// TODO Auto-generated method stub
 		vo.setFstRgtWkrNm(manager.getmName());
@@ -50,7 +54,7 @@ public class AssetServiceImpl implements AssetService {
 	}
 
 	@Override
-	public void assetMdf(AssetVo vo,ManagerDto manager) throws SQLException{
+	public void assetMdf(AssetVo vo,ManagerDto manager) throws Exception{
 		// TODO Auto-generated method stub
 		vo.setLstMdfWkrNm(manager.getmName());
 		
@@ -58,14 +62,14 @@ public class AssetServiceImpl implements AssetService {
 	}
 
 	@Override
-	public void assetDl(AssetDto dto,ManagerDto manager) throws SQLException{
+	public void assetDl(AssetDto dto,ManagerDto manager) throws Exception{
 		// TODO Auto-generated method stub
 		dto.setLstMdfWkrNm(manager.getmName());
 		dao.delete(dto);
 	}
 
 	@Override
-	public String assetNo(String category) throws SQLException{
+	public String assetNo(String category) throws Exception{
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String,Object>();
 		
@@ -87,19 +91,19 @@ public class AssetServiceImpl implements AssetService {
 	}
 
 	@Override
-	public void assetDlY(AssetDto dto) throws SQLException{
+	public void assetDlY(AssetDto dto) throws Exception{
 		// TODO Auto-generated method stub
 		dao.deleteY(dto);
 	}
 
 	@Override
-	public List<AssetDownDto> assetDown(AssetSearchDto dto) throws SQLException{
+	public List<AssetDownDto> assetDown(AssetSearchDto dto) throws Exception{
 		// TODO Auto-generated method stub
 		return dao.selectDown(dto);
 	}
 
 	@Override
-	public Map<String, Object> assetChart(ChartDto dto) throws SQLException{
+	public Map<String, Object> assetChart(ChartDto dto) throws Exception{
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<ChartDto> list = dao.selectRow(dto);
@@ -107,6 +111,7 @@ public class AssetServiceImpl implements AssetService {
 		
 		return map;
 	}
+
 
 
 }
