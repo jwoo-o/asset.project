@@ -9,7 +9,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="Content-Style-Type" content="text/css">
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
     
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -115,23 +115,23 @@
 							<table class="table table-bordered text-sm">
 						       <tbody><tr height="18">
 						      		<td class="tdBack" style="width: 13%;">&nbsp;<strong class="list_title">구매일</strong></td>
-						            <td align="left" width="200">&nbsp;
-						               <input type="text"  size="7" id="datepicker" name="start_dt" >~
-								       <input type="text"  size="7" id="datepicker1" name="end_dt">
+						            <td align="left" style="width: 16%;">&nbsp;
+						               <input type="text"  size="5" id="datepicker" name="start_dt"  autocomplete="off">~
+								       <input type="text"  size="5" id="datepicker1" name="end_dt" autocomplete="off">
 						            </td>
 						            <td class="tdBack" style="width: 13%;">&nbsp;<strong class="list_title">사용자</strong></td>
-						            <td align="left">&nbsp;
+						            <td align="left" style="width: 17%;">&nbsp;
 						              	<input type="text" class="TextBox w_date" size="10" id="userName" name="userName">
 						            </td>
 						            <td class="tdBack" style="width: 13%;">&nbsp;<strong class="list_title">자산번호</strong></td>
-						            <td align="left">&nbsp;
+						            <td align="left" style="width: 20%;">&nbsp;
 						              	<input type="text" class="TextBox w_date" size="10" id="assetNo" name="assetNo">
 						            </td>
-						            <td align="center" width="80" rowspan="3" style="padding-top:40px;"><input type="button" class="btn bg-navy btn-sm" id="searchBt" name="searchBt" value="Search" alt="Search"></td>
+						            <td align="center" rowspan="3" style="padding-top:40px;"><input type="button" class="btn bg-navy btn-sm" id="searchBt" name="searchBt" value="Search" alt="Search"></td>
 						       </tr>
 						      	<tr>
-						      	   <td class="tdBack" align="left" width="80">&nbsp;<strong class="list_title">종류</strong></td>
-						           <td align="left" width="120">&nbsp;
+						      	   <td class="tdBack" align="left">&nbsp;<strong class="list_title">종류</strong></td>
+						           <td align="left" >&nbsp;
 						              	<select class="SelectBox" id="category" name="category">
 						              		<option value="">All</option>
 						              		<c:forEach var="category" items="${common.category }">
@@ -140,8 +140,8 @@
 									        	 
 										</select>
 									</td>
-									<td class="tdBack" align="left" style="width: 14%;">&nbsp;<strong class="list_title">직위</strong></td>
-						            <td align="left" width="80">&nbsp;
+									<td class="tdBack" align="left">&nbsp;<strong class="list_title">직위</strong></td>
+						            <td align="left">&nbsp;
 						              	<select class="SelectBox" id="position" name="position"> 
 						              	<option value="">All</option>
 						              	<c:forEach var="position" items="${common.position }">
@@ -151,8 +151,8 @@
 						              	
 						              	</select>
 						             </td>
-						           	<td class="tdBack" align="left" width="80">&nbsp;<strong class="list_title">부서</strong></td>
-							        <td align="left" width="80">&nbsp; 
+						           	<td class="tdBack" align="left">&nbsp;<strong class="list_title">부서</strong></td>
+							        <td align="left" >&nbsp; 
 							             <select class="SelectBox" id="division" name="division"> 
 								            <option value="">All</option>
 						              		<c:forEach var="division" items="${common.division }">
@@ -162,20 +162,20 @@
 							        </td>
 						      	</tr>
 						      	<tr>
-						           <td class="tdBack" align="left" width="100">&nbsp;<strong class="list_title">상태</strong></td>
-						           <td align="left" width="80" >&nbsp;<select class="SelectBox" id="status" name="status">
+						           <td class="tdBack" align="left">&nbsp;<strong class="list_title">상태</strong></td>
+						           <td align="left" >&nbsp;&nbsp;<select class="SelectBox" id="status" name="status">
 						           				<option value="">All</option>
 								              	<c:forEach var="status" items="${common.status }">
 						              				<option value="${status.cCode }">${status.cName}</option>
 						              			</c:forEach> 
 							             </select></td>
-							        <td class="tdBack" align="left" width="100">&nbsp;<strong class="list_title">교체시기</strong></td>
-						           <td align="left" width="80">&nbsp;<select class="SelectBox" id="re_time" name="re_time"> 
+							       <td class="tdBack" align="left">&nbsp;<strong class="list_title">교체시기</strong></td>
+						           <td align="left">&nbsp;&nbsp;<select class="SelectBox" id="re_time" name="re_time"> 
 								              	
 							             </select></td>
-							        <td class="tdBack" align="left" width="80">&nbsp;<strong class="list_title">참고사항</strong></td>
-							        <td align="left" width="80">&nbsp; 
-							             <input type="text" class="TextBox w_date" size="32" id="note" name="note">
+							        <td class="tdBack" align="left">&nbsp;<strong class="list_title">참고사항</strong></td>
+							        <td align="left">&nbsp; 
+							             <input type="text" class="TextBox w_date" id="note" name="note">
 							        </td>
 						      	</tr>
 						      </tbody></table>
