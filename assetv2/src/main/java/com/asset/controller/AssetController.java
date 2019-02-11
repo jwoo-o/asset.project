@@ -44,8 +44,9 @@ public class AssetController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping("/home")
-	public void home(Model model) throws Exception {
+	public String home(Model model) throws Exception {
 		model.addAttribute("common",cService.commonLst());
+		return "main";
 	}
 	/**자산 리스트 검색*/
 	@RequestMapping(value = "/list/proc", method = RequestMethod.POST)
