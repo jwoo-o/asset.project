@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -103,5 +102,20 @@ public class CommonController {
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
 		}
 		return map;
+	}
+	@RequestMapping(value="/common/delete/proc")
+	public Map<String, Object> commonDeleteProc(String grpC){
+		logger.info(grpC);
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			map = service.commonDeleteProc(grpC);
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.toString(),e);
+			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
+		}
+		
+		return map;
+		
 	}
 }

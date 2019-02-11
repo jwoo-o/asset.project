@@ -1,5 +1,6 @@
 package com.core.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.core.service.CommonServie;
 import com.core.service.dao.CommonDtlDao;
-import com.core.service.dao.CommonServiceDao;
+import com.core.service.dao.CommonGrpDao;
 import com.core.vo.CmcdDtlmDto;
 import com.core.vo.CmcdDtlmVo;
 import com.core.vo.CmcdGrpmDto;
@@ -21,8 +22,9 @@ import com.core.vo.ManagerDto;
 @Service
 public class CommonServiceImpl implements CommonServie {
 
+	/***/
 	@Inject
-	private CommonServiceDao dao;
+	private CommonGrpDao dao;
 	
 	@Inject
 	private CommonDtlDao dDao;
@@ -34,11 +36,11 @@ public class CommonServiceImpl implements CommonServie {
 	public Map<String, Object> commonLst() throws Exception{
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("division", dao.selectDiv());
-		map.put("position", dao.selectPos());
-		map.put("category", dao.selectCat());
-		map.put("status", dao.selectStt());
-		map.put("office", dao.selectOfc());
+		List<CmcdGrpmVo> commons = new ArrayList<CmcdGrpmVo>();
+		commons = dao.selectList();
+		for (CmcdGrpmVo vo : commons) {
+			map.put(vo.getGrpC(), dDao.selectCode(vo.getGrpC()));
+		}
 		return map;
 	}
 
@@ -98,7 +100,7 @@ public class CommonServiceImpl implements CommonServie {
 	}
 
 	@Override
-	public Map<String, Object> commonSubWriterProc(List<CmcdDtlmDto> list, ManagerDto manager) {
+	public Map<String, Object> commonSubWriterProc(List<CmcdDtlmDto> list, ManagerDto manager)throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String,Object>();
 		CmcdDtlmVo vo = null;
@@ -143,6 +145,18 @@ public class CommonServiceImpl implements CommonServie {
 			
 		}
 		
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> commonDeleteProc(String grpC) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String,Object>();
+		if(dao.deleteCommon(grpC)>0) {
+			map.put("msg", "0001");
+		}else {
+			map.put("msg", "삭제 할 코드가 존재 하지 않습니다");
+		}
 		return map;
 	}
 	

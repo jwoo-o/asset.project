@@ -1,6 +1,6 @@
 package com.core.controller;
 
-import java.sql.SQLException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.asset.service.AssetService;
 import com.asset.vo.AssetDownDto;
 import com.asset.vo.AssetSearchDto;
-import com.asset.vo.AssetViewDto;
 
 @Controller
 public class ExcelController {
@@ -41,7 +40,7 @@ public class ExcelController {
 		List<AssetDownDto> excelList = null;
 		try {
 			excelList = service.assetDown(dto);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

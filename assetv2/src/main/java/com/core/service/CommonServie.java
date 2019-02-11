@@ -19,7 +19,9 @@ public interface CommonServie {
 
 	public Map<String, Object> commonWriteProc(CmcdGrpmVo vo, ManagerDto manager)throws Exception;
 
-	public Map<String, Object> commonSubWriterProc(List<CmcdDtlmDto> list, ManagerDto manager);
+	public Map<String, Object> commonSubWriterProc(List<CmcdDtlmDto> list, ManagerDto manager) throws Exception;
+
+	public Map<String, Object> commonDeleteProc(String grpC) throws Exception;
 	
 
 }

@@ -113,7 +113,7 @@ body {
 									<i class="fa fa-list-ul"></i> 목록
 								</button>
 								<button type="button" class="btn btn-danger" name="btnDl"
-									id="btnDl">
+									id="btnDl" style="display: none;">
 									<i class="fa fa-close"></i> 삭제
 								</button>
 								<button type="button" class="btn btn-success" name="btnUpd"
@@ -201,6 +201,11 @@ body {
 		
 		$("#wkC").val("${map.cmcdGrpm.wkC }").prop("selected", true);
 		
+		if("${map.cmcdGrpm}"!=''){
+			$("#btnDl").show();
+		}
+		
+		
 		$("#btnUpd").on('click', function() {
 		 	if($("#vldStC").val()=="C"){
 				$("#grpC").val($("#tGrpC").val());
@@ -220,7 +225,8 @@ body {
 					if($("#vldStC").next().is("input")){
 						$("#vldStC").val("U");
 						$("#vldStC").after('<p class="form-control-static">'+$("#tGrpC").val()+'</p>');
-						$("#tGrpC").remove();		
+						$("#tGrpC").remove();
+						$("#btnDl").show();
 					}
 					alert("Request Success");
 				}else{
@@ -232,6 +238,32 @@ body {
             	}	
 			})
 		});
+		$("#btnDl").click(function() {
+			var data = {"grpC":$("#vldStC").next().html()},dataStr = JSON.stringify(data);
+			if(data!=''){
+				
+			}
+			$.ajax({
+				url:"<c:url value='/common/delete/proc'/>",
+				contentType:"application/json; charset=utf-8",
+				dataType:"json",
+				method:"post",
+				data:dataStr
+			}).done(function(data) {
+			 
+				if(data.msg="0000"){
+					alert("Request Success");
+					location.href='/common'
+				}else{
+					alert(data.msg);
+				}
+			}).fail(function(e) {
+				if(e.status == 401){
+            		onErrorFunc(e);
+            	}	
+			})
+			
+		})
 		
 		$("#btnAddRow").on('click', function() {
 			var tag = '<tr><td><input type="checkbox"><input type="hidden"name="vldStC" value="C"></td><td><p></p></td><td><input type="text" class="form-control"required="required" name="dtlC"></td><td><input type="text" class="form-control"required="required" name="dtlCNm"></td></tr>'
@@ -261,7 +293,7 @@ body {
 				/**
 		 * 위로 버튼 클릭 이벤트
 		 */
-		$("#btnUp").on("click touchstart", function() {
+		$("#btnUp").on("click", function() {
 			var chks = $("#tableBody tr").children().find("input:checked");
 			if (chks.length == 1) {
 				$(chks).each(function(i, el) {
@@ -284,7 +316,7 @@ body {
 		/**
 		 * 아래로 버튼 클릭 이벤트
 		 */
-		$("#btnDown").on("click touchstart", function() {
+		$("#btnDown").on("click", function() {
 			var chks = $("#tableBody tr").children().find("input:checked");
 			if (chks.length == 1) {
 				$(chks).each(function(i, el) {
