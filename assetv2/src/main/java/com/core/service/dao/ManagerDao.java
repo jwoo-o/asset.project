@@ -44,7 +44,7 @@ public class ManagerDao {
 		return session.update("manager.updatePwd",dto);
 	}
 
-	public List<ManagerVo> selectManagerId() {
+	public List<String> selectManagerId() {
 		// TODO Auto-generated method stub
 		return session.selectList("manager.selectId");
 	}

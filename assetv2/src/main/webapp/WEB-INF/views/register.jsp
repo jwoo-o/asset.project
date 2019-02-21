@@ -303,11 +303,9 @@
 											<td align="left">
 												&nbsp;&nbsp;<select class="SelectBox" id="mInch" name="mInch">
 												<option value="">선택하세요</option>
-												<option value="0">none</option>
-												<option value="1">17인치</option>
-												<option value="2">19인치</option>
-												<option value="3">24인치</option>
-												<option value="4">27인치</option>
+												<c:forEach var="mInch" items="${common.mInch}">
+									        	 		<option value="${mInch.cCode }">${mInch.cName }</option>
+									        	 </c:forEach>
 												</select>
 											</td>
 										</tr>

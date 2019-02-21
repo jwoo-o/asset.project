@@ -14,6 +14,14 @@ public class CalendarVo {
 	private String id;
 	private String divNm;
 	private String mgr;
+	/**최초등록작업자이름*/
+	private String fstRgtWkrNm;
+	/**최초등록일시*/
+	private String fstRgtDtm;
+	/**최종변경작업자이름*/
+	private String lstMdfWkrNm;
+	/**최종변경일시*/
+	private String lstMdfDtm;
 	
 	
 	
@@ -85,6 +93,31 @@ public class CalendarVo {
 	}
 	public void setMgr(String mgr) {
 		this.mgr = mgr;
+	}
+	
+	public String getFstRgtWkrNm() {
+		return fstRgtWkrNm;
+	}
+	public void setFstRgtWkrNm(String fstRgtWkrNm) {
+		this.fstRgtWkrNm = fstRgtWkrNm;
+	}
+	public String getFstRgtDtm() {
+		return fstRgtDtm;
+	}
+	public void setFstRgtDtm(String fstRgtDtm) {
+		this.fstRgtDtm = fstRgtDtm;
+	}
+	public String getLstMdfWkrNm() {
+		return lstMdfWkrNm;
+	}
+	public void setLstMdfWkrNm(String lstMdfWkrNm) {
+		this.lstMdfWkrNm = lstMdfWkrNm;
+	}
+	public String getLstMdfDtm() {
+		return lstMdfDtm;
+	}
+	public void setLstMdfDtm(String lstMdfDtm) {
+		this.lstMdfDtm = lstMdfDtm;
 	}
 	@Override
 	public String toString() {
