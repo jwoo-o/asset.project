@@ -27,8 +27,7 @@ var calendar;
             	}else{
             		
     	            var data = $("#regForm").serializeObject()
-    	          
-    	            data.divNm = $("#division").data('div');
+    	            data.divNm = $("#division option:checked").text();
     	            var dataStr = JSON.stringify(data); 
     	               
     	            
