@@ -44,7 +44,7 @@ public class CalendarServiceImpl implements CalendarService {
 		vo.setLstMdfWkrNm(manager.getmName());
 		//DateUtillity.calendarFormat(vo);
 		dao.insertCal(vo); 
-		String subject = "System";
+		String subject = "GA_System";
 		String content = "<html><body><div style= 'width:500;border:solid #fffff;}'><h2>신규입사자 안내 메일</h2><table border='1'><tr><td style='width:200px;'><b>등록자</b></td><td>"+manager.getmName()+"</td></tr>"
 				+ "<tr><td><b>입사예정일</b></td><td>"+vo.getStart()+"</td></tr>"
 				+ "<tr><td><b>이름</b></td><td>"+vo.getName()+"</td></tr>"
@@ -55,7 +55,7 @@ public class CalendarServiceImpl implements CalendarService {
 						"	    	<img src='https://stcom.image-gmkt.com/css/us/qoo10/front/cm/common/image/logo_qoo10_main.png'>" + 
 						"	    	</div></div></body></html>";
 		try {
-			emailSendService.emailSendProc(subject, content, "ga@qoo10.com",list,manager.getmName(), "system");
+			emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
