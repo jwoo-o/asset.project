@@ -3,7 +3,7 @@
  */
 var regist;
 var calendar;
-
+var isRun = false;
 	
     	$(function () {
     		
@@ -26,6 +26,11 @@ var calendar;
     				alert("이름은 필수 입력사항입니다.");
             	}else{
             		
+            		if(isRun == true){
+            			return;
+            		}
+            		isRun = true;
+            		
     	            var data = $("#regForm").serializeObject()
     	            data.divNm = $("#division option:checked").text();
     	            var dataStr = JSON.stringify(data); 
@@ -36,7 +41,7 @@ var calendar;
     	                    regist.close();
     	                    $('#calendar').fullCalendar('destroy');
     	                    calendarData();
-    	                   
+    	                    isRun=false;
     	                })
     	                .fail(function (e) {
     	                	if(e.status == 401){
