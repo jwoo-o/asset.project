@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.calendar.service.CalendarService;
 import com.calendar.vo.CalendarVo;
 import com.core.service.CommonServie;
+import com.core.vo.ManagerDto;
 
 @Controller
 public class CalendarController {
@@ -35,11 +37,12 @@ public class CalendarController {
 		model.addAttribute("common", cService.commonLst());
 	}
 	@RequestMapping(value="/calendarRgt/proc",method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> calendarRgtProc(@RequestBody CalendarVo vo){
+	public @ResponseBody Map<String, Object> calendarRgtProc(@RequestBody CalendarVo vo,HttpSession session){
 		logger.info(vo.toString());
 		Map<String, Object> map = new HashMap<String,Object>();
+		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		try {
-			map = service.calendarRgt(vo);
+			map = service.calendarRgt(vo,manager);
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());
