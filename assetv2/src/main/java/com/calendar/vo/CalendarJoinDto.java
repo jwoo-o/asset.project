@@ -1,32 +1,29 @@
 package com.calendar.vo;
 
+public class CalendarJoinDto {
 
-public class CalendarVo {
-	
 	/**번호*/
 	private int no;
 	/**입사자명*/
 	private String name;
 	/**부서넘버*/
 	private String division;
-	/**증원/충원*/
-	private String addNrein;
-	/**등록명*/
-	private String title;
-	/**시작일*/
-	private String start;
-	/**종료일*/
-	private String end;
-	/**입사좌석*/
-	private String seat;
+	/**사원번호*/
+	private String empNo;
+	/**직위넘버*/
+	private String position;
+	/**성별*/
+	private String gender;
+	/**입사일*/
+	private String joinDate;
+	/**이메일*/
+	private String email;
 	/**등록자*/
 	private String id;
+	/**직위명*/
+	private String posNm;
 	/**부서명*/
 	private String divNm;
-	/**관리자*/
-	private String mgr;
-	/**입사완료 여부*/
-	private String joinYN;
 	/**최초등록작업자이름*/
 	private String fstRgtWkrNm;
 	/**최초등록일시*/
@@ -35,9 +32,6 @@ public class CalendarVo {
 	private String lstMdfWkrNm;
 	/**최종변경일시*/
 	private String lstMdfDtm;
-	
-	
-	
 	
 	public int getNo() {
 		return no;
@@ -57,63 +51,41 @@ public class CalendarVo {
 	public void setDivision(String division) {
 		this.division = division;
 	}
-	public String getAddNrein() {
-		return addNrein;
+	public String getEmpNo() {
+		return empNo;
 	}
-	public void setAddNrein(String addNrein) {
-		this.addNrein = addNrein;
+	public void setEmpNo(String empNo) {
+		this.empNo = empNo;
 	}
-	public String getSeat() {
-		return seat;
+	public String getPosition() {
+		return position;
 	}
-	public void setSeat(String seat) {
-		this.seat = seat;
+	public void setPosition(String position) {
+		this.position = position;
 	}
-	public String getTitle() {
-		return title;
+	public String getGender() {
+		return gender;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
-	public String getStart() {
-		return start;
+	public String getJoinDate() {
+		return joinDate;
 	}
-	public void setStart(String start) {
-		this.start = start;
+	public void setJoinDate(String joinDate) {
+		this.joinDate = joinDate;
 	}
-	public String getEnd() {
-		return end;
+	public String getEmail() {
+		return email;
 	}
-	public void setEnd(String end) {
-		this.end = end;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
-	public String getDivNm() {
-		return divNm;
-	}
-	public void setDivNm(String divNm) {
-		this.divNm = divNm;
-	}
-	
-	public String getMgr() {
-		return mgr;
-	}
-	public void setMgr(String mgr) {
-		this.mgr = mgr;
-	}
-	
-	
-	public String getJoinYN() {
-		return joinYN;
-	}
-	public void setJoinYN(String joinYN) {
-		this.joinYN = joinYN;
 	}
 	public String getFstRgtWkrNm() {
 		return fstRgtWkrNm;
@@ -139,20 +111,25 @@ public class CalendarVo {
 	public void setLstMdfDtm(String lstMdfDtm) {
 		this.lstMdfDtm = lstMdfDtm;
 	}
+	public String getPosNm() {
+		return posNm;
+	}
+	public void setPosNm(String posNm) {
+		this.posNm = posNm;
+	}
+	public String getDivNm() {
+		return divNm;
+	}
+	public void setDivNm(String divNm) {
+		this.divNm = divNm;
+	}
 	@Override
 	public String toString() {
-		return "CalendarVo [no=" + no + ", name=" + name + ", division=" + division + ", addNrein=" + addNrein
-				+ ", title=" + title + ", start=" + start + ", end=" + end + ", seat=" + seat + ", id=" + id
-				+ ", divNm=" + divNm + ", mgr=" + mgr + ", joinYN=" + joinYN + ", fstRgtWkrNm=" + fstRgtWkrNm
+		return "CalendarJoinDto [no=" + no + ", name=" + name + ", division=" + division + ", empNo=" + empNo
+				+ ", position=" + position + ", gender=" + gender + ", joinDate=" + joinDate + ", email=" + email
+				+ ", id=" + id + ", posNm=" + posNm + ", divNm=" + divNm + ", fstRgtWkrNm=" + fstRgtWkrNm
 				+ ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm=" + lstMdfWkrNm + ", lstMdfDtm=" + lstMdfDtm + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

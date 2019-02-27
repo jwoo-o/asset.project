@@ -3,18 +3,26 @@
  */
 var regist;
 var calendar;
+var empRegist;
 var isRun = false;
 	
     	$(function () {
     		
-    		function frmchk() {
-    			var frm=$("#regForm").find("input");
-    			var num=frm.length;
-    			for(i=0;i<=num-1;i++){
-    				if($(frm[i]).val().trim()==""){
+    		function frmchk(formName) {
+    			var input=$("#"+formName).find("input");
+    			var select=$("#"+formName).find("select");
+    			
+    			for(i=0;i<input.length;i++){
+    				if($(input[i]).val().trim()==""){
     					return false;	
     				}
     			}
+    			for(i=0;i<select.length;i++){
+    				if($(select[i]).val().trim()==""){
+    					return false;	
+    				}
+    			}
+    			
     			return true;
     		}
     		function Save() {
@@ -22,8 +30,8 @@ var isRun = false;
             	if($("#no").val()!='0'){
             		url = '/calendarMdf/proc';
             	}
-            	if(!frmchk()){
-    				alert("이름은 필수 입력사항입니다.");
+            	if(!frmchk("regForm")){
+    				alert("빈칸없이 입력하세요.");
             	}else{
             		
             		if(isRun == true){
@@ -51,6 +59,41 @@ var isRun = false;
     	                });
             	}
             }
+    		function Success(){
+    			if(!frmchk("empForm")){
+    				alert("빈칸없이 입력하세요.");
+            	}else{
+            		
+            		if(isRun == true){
+            			return;
+            		}
+            		isRun = true;
+            		
+            		var data = $("#empForm").serializeObject();
+            		data.division = $("#division").val();
+            		data.divNm = $("#division option:checked").text();
+            		data.posNm = $("#position option:checked").text();
+            		data.name = $("#name").val();
+            		data.joinDate = $("#start").val();
+            		data.no = $("#no").val();
+            		
+            		dataStr = JSON.stringify(data);
+            		
+            		$.ajax({ url:'calendarJoin/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
+	                .done(function () {
+	                	empRegist.close();
+	                    $('#calendar').fullCalendar('destroy');
+	                    calendarData();
+	                    isRun=false;
+	                })
+	                .fail(function (e) {
+	                	if(e.status == 401){
+	                		empRegist.close();
+	        				onErrorFunc(e);
+	                	}
+	                });
+            	}
+    		}
     		
     		function getTimeStamp(date) {
     			  var d = new Date(date);
@@ -95,6 +138,12 @@ var isRun = false;
 	    		$.ajax({
 					url: '/calendarLst/proc', method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'
 				}).done(function(data) {
+					$.each(data, function(i, elt) {
+						if(elt.joinYN=='y'){
+							elt.color = '#666666';
+							
+						}
+					})
 					calendar(data);
 				})
     		}
@@ -118,6 +167,11 @@ var isRun = false;
 					eventClick:function(event,start,end){
 						$("#division").val(event.division).prop("selected",true);
 						$("#btnDelete").show();
+						if(event.joinYN=='n'){
+							$("#btnJoin").show();
+						}else{
+							$("#btnJoin").hide();
+						}
 						$("#name").val(event.name);
 						$("#no").val(event.no);
 						$("#seat").val(event.seat);
@@ -146,6 +200,7 @@ var isRun = false;
 					},
 			        select:function(start, end){
 			        	$("#btnDelete").hide();
+			        	$("#btnJoin").hide();
 			        	$("#regForm")[0].reset();
 		                $("#start").val(getTimeStamp(start));
 		                $("#end").val(getTimeStamp(end));
@@ -163,13 +218,28 @@ var isRun = false;
                 resizable: false,
                 modal: true
             });
+			empRegist = $("#employee_regist").dialog({
+                uiLibrary: 'bootstrap4',
+                iconsLibrary: 'fontawesome',
+                autoOpen: false,
+                resizable: false,
+                modal: true
+            });
 			 
-			 $("#btnCancel").click(function() {
-				 $("#regForm")[0].reset(); 
+			 $(".btnCancel").click(function() {
+				 $("#regForm")[0].reset();
+				 $("#empForm")[0].reset();
 				 regist.close();
+				 empRegist.close();
 			 })
 			 $("#btnSave").on('click', Save);
 			 $("#btnDelete").on('click', Delete);
+			 $("#btnSuccess").on('click', Success);
+			 $("#btnJoin").click(function() {
+				 empRegist.open('Join Success');
+				 regist.close();
+			 })
+			 
 			 
 			 calendarData(); 
     	})
