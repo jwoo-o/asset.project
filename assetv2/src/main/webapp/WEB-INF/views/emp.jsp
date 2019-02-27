@@ -159,39 +159,24 @@
 											<td class="tdBack" align="left"><strong class="list_title">직위</strong></td>
 						            		<td align="left" width="80">&nbsp;
 								              	<select class="SelectBox" id="position" name="position">
-								              		<option value=""></option> 
-									              	<option value="0">Dispatched</option>
-									              	<option value="1">Staff</option>
-									              	<option value="2">Senior Staff</option>
-									              	<option value="3">Manager</option>
-									              	<option value="4">Senior Manager</option>
-									              	<option value="5">General Manager</option>
-									              	<option value="6">Director</option>
-									              	<option value="7">Managing Director </option>
-									              	<option value="8">C.E.O</option>
-								              	</select></td>
+										    		<option value=""></option>
+										       		<c:forEach var="position" items="${common.position }">
+										        		<option value="${position.cCode }">${position.cName }</option>
+										       		</c:forEach>
+									        	</select>
+									        	</td>
 										</tr>
 										
 										<tr height="22">
 											<td class="tdBack" align="left"><strong class="list_title">부서</strong></td>
 											<td align="left">&nbsp; 
-							             <select class="SelectBox" id="division" name="division">
-							             		<option value=""></option> 
-								              	<option value="0">Corporate Development Division</option>
-								              	<option value="1">Development Unit</option>
-								              	<option value="2">FA Division</option>
-								              	<option value="3">Fulfillment Operation Group</option>
-								              	<option value="4">Global Biz Division</option>
-								              	<option value="5">Global JP Group</option>
-								              	<option value="6">Global P.Planning Division</option>
-								              	<option value="7">KR GA & ER Division</option>
-								              	<option value="8">KRSG Beauty & Fashion Division</option>
-								              	<option value="9">Live10 Division</option>
-								              	<option value="10">Platform Planning Division</option>
-								              	<option value="11">SQM Division</option>
-								              	<option value="12">Technology Unit</option>
-								              	<option value="13">US & EU Biz Division</option> 	
-							             </select></td>
+							             		<select class="SelectBox" id="division" name="division">
+							                		<option value=""></option>
+							                		<c:forEach var="division" items="${common.division }">
+							                			<option value="${division.cCode }">${division.cName }</option>
+							                		</c:forEach>
+						                		</select>
+						                	</td>
 										</tr>
 										<tr height="22">
 											<td class="tdBack" align="left"><strong class="list_title">입사일</strong></td>
