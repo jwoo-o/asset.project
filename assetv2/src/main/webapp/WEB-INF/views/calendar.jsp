@@ -60,7 +60,7 @@
                 <select class="form-control" id="division" name="division">
 	                <option value=""></option>
 	                <c:forEach var="division" items="${common.division }">
-	                	<option value="${division.cCode }" data-div="${division.cName }">${division.cName }</option>
+	                	<option value="${division.cCode }">${division.cName }</option>
 	                </c:forEach>
                 </select>
             </div>
@@ -82,8 +82,39 @@
             
             <button type="button" id="btnSave" class="btn btn-default">Save</button>
             <button type="button" id="btnDelete" class="btn btn-default">Delete</button>
-            <button type="button" id="btnCancel" class="btn btn-default">Cancel</button>
+            <button type="button" id="btnJoin" class="btn btn-danger" style="display: none">Join</button>
+            <button type="button" class="btn btn-default btnCancel">Cancel</button>
         </form>
+    </div>
+    <div id="employee_regist" style="display: none">
+    	<form id="empForm">
+	    	<div class="form-group">
+	        	<label for="empNo">사번</label>
+	        	<input type="text" class="form-control" id="empNo" name="empNo" maxlength="10"/>
+	    	</div>
+	    	<div class="form-group">
+	    		<label for="position">직위</label>
+		    	<select class="form-control" id="position" name="position">
+			    	<option value=""></option>
+			        <c:forEach var="position" items="${common.position }">
+			        	<option value="${position.cCode }">${position.cName }</option>
+			       	</c:forEach>
+		        </select>
+	        </div>
+	        <div class="form-group">
+	        	<label for="gender">성별</label>
+		        <select class="form-control" id="gender" name="gender">
+					<option value="M">Male</option> 
+					<option value="F">Female</option>       	
+				</select>
+			</div>
+	    	<div class="form-group">
+	        	<label for="name">이메일</label>
+	        	<input type="text" class="form-control" id="email" name="email" val="@qoo10.com"/>
+	    	</div>
+	    	<button type="button" id="btnSuccess" class="btn btn-default">Success</button>
+	    	<button type="button" class="btn btn-default btnCancel">Cancel</button>
+	    </form>
     </div>
 </body>
 	

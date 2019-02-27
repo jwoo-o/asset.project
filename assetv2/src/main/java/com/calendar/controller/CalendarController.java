@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.calendar.service.CalendarService;
+import com.calendar.vo.CalendarJoinDto;
 import com.calendar.vo.CalendarVo;
 import com.core.service.CommonServie;
 import com.core.vo.ManagerDto;
@@ -52,11 +53,12 @@ public class CalendarController {
 	}
 	
 	@RequestMapping(value="/calendarMdf/proc",method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> calendarMdfProc(@RequestBody CalendarVo vo){
+	public @ResponseBody Map<String, Object> calendarMdfProc(@RequestBody CalendarVo vo,HttpSession session){
 		logger.info(vo.toString());
 		Map<String, Object> map = new HashMap<String,Object>();
+		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		try {
-			map = service.calendarMdf(vo);
+			map = service.calendarMdf(vo,manager);
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());
@@ -76,11 +78,12 @@ public class CalendarController {
 		return list;
 	}
 	@RequestMapping(value="/calendarDate/proc",method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> calendarDateProc(@RequestBody CalendarVo vo){
+	public @ResponseBody Map<String, Object> calendarDateProc(@RequestBody CalendarVo vo,HttpSession session){
 		logger.info(vo.toString());
 		Map<String, Object> map = new HashMap<String,Object>();
+		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		try {
-			map = service.dateMdf(vo);
+			map = service.dateMdf(vo,manager);
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());
@@ -95,6 +98,20 @@ public class CalendarController {
 		Map<String, Object> map = new HashMap<String,Object>();
 		try {
 			map = service.calendarDl(vo);
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage());
+			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");	
+		}
+		return map;
+	}
+	@RequestMapping(value="/calendarJoin/proc",method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> calendarJoinProc(@RequestBody CalendarJoinDto dto,HttpSession session){
+		logger.info(dto.toString());
+		Map<String, Object> map = new HashMap<String,Object>();
+		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
+		try {
+			map = service.calendarJoin(dto,manager);
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());
