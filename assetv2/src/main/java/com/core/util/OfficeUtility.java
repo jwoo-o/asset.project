@@ -9,11 +9,11 @@ public class OfficeUtility {
 		String division = vo.getDivision();
 		
 		switch (division) {
-		case "1":case"3":case"7":case"9":case"10":case"12":
-			vo.setOffice("0");
+		case "1":case"9":case"10":case"12":
+			vo.setOffice("3");
 			break;
 		default:
-			vo.setOffice("1");
+			vo.setOffice("2");
 			break;
 		}
 	}
