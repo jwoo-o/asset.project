@@ -15,6 +15,7 @@ public class EmpVo {
 	private String manager;
 	private String auth;
 	private String office;
+	private String seat;
 	
 	
 	public String getPcode() {
@@ -100,12 +101,12 @@ public class EmpVo {
 	public void setOffice(String office) {
 		this.office = office;
 	}
-	@Override
-	public String toString() {
-		return "EmpVo [empNo=" + empNo + ", name=" + name + ", division=" + division + ", position=" + position
-				+ ", gender=" + gender + ", joinDate=" + joinDate + ", pcode=" + pcode + ", dcode=" + dcode
-				+ ", status=" + status + ", email=" + email + ", manager=" + manager + ", auth=" + auth + ", office="
-				+ office + "]";
+	
+	public String getSeat() {
+		return seat;
+	}
+	public void setSeat(String seat) {
+		this.seat = seat;
 	}
 	
 	

@@ -216,7 +216,8 @@ var isRun = false;
                 iconsLibrary: 'fontawesome',
                 autoOpen: false,
                 resizable: false,
-                modal: true
+                modal: true,
+				
             });
 			empRegist = $("#employee_regist").dialog({
                 uiLibrary: 'bootstrap4',
@@ -232,6 +233,14 @@ var isRun = false;
 				 regist.close();
 				 empRegist.close();
 			 })
+			 $("#seat").on('click', function() {
+				 	var x = window.screen.Width;
+				 	var y = window.screen.Height;
+					var url = '/seat';
+					var title = 'Seat Search';
+					    
+					    popup(url,title,x,y);
+			 })
 			 $("#btnSave").on('click', Save);
 			 $("#btnDelete").on('click', Delete);
 			 $("#btnSuccess").on('click', Success);
@@ -239,7 +248,30 @@ var isRun = false;
 				 empRegist.open('Join Success');
 				 regist.close();
 			 })
-			 
-			 
-			 calendarData(); 
+			 $("#mgr").autocomplete({
+
+		        source : function( request, response ) {
+		        	
+		        	
+		        	var data = { "mgr" : request.term,"division" : $("#division").val()};
+		        	var dataStr = JSON.stringify(data);
+		             $.ajax({
+		                    type: 'post',
+		                    url: "/mgrSearch/proc",
+		                    dataType: "json",
+		                    contentType:"application/json; charset=UTF-8",
+		                    data: dataStr
+		             }).done(function(data) {
+		              response(data);
+		             });
+		        },
+		        minLength: 1,
+		        select: function( event, ui ) {
+		
+		        
+		        }
+		   });
+
+			calendarData(); 
+			
     	})
