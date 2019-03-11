@@ -248,7 +248,7 @@ var isRun = false;
 				 empRegist.open('Join Success');
 				 regist.close();
 			 })
-			 $("#mgr").autocomplete({
+			 /*$("#mgr").autocomplete({
 
 		        source : function( request, response ) {
 		        	
@@ -270,7 +270,7 @@ var isRun = false;
 		
 		        
 		        }
-		   });
+		   });*/
 
 			calendarData(); 
 			
