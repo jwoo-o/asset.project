@@ -166,10 +166,7 @@
 						}
 							
 					}).fail(function(e) {
-						if(e.status==401)
-							alert("세션이 만료되어 입력에 실패하였습니다. 다시로그인 하세요");
-							opener.parent.location.reload();
-							window.close();
+						onErrorFunc(e);
 					})
 				}
 			})
