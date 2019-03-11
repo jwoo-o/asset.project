@@ -61,6 +61,13 @@ body {
 	background-color: #172d44;
 }
 
+#seatSearch:hover {
+	background-color: #172d44;
+}
+#seatSearch:visited{
+	background-color: #172d44;
+}
+
 /* Layout */
 .wrapper {
 	min-height: 100%;

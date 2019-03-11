@@ -1,6 +1,5 @@
 package com.emp.service.impl;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +33,7 @@ public class EmpServiceImpl implements EmpService {
 	
 	
 	@Override
-	public Map<String, Object> empList(SearchDto dto) throws SQLException {
+	public Map<String, Object> empList(SearchDto dto) throws Exception {
 		// TODO Auto-generated method stub
 		PageUtility.calc(dto);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -50,7 +49,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public void empMdf(EmpVo vo,ManagerDto dto) throws SQLException {
+	public void empMdf(EmpVo vo,ManagerDto dto) throws Exception {
 		// TODO Auto-generated method stub
 		
 		if(dao.exiManager(vo.getEmpNo()).equals("n")) {
@@ -85,7 +84,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public void empDl(EmpVo vo,ManagerDto dto)  throws SQLException {
+	public void empDl(EmpVo vo,ManagerDto dto)  throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lstMdfWkrNm", dto.getmName());
@@ -102,14 +101,14 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public void empRst(EmpVo vo) throws SQLException {
+	public void empRst(EmpVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		OfficeUtility.input(vo);
 		dao.insert(vo);
 	}
 
 	@Override
-	public List<String> mgrList(CalendarVo vo) throws SQLException {
+	public List<String> mgrList(CalendarVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectMgr(vo);
 	}

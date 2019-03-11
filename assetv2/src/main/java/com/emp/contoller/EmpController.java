@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -128,9 +129,24 @@ public class EmpController {
 			list = service.mgrList(vo);
 		}catch (Exception e) {
 			// TODO: handle exception
+			
 			logger.error(e.getMessage());
 		}
 		return list;
+	}
+	@RequestMapping(value="/empSeat/proc",method=RequestMethod.POST)
+	public @ResponseBody Map<String,Object> empSeatProc(@RequestBody SearchDto dto) {
+		logger.info(dto.toString());
+		Map<String,Object> map = null;
+		try {
+			map =  service.empList(dto);
+			map.put("msg","0001");
+		}catch (Exception e) {
+			// TODO: handle exception
+			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
+			logger.error(e.getMessage());
+		}
+		return map;
 	}
 	
 }

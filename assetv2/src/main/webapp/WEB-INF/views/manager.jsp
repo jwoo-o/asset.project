@@ -28,6 +28,28 @@
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   	<script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.js" type="text/javascript"></script>
   	<script src="js/jquery.serializeObject.js" type="text/javascript"></script>
+  	<script type="text/javascript">
+  	var division_data = new Array();
+    var position_data = new Array();
+    var office_data = new Array();
+    var division_val = new Array();
+    var position_val = new Array();
+    var office_val = new Array();
+    
+    '<c:forEach items="${common.position}" var="position">'
+    	position_data.push("${position.cName}");
+    	position_val.push("${position.cCode}")
+    '</c:forEach>'
+    '<c:forEach items="${common.division}" var="division">'
+    	division_data.push("${division.cName}")
+    	division_val.push("${division.cCode}")
+    '</c:forEach>'
+    '<c:forEach items="${common.office}" var="office">'
+    	office_data.push("${office.cName}")
+    	office_val.push("${office.cCode}")
+    '</c:forEach>'
+      
+  	</script>
   	<script src="/js/manager.js" type="text/javascript"></script>
 </head>
 <body>
@@ -93,6 +115,13 @@
 	                </c:forEach>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="seat">좌석</label>
+                <div role="wrapper" class="gj-datepicker gj-datepicker-md gj-unselectable">
+                <input type="text" class="form-control gj-textbox-md seat" id="seat" name="seat" role="input">
+                <i class="fa fa-map-marker seatMap" role="right-icon"></i>
+                </div>    	
+            </div>
              <div class="form-group">
                 <label for="gender">성별</label>
                 <select class="form-control" id="gender" name="gender">
@@ -137,6 +166,13 @@
 	                	<option value="${division.cCode }">${division.cName }</option>
 	                </c:forEach>
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="seat">좌석</label>
+                <div role="wrapper" class="gj-datepicker gj-datepicker-md gj-unselectable">
+                <input type="text" class="form-control gj-textbox-md seat" id="eseat" name="seat" role="input">
+                <i class="fa fa-map-marker seatMap" role="right-icon"></i>
+                </div>    	
             </div>
             <div class="form-group">
                 <label for="estatus">상태</label>

@@ -14,6 +14,7 @@
 	            $("#edivision").val(e.data.record.dcode).prop("selected",true);
 	            $("#estatus").val(e.data.record.status).prop("selected",true);
 	            $("#eemail").val(e.data.record.email);
+	            $("#eseat").val(e.data.record.seat);
 	            if(e.data.record.manager=='y'){
 	            	$("#managerDiv").show();
 	            	$("#manager").prop("checked",true);
@@ -149,15 +150,12 @@
         $(document).ready(function () {
         	
         	
-        	
+        
         	$("#joinDate").datepicker({format:'yyyy-mm-dd',header: true, modal: true, footer: true });
         	 if($("#mgrAuth").val()==0){
              	$("#btnAdd").remove();
              }
         	var keyword,search;
-        	var division_data = ['Corporate Development Division','Development Unit','FA Division','Fulfillment Operation Group','Global Biz Division','Global JP Group','Global P.Planning Division','KR GA & ER Division','KRSG Beauty & Fashion Division','Live10 Division','Platform Planning Division','SQM Division','Technology Unit','US & EU Biz Division'];
-            var position_data = ['Dispatched','Staff','Senior Staff','Manager','Senior Manager','General Manager','Director','Managing Director'];
-            var office_data = ['SAMWON','KG','N 3F','N 13F'];
             
             grid = $('#grid').grid({
                 primaryKey: 'empNo',
@@ -236,7 +234,7 @@
             		case 'division':
             			$(select).append("<option value=''>선택</option>");
             			for(var i=0;i<division_data.length;i++){
-            				var option = $("<option value='"+i+"'>"+division_data[i]+"</option>")
+            				var option = $("<option value='"+division_val[i]+"'>"+division_data[i]+"</option>")
             				$(select).append(option).show();
             			}
             			$("#s").append(select).show();;
@@ -245,7 +243,7 @@
             		case 'position':
             			$(select).append("<option value=''>선택</option>");
             			for(var i=0;i<position_data.length;i++){
-            				var option = $("<option value='"+i+"'>"+position_data[i]+"</option>")
+            				var option = $("<option value='"+position_val[i]+"'>"+position_data[i]+"</option>")
             				$(select).append(option);
             			}
             			$("#s").append(select).show();;
@@ -261,7 +259,7 @@
             			break;
             		case 'office':
             			for(var i=0;i<office_data.length;i++){
-            				var option = $("<option value='"+i+"'>"+office_data[i]+"</option>")
+            				var option = $("<option value='"+office_val[i]+"'>"+office_data[i]+"</option>")
             				$(select).append(option);
             			}
             			$("#s").append(select).show();;
@@ -289,6 +287,14 @@
                     	}
                     });
             	}
+            })
+            $(".seatMap").click(function() {
+            	var x = window.screen.Width;
+			 	var y = window.screen.Height;
+				var url = '/seat';
+				var title = 'Seat Search';
+				    
+				    popup(url,title,x,y);
             })
           
 

@@ -118,4 +118,8 @@ public class CommonController {
 		return map;
 		
 	}
+	@RequestMapping(value="/seat")
+	public void seat() {
+		
+	}
 }

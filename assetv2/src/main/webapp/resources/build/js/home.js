@@ -33,6 +33,14 @@
 				    
 				    popup(url,title,x,y);
 			})
+			$("#seatSearch").click(function() {
+				 var x = window.screen.Width;
+			 	 var y = window.screen.Height;
+				 var url = '/seat';
+				 var title = 'Seat Search';
+				    
+				    popup(url,title,x,y);
+			})
 			
 			$("#requestBt").click(function(){
 				
@@ -55,7 +63,7 @@
 			
 			$("#empSearch").click(function() {
 				var x = 1000;
-				var y = 700;
+				var y = 900;
 				var title='Employee Search';
 				var url = '/emp';
 				
