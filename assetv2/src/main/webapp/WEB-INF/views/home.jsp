@@ -86,7 +86,7 @@
 	                <a id="calendar" title="입사 예정"><span class="glyphicon glyphicon-calendar na" style="color: white; font-size:large;"></span></a>
 	            </li>
 	            <li>
-	                <a id="seatSearch" title="설정"><span class="glyphicon glyphicon-map-marker na" style="color: white; font-size:large;"></span></a>
+	                <a id="seatSearch" title="좌석"><span class="glyphicon glyphicon-map-marker na" style="color: white; font-size:large;"></span></a>
 	            </li>
 	            <li>
 	                <a id="empSearch"  title="사원 검색"><span class="glyphicon glyphicon-user na" style="color: white; font-size:large;"></span></a>
