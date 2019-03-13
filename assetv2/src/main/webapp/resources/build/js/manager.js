@@ -289,8 +289,8 @@
             	}
             })
             $(".seatMap").click(function() {
-            	var x = window.screen.Width;
-			 	var y = window.screen.Height;
+            	var x = 2000;
+			 	var y = 1000;
 				var url = '/seat';
 				var title = 'Seat Search';
 				    
