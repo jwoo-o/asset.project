@@ -76,7 +76,7 @@ var isRun = false;
             		data.name = $("#name").val();
             		data.joinDate = $("#start").val();
             		data.no = $("#no").val();
-            		
+            		data.seat = $("#seat").val();
             		dataStr = JSON.stringify(data);
             		
             		$.ajax({ url:'calendarJoin/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
@@ -234,8 +234,8 @@ var isRun = false;
 				 empRegist.close();
 			 })
 			 $("#seat").on('click', function() {
-				 	var x = window.screen.Width;
-				 	var y = window.screen.Height;
+				 	var x = 2000;
+				 	var y = 1000;
 					var url = '/seat';
 					var title = 'Seat Search';
 					    

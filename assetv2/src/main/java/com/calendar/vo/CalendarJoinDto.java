@@ -24,6 +24,8 @@ public class CalendarJoinDto {
 	private String posNm;
 	/**부서명*/
 	private String divNm;
+	/**좌석*/
+	private String seat;	
 	/**최초등록작업자이름*/
 	private String fstRgtWkrNm;
 	/**최초등록일시*/
@@ -123,13 +125,21 @@ public class CalendarJoinDto {
 	public void setDivNm(String divNm) {
 		this.divNm = divNm;
 	}
+	public String getSeat() {
+		return seat;
+	}
+	public void setSeat(String seat) {
+		this.seat = seat;
+	}
 	@Override
 	public String toString() {
 		return "CalendarJoinDto [no=" + no + ", name=" + name + ", division=" + division + ", empNo=" + empNo
 				+ ", position=" + position + ", gender=" + gender + ", joinDate=" + joinDate + ", email=" + email
-				+ ", id=" + id + ", posNm=" + posNm + ", divNm=" + divNm + ", fstRgtWkrNm=" + fstRgtWkrNm
-				+ ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm=" + lstMdfWkrNm + ", lstMdfDtm=" + lstMdfDtm + "]";
+				+ ", id=" + id + ", posNm=" + posNm + ", divNm=" + divNm + ", seat=" + seat + ", fstRgtWkrNm="
+				+ fstRgtWkrNm + ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm=" + lstMdfWkrNm + ", lstMdfDtm=" + lstMdfDtm
+				+ "]";
 	}
+	
 	
 	
 	

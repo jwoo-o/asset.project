@@ -116,6 +116,7 @@ public class CalendarServiceImpl implements CalendarService {
 		vo.setPosition(dto.getPosition());
 		vo.setJoinDate(dto.getJoinDate());
 		vo.setEmail(dto.getEmail());
+		vo.setSeat(dto.getSeat());
 		OfficeUtility.input(vo);
 		dto.setId(manager.getmName());
 		List<String> list = mDao.selectManagerId();
