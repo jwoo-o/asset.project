@@ -48,6 +48,7 @@
 					$("#empBt").remove();
 					$("#deleteBt").remove();
 					$("#requestBt").remove();
+					$("#empdelBt").remove();
 					$("#empForm").find("input").prop('readonly', true);
 					$("#status option").not(":selected").remove();
 					$("#position option").not(":selected").remove();
