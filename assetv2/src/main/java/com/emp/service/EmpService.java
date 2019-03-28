@@ -17,4 +17,5 @@ public interface EmpService {
 	public void empDl(EmpVo vo, ManagerDto manager) throws Exception;
 	public void empRst(EmpVo vo) throws Exception;
 	public List<String> mgrList(CalendarVo vo) throws Exception;
+	public Map<String, Object> seatList(SearchDto dto) throws Exception;
 }

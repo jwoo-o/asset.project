@@ -16,6 +16,9 @@
   	<!-- 사용자 -->
   	<typeAlias type="com.emp.vo.EmpDto" alias="empDto"/>
   	<typeAlias type="com.emp.vo.EmpVo" alias="empVo"/>
+  	<typeAlias type="com.emp.vo.SeatDto" alias="seatDto"/>
+  	
+  	<!-- 입사현황 -->
   	<typeAlias type="com.calendar.vo.CalendarVo" alias="calendarVo"/>
   	
   	<!-- Common -->
@@ -24,6 +27,7 @@
   	<typeAlias type="com.core.vo.CmcdGrpmDto" alias="cmcdGrpmDto"/>
   	<typeAlias type="com.core.vo.CmcdDtlmVo" alias="cmcdDtlmVo"/>
   	<typeAlias type="com.core.vo.CmcdDtlmDto" alias="cmcdDtlmDto"/>
+  	
   	
   </typeAliases>
 </configuration>

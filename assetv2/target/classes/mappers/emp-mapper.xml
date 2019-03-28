@@ -90,4 +90,12 @@
   	and division=#{division}
   	</if>	
   </select>
+  <select id="seatCount" resultType="seatDto">
+  	SELECT division as dCode,count(*) count,office,DTL_C_NM division 
+  	FROM 
+  		assetdb.employee e,assetdb.CMCDDTLM c 
+  	where 
+  		e.division=c.DTL_C and c.GRP_C='division' and seat like '%n%' 
+  	group by division order by office desc ; 
+  </select>
 </mapper>

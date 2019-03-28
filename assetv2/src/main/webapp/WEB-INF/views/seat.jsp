@@ -13,6 +13,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style type="text/css">
+#floor_data{
+
+	
+	left: 1175px;
+	top: 85px;
+	width: 700px;
+	height: 105px;
+	border: 1px solid #666666;
+	position:absolute;
+	
+	
+	
+}
 #N3F {
 	background-image: url("/images/n3f.jpg");
 	width: 1865px;
@@ -62,8 +75,9 @@ p{
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/js/common.js" type="text/javascript"></script>
 <script type="text/javascript">
+//좌표 확인
 /*function action_coords(event) {
-	var x1 = event.pageX
+	var x1 = event.pageX;
 
     var y1 = event.pageY;
 	var t = $("#N13F").position().top;
@@ -72,53 +86,61 @@ p{
 	
 	
 }*/
+var colorList = ["","#DDD9C4","#F2DCDB","#FABF8F","#DA9694","#CCC0DA","#FFFFCC","#FFE400","#DDD9C4","#FFC000", "#CCECFF","#FFC000","#FFCCFF","#CCECFF","#FFCCFF"];
+
 	$(function () {
+		var tag = "<table style='width:100%' border='1'><thead><tr><td align='center' colspan='6'><b>부서별 현황</b></td></tr><thead><tr>";
+		var n3_count_tag = '';
+		var n13_count_tag = '';
 		var n3_seatNo = 21;		
 		var n13_seatNo = 17;
 		function seatGrid() {
 			var n3_tag='';
 			var n13_tag='';
 				
-			//n3
+		//n3
 				//GAF 헤드석
-				n3_tag +='<div class="seat1 seat" style="left:135px;top:15px" id="n30001"></div>';
-				n3_tag +='<div class="seat1 seat" style="left:240px;top:15px" id="n30002"></div>';
-				n3_tag +='<div class="seat1 seat" style="left:310px;top:15px" id="n30003"></div>';
-				n3_tag +='<div class="seat1 seat" style="left:365px;top:15px" id="n30004"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:135px;top:15px" id="n30001"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:240px;top:15px" id="n30002"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:310px;top:15px" id="n30003"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:365px;top:15px" id="n30004"></div>';
 				
 				//엽업 부서 헤드석
-				n3_tag +='<div class="seat1 seat" style="left:25px;top:810px" id="n30005"></div>';
-				n3_tag +='<div class="seat2 seat" style="left:175px;top:865px" id="n30006"></div>';
-				n3_tag +='<div class="seat1 seat" style="left:215px;top:865px" id="n30007"></div>';//40
-				n3_tag +='<div class="seat1 seat" style="left:335px;top:865px" id="n30008"></div>';//120
-				n3_tag +='<div class="seat1 seat" style="left:565px;top:865px" id="n30009"></div>';//230
-				n3_tag +='<div class="seat2 seat" style="left:620px;top:865px" id="n30010"></div>';//
-				n3_tag +='<div class="seat1 seat" style="left:715px;top:865px" id="n30011"></div>';
-				n3_tag +='<div class="seat1 seat" style="left:835px;top:865px" id="n30012"></div>';
-				n3_tag +='<div class="seat1 seat" style="left:970px;top:865px" id="n30013"></div>';
-				n3_tag +='<div class="seat1 seat" style="left:1025px;top:865px" id="n30014"></div>';
-				n3_tag +='<div class="seat1 seat" style="left:1120px;top:865px" id="n30015"></div>';
-				n3_tag +='<div class="seat2 seat" style="left:1175px;top:865px" id="n30016"></div>';
-				n3_tag +='<div class="seat1 seat" style="left:1255px;top:865px" id="n30017"></div>';
-				n3_tag +='<div class="seat1 seat" style="left:1390px;top:865px" id="n30018"></div>';
-				n3_tag +='<div class="seat1 seat" style="left:1550px;top:865px" id="n30019"></div>';
-				n3_tag +='<div class="seat1 seat" style="left:1645px;top:865px" id="n30020"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:25px;top:810px" id="n30005"></div>';
+				n3_tag +='<div class="seat2 seat n3" style="left:175px;top:865px" id="n30006"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:215px;top:865px" id="n30007"></div>';//40
+				n3_tag +='<div class="seat1 seat n3" style="left:335px;top:865px" id="n30008"></div>';//120
+				n3_tag +='<div class="seat1 seat n3" style="left:565px;top:865px" id="n30009"></div>';//230
+				n3_tag +='<div class="seat2 seat n3" style="left:620px;top:865px" id="n30010"></div>';//
+				n3_tag +='<div class="seat1 seat n3" style="left:715px;top:865px" id="n30011"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:835px;top:865px" id="n30012"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:970px;top:865px" id="n30013"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:1025px;top:865px" id="n30014"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:1120px;top:865px" id="n30015"></div>';
+				n3_tag +='<div class="seat2 seat n3" style="left:1175px;top:865px" id="n30016"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:1255px;top:865px" id="n30017"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:1390px;top:865px" id="n30018"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:1550px;top:865px" id="n30019"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:1645px;top:865px" id="n30020"></div>';
+				
+				
+			
 				
 				//부서 자리	
 				for(var i=1;i<5;i++){
 					var y = 55*i;
 					var x = 40;
 					var x_1 = 30;
-					n3_tag +='<div class="seat2 seat" style="left:30px;top:'+y+'px" id="n3'+divIdAssign('n3')+'"></div>';
-					n3_tag +='<div class="seat2 seat" style="left:110px;top:'+y+'px" id="n3'+divIdAssign('n3')+'"></div>';
-					n3_tag +='<div class="seat2 seat" style="left:150px;top:'+y+'px" id="n3'+divIdAssign('n3')+'"></div>';
-					n3_tag +='<div class="seat2 seat" style="left:240px;top:'+y+'px" id="n3'+divIdAssign('n3')+'"></div>';
-					n3_tag +='<div class="seat2 seat" style="left:325px;top:'+y+'px" id="n3'+divIdAssign('n3')+'"></div>';
-					n3_tag +='<div class="seat2 seat" style="left:365px;top:'+y+'px" id="n3'+divIdAssign('n3')+'"></div>';		
-					n3_tag +='<div class="seat2 seat" style="left:445px;top:'+y+'px" id="n3'+divIdAssign('n3')+'"></div>';
+					n3_tag +='<div class="seat2 seat n3" style="left:30px;top:'+y+'px" id="n3'+divIdAssign('n3')+'"></div>';
+					n3_tag +='<div class="seat2 seat n3" style="left:110px;top:'+y+'px" id="n3'+divIdAssign('n3')+'"></div>';
+					n3_tag +='<div class="seat2 seat n3" style="left:150px;top:'+y+'px" id="n3'+divIdAssign('n3')+'"></div>';
+					n3_tag +='<div class="seat2 seat n3" style="left:240px;top:'+y+'px" id="n3'+divIdAssign('n3')+'"></div>';
+					n3_tag +='<div class="seat2 seat n3" style="left:325px;top:'+y+'px" id="n3'+divIdAssign('n3')+'"></div>';
+					n3_tag +='<div class="seat2 seat n3" style="left:365px;top:'+y+'px" id="n3'+divIdAssign('n3')+'"></div>';		
+					n3_tag +='<div class="seat2 seat n3" style="left:445px;top:'+y+'px" id="n3'+divIdAssign('n3')+'"></div>';
 					if(i<4){
-						n3_tag +='<div class="seat2 seat" style="left:40px;top:'+(590+y)+'px" id="n3'+divIdAssign('n3')+'"></div>';
-						n3_tag +='<div class="seat2 seat" style="left:80px;top:'+(590+y)+'px" id="n3'+divIdAssign('n3')+'"></div>';
+						n3_tag +='<div class="seat2 seat n3" style="left:40px;top:'+(590+y)+'px" id="n3'+divIdAssign('n3')+'"></div>';
+						n3_tag +='<div class="seat2 seat n3" style="left:80px;top:'+(590+y)+'px" id="n3'+divIdAssign('n3')+'"></div>';
 					}
 					for(var j=0;j<24;j++){
 						if(j%2==0){
@@ -126,14 +148,27 @@ p{
 						}else{
 							x +=95;
 						}
-						n3_tag +='<div class="seat2 seat" style="left:'+x+'px;top:'+(590+y)+'px" id="n3'+divIdAssign('n3')+'"></div>';
+						n3_tag +='<div class="seat2 seat n3" style="left:'+x+'px;top:'+(590+y)+'px" id="n3'+divIdAssign('n3')+'"></div>';
 					}
 							
 				}
-			//n13
+				//추가좌석
+				n3_tag +='<div class="seat2 seat n3" style="left:35px;top:465px" id="n30151"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:75px;top:465px" id="n30152"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:130px;top:465px" id="n30153"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:185px;top:465px" id="n30154"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:240px;top:465px" id="n30155"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:295px;top:465px" id="n30156"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:95px;top:547px" id="n30157"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:150px;top:547px" id="n30158"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:205px;top:547px" id="n30159"></div>';
+				n3_tag +='<div class="seat1 seat n3" style="left:260px;top:547px" id="n30160"></div>';
+				n3_tag +='<div class="seat2 seat n3" style="left:445px;top:275px" id="n30161"></div>';
+				n3_tag +='<div class="seat2 seat n3" style="left:445px;top:330px" id="n30162"></div>';
+		//n13
 			
 			//tech 헤드석
-			n13_tag +='<div class="seat2 seat" style="left:30px;top:55px" id="n130001"></div>';
+			n13_tag +='<div class="seat2 seat n13" style="left:30px;top:55px" id="n130001"></div>';
 			
 			
 			var y3= 45;
@@ -143,12 +178,12 @@ p{
 				
 				for(var j=1;j<7;j++){
 					
-					n13_tag += '<div class="seat1 seat" style="left:'+x+'px;top:'+y3+'px"  id="n13'+divIdAssign('n13')+'"></div>';
+					n13_tag += '<div class="seat1 seat n13" style="left:'+x+'px;top:'+y3+'px"  id="n13'+divIdAssign('n13')+'"></div>';
 					x += 55;
 				}
 				//tech 헤드석
 				if(i>1 && i<6){
-					n13_tag += '<div class="seat1 seat" style="left:15px;top:'+y3+'px"  id="n13'+divIdAssign('n13')+'"></div>';
+					n13_tag += '<div class="seat1 seat n13" style="left:15px;top:'+y3+'px"  id="n13'+divIdAssign('n13')+'"></div>';
 				}
 				if(i%2==0){
 					y3 +=40;
@@ -157,20 +192,20 @@ p{
 				}
 			}
 			//헤드석
-			n13_tag +='<div class="seat1 seat" style="left:235px;top:865px" id="n130002"></div>';
-			n13_tag +='<div class="seat1 seat" style="left:325px;top:865px" id="n130003"></div>';
-			n13_tag +='<div class="seat1 seat" style="left:380px;top:865px" id="n130004"></div>';
-			n13_tag +='<div class="seat3 seat" style="left:518px;top:865px" id="n130005"></div>';
-			n13_tag +='<div class="seat1 seat" style="left:625px;top:865px" id="n130006"></div>';
-			n13_tag +='<div class="seat1 seat" style="left:715px;top:865px" id="n130007"></div>';
-			n13_tag +='<div class="seat1 seat" style="left:770px;top:865px" id="n130008"></div>';
-			n13_tag +='<div class="seat1 seat" style="left:850px;top:865px" id="n130009"></div>';
-			n13_tag +='<div class="seat1 seat" style="left:1015px;top:865px" id="n130010"></div>';
-			n13_tag +='<div class="seat1 seat" style="left:1105px;top:865px" id="n130011"></div>';
-			n13_tag +='<div class="seat1 seat" style="left:1160px;top:865px" id="n130013"></div>';
-			n13_tag +='<div class="seat1 seat" style="left:1275px;top:865px" id="n130014"></div>';
-			n13_tag +='<div class="seat1 seat" style="left:1405px;top:865px" id="n130015"></div>';
-			n13_tag +='<div class="seat2 seat" style="left:1510px;top:865px" id="n130016"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:235px;top:865px" id="n130002"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:325px;top:865px" id="n130003"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:380px;top:865px" id="n130004"></div>';
+			n13_tag +='<div class="seat3 seat n13" style="left:518px;top:865px" id="n130005"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:625px;top:865px" id="n130006"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:715px;top:865px" id="n130007"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:770px;top:865px" id="n130008"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:850px;top:865px" id="n130009"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:1015px;top:865px" id="n130010"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:1105px;top:865px" id="n130011"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:1160px;top:865px" id="n130013"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:1275px;top:865px" id="n130014"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:1405px;top:865px" id="n130015"></div>';
+			n13_tag +='<div class="seat2 seat n13" style="left:1510px;top:865px" id="n130016"></div>';
 			
 			
 			//중앙
@@ -178,7 +213,7 @@ p{
 			for(var i=0;i<9;i++){
 				var y= 465;
 				for(var j=1;j<3;j++){
-					n13_tag += '<div class="seat2 seat" style="left:'+x3+'px;top:'+y+'px"  id="n13'+divIdAssign('n13')+'"></div>';
+					n13_tag += '<div class="seat2 seat n13" style="left:'+x3+'px;top:'+y+'px"  id="n13'+divIdAssign('n13')+'"></div>';
 					y += 55;
 				}
 				if(i%2==0){
@@ -205,7 +240,7 @@ p{
 					}else{
 						x +=90;
 					}
-					n13_tag += '<div class="seat2 seat" style="left:'+x+'px;top:'+(590+y)+'px"  id="n13'+divIdAssign('n13')+'"></div>';
+					n13_tag += '<div class="seat2 seat n13" style="left:'+x+'px;top:'+(590+y)+'px"  id="n13'+divIdAssign('n13')+'"></div>';
 				}
 			}
 			
@@ -242,7 +277,7 @@ p{
 			var data = {"search":''}
 			var dataStr = JSON.stringify(data);
 			$.ajax({
-				url:"/empSeat/proc",
+				url:"empSeat/proc",
 				dataType:"json",
 				data:dataStr,
 				contentType:"application/json; charset=utf-8",
@@ -255,71 +290,31 @@ p{
 					 	if(elt.seat!=null){
 					 		//alert(elt.name);
 					 		$("#"+elt.seat).append("<p>"+elt.name+"</p>");
-					 		if(elt.dcode=='1'){
-					 			$("#"+elt.seat).css("background", "#DDD9C4");
-					 			
-					 		}
-					 		if(elt.dcode=='2'){
-					 			$("#"+elt.seat).css("background", "#F2DCDB");
-					 			
-					 		}
-					 		if(elt.dcode=='3'){
-					 			$("#"+elt.seat).css("background", "#FABF8F");
-					 			
-					 		}
-					 		if(elt.dcode=='4'){
-					 			$("#"+elt.seat).css("background", "#DA9694");
-					 			
-					 		}
-					 		if(elt.dcode=='5'){
-					 			$("#"+elt.seat).css("background", "#CCC0DA");
-					 			
-					 		}
-					 		if(elt.dcode=='6'){
-					 			$("#"+elt.seat).css("background", "#FFFFCC");
-					 			
-					 		}
-					 		if(elt.dcode=='7'){
-					 			$("#"+elt.seat).css("background", "yellow");
-					 			
-					 		}
+					 		$("#"+elt.seat).css("background", colorList[Number(elt.dcode)]);
 					 		
-					 		if(elt.dcode=='8'){
-					 			$("#"+elt.seat).css("background", "#DDD9C4");
-					 			
-					 		}
-					 		if(elt.dcode=='9'){
-					 			$("#"+elt.seat).css("background", "#FFC000");
-					 			
-					 		}
-					 		if(elt.dcode=='10'){
-					 			$("#"+elt.seat).css("background", "#CCECFF");
-					 			
-					 		}
-					 		if(elt.dcode=='11'){
-					 			$("#"+elt.seat).css("background", "#FFC000");
-					 			
-					 		}
-					 		
-					 		if(elt.dcode=='12'){
-					 			$("#"+elt.seat).css("background", "#FFCCFF");
-					 			
-					 		}
-					 		
-					 		
-					 		if(elt.dcode=='13'){
-					 			$("#"+elt.seat).css("background", "#CCECFF");
-					 			
-					 		}
-					 		if(elt.dcode=='14'){
-					 			$("#"+elt.seat).css("background", "#FFCCFF");
-					 			
-					 		}
+	
 					 	}
-					 	
 					})
-				}else{
+					n3_count_tag = "<table style='width:100%' border='1'><thead><tr><td align='center' colspan='6'><b>부서별 현황("+$(".n3 p").length+"/"+$(".n3").length+")</b></td></tr><thead><tr>";
+					n13_count_tag = "<table style='width:100%' border='1'><thead><tr><td align='center' colspan='6'><b>부서별 현황("+$(".n13 p").length+"/"+$(".n13").length+")</b></td></tr><thead><tr>";
+					$.each(data.count, function(i, elt) {
+						
+						if(elt.office=='n3'){						
+							n3_count_tag += "<td align='center' style='background:"+colorList[Number(elt.dCode)]+"'>"+elt.division+"</td><td width='5%' align='center' >"+elt.count+"</td>";
+						}else{
+							n13_count_tag += "<td align='center' style='background:"+colorList[Number(elt.dCode)]+"'>"+elt.division+"</td><td width='5%' align='center' >"+elt.count+"</td>";
+						}
+						if((i+1)%3==0){
+							n3_count_tag +="</tr><tr>";
+							n13_count_tag +="</tr><tr>";
+						}
+					})
+					n3_count_tag += "</tr></table>";
+					n13_count_tag += "</tr></table>";
+					$("#floor_data").append(n3_count_tag);
 					
+				}else{
+					alert(data.msg);
 				}
 				
 			}).fail(function(e) {
@@ -329,11 +324,11 @@ p{
 		}
 		
 		seatData("n3");
-		
 		$("#btn_n3f").on('click', function() {
 			$("#N13F").hide()
 		 	$("#N3F").show();
 			$("#seat_title").html("N3F");
+			$("#floor_data").empty().append(n3_count_tag);
 			
 		});
 		
@@ -341,6 +336,7 @@ p{
 			$("#N3F").hide()
 			$("#N13F").show();	 
 			$("#seat_title").html("N13F");
+			$("#floor_data").empty().append(n13_count_tag);
 		});
 		
 		
@@ -395,8 +391,11 @@ p{
 		                  <h3 class="box-title"><strong id="seat_title">N3F</strong></h3>
 		                </div><!-- /.box-header -->
 		                <button id="btn_n3f" class="btn btn-primary">N3F</button>&nbsp;&nbsp;<button id="btn_n13f" class="btn btn-primary">N13F</button>
+		                
 		                <div id="N3F"></div>
 						<div id="N13F" style="display: none;"></div>
+						<div id="floor_data">
+						</div>
 					</div>
 					
 				</div>
