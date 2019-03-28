@@ -113,4 +113,13 @@ public class EmpServiceImpl implements EmpService {
 		return dao.selectMgr(vo);
 	}
 
+	@Override
+	public Map<String, Object> seatList(SearchDto dto) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("records", dao.selectList(dto));
+		map.put("count",dao.selectSeatCount());
+		return map;
+	}
+
 }
