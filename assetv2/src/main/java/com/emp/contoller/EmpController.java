@@ -139,7 +139,7 @@ public class EmpController {
 		logger.info(dto.toString());
 		Map<String,Object> map = null;
 		try {
-			map =  service.empList(dto);
+			map =  service.seatList(dto);
 			map.put("msg","0001");
 		}catch (Exception e) {
 			// TODO: handle exception

@@ -11,6 +11,7 @@ import com.calendar.vo.CalendarVo;
 import com.core.vo.ManagerVo;
 import com.emp.vo.EmpVo;
 import com.emp.vo.SearchDto;
+import com.emp.vo.SeatDto;
 
 @Repository
 public class EmpDao {
@@ -61,5 +62,10 @@ public class EmpDao {
 	public List<String> selectMgr(CalendarVo vo) {
 		// TODO Auto-generated method stub
 		return session.selectList("emp.mgrList",vo);
+	}
+
+	public List<SeatDto> selectSeatCount() {
+		// TODO Auto-generated method stub
+		return session.selectList("emp.seatCount");
 	}
 }
