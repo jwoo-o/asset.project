@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 #floor_data{
 
@@ -74,6 +75,7 @@ p{
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/js/common.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.js" type="text/javascript"></script>
 <script type="text/javascript">
 //좌표 확인
 /*function action_coords(event) {
@@ -87,7 +89,7 @@ p{
 	
 }*/
 var colorList = ["","#DDD9C4","#F2DCDB","#FABF8F","#DA9694","#CCC0DA","#FFFFCC","#FFE400","#DDD9C4","#FFC000", "#CCECFF","#FFC000","#FFCCFF","#CCECFF","#FFCCFF"];
-
+var popup;
 	$(function () {
 		var tag = "<table style='width:100%' border='1'><thead><tr><td align='center' colspan='6'><b>부서별 현황</b></td></tr><thead><tr>";
 		var n3_count_tag = '';
@@ -289,8 +291,15 @@ var colorList = ["","#DDD9C4","#F2DCDB","#FABF8F","#DA9694","#CCC0DA","#FFFFCC",
 					$.each(data.records, function(i, elt) {
 					 	if(elt.seat!=null){
 					 		//alert(elt.name);
-					 		$("#"+elt.seat).append("<p>"+elt.name+"</p>");
+					 		$("#"+elt.seat).append('<p>'+elt.name+'</p><input type="hidden" value="'+elt.empNo+'"><input type="hidden" value="'+elt.division+'"><input type="hidden" value="'+elt.position+'">');				 		
 					 		$("#"+elt.seat).css("background", colorList[Number(elt.dcode)]);
+					 		$('.employee').dialog({
+				                uiLibrary: 'bootstrap4',
+				                iconsLibrary: 'fontawesome',
+				                autoOpen: false,
+				                resizable: false,
+				                modal: true
+				            });
 					 		
 	
 					 	}
@@ -322,6 +331,13 @@ var colorList = ["","#DDD9C4","#F2DCDB","#FABF8F","#DA9694","#CCC0DA","#FFFFCC",
 				onErrorFunc(e);
 			})
 		}
+		popup = $('#employee_info').dialog({
+            uiLibrary: 'bootstrap4',
+            iconsLibrary: 'fontawesome',
+            autoOpen: false,
+            resizable: false,
+            modal: true
+        });
 		
 		seatData("n3");
 		$("#btn_n3f").on('click', function() {
@@ -346,25 +362,33 @@ var colorList = ["","#DDD9C4","#F2DCDB","#FABF8F","#DA9694","#CCC0DA","#FFFFCC",
 			 var type = url[url.length-1];
 			 
 			 switch (type) {
-			case 'home':
-				
-				break;
-
-			case 'emp':
-				if($(this).children().html()==undefined){
-					$(".seat",opener.document).val($(this).attr("id"));
-					//$("#eseat",opener.document).val($(this).attr("id"));				
-					window.close();
-				}
-				break;
-				
-			case 'calendar':
-				if($(this).children().html()==undefined){
-					$("#seat",opener.document).val($(this).attr("id"));
-					//$("#eseat",opener.document).val($(this).attr("id"));				
-					window.close();
-				}
-				break;
+				case 'home':
+					if($(this).children().html()!=undefined){
+						var input = $(this).find("input");
+						$("#name").val($(this).find("p").text());
+						$("#empNo").val($(input[0]).val())
+						$("#position").val($(input[1]).val())
+						$("#division").val($(input[2]).val())
+						popup.open("Info");
+					}
+					
+					break;
+	
+				case 'emp':
+					if($(this).children().html()==undefined){
+						$(".seat",opener.document).val($(this).attr("id"));
+						//$("#eseat",opener.document).val($(this).attr("id"));				
+						window.close();
+					}
+					break;
+					
+				case 'calendar':
+					if($(this).children().html()==undefined){
+						$("#seat",opener.document).val($(this).attr("id"));
+						//$("#eseat",opener.document).val($(this).attr("id"));				
+						window.close();
+					}
+					break;
 			}
 			
 		})
@@ -396,10 +420,32 @@ var colorList = ["","#DDD9C4","#F2DCDB","#FABF8F","#DA9694","#CCC0DA","#FFFFCC",
 						<div id="N13F" style="display: none;"></div>
 						<div id="floor_data">
 						</div>
-					</div>
-					
+					</div>	
 				</div>
 			</div>
+			<div id="employee_info" style="display: none">
+			
+        		<div class="form-group">  
+	                <img alt="사진" src="" width="120px" height="150px">
+	            </div>
+        		<div class="form-group">
+	                <label for="empNo">사번</label>
+	                <input type="text" class="form-control" id="empNo" readonly="readonly"/>
+	            </div>
+	            <div class="form-group">
+	                <label for="name">이름</label>
+	                <input type="text" class="form-control" id="name" readonly="readonly"/>
+	            </div>
+	            <div class="form-group">
+	                <label for="division">부서</label>
+	                <input type="text" class="form-control" id="division" readonly="readonly"/>
+	            </div>   
+	             <div class="form-group">
+	                <label for="position">직위</label>
+	                <input type="text" class="form-control" id="position" readonly="readonly" />
+	            </div>
+	                  
+            </div>
 			
 	</section>
 	
