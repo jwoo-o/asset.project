@@ -91,6 +91,8 @@ p{
 var colorList = ["","#DDD9C4","#F2DCDB","#FABF8F","#DA9694","#CCC0DA","#FFFFCC","#FFE400","#DDD9C4","#FFC000", "#CCECFF","#FFC000","#FFCCFF","#CCECFF","#FFCCFF"];
 var popup;
 	$(function () {
+		var url = window.opener.document.URL.split('/');
+		var type = url[url.length-1];
 		var tag = "<table style='width:100%' border='1'><thead><tr><td align='center' colspan='6'><b>부서별 현황</b></td></tr><thead><tr>";
 		var n3_count_tag = '';
 		var n13_count_tag = '';
@@ -354,12 +356,22 @@ var popup;
 			$("#seat_title").html("N13F");
 			$("#floor_data").empty().append(n13_count_tag);
 		});
-		
+		if(type=='calendar'){
+			var id = $("#seat",opener.document).val()
+			if(id !=''){
+				$("#"+id).css('border','2px solid #003399');
+			}
+		}
+		if(type=='emp'){
+			var id = $("#eseat",opener.document).val();
+			if(id !=''){
+				$("#"+id).css('border','2px solid #003399');
+			}
+		}
 		
 		
 		$(".seat").on('click', function() {
-			 var url = window.opener.document.URL.split('/');
-			 var type = url[url.length-1];
+			 
 			 
 			 switch (type) {
 				case 'home':
@@ -425,8 +437,8 @@ var popup;
 			</div>
 			<div id="employee_info" style="display: none">
 			
-        		<div class="form-group">  
-	                <img alt="사진" src="" width="120px" height="150px">
+        		<div class="form-group" style="text-align: center;">  
+	                <img alt="사진" src="/images/profileImage/default_profile.jpg" width="150px" height="170px">
 	            </div>
         		<div class="form-group">
 	                <label for="empNo">사번</label>
