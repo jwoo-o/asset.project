@@ -104,7 +104,7 @@ public class CommonServiceImpl implements CommonServie {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String,Object>();
 		CmcdDtlmVo vo = null;
-		int idx = 0;
+		int idx = 1;
 		int applyCount = 0;
 		for(CmcdDtlmDto dto : list) {
 			vo = new CmcdDtlmVo();
@@ -114,7 +114,7 @@ public class CommonServiceImpl implements CommonServie {
 				vo.setDtlC(dto.getDtlC());
 				vo.setDtlCNm(dto.getDtlCNm());
 				vo.setGrpC(dto.getGrpC());
-				vo.setOrdSn(++idx);
+				vo.setOrdSn(idx++);
 				vo.setFstRgtWkrNm(manager.getmId());
 				vo.setLstMdfWkrNm(manager.getmId());
 				
@@ -126,7 +126,7 @@ public class CommonServiceImpl implements CommonServie {
 				vo.setDtlCNm(dto.getDtlCNm());
 				vo.setDtlC(dto.getDtlC());
 				vo.setGrpC(dto.getGrpC());
-				vo.setOrdSn(++idx);
+				vo.setOrdSn(idx++);
 				vo.setLstMdfWkrNm(manager.getmId());
 				
 				applyCount += dDao.updateDtlC(vo);
