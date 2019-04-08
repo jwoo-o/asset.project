@@ -1,5 +1,6 @@
 package com.emp.service.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,52 +20,52 @@ public class EmpDao {
 	@Inject
 	private SqlSession session;
 	
-	public List<EmpVo> selectList(SearchDto dto){
+	public List<EmpVo> selectList(SearchDto dto) throws SQLException{
 	
 		return session.selectList("emp.list",dto);
 	}
 	
-	public EmpVo selectEmp(String empNo) {
+	public EmpVo selectEmp(String empNo) throws SQLException{
 		
 		return session.selectOne("emp.detail",empNo);
 	}
 	
-	public void insert(EmpVo vo) {
+	public void insert(EmpVo vo)throws SQLException {
 		
 		session.insert("emp.insert",vo);
 	}
 	
-	public void update(EmpVo vo) {
+	public void update(EmpVo vo) throws SQLException{
 		
 		session.update("emp.update",vo);
 	}
 	
-	public void delete(String empNo) {
+	public void delete(String empNo) throws SQLException{
 		
 		session.delete("emp.delete",empNo);
 	}
 
-	public int selectCount(SearchDto dto) {
+	public int selectCount(SearchDto dto) throws SQLException{
 		// TODO Auto-generated method stub
 		return session.selectOne("emp.count",dto);
 	}
 
-	public void updateMgt(ManagerVo vo) {
+	public void updateMgt(ManagerVo vo)throws SQLException {
 		// TODO Auto-generated method stub
 		session.update("emp.mgt",vo);
 	}
 
-	public String exiManager(String empNo) {
+	public String exiManager(String empNo)throws SQLException {
 		// TODO Auto-generated method stub
 		return session.selectOne("emp.exiManager",empNo);
 	}
 
-	public List<String> selectMgr(CalendarVo vo) {
+	public List<String> selectMgr(CalendarVo vo)throws SQLException {
 		// TODO Auto-generated method stub
 		return session.selectList("emp.mgrList",vo);
 	}
 
-	public List<SeatDto> selectSeatCount() {
+	public List<SeatDto> selectSeatCount()throws SQLException {
 		// TODO Auto-generated method stub
 		return session.selectList("emp.seatCount");
 	}

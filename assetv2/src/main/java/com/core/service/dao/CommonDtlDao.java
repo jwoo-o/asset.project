@@ -17,22 +17,22 @@ public class CommonDtlDao {
 	@Inject
 	SqlSession session;
 	
-	public List<CmcdDtlmVo> selectDtlC(String grpC) {
+	public List<CmcdDtlmVo> selectDtlC(String grpC)throws SQLException {
 		// TODO Auto-generated method stub
 		return session.selectList("selectDtlC", grpC);
 	}
 
-	public void insertDtlC(CmcdDtlmVo vo) {
+	public void insertDtlC(CmcdDtlmVo vo)throws SQLException {
 		// TODO Auto-generated method stub
 		session.insert("insertDtlC",vo);
 	}
 
-	public int updateDtlC(CmcdDtlmVo vo) {
+	public int updateDtlC(CmcdDtlmVo vo)throws SQLException {
 		// TODO Auto-generated method stub
 		return session.update("updateDtlC", vo);
 	}
 
-	public int deleteDtlC(CmcdDtlmVo vo) {
+	public int deleteDtlC(CmcdDtlmVo vo)throws SQLException {
 		// TODO Auto-generated method stub
 		return session.delete("deleteDtlC",vo);
 	}

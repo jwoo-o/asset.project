@@ -45,10 +45,15 @@ var isRun = false;
     	               
     	            
     	            $.ajax({ url: url, data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
-    	                .done(function () {
-    	                    regist.close();
-    	                    $('#calendar').fullCalendar('destroy');
-    	                    calendarData();
+    	                .done(function (data) {
+    	                	if(data.msg=="0001"){
+    	                		regist.close();
+        	                    $('#calendar').fullCalendar('destroy');
+        	                    calendarData();
+    	                	}else{
+    	                		alert(data.msg);
+    	                	}
+    	                    
     	                    isRun=false;
     	                })
     	                .fail(function (e) {
@@ -80,10 +85,14 @@ var isRun = false;
             		dataStr = JSON.stringify(data);
             		
             		$.ajax({ url:'calendarJoin/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
-	                .done(function () {
-	                	empRegist.close();
-	                    $('#calendar').fullCalendar('destroy');
-	                    calendarData();
+	                .done(function (data) {
+	                	if(data.msg=="0001"){
+		                	empRegist.close();
+		                    $('#calendar').fullCalendar('destroy');
+		                    calendarData();
+	                	}else{
+	                		alert(data.msg);
+	                	}
 	                    isRun=false;
 	                })
 	                .fail(function (e) {
@@ -118,10 +127,15 @@ var isRun = false;
     			if (confirm('Are you sure?')) {
                 	var data = {"no":$("#no").val()},dataStr = JSON.stringify(data);
     				 $.ajax({ url: '/calendarDl/proc', data:dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
-    	                .done(function () {
-    	                    regist.close();
-    	                    $('#calendar').fullCalendar('destroy');
-    	                    calendarData();
+    	                .done(function (data) {
+    	                	if(data.msg=="0001"){
+    	                		 regist.close();
+    	    	                 $('#calendar').fullCalendar('destroy');
+    	    	                 calendarData();
+    	                	}else{
+    	                		alert(data.msg);
+    	                	}
+    	                   
     	                   
     	                })
     	                .fail(function (e) {
@@ -138,13 +152,17 @@ var isRun = false;
 	    		$.ajax({
 					url: '/calendarLst/proc', method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'
 				}).done(function(data) {
-					$.each(data, function(i, elt) {
-						if(elt.joinYN=='y'){
-							elt.color = '#666666';
-							
-						}
-					})
-					calendar(data);
+					if(data.msg="0001"){
+						$.each(data, function(i, elt) {
+							if(elt.joinYN=='y'){
+								elt.color = '#666666';
+								
+							}
+						})
+						calendar(data);
+					}else{
+						alert(data.msg);
+					}				
 				})
     		}
     		function calendar(data){
@@ -185,11 +203,12 @@ var isRun = false;
 						$('#calendar').fullCalendar('destroy');
 						var data = {"start":getTimeStamp(event.start),"end":getTimeStamp(event.end),"no":event.no}, dataStr = JSON.stringify(data);
 						$.ajax({url:'/calendarDate/proc',method:'post',data:dataStr,dataType:'json',contentType:'application/json; charset=UTF-8'})
-							.done(function(data) {
-								
+							.done(function(data) {							
 								if(data.msg=="0001"){
 									calendarData();
-									}	
+								}else{
+									alert(data.msg);
+								}
 							})
 							.fail(function (e) {
 			                	if(e.status == 401){

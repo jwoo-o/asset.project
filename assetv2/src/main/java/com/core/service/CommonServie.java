@@ -11,17 +11,17 @@ import com.core.vo.ManagerDto;
 public interface CommonServie {
 
 	
-	public Map<String, Object> commonLst() throws Exception;
+	public Map<String, Object> selCommonLst() throws Exception;
 
-	public Map<String, Object> commonSearch(CommonDto dto) throws Exception;
+	public Map<String, Object> selCommonSearch(CommonDto dto) throws Exception;
 
-	public Map<String, Object> commonDtl(String grpC) throws Exception;
+	public Map<String, Object> selCommonDtl(String grpC) throws Exception;
 
-	public Map<String, Object> commonWriteProc(CmcdGrpmVo vo, ManagerDto manager)throws Exception;
+	public Map<String, Object> insCommonWriteProc(CmcdGrpmVo vo, ManagerDto manager)throws Exception;
 
-	public Map<String, Object> commonSubWriterProc(List<CmcdDtlmDto> list, ManagerDto manager) throws Exception;
+	public Map<String, Object> insCommonSubWriterProc(List<CmcdDtlmDto> list, ManagerDto manager) throws Exception;
 
-	public Map<String, Object> commonDeleteProc(String grpC) throws Exception;
+	public Map<String, Object> delCommonDeleteProc(String grpC) throws Exception;
 	
 
 }

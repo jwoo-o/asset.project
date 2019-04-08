@@ -34,17 +34,17 @@ public class ManagerDao {
 		return session.delete("manager.delete",empNo);
 	}
 
-	public void updateMgt(EmpVo vo) {
+	public void updateMgt(EmpVo vo)throws SQLException {
 		// TODO Auto-generated method stub
 		session.update("manager.update",vo);
 	}
 
-	public int updatePwd(MgrPwdDto dto) {
+	public int updatePwd(MgrPwdDto dto)throws SQLException {
 		// TODO Auto-generated method stub
 		return session.update("manager.updatePwd",dto);
 	}
 
-	public List<String> selectManagerId() {
+	public List<String> selectManagerId()throws SQLException {
 		// TODO Auto-generated method stub
 		return session.selectList("manager.selectId");
 	}

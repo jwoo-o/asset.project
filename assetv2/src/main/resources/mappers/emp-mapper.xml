@@ -18,7 +18,8 @@
         (select auth from manager m where m.empNo=e.employeeNumber) as auth,
         e.email,
         e.office,
-        e.seat
+        e.seat,
+        e.profile_name
         from employee e
         <where>
         	<if test="search!=null and search!='' and keyword!=null and keyword!=''">
@@ -55,7 +56,7 @@
   	from employee where name=#{userName}
   </select>
   <insert id="insert">
-  	insert into employee values(#{empNo},#{name},#{division},#{position},#{gender},#{joinDate},'y',#{email},'n',#{office},#{seat})
+  	insert into employee values(#{empNo},#{name},#{division},#{position},#{gender},#{joinDate},'y',#{email},'n',#{office},#{seat},null)
   </insert>
   <update id="update">
   	update employee set division=#{division},position=#{position},status=#{status},manager=#{manager},office=#{office},seat=#{seat} where employeeNumber=#{empNo}

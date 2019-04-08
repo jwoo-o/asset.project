@@ -39,10 +39,10 @@ public class ExcelController {
 		
 		List<AssetDownDto> excelList = null;
 		try {
-			excelList = service.assetDown(dto);
+			excelList = service.selAssetDown(dto);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 		map.put("list",excelList);
 		return "excelView";

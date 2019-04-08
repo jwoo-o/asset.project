@@ -35,7 +35,7 @@ public class CalendarController {
 	
 	@RequestMapping("/calendar")
 	public void joinEmp(Model model) throws Exception {
-		model.addAttribute("common", cService.commonLst());
+		model.addAttribute("common", cService.selCommonLst());
 	}
 	@RequestMapping(value="/calendarRgt/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> calendarRgtProc(@RequestBody CalendarVo vo,HttpSession session){
@@ -43,7 +43,8 @@ public class CalendarController {
 		Map<String, Object> map = new HashMap<String,Object>();
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		try {
-			map = service.calendarRgt(vo,manager);
+			map = service.insCalendarRgt(vo,manager);
+			map.put("msg", "0001");
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());
@@ -58,7 +59,8 @@ public class CalendarController {
 		Map<String, Object> map = new HashMap<String,Object>();
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		try {
-			map = service.calendarMdf(vo,manager);
+			map = service.updCalendarMdf(vo,manager);
+			map.put("msg", "0001");
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());
@@ -70,7 +72,7 @@ public class CalendarController {
 	public @ResponseBody List<CalendarVo> calendarLstProc(){
 		List<CalendarVo> list = null;
 		try {
-			list = service.calendarList();
+			list = service.selCalendarList();
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());
@@ -83,7 +85,8 @@ public class CalendarController {
 		Map<String, Object> map = new HashMap<String,Object>();
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		try {
-			map = service.dateMdf(vo,manager);
+			map = service.updDateMdf(vo,manager);
+			map.put("msg", "0001");
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());
@@ -97,7 +100,8 @@ public class CalendarController {
 		logger.info(vo.toString());
 		Map<String, Object> map = new HashMap<String,Object>();
 		try {
-			map = service.calendarDl(vo);
+			map = service.delCalendarDl(vo);
+			map.put("msg", "0001");
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());
@@ -111,7 +115,8 @@ public class CalendarController {
 		Map<String, Object> map = new HashMap<String,Object>();
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		try {
-			map = service.calendarJoin(dto,manager);
+			map = service.updCalendarJoin(dto,manager);
+			map.put("msg", "0001");
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());
