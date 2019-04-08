@@ -33,18 +33,17 @@ public class CalendarServiceImpl implements CalendarService {
 	
 	
 	@Override
-	public List<CalendarVo> calendarList() throws Exception {
+	public List<CalendarVo> selCalendarList() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectLst();
 	}
 
 	@Override
-	public Map<String, Object> calendarRgt(CalendarVo vo,ManagerDto manager) throws Exception {
+	public Map<String, Object> insCalendarRgt(CalendarVo vo,ManagerDto manager) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<String> list = mDao.selectManagerId();
 		
-		map.put("msg", "0001");
 		vo.setTitle("["+vo.getAddNrein()+"]"+vo.getName());
 		vo.setFstRgtWkrNm(manager.getmName());
 		vo.setLstMdfWkrNm(manager.getmName());
@@ -60,51 +59,46 @@ public class CalendarServiceImpl implements CalendarService {
 				+ "<tr><td><b>예정 좌석</b></td><td>"+vo.getSeat()+"</td></tr></table><hr><div style='text-align: right;'>" + 
 						"	    	<img src='https://stcom.image-gmkt.com/css/us/qoo10/front/cm/common/image/logo_qoo10_main.png'>" + 
 						"	    	</div></div></body></html>";
-		try {
+		
 			emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		
 		
 		return map;
 	}
 
 	@Override
-	public Map<String, Object> calendarMdf(CalendarVo vo,ManagerDto manager) throws Exception{
+	public Map<String, Object> updCalendarMdf(CalendarVo vo,ManagerDto manager) throws Exception{
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		vo.setTitle("["+vo.getAddNrein()+"]"+vo.getName());
 		vo.setLstMdfWkrNm(manager.getmName());
-		if(dao.updateCal(vo)>0)
-			map.put("msg", "0001");
+		dao.updateCal(vo);
+			
 		return map;
 	}
 
 	@Override
-	public Map<String, Object> dateMdf(CalendarVo vo,ManagerDto manager) throws Exception {
+	public Map<String, Object> updDateMdf(CalendarVo vo,ManagerDto manager) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		//DateUtillity.calendarFormat(vo);
 		vo.setLstMdfWkrNm(manager.getmName());
-		if(dao.updateDate(vo)>0)
-			map.put("msg", "0001");
+		dao.updateDate(vo);
 		return map;
 	}
 
 	@Override
-	public Map<String, Object> calendarDl(CalendarVo vo) throws Exception {
+	public Map<String, Object> delCalendarDl(CalendarVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		vo.setTitle(vo.getName());
-		if(dao.updateDl(vo)>0)
-			map.put("msg", "0001");
+		dao.updateDl(vo);
 		return map;
 	}
 
 	@Override
-	public Map<String, Object> calendarJoin(CalendarJoinDto dto, ManagerDto manager) throws Exception {
+	public Map<String, Object> updCalendarJoin(CalendarJoinDto dto, ManagerDto manager) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		EmpVo vo = new EmpVo();
@@ -119,9 +113,10 @@ public class CalendarServiceImpl implements CalendarService {
 		vo.setSeat(dto.getSeat());
 		OfficeUtility.input(vo);
 		dto.setId(manager.getmName());
-		List<String> list = mDao.selectManagerId();
+		List<String> list = mDao.selectManagerId();	
+		eDao.insert(vo);
 		if(dao.updateJoin(dto)>0) {
-			eDao.insert(vo);
+			
 			
 			String subject = "GA_System";
 			String content = "<html><body><div style= 'width:500;border:solid #fffff;}'><h2>신규입사자 등록 확인 메일</h2><table border='1'><tr><td style='width:200px;'><b>등록자</b></td><td>"+manager.getmName()+"</td></tr>"
@@ -133,15 +128,11 @@ public class CalendarServiceImpl implements CalendarService {
 					+ "<tr><td><b>성별</b></td><td>"+dto.getGender()+"</td></tr></table><hr><div style='text-align: right;'>" + 
 							"	    	<img src='https://stcom.image-gmkt.com/css/us/qoo10/front/cm/common/image/logo_qoo10_main.png'>" + 
 							"	    	</div></div></body></html>";
-			try {
-				emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
-				map.put("msg", "0001");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
+				
+			emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
 		}
+					
 		return map;
 	}
 

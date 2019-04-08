@@ -31,19 +31,19 @@ public class AssetServiceImpl implements AssetService {
 	private CommonGrpDao cDao;
 	
 	@Override
-	public List<AssetViewDto> assetLst(AssetSearchDto dto) throws Exception{
+	public List<AssetViewDto> selAssetLst(AssetSearchDto dto) throws Exception{
 		// TODO Auto-generated method stub
 		return dao.selectList(dto);
 	}
 
 	@Override
-	public AssetVo assetDtl(AssetDto dto) throws Exception{
+	public AssetVo selAssetDtl(AssetDto dto) throws Exception{
 		// TODO Auto-generated method stub
 		return dao.select(dto.getaNo());
 	}
 
 	@Override
-	public void assetRgt(AssetVo vo,ManagerDto manager) throws Exception {
+	public void insAssetRgt(AssetVo vo,ManagerDto manager) throws Exception {
 		
 		// TODO Auto-generated method stub
 		vo.setFstRgtWkrNm(manager.getmName());
@@ -54,7 +54,7 @@ public class AssetServiceImpl implements AssetService {
 	}
 
 	@Override
-	public void assetMdf(AssetVo vo,ManagerDto manager) throws Exception{
+	public void updAssetMdf(AssetVo vo,ManagerDto manager) throws Exception{
 		// TODO Auto-generated method stub
 		vo.setLstMdfWkrNm(manager.getmName());
 		
@@ -62,14 +62,14 @@ public class AssetServiceImpl implements AssetService {
 	}
 
 	@Override
-	public void assetDl(AssetDto dto,ManagerDto manager) throws Exception{
+	public void updAssetDl(AssetDto dto,ManagerDto manager) throws Exception{
 		// TODO Auto-generated method stub
 		dto.setLstMdfWkrNm(manager.getmName());
 		dao.delete(dto);
 	}
 
 	@Override
-	public String assetNo(String category) throws Exception{
+	public String selAssetNo(String category) throws Exception{
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String,Object>();
 		
@@ -91,19 +91,19 @@ public class AssetServiceImpl implements AssetService {
 	}
 
 	@Override
-	public void assetDlY(AssetDto dto) throws Exception{
+	public void delAssetDlY(AssetDto dto) throws Exception{
 		// TODO Auto-generated method stub
 		dao.deleteY(dto);
 	}
 
 	@Override
-	public List<AssetDownDto> assetDown(AssetSearchDto dto) throws Exception{
+	public List<AssetDownDto> selAssetDown(AssetSearchDto dto) throws Exception{
 		// TODO Auto-generated method stub
 		return dao.selectDown(dto);
 	}
 
 	@Override
-	public Map<String, Object> assetChart(ChartDto dto) throws Exception{
+	public Map<String, Object> selAssetChart(ChartDto dto) throws Exception{
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<ChartDto> list = dao.selectRow(dto);

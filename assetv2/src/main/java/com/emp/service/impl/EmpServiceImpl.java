@@ -1,9 +1,12 @@
 package com.emp.service.impl;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -19,6 +22,7 @@ import com.core.vo.ManagerVo;
 import com.emp.service.EmpService;
 import com.emp.service.dao.EmpDao;
 import com.emp.vo.EmpVo;
+import com.emp.vo.ProfileDto;
 import com.emp.vo.SearchDto;
 
 @Service
@@ -30,10 +34,13 @@ public class EmpServiceImpl implements EmpService {
 	private AssetDao assetDao;
 	@Inject
 	private ManagerDao managerDao;
+	@Resource(name="uploadPath")
+	private String uploadPath;
+	
 	
 	
 	@Override
-	public Map<String, Object> empList(SearchDto dto) throws Exception {
+	public Map<String, Object> selEmpList(SearchDto dto) throws Exception {
 		// TODO Auto-generated method stub
 		PageUtility.calc(dto);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -43,13 +50,13 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public EmpVo getEmp(String empNo) {
+	public EmpVo selGetEmp(String empNo)throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectEmp(empNo);
 	}
 
 	@Override
-	public void empMdf(EmpVo vo,ManagerDto dto) throws Exception {
+	public void updEmpMdf(EmpVo vo,ManagerDto dto) throws Exception {
 		// TODO Auto-generated method stub
 		
 		if(dao.exiManager(vo.getEmpNo()).equals("n")) {
@@ -84,7 +91,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public void empDl(EmpVo vo,ManagerDto dto)  throws Exception {
+	public void delEmpDl(EmpVo vo,ManagerDto dto)  throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lstMdfWkrNm", dto.getmName());
@@ -101,24 +108,36 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public void empRst(EmpVo vo) throws Exception {
+	public void insEmpRst(EmpVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		OfficeUtility.input(vo);
 		dao.insert(vo);
 	}
 
 	@Override
-	public List<String> mgrList(CalendarVo vo) throws Exception {
+	public List<String> selMgrList(CalendarVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectMgr(vo);
 	}
 
 	@Override
-	public Map<String, Object> seatList(SearchDto dto) throws Exception {
+	public Map<String, Object> selSeatList(SearchDto dto) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("records", dao.selectList(dto));
 		map.put("count",dao.selectSeatCount());
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> updImgUpload(ProfileDto dto) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(dto.getOriginal_name()!="" || dto.getOriginal_name()!=null) {
+			File file = new File(uploadPath+"/"+dto.getOriginal_name());
+			file.delete();
+		}
+		
 		return map;
 	}
 

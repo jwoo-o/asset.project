@@ -1,5 +1,7 @@
 package com.emp.vo;
 
+
+
 public class EmpVo {
 
 	private String empNo;
@@ -16,6 +18,7 @@ public class EmpVo {
 	private String auth;
 	private String office;
 	private String seat;
+	private String profile_name;
 	
 	
 	public String getPcode() {
@@ -108,13 +111,19 @@ public class EmpVo {
 	public void setSeat(String seat) {
 		this.seat = seat;
 	}
-	
-	
-	
-	
-	
-	
-	
+	public String getProfile_name() {
+		return profile_name;
+	}
+	public void setProfile_name(String profile_name) {
+		this.profile_name = profile_name;
+	}
+	@Override
+	public String toString() {
+		return "EmpVo [empNo=" + empNo + ", name=" + name + ", division=" + division + ", position=" + position
+				+ ", gender=" + gender + ", joinDate=" + joinDate + ", pcode=" + pcode + ", dcode=" + dcode
+				+ ", status=" + status + ", email=" + email + ", manager=" + manager + ", auth=" + auth + ", office="
+				+ office + ", seat=" + seat + ", profile_name=" + profile_name + "]";
+	}
 	
 	
 	
