@@ -14,13 +14,13 @@ import com.core.vo.ManagerDto;
 
 public interface AssetService {
 
-	public List<AssetViewDto> assetLst(AssetSearchDto dto) throws Exception;
-	public AssetVo assetDtl(AssetDto dto) throws Exception;
-	public void assetRgt(AssetVo vo, ManagerDto manager) throws Exception;
-	public void assetMdf(AssetVo vo, ManagerDto manager) throws Exception;
-	public void assetDl(AssetDto dto, ManagerDto manager) throws Exception;
-	public String assetNo(String category) throws Exception;
-	public void assetDlY(AssetDto dto) throws Exception;
-	public List<AssetDownDto> assetDown(AssetSearchDto dto) throws Exception;
-	public Map<String, Object> assetChart(ChartDto dto) throws Exception;
+	public List<AssetViewDto> selAssetLst(AssetSearchDto dto) throws Exception;
+	public AssetVo selAssetDtl(AssetDto dto) throws Exception;
+	public void insAssetRgt(AssetVo vo, ManagerDto manager) throws Exception;
+	public void updAssetMdf(AssetVo vo, ManagerDto manager) throws Exception;
+	public void updAssetDl(AssetDto dto, ManagerDto manager) throws Exception;
+	public String selAssetNo(String category) throws Exception;
+	public void delAssetDlY(AssetDto dto) throws Exception;
+	public List<AssetDownDto> selAssetDown(AssetSearchDto dto) throws Exception;
+	public Map<String, Object> selAssetChart(ChartDto dto) throws Exception;
 }

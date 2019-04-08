@@ -33,7 +33,7 @@ public class CommonServiceImpl implements CommonServie {
 	
 
 	@Override
-	public Map<String, Object> commonLst() throws Exception{
+	public Map<String, Object> selCommonLst() throws Exception{
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<CmcdGrpmVo> commons = new ArrayList<CmcdGrpmVo>();
@@ -45,7 +45,7 @@ public class CommonServiceImpl implements CommonServie {
 	}
 
 	@Override
-	public Map<String, Object> commonSearch(CommonDto dto) throws Exception {
+	public Map<String, Object> selCommonSearch(CommonDto dto) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		dto.setNext((dto.getNext()-1)*10);
@@ -67,7 +67,7 @@ public class CommonServiceImpl implements CommonServie {
 	}
 
 	@Override
-	public Map<String, Object> commonDtl(String grpC) throws Exception {
+	public Map<String, Object> selCommonDtl(String grpC) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -78,7 +78,7 @@ public class CommonServiceImpl implements CommonServie {
 	}
 
 	@Override
-	public Map<String, Object> commonWriteProc(CmcdGrpmVo vo, ManagerDto manager) throws Exception {
+	public Map<String, Object> insCommonWriteProc(CmcdGrpmVo vo, ManagerDto manager) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String,Object>();
 		vo.setFstRgtWkrNm(manager.getmId());
@@ -86,13 +86,10 @@ public class CommonServiceImpl implements CommonServie {
 		switch (vo.getVldStC()) {
 		case "C":
 			dao.insertCommon(vo);
-			map.put("msg", "0001");
 			break;
 
 		case "U":
-			if(dao.updateCommon(vo)>0) {
-				map.put("msg", "0001");
-			}
+			dao.updateCommon(vo);
 			break;
 			
 		}
@@ -100,7 +97,7 @@ public class CommonServiceImpl implements CommonServie {
 	}
 
 	@Override
-	public Map<String, Object> commonSubWriterProc(List<CmcdDtlmDto> list, ManagerDto manager)throws Exception {
+	public Map<String, Object> insCommonSubWriterProc(List<CmcdDtlmDto> list, ManagerDto manager)throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String,Object>();
 		CmcdDtlmVo vo = null;
@@ -149,7 +146,7 @@ public class CommonServiceImpl implements CommonServie {
 	}
 
 	@Override
-	public Map<String, Object> commonDeleteProc(String grpC) throws Exception {
+	public Map<String, Object> delCommonDeleteProc(String grpC) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String,Object>();
 		if(dao.deleteCommon(grpC)>0) {

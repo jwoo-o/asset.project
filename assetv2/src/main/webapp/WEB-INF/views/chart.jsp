@@ -39,6 +39,7 @@
 				method:'post',
 				data : JSON.stringify({"categorys" : category})
 			}).done(function(d) {
+				if(d.msg=="0001"){
 					$.each(d.rows, function(i, elt) {
 						var category = elt.categorys;
 						var count = elt.count;
@@ -50,6 +51,9 @@
 						       };       
 					var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
 					chart.draw(data,options);	
+				}else{
+					alert(d.msg);
+				}					
 				
 			}).fail(function (e) {
             	onErrorFunc(e);

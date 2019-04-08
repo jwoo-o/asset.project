@@ -35,7 +35,8 @@ public class CommonController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
-			map = service.commonLst();
+			map = service.selCommonLst();
+			map.put("msg", "0001");
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());
@@ -53,7 +54,8 @@ public class CommonController {
 		logger.info(dto.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			map = service.commonSearch(dto);
+			map = service.selCommonSearch(dto);
+			map.put("msg", "0001");
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.toString());
@@ -65,7 +67,7 @@ public class CommonController {
 	public String commonWrite(Model model,String grpC) throws Exception{
 		logger.info(grpC);
 		if(grpC!="" && grpC!=null) {
-			model.addAttribute("map",service.commonDtl(grpC));
+			model.addAttribute("map",service.selCommonDtl(grpC));
 		}
 		
 		return "commonRegister";
@@ -77,7 +79,8 @@ public class CommonController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		try {
-			map = service.commonWriteProc(vo,manager);
+			map = service.insCommonWriteProc(vo,manager);
+			map.put("msg", "0001");
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.toString(),e);
@@ -95,7 +98,8 @@ public class CommonController {
 		Map<String, Object> map = new HashMap<String,Object>();
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		try {
-			map = service.commonSubWriterProc(list,manager);
+			map = service.insCommonSubWriterProc(list,manager);
+			map.put("msg", "0001");
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.toString(),e);
@@ -108,7 +112,8 @@ public class CommonController {
 		logger.info(grpC);
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			map = service.commonDeleteProc(grpC);
+			map = service.delCommonDeleteProc(grpC);
+			map.put("msg", "0001");
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.toString(),e);
@@ -119,7 +124,5 @@ public class CommonController {
 		
 	}
 	@RequestMapping(value="/seat")
-	public void seat() {
-		
-	}
+	public void seat() {}
 }

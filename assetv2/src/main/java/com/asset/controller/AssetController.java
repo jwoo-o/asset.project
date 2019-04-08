@@ -45,7 +45,7 @@ public class AssetController {
 	 */
 	@RequestMapping("/home")
 	public void home(Model model) throws Exception {
-		model.addAttribute("common",cService.commonLst());
+		model.addAttribute("common",cService.selCommonLst());
 		
 	}
 	/**자산 리스트 검색*/
@@ -56,7 +56,7 @@ public class AssetController {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			map.put("list", service.assetLst(dto));
+			map.put("list", service.selAssetLst(dto));
 			map.put("msg", "0001");
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -68,7 +68,7 @@ public class AssetController {
 	/***/
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public void assetRst(Model model) throws Exception{
-		model.addAttribute("common",cService.commonLst());
+		model.addAttribute("common",cService.selCommonLst());
 	}
 
 	@RequestMapping(value = "/register/proc", method = RequestMethod.POST)
@@ -78,7 +78,7 @@ public class AssetController {
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			service.assetRgt(vo, manager);
+			service.insAssetRgt(vo, manager);
 			map.put("msg","0001");
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -94,8 +94,8 @@ public class AssetController {
 		AssetDto dto = new AssetDto();
 		dto.setaNo(aNo);
 		logger.info(dto.toString());
-		model.addAttribute("common",cService.commonLst());
-		model.addAttribute("vo", service.assetDtl(dto));
+		model.addAttribute("common",cService.selCommonLst());
+		model.addAttribute("vo", service.selAssetDtl(dto));
 		return "/register";
 	}
 
@@ -105,7 +105,7 @@ public class AssetController {
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			service.assetMdf(vo, manager);
+			service.updAssetMdf(vo, manager);
 			map.put("msg","0001");
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -121,7 +121,7 @@ public class AssetController {
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			service.assetDl(dto, manager);
+			service.updAssetDl(dto, manager);
 			map.put("msg","0001");
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -136,7 +136,7 @@ public class AssetController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			service.assetDlY(dto);
+			service.delAssetDlY(dto);
 			map.put("msg","0001");
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -149,7 +149,7 @@ public class AssetController {
 	public @ResponseBody Map<String, Object> assetNo(@RequestBody String category){
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			map.put("assetNo", service.assetNo(category));
+			map.put("assetNo", service.selAssetNo(category));
 			map.put("msg", "0001");
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -167,10 +167,12 @@ public class AssetController {
 		logger.info(dto.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			map = service.assetChart(dto);
+			map = service.selAssetChart(dto);
+			map.put("msg", "0001");
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());
+			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
 		}
 		return map;
 	}
