@@ -142,9 +142,14 @@
         </form>
     </div>
     <div id="modify" style="display: none">
-        <form id="mdfForm">
+        <form id="mdfForm" enctype="multipart/form-data">
+        	
             <input type="hidden" class="form-control" id="eempNo" name="empNo">
             <input type="hidden" class="form-control" id="eemail" name="email">
+            <input type="hidden" class="form-control" id="original_name">
+            <div class="form-group" style="text-align: center;">  
+	       		<img alt="사진" src="/images/profileImage/default_profile.jpg" width="150px" height="170px" id="profile">
+	        </div>
             <div class="form-group">
                 <label for="ename">이름</label>
                 <input type="text" class="form-control" id="ename" readonly="readonly" name="name"/>
@@ -180,6 +185,13 @@
                 	<option value="y">정상</option>
 					<option value="n">휴직</option>
                 </select>
+            </div>
+             <div class="form-group">
+                <label for="profile">사진</label>
+                <div role="wrapper" class="gj-datepicker gj-datepicker-md gj-unselectable">
+                <input type="file" class="form-control gj-textbox-md" id="profile_upload" name="profile" role="input"/>
+                <i class="fa fa-map-marker upload"role="right-icon" style="display: none"></i>
+                </div>
             </div>
             <div class="form-group" id="managerCr">
                 <label for="">계정생성</label>
