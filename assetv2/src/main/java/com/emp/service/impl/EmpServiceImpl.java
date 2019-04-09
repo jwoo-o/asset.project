@@ -1,6 +1,7 @@
 package com.emp.service.impl;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -137,6 +138,14 @@ public class EmpServiceImpl implements EmpService {
 			File file = new File(uploadPath+"/"+dto.getOriginal_name());
 			file.delete();
 		}
+		UUID uid = UUID.randomUUID();
+		dto.setProfile_name(uid.toString()+dto.getProfile().getOriginalFilename());
+		File file = new File(uploadPath+"/"+dto.getProfile_name());
+		FileOutputStream fos = new FileOutputStream(file);
+		fos.write(dto.getProfile().getBytes());
+		fos.close();
+		dao.updateImg(dto);
+		
 		
 		return map;
 	}

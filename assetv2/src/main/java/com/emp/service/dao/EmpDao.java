@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.calendar.vo.CalendarVo;
 import com.core.vo.ManagerVo;
 import com.emp.vo.EmpVo;
+import com.emp.vo.ProfileDto;
 import com.emp.vo.SearchDto;
 import com.emp.vo.SeatDto;
 
@@ -68,5 +69,10 @@ public class EmpDao {
 	public List<SeatDto> selectSeatCount()throws SQLException {
 		// TODO Auto-generated method stub
 		return session.selectList("emp.seatCount");
+	}
+
+	public void updateImg(ProfileDto dto)throws SQLException {
+		// TODO Auto-generated method stub
+		session.update("emp.updateImg",dto);
 	}
 }

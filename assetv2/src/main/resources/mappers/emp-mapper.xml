@@ -99,4 +99,8 @@
   		e.division=c.DTL_C and c.GRP_C='division' and seat like '%n%' 
   	group by division order by office desc ; 
   </select>
+  
+  <update id="updateImg">
+  	update employee set profile_name=#{profile_name} where employeeNumber=#{empNo}
+  </update>
 </mapper>
