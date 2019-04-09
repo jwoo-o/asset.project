@@ -381,10 +381,10 @@ var popup;
 						$("#empNo").val($(input[0]).val());
 						$("#position").val($(input[1]).val());
 						$("#division").val($(input[2]).val());
-						if($(input[3]).val()!=null && $(input[3]).val()!=''){
+						if($(input[3]).val()!="null" && $(input[3]).val()!=''){
 							$("#profile").attr("src", "/resources/build/images/profileImage/"+$(input[3]).val());
 						}else{
-							$("#profile").attr("src=","/images/profileImage/default_profile.jpg");
+							$("#profile").attr("src","/images/profileImage/default_profile.jpg");
 						}
 						popup.open("Info");
 					}
