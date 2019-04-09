@@ -293,7 +293,7 @@ var popup;
 					$.each(data.records, function(i, elt) {
 					 	if(elt.seat!=null){
 					 		//alert(elt.name);
-					 		$("#"+elt.seat).append('<p>'+elt.name+'</p><input type="hidden" value="'+elt.empNo+'"><input type="hidden" value="'+elt.division+'"><input type="hidden" value="'+elt.position+'">');				 		
+					 		$("#"+elt.seat).append('<p>'+elt.name+'</p><input type="hidden" value="'+elt.empNo+'"><input type="hidden" value="'+elt.division+'"><input type="hidden" value="'+elt.position+'"><input type="hidden" value="'+elt.profile_name+'">');				 		
 					 		$("#"+elt.seat).css("background", colorList[Number(elt.dcode)]);
 					 		$('.employee').dialog({
 				                uiLibrary: 'bootstrap4',
@@ -378,9 +378,14 @@ var popup;
 					if($(this).children().html()!=undefined){
 						var input = $(this).find("input");
 						$("#name").val($(this).find("p").text());
-						$("#empNo").val($(input[0]).val())
-						$("#position").val($(input[1]).val())
-						$("#division").val($(input[2]).val())
+						$("#empNo").val($(input[0]).val());
+						$("#position").val($(input[1]).val());
+						$("#division").val($(input[2]).val());
+						if($(input[3]).val()!=null && $(input[3]).val()!=''){
+							$("#profile").attr("src", "/resources/build/images/profileImage/"+$(input[3]).val());
+						}else{
+							$("#profile").attr("src=","/images/profileImage/default_profile.jpg");
+						}
 						popup.open("Info");
 					}
 					
@@ -438,7 +443,7 @@ var popup;
 			<div id="employee_info" style="display: none">
 			
         		<div class="form-group" style="text-align: center;">  
-	                <img alt="사진" src="/images/profileImage/default_profile.jpg" width="150px" height="170px">
+	                <img alt="사진" width="150px" height="170px" id="profile">
 	            </div>
         		<div class="form-group">
 	                <label for="empNo">사번</label>
