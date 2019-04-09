@@ -62,7 +62,8 @@
 	
 	<bean id = "uploadPath" class="java.lang.String">
 	<!-- <beans:constructor-arg value="/volume1/upload/ROOT/resources/build/images\profileImage"> -->
-	<constructor-arg value="/images/profileImage">
+	<!-- <constructor-arg value="C:\Users\ghkt741\git\asset.project\assetv2\src\main\webapp\resources\build\images\profileImage"> -->
+	<constructor-arg value="/volume1/upload/ROOT/resources/build/images/profileImage">
 	</constructor-arg>
 	</bean>
 	

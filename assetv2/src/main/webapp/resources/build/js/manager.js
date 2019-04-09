@@ -7,6 +7,7 @@
         
         
         function Edit(e) {
+        	
         	if($("#mgrAuth").val()!=0){
 	            $("#eempNo").val(e.data.id);
 	            $("#ename").val(e.data.record.name);
@@ -15,6 +16,13 @@
 	            $("#estatus").val(e.data.record.status).prop("selected",true);
 	            $("#eemail").val(e.data.record.email);
 	            $("#eseat").val(e.data.record.seat);
+	            $("#original_name").val(e.data.record.profile_name);
+	            if(e.data.record.profile_name!=null || e.data.record.profile_name!=''){
+	            	$("#profile").attr("src", "images/profileImage/"+e.data.record.profile_name);
+	            }else{
+	            	$("#profile").attr("src","images/profileImage/default_profile.jpg");
+	            }
+	            $("#profile_upload").val('');
 	            if(e.data.record.manager=='y'){
 	            	$("#managerDiv").show();
 	            	$("#manager").prop("checked",true);
@@ -48,11 +56,16 @@
 	               
 	            
 	            $.ajax({ url: '/empRgt/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
-	                .done(function () {
-	                    regist.close();
-	                    var keyword = $("#keyword").val();
-                    	var search = $("#search").val();
-        				grid.reload({ keyword : keyword, search : search,page : 1 });
+	                .done(function (data) {
+	                	if(data.msg=="0001"){
+	                		regist.close();
+		                    var keyword = $("#keyword").val();
+	                    	var search = $("#search").val();
+	        				grid.reload({ keyword : keyword, search : search,page : 1 });
+	                	}else{
+	                		alert(data.msg);
+	                	}
+	                    
 	                })
 	                .fail(function (e) {
 	                	if(e.status == 401){
@@ -64,11 +77,16 @@
         }
         
         function Revise() {
-            var data = $("#mdfForm").serializeObject(), dataStr = JSON.stringify(data);  
+            var data = $("#mdfForm").serializeObject(), dataStr = JSON.stringify(data);
             $.ajax({ url: '/empMdf/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
-                .done(function () {
-                    modify.close();
-                    grid.reload();
+                .done(function (data) {
+                	if(data.msg=="0001"){
+                		modify.close();
+                        grid.reload();
+                	}else{
+                		alert(data.msg);
+                	}
+                    
                 })
                 .fail(function (e) {
                 	if(e.status == 401){
@@ -78,6 +96,27 @@
                 	}
                 });
         }
+        function Upload(){
+        	var data = new FormData();
+        	data.append("profile",$("input[name=profile]")[0].files[0]);
+        	data.append("empNo",$("#eempNo").val());
+        	data.append("original_name",$("#original_name").val());
+        	$.ajax({url:'/empImgUld/proc',data:data,type:'post',contentType:false,dataType: "json",processData:false})
+        	.done(function(data) {
+        		if(data.msg!="0001"){
+        			alert(data.msg);
+        		}
+        		$(".upload").hide();
+        	})
+        	.fail(function (e) {
+            	if(e.status == 401){
+            		modify.close();
+            		onErrorFunc(e);
+            		
+            	}
+            });
+        	
+        }
         
         
         function Delete(e) {
@@ -85,8 +124,13 @@
 	            if (confirm('Are you sure?')) {
 	            	var data = { empNo: e.data.id,name: e.data.record.name,manager:e.data.record.manager }, dataStr = JSON.stringify(data);
 	                $.ajax({ url: '/empDl/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
-	                    .done(function () {
-	                        grid.reload();
+	                    .done(function (data) {
+	                    	if(data.msg=="0001"){
+	                    		 grid.reload();
+	                    	}else{
+	                    		alert(data.msg);
+	                    	}
+	                       
 	                    })
 	                    .fail(function (e) {
 	                    	if(e.status == 401){
@@ -145,7 +189,18 @@
              });
         }*/
         
-        
+        function readURL(input) {
+        	 
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		 
+		        reader.onload = function (e) {
+		            $('#profile').attr('src', e.target.result);
+		        }
+		 
+		        reader.readAsDataURL(input.files[0]);
+		    }
+        }
         
         $(document).ready(function () {
         	
@@ -204,6 +259,7 @@
             
             $('#btnCancel1').on('click', function () {
             	modify.close();
+            	$(".upload").hide();
                
              });
             
@@ -267,6 +323,23 @@
             			
             	}
             })
+            $("#profile_upload").change(function() {
+             
+            	var upload_name = $('input[type=file]')[0].files[0].name;
+            	ext = upload_name.slice(upload_name.indexOf('.')+1).toLowerCase();
+
+            	if(!(ext == 'jpg' || ext == 'png' || ext =='jpeg')){
+            		alert('이미지만 업로드 가능');
+            		$(this).val("");
+            		return false;
+            	}
+            	readURL(this);
+            	$(".upload").show();
+     
+            	
+            })
+            
+            
             $("#manager").change(function() {
             	if($("#manager").is(":checked")){
             		$("#managerDiv").show();
@@ -277,8 +350,9 @@
                	 	$.ajax({ url: '/managerDl/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
                     .done(function (data) {
 	                   	 if(data.msg=='0001'){
-	                    	alert("계정 삭제 완료");
-	                    	
+	                    	alert("계정 삭제 완료");                    	
+	                   	}else{
+	                   		alert(data.msg);
 	                   	}
                     })
                     .fail(function (e,data) {
@@ -296,7 +370,6 @@
 				    
 				    popup(url,title,x,y);
             })
-          
-
-            
+            $('.upload').on('click', Upload);
+                   
         });
