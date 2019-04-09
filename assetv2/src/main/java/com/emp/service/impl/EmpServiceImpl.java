@@ -138,13 +138,15 @@ public class EmpServiceImpl implements EmpService {
 			File file = new File(uploadPath+"/"+dto.getOriginal_name());
 			file.delete();
 		}
+		
 		UUID uid = UUID.randomUUID();
 		dto.setProfile_name(uid.toString()+dto.getProfile().getOriginalFilename());
+		dao.updateImg(dto);
 		File file = new File(uploadPath+"/"+dto.getProfile_name());
 		FileOutputStream fos = new FileOutputStream(file);
 		fos.write(dto.getProfile().getBytes());
 		fos.close();
-		dao.updateImg(dto);
+		
 		
 		
 		return map;
