@@ -190,7 +190,7 @@
                 <label for="profile">사진</label>
                 <div role="wrapper" class="gj-datepicker gj-datepicker-md gj-unselectable">
                 <input type="file" class="form-control gj-textbox-md" id="profile_upload" name="profile" role="input"/>
-                <i class="fa fa-map-marker upload"role="right-icon" style="display: none"></i>
+                <i class="fa fa-check upload"role="right-icon" style="display: none"></i>
                 </div>
             </div>
             <div class="form-group" id="managerCr">
