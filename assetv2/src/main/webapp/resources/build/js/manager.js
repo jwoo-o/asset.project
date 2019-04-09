@@ -328,7 +328,7 @@
             	var upload_name = $('input[type=file]')[0].files[0].name;
             	ext = upload_name.slice(upload_name.indexOf('.')+1).toLowerCase();
 
-            	if(!(ext == 'jpg' || ext == 'png' || ext =='jpeg')){
+            	if(!(ext == 'jpg' || ext == 'png' || ext =='jpeg' || ext =='gif')){
             		alert('이미지만 업로드 가능');
             		$(this).val("");
             		return false;
