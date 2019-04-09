@@ -18,7 +18,7 @@
 	            $("#eseat").val(e.data.record.seat);
 	            $("#original_name").val(e.data.record.profile_name);
 	            if(e.data.record.profile_name!=null && e.data.record.profile_name!=''){
-	            	$("#profile").attr("src", "images/profileImage/"+e.data.record.profile_name);
+	            	$("#profile").attr("src", "/resources/build/images/profileImage/"+e.data.record.profile_name);
 	            }else{
 	            	$("#profile").attr("src","images/profileImage/default_profile.jpg");
 	            }
