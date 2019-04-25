@@ -61,7 +61,7 @@ public class EmpDao {
 		return session.selectOne("emp.exiManager",empNo);
 	}
 
-	public List<String> selectMgr(CalendarVo vo)throws SQLException {
+	public List<EmpVo> selectMgr(CalendarVo vo)throws SQLException {
 		// TODO Auto-generated method stub
 		return session.selectList("emp.mgrList",vo);
 	}

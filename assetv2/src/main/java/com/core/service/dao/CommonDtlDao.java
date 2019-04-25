@@ -42,4 +42,9 @@ public class CommonDtlDao {
 		return session.selectList("common.selectCode",grpC);
 	}
 
+	public void deleteDtlAll(String grpC)throws SQLException {
+		// TODO Auto-generated method stub
+		session.delete("common.deleteDtlAll",grpC);
+	}
+
 }

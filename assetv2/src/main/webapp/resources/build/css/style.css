@@ -67,6 +67,12 @@ body {
 #seatSearch:visited{
 	background-color: #172d44;
 }
+#mail:hover {
+	background-color: #172d44;
+}
+#mail:visited{
+	background-color: #172d44;
+}
 
 /* Layout */
 .wrapper {

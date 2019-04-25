@@ -40,7 +40,7 @@ public class EmpController {
 	
 	@RequestMapping(value="/empSC/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> searchEmp(@RequestBody EmpDto dto){
-		logger.info(dto.toString());
+		logger.debug(dto.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			map.put("emp", service.selGetEmp(dto.getUserName()));
@@ -60,7 +60,7 @@ public class EmpController {
 	}
 	@RequestMapping(value="/empLst/proc")
 	public @ResponseBody Map<String,Object> empLst(SearchDto dto) {
-		logger.info(dto.toString());
+		logger.debug(dto.toString());
 		Map<String,Object> map = null;
 		try {
 			map =  service.selEmpList(dto);
@@ -74,7 +74,7 @@ public class EmpController {
 	
 	@RequestMapping(value="/empRgt/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> empRstProc(@RequestBody EmpVo vo) {
-		logger.info(vo.toString());
+		logger.debug(vo.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			service.insEmpRst(vo);
@@ -88,7 +88,7 @@ public class EmpController {
 	}
 	@RequestMapping(value="/empMdf/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> empMdfProc(@RequestBody EmpVo vo,HttpSession session) {
-		logger.info(vo.toString());
+		logger.debug(vo.toString());
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
@@ -103,7 +103,7 @@ public class EmpController {
 	}
 	@RequestMapping(value="/empDl/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> empDlProc(@RequestBody EmpVo vo,HttpSession session) {
-		logger.info(vo.toString());
+		logger.debug(vo.toString());
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
@@ -125,9 +125,9 @@ public class EmpController {
 	}
 	
 	@RequestMapping(value="/mgrSearch/proc",method=RequestMethod.POST)
-	public @ResponseBody List<String> mgrSearchProc(@RequestBody CalendarVo vo){
-		logger.info(vo.toString());
-		List<String> list = new ArrayList<String>();
+	public @ResponseBody List<EmpVo> mgrSearchProc(@RequestBody CalendarVo vo){
+		logger.debug(vo.toString());
+		List<EmpVo> list = new ArrayList<EmpVo>();
 		try {
 			list = service.selMgrList(vo);
 		}catch (Exception e) {
@@ -139,7 +139,7 @@ public class EmpController {
 	}
 	@RequestMapping(value="/empSeat/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String,Object> empSeatProc(@RequestBody SearchDto dto) {
-		logger.info(dto.toString());
+		logger.debug(dto.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			map =  service.selSeatList(dto);
@@ -153,7 +153,7 @@ public class EmpController {
 	}
 	@RequestMapping(value="/empImgUld/proc")
 	public @ResponseBody Map<String, Object> empImgUldProc(@RequestParam(value="profile",required=false)MultipartFile profile,String empNo,String original_name){
-		logger.info("file name : "+profile.getOriginalFilename()+", empNo : "+empNo+", original_name : "+original_name);
+		logger.debug("file name : "+profile.getOriginalFilename()+", empNo : "+empNo+", original_name : "+original_name);
 		ProfileDto dto = new ProfileDto();
 		dto.setProfile(profile);
 		dto.setEmpNo(empNo);

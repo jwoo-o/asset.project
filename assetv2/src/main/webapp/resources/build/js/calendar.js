@@ -183,12 +183,17 @@ var isRun = false;
 					editable:true,
 					events:data,
 					eventClick:function(event,start,end){
-						$("#division").val(event.division).prop("selected",true);
-						$("#btnDelete").show();
+						$("#division").val(event.division);
 						if(event.joinYN=='n'){
+							$("#btnSave").show();
 							$("#btnJoin").show();
+							$("#btnDelete").show();
 						}else{
+							$("#btnSave").hide();
 							$("#btnJoin").hide();
+							$("#btnDelete").hide();
+							$("#empForm").find("input").prop("readonly",true);
+							
 						}
 						$("#name").val(event.name);
 						$("#no").val(event.no);
@@ -220,6 +225,7 @@ var isRun = false;
 			        select:function(start, end){
 			        	$("#btnDelete").hide();
 			        	$("#btnJoin").hide();
+			        	$("#btnSave").show();
 			        	$("#regForm")[0].reset();
 		                $("#start").val(getTimeStamp(start));
 		                $("#end").val(getTimeStamp(end));
@@ -267,7 +273,7 @@ var isRun = false;
 				 empRegist.open('Join Success');
 				 regist.close();
 			 })
-			 /*$("#mgr").autocomplete({
+			 $("#mgr").autocomplete({
 
 		        source : function( request, response ) {
 		        	
@@ -281,15 +287,27 @@ var isRun = false;
 		                    contentType:"application/json; charset=UTF-8",
 		                    data: dataStr
 		             }).done(function(data) {
-		              response(data);
+		              
+		              response($.map(data, function(ui) {
+		            	  return{
+		            		  label: ui.name,
+		            		  value:ui.name,
+		            		  email:ui.email,
+		            		  empNo:ui.empNo
+		            	  }
+		              }));
 		             });
 		        },
-		        minLength: 1,
-		        select: function( event, ui ) {
-		
 		        
+		        minLength: 1,
+		       appendTo: "#regist",
+		       focus:function(event,ui){
+		    	   return false;
+		       },
+		       select: function( event, ui ) {
+		        	
 		        }
-		   });*/
+		   });
 
 			calendarData(); 
 			

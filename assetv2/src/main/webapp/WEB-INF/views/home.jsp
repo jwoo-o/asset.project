@@ -89,6 +89,9 @@
 	                <a id="seatSearch" title="좌석"><span class="glyphicon glyphicon-map-marker na" style="color: white; font-size:large;"></span></a>
 	            </li>
 	            <li>
+	                <a id="mail" title="메일"><span class="glyphicon glyphicon-envelope na" style="color: white; font-size:large;"></span></a>
+	            </li>
+	            <li>
 	                <a id="empSearch"  title="사원 검색"><span class="glyphicon glyphicon-user na" style="color: white; font-size:large;"></span></a>
 	            </li>
              	<li>
@@ -223,7 +226,7 @@
 									<table align="right" style="width:100px;margin-bottom:10px;" class="no-bordered">					
 										<tbody><tr><td align="right"><input type="button" class="btn bg-navy btn-sm" id="requestBt" name="requestBt" value="New Request" alt="New Request"></td></tr>
 									</tbody></table>
-								</div><!--  list box end -->
+								</div>
 							</div>
 						</div>
 					</div>
