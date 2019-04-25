@@ -17,7 +17,7 @@ public interface EmpService {
 	public void updEmpMdf(EmpVo vo, ManagerDto manager) throws Exception;
 	public void delEmpDl(EmpVo vo, ManagerDto manager) throws Exception;
 	public void insEmpRst(EmpVo vo) throws Exception;
-	public List<String> selMgrList(CalendarVo vo) throws Exception;
+	public List<EmpVo> selMgrList(CalendarVo vo) throws Exception;
 	public Map<String, Object> selSeatList(SearchDto dto) throws Exception;
 	public Map<String, Object> updImgUpload(ProfileDto dto) throws Exception;
 }

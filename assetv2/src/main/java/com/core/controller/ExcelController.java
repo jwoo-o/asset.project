@@ -30,7 +30,7 @@ public class ExcelController {
 	
 	@RequestMapping(value="/excelDownload",method=RequestMethod.POST)
 	public String excelForm(AssetSearchDto dto,HttpServletResponse response,Map<String, Object> map) {
-		logger.info(dto.toString());
+		logger.debug(dto.toString());
 		Date date = new Date();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd.");
 		String fileName = format.format(date)+"Giosis.asset";

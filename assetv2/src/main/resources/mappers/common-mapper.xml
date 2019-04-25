@@ -48,6 +48,9 @@
 	<insert id="insertCommon">
 		insert into CMCDGRPM values(#{grpC},#{grpCNm},#{wkC},#{grpCExpl},#{fstRgtWkrNm},now(),#{lstMdfWkrNm},now())
 	</insert>
+	<update id="updateCommon">
+		update CMCDGRPM set GRP_C_NM=#{grpCNm},WK_C=#{wkC},GRP_C_EXPL=#{grpCExpl},LST_MDF_WKR_ID=#{lstMdfWkrNm},LST_MDF_DTM=now() where GRP_C=#{grpC}
+	</update>
 	<select id="selectGrpCDtl" resultType="cmcdGrpmVo">
 		select 
 			GRP_C as grpC,
@@ -92,9 +95,18 @@
 	<select id="selectList" resultType="cmcdGrpmVo">
 		select 
 			GRP_C as grpC
-		from CMCDGRPM
-			
+		from CMCDGRPM		
 	</select>
+	<delete id="deleteDtlAll">
+		delete from CMCDDTLM
+		where 
+			GRP_C=#{grpC}
+	</delete>
+	<delete id="deleteCommon">
+		delete from CMCDGRPM
+		where 
+			GRP_C=#{grpC}
+	</delete>
 	
 	
 </mapper>

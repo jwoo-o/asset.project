@@ -116,7 +116,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public List<String> selMgrList(CalendarVo vo) throws Exception {
+	public List<EmpVo> selMgrList(CalendarVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectMgr(vo);
 	}
