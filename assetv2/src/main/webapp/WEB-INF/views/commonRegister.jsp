@@ -221,7 +221,7 @@ body {
 				data:dataStr
 			}).done(function(data) {
 			 
-				if(data.msg="0000"){
+				if(data.msg=="0001"){
 					if($("#vldStC").next().is("input")){
 						$("#vldStC").val("U");
 						$("#vldStC").after('<p class="form-control-static">'+$("#tGrpC").val()+'</p>');
@@ -239,19 +239,18 @@ body {
 			})
 		});
 		$("#btnDl").click(function() {
+			alert($("#vldStC").next().html());
 			var data = {"grpC":$("#vldStC").next().html()},dataStr = JSON.stringify(data);
-			if(data!=''){
-				
-			}
+			
 			$.ajax({
 				url:"<c:url value='/common/delete/proc'/>",
-				contentType:"application/json; charset=utf-8",
+				//contentType:"application/json; charset=utf-8",
 				dataType:"json",
 				method:"post",
 				data:dataStr
 			}).done(function(data) {
 			 
-				if(data.msg="0000"){
+				if(data.msg=="0001"){
 					alert("Request Success");
 					location.href='/common'
 				}else{

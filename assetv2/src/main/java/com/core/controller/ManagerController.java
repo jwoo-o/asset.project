@@ -53,7 +53,7 @@ public class ManagerController {
 					ManagerDto sDto = SessionUtility.setSessionAttribute(vo);
 							
 					request.getSession().setAttribute("mgr", sDto);
-					logger.info(sDto.toString());
+					logger.debug(sDto.toString());
 				}else {
 					map.put("msg", "아이디 또는 패스워드를 확인하세요");
 				}
@@ -69,7 +69,7 @@ public class ManagerController {
 	@RequestMapping(value="/managerDl/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> managerDlProc(@RequestBody ManagerVo vo){
 		Map<String, Object> map = new HashMap<String, Object>();
-		logger.info(vo.toString());
+		logger.debug(vo.toString());
 		try {
 			map.put("msg", service.DeleteProc(vo));
 		}catch (Exception e) {
@@ -87,7 +87,7 @@ public class ManagerController {
 	@RequestMapping(value="/password/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> pwdChange(@RequestBody MgrPwdDto dto){
 		Map<String, Object> map = new HashMap<String,Object>();
-		logger.info(dto.toString());
+		logger.debug(dto.toString());
 		try {
 			map = service.pwdMdf(dto);
 		}catch (Exception e) {

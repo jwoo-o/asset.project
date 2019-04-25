@@ -149,6 +149,7 @@ public class CommonServiceImpl implements CommonServie {
 	public Map<String, Object> delCommonDeleteProc(String grpC) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String,Object>();
+		dDao.deleteDtlAll(grpC);
 		if(dao.deleteCommon(grpC)>0) {
 			map.put("msg", "0001");
 		}else {

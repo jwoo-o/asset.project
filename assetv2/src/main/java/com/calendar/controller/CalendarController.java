@@ -39,7 +39,7 @@ public class CalendarController {
 	}
 	@RequestMapping(value="/calendarRgt/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> calendarRgtProc(@RequestBody CalendarVo vo,HttpSession session){
-		logger.info(vo.toString());
+		logger.debug(vo.toString());
 		Map<String, Object> map = new HashMap<String,Object>();
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		try {
@@ -55,7 +55,7 @@ public class CalendarController {
 	
 	@RequestMapping(value="/calendarMdf/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> calendarMdfProc(@RequestBody CalendarVo vo,HttpSession session){
-		logger.info(vo.toString());
+		logger.debug(vo.toString());
 		Map<String, Object> map = new HashMap<String,Object>();
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		try {
@@ -81,7 +81,7 @@ public class CalendarController {
 	}
 	@RequestMapping(value="/calendarDate/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> calendarDateProc(@RequestBody CalendarVo vo,HttpSession session){
-		logger.info(vo.toString());
+		logger.debug(vo.toString());
 		Map<String, Object> map = new HashMap<String,Object>();
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		try {
@@ -97,7 +97,7 @@ public class CalendarController {
 	
 	@RequestMapping(value="/calendarDl/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> calendarDlProc(@RequestBody CalendarVo vo){
-		logger.info(vo.toString());
+		logger.debug(vo.toString());
 		Map<String, Object> map = new HashMap<String,Object>();
 		try {
 			map = service.delCalendarDl(vo);
@@ -111,7 +111,7 @@ public class CalendarController {
 	}
 	@RequestMapping(value="/calendarJoin/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> calendarJoinProc(@RequestBody CalendarJoinDto dto,HttpSession session){
-		logger.info(dto.toString());
+		logger.debug(dto.toString());
 		Map<String, Object> map = new HashMap<String,Object>();
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		try {

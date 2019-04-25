@@ -51,7 +51,7 @@ public class CommonController {
 	
 	@RequestMapping(value="/common/search/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> commonSearchProc(@RequestBody CommonDto dto){
-		logger.info(dto.toString());
+		logger.debug(dto.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			map = service.selCommonSearch(dto);
@@ -65,7 +65,7 @@ public class CommonController {
 	}
 	@RequestMapping(value="/common/write")
 	public String commonWrite(Model model,String grpC) throws Exception{
-		logger.info(grpC);
+		logger.debug(grpC);
 		if(grpC!="" && grpC!=null) {
 			model.addAttribute("map",service.selCommonDtl(grpC));
 		}
@@ -75,7 +75,7 @@ public class CommonController {
 	}
 	@RequestMapping(value="/common/write/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> commonWriteProc(@RequestBody CmcdGrpmVo vo,HttpSession session){
-		logger.info(vo.toString());
+		logger.debug(vo.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		try {
@@ -93,7 +93,7 @@ public class CommonController {
 	public @ResponseBody Map<String, Object> commonSubWriteProc(@RequestBody List<CmcdDtlmDto> list,HttpSession session){
 		
 		for(CmcdDtlmDto dto : list) {
-			logger.info(dto.toString());
+			logger.debug(dto.toString());
 		}
 		Map<String, Object> map = new HashMap<String,Object>();
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
@@ -108,8 +108,8 @@ public class CommonController {
 		return map;
 	}
 	@RequestMapping(value="/common/delete/proc")
-	public Map<String, Object> commonDeleteProc(String grpC){
-		logger.info(grpC);
+	public @ResponseBody Map<String, Object> commonDeleteProc(@RequestBody String grpC){
+		logger.debug(grpC);
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			map = service.delCommonDeleteProc(grpC);

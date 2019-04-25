@@ -56,6 +56,6 @@ public class CommonGrpDao {
 	/** 그룹코드 삭제 */
 	public int deleteCommon(String grpC) throws SQLException {
 		// TODO Auto-generated method stub
-		return session.delete("common.deleteCommon");
+		return session.delete("common.deleteCommon",grpC);
 	}
 }
