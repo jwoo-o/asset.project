@@ -21,6 +21,9 @@ public class EmailSendServiceImpl implements EmailSendService {
 	@Autowired 
 	private JavaMailSender mailSender;
 	
+	
+
+	
 	Logger logger = LoggerFactory.getLogger(EmailSendServiceImpl.class);
 	
 	@Override
@@ -36,6 +39,18 @@ public class EmailSendServiceImpl implements EmailSendService {
 			logger.error(e.getMessage(), e);
 			
 		}
+	}
+	@Override
+	public void emailGrpSendProc(String subject, String content, String from, String[] to, String[] cc)
+			throws Exception {
+		
+		try {
+			sendGrpEml(subject, content, from, to, cc);
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage(), e);
+		}
+		
 	}
 	
 	public void sendEml(String subject, String text, String from, String to) throws Exception {
@@ -53,6 +68,23 @@ public class EmailSendServiceImpl implements EmailSendService {
 	    mailSender.send(preparator);
 	    }
 
+	public void sendGrpEml(String subject, String text, String from, String[] to,String[] cc) throws Exception {
+		
+		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
+	        @Override
+	        public void prepare(MimeMessage mimeMessage) throws Exception {
+	            final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+	            helper.setFrom(from);
+	            helper.setTo(to);
+	            helper.setCc(cc);
+	            helper.setSubject(subject);
+	            helper.setText(text, true);
+	        }
+	    };
+	    mailSender.send(preparator);
+	    }
+
+	
 }
 	
 

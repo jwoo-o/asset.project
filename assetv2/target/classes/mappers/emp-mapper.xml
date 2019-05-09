@@ -86,10 +86,16 @@
   	select manager from employee where employeeNumber=#{empNo}
   </select>
   <select id="mgrList" resultType="empVo">
-  	select name,email,employeeNumber empNo from employee where name like concat('%',#{mgr},'%') 
-  	<if test="division!=null and division!=''">
-  	and division=#{division}
-  	</if>	
+  	select name,email,employeeNumber empNo from employee 
+  	<where>
+  		<if test="mgr!=null and mgr!=''">
+  			name like concat('%',#{mgr},'%') 
+  		</if>
+  		<if test="division!=null and division!=''">
+  			division=#{division}
+  		</if>	
+  	</where>
+  	
   </select>
   <select id="seatCount" resultType="seatDto">
   	SELECT division as dCode,count(*) count,office,DTL_C_NM division 
