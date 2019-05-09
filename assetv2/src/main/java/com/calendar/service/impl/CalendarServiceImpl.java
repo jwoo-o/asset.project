@@ -112,7 +112,7 @@ public class CalendarServiceImpl implements CalendarService {
 		vo.setEmail(dto.getEmail());
 		vo.setSeat(dto.getSeat());
 		OfficeUtility.input(vo);
-		dto.setId(manager.getmName());
+		dto.setLstMdfWkrNm(manager.getmName());
 		List<String> list = mDao.selectManagerId();	
 		eDao.insert(vo);
 		if(dao.updateJoin(dto)>0) {
@@ -133,6 +133,14 @@ public class CalendarServiceImpl implements CalendarService {
 			emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
 		}
 					
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> selIpConfirm() throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", dao.selectIp());
 		return map;
 	}
 

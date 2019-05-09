@@ -300,15 +300,23 @@ var isRun = false;
 		        },
 		        
 		        minLength: 1,
-		       appendTo: "#regist",
-		       focus:function(event,ui){
+		        appendTo: "#regist",
+		       	delay: 200,
+				minLength: 1,
+				autoFocus: true,
+				focus:function(event,ui){
+			
 		    	   return false;
-		       },
-		       select: function( event, ui ) {
-		        	
+				},
+		       	select: function( event, ui ) {
+		    	$("#mgr_email").val(ui.item.email);
+		    	$("#mgr").val(ui.item.value);
+		    	 if(event.keyCode==13){
+		    		 $("#addNrein").focus();
+		    	 }
+		    	 return false;
 		        }
 		   });
-
 			calendarData(); 
 			
     	})

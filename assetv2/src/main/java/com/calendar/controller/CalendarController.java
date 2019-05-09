@@ -124,4 +124,18 @@ public class CalendarController {
 		}
 		return map;
 	}
+	@RequestMapping(value="/ipConfirm/proc")
+	public @ResponseBody Map<String, Object> ipConfirmProc(){
+		Map<String, Object> map = new HashMap<String,Object>();
+		try {
+			map = service.selIpConfirm();
+			map.put("msg", "0001");
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage());
+			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");	
+		}
+		return map;
+	}
+	
 }

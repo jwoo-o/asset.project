@@ -8,7 +8,7 @@ public class CalendarVo {
 	/**입사자명*/
 	private String name;
 	/**부서넘버*/
-	private String division;
+	private String division;	
 	/**증원/충원*/
 	private String addNrein;
 	/**등록명*/
@@ -25,6 +25,8 @@ public class CalendarVo {
 	private String divNm;
 	/**관리자*/
 	private String mgr;
+	/**관리자 이메일*/
+	private String mgr_email;	
 	/**입사완료 여부*/
 	private String joinYN;
 	/**최초등록작업자이름*/
@@ -109,6 +111,12 @@ public class CalendarVo {
 	}
 	
 	
+	public String getMgr_email() {
+		return mgr_email;
+	}
+	public void setMgr_email(String mgr_email) {
+		this.mgr_email = mgr_email;
+	}
 	public String getJoinYN() {
 		return joinYN;
 	}
@@ -143,9 +151,13 @@ public class CalendarVo {
 	public String toString() {
 		return "CalendarVo [no=" + no + ", name=" + name + ", division=" + division + ", addNrein=" + addNrein
 				+ ", title=" + title + ", start=" + start + ", end=" + end + ", seat=" + seat + ", id=" + id
-				+ ", divNm=" + divNm + ", mgr=" + mgr + ", joinYN=" + joinYN + ", fstRgtWkrNm=" + fstRgtWkrNm
-				+ ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm=" + lstMdfWkrNm + ", lstMdfDtm=" + lstMdfDtm + "]";
+				+ ", divNm=" + divNm + ", mgr=" + mgr + ", mgr_email=" + mgr_email + ", joinYN=" + joinYN
+				+ ", fstRgtWkrNm=" + fstRgtWkrNm + ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm=" + lstMdfWkrNm
+				+ ", lstMdfDtm=" + lstMdfDtm + "]";
 	}
+	
+	
+	
 	
 	
 	
