@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import com.calendar.vo.CalendarJoinDto;
 import com.calendar.vo.CalendarVo;
-import com.core.vo.ManagerDto;
 
 @Repository
 public class CalendarDao {
@@ -44,5 +43,15 @@ public class CalendarDao {
 	public int updateJoin(CalendarJoinDto dto) throws SQLException {
 		// TODO Auto-generated method stub
 		return session.update("calendar.updateJoin", dto);
+	}
+
+	public List<CalendarVo> selectIp() throws SQLException {
+		// TODO Auto-generated method stub
+		return session.selectList("calendar.selectIp");
+	}
+
+	public int updateIp(CalendarVo data) {
+		// TODO Auto-generated method stub
+		return session.update("calendar.updateIp",data);
 	}
 }
