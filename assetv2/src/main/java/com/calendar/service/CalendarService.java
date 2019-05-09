@@ -15,4 +15,5 @@ public interface CalendarService {
 	public Map<String, Object> updDateMdf(CalendarVo vo, ManagerDto manager) throws Exception;
 	public Map<String, Object> delCalendarDl(CalendarVo vo) throws Exception;
 	public Map<String, Object> updCalendarJoin(CalendarJoinDto dto, ManagerDto manager) throws Exception;
+	public Map<String, Object> selIpConfirm() throws Exception;
 }

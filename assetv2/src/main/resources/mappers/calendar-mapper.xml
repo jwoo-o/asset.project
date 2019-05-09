@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="calendar">
 	<select id="selectLst" resultType="calendarVo">
-		select * from planned
+		select * from planned p
 	</select>
 	<insert id="insertCal">
-		insert into planned (name,division,addNrein,seat,title,start,end,mgr,fstRgtWkrNm,fstRgtDtm,lstMdfWkrNm,lstMdfDtm) values(#{name},#{division},#{addNrein},#{seat},#{title},#{start},#{end},#{mgr},#{fstRgtWkrNm},now(),#{lstMdfWkrNm},now())
+		insert into planned (name,division,addNrein,seat,title,start,end,mgr,mgr_email,fstRgtWkrNm,fstRgtDtm,lstMdfWkrNm,lstMdfDtm) values(#{name},#{division},#{addNrein},#{seat},#{title},#{start},#{end},#{mgr},#{mgr_email},#{fstRgtWkrNm},now(),#{lstMdfWkrNm},now())
 	</insert>
 	<update id="updateCal">
 		update planned set name=#{name},division=#{division},addNrein=#{addNrein},seat=#{seat},title=#{title},mgr=#{mgr},lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where no=#{no}
@@ -19,6 +19,12 @@
 		delete from planned where no=#{no}
 	</delete>
 	<update id="updateJoin">
-		update planned set joinYN='y',lstMdfWkrNm=#{id},lstMdfDtm=now() where no=#{no}
+		update planned set joinYN='y',lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where no=#{no}
 	</update>
+	<update id="updateIp">
+		update planned set ip_voip='y',lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where no=#{no}
+	</update>
+	<select id="selectIp" resultType="calendarVo">
+		select p.*,(select DTL_C_NM from CMCDDTLM where GRP_C='division' and DTL_C=p.division) as divNm from planned p where p.joinYN='y' and p.ip_voip='n' order by p.start asc
+	</select>
 </mapper>

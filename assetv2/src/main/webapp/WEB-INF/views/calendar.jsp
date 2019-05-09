@@ -67,6 +67,7 @@
             <div class="form-group">
                 <label for="name">관리자</label>
                 <input type="text" class="form-control" id="mgr" name="mgr" maxlength="10"/>
+                <input type="hidden" id="mgr_email" name="mgr_email"/>
             </div>
              <div class="form-group">
                 <label for="gender">증원/충원</label>
