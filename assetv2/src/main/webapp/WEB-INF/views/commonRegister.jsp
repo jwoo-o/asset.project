@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Style-Type" content="text/css">
 <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
 
-<link href="${pageContext.request.contextPath}/css/style.css"
+<link href="/css/style.css"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -23,15 +23,15 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="${pageContext.request.contextPath}/js/common.js"
+<script src="/js/common.js"
 	type="text/javascript"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="${pageContext.request.contextPath}/js/jquery.form.js"
+<script src="/js/jquery.form.js"
 	type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/js/jquery.session.js"
+<script src="/js/jquery.session.js"
 	type="text/javascript"></script>
 <script
-	src="${pageContext.request.contextPath}/js/jquery.serializeObject.js"
+	src="/js/jquery.serializeObject.js"
 	type="text/javascript"></script>
 <style type="text/css">
 body {
@@ -116,7 +116,7 @@ body {
 									id="btnDl" style="display: none;">
 									<i class="fa fa-close"></i> 삭제
 								</button>
-								<button type="button" class="btn btn-success" name="btnUpd"
+								<button type="button" class="btn btn-primary" name="btnUpd"
 									id="btnUpd">
 									<i class="fa fa-check"></i> 저장
 								</button>
@@ -184,7 +184,7 @@ body {
 									id="btnReSearch">
 									<i class="fa fa-refresh"></i> 초기화
 								</button>
-								<button type="button" class="btn btn-success" name="btnSv"
+								<button type="button" class="btn btn-primary" name="btnSv"
 									id="btnSvSubC">
 									<i class="fa fa-check"></i> 저장
 								</button>
