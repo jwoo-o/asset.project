@@ -283,7 +283,7 @@
             if (this.options.availableTags || this.options.tagSource || this.options.autocomplete.source) {
                 var autocompleteOptions = {
                     select: function(event, ui) {
-                        that.createTag(ui.item.value);
+                        that.createTag(ui.item.label,ui.item.value);
                         // Preventing the tag input to be updated with the chosen value.
                         return false;
                     }
@@ -436,7 +436,7 @@
             return Boolean($.effects && ($.effects[name] || ($.effects.effect && $.effects.effect[name])));
         },
 
-        createTag: function(value, additionalClass, duringInitialization) {
+        createTag: function(labelname,value, additionalClass, duringInitialization) {
             var that = this;
 
             value = $.trim(value);
@@ -467,7 +467,7 @@
                 return false;
             }
 
-            var label = $(this.options.onTagClicked ? '<a class="tagit-label"></a>' : '<span class="tagit-label"></span>').text(value);
+            var label = $(this.options.onTagClicked ? '<a class="tagit-label"></a>' : '<span class="tagit-label"></span>').text(labelname);
 
             // Create tag.
             var tag = $('<li></li>')
@@ -494,7 +494,7 @@
 
             // Unless options.singleField is set, each tag has a hidden input field inline.
             if (!this.options.singleField) {
-                var escapedValue = label.html();
+                var escapedValue = value;
                 tag.append('<input type="hidden" value="' + escapedValue + '" name="' + this.options.fieldName + '" class="tagit-hidden-field" />');
             }
 
