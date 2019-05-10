@@ -48,8 +48,9 @@
               	contentType:"application/json; charset=UTF-8"
 	         }).done(function(data) {
 	        	$.each(data, function(i, elt) {
-	        	 emp_data.push(elt.name);
+	        	 emp_data.push({"label":elt.name,"value":elt.email});
 	        	})
+	        	
 	         })
 	         
 	         
@@ -127,8 +128,12 @@
 						data:dataStr
 					}).done(function(d) {
 					 
-						alert(d.msg);
 						isRun = false;
+						if(d.msg=="0001"){
+							alert("Request Success");
+						}else{
+							alert(d.msg);
+						}
 					})
 					
 				}
@@ -151,11 +156,19 @@
 						dataType:"json",
 						method:"post"			
 					}).done(function(data) {
-						calendar_list = data.list;
+						
 						 $.each(data.list, function(i, elt) {
-							 $issuer_tr.tagit("createTag", elt.name)
-							 $("#ccTags").tagit("createTag", elt.mgr);
-							 $("#ccTags").tagit("createTag", elt.lstMdfWkrNm);
+							 var fstRgt;
+							 for(var i=0;i<emp_data.length;i++){
+								 for(key in emp_data[i]){
+									 if(emp_data[i][key].indexOf(elt.fstRgtWkrNm)!=-1){
+										 fstRgt = emp_data[i]; 
+									 }
+								 }
+							 }
+							 $issuer_tr.tagit("createTag", elt.name,elt.name)
+							 $("#ccTags").tagit("createTag", elt.mgr,elt.mgr_email);
+							 $("#ccTags").tagit("createTag", fstRgt.label,fstRgt.value);
 						 })
 						 $issuer_tr.tagit({
 							 tagLimit:data.list.length,
