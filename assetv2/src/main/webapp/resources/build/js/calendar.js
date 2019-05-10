@@ -180,7 +180,7 @@ var isRun = false;
 					selectHelper: true,
 					businessHours: true,
 					eventLimit: true,
-					editable:true,
+					//editable:true,
 					events:data,
 					eventClick:function(event,start,end){
 						$("#division").val(event.division);
