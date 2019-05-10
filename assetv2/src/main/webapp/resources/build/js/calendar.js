@@ -188,6 +188,7 @@ var isRun = false;
 							$("#btnSave").show();
 							$("#btnJoin").show();
 							$("#btnDelete").show();
+							$("#regForm").find("input").prop("readonly",false);
 						}else{
 							$("#btnSave").hide();
 							$("#btnJoin").hide();
