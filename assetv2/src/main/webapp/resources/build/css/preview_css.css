@@ -1,0 +1,72 @@
+@charset "UTF-8";
+html,body,h4 {
+			padding: 0;
+			margin: 0;
+			}
+		
+table,tbody,tr,td,img{
+			padding: 0;
+			margin:0;
+			font-size:0;
+			}
+		
+		table{
+			border-collapse: collapse;
+		}
+		
+		.mail_contents td {
+			font-size: 18px; 
+			padding: 50px 0;
+			word-wrap:break-word;
+			line-height:1.5rem;
+			background: #f1f1f1;
+		}
+		
+		.wrapper {
+			width: 70%;
+			margin: 0 auto;
+		}
+		
+		.center {
+			display: inline-block;
+			width: 100%;
+			text-align: center;
+		}
+		.divTable{
+			display: table;
+			width: 100%;
+		}
+		.divTableRow {
+			display: table-row;
+		}
+		.divTableHeading {
+			background-color: #EEE;
+			display: table-header-group;
+		}
+		.divTableCell, .divTableHead {
+			border: 2px solid black;
+			display: table-cell;
+			padding: 3px 10px;
+		}
+		.divTableHeading {
+			background-color: #EEE;
+			display: table-header-group;
+			font-weight: bold;
+		}
+		.divTableFoot {
+			background-color: #EEE;
+			display: table-footer-group;
+			font-weight: bold;
+		}
+		.divTableBody {
+			display: table-row-group;
+		}
+		.colum-name{
+			background:#B7DEE8;
+			text-align: center;
+			font-weight: 600;
+		}
+		.colum-data{
+			text-align: center;
+			font-weight: 500;
+		}
