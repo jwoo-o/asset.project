@@ -138,7 +138,8 @@
 				
 				</span>
 				
-		</h4>			
+		</h4>		
+		<!-- 문제됨 -->	
 		<div class="divTable" style="display: none;" id="ip_table">
 				<div class="divTableBody">
 				<div class="divTableRow">

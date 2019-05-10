@@ -156,7 +156,7 @@
 						dataType:"json",
 						method:"post"			
 					}).done(function(data) {
-						
+						calendar_list = data.list;
 						 $.each(data.list, function(i, elt) {
 							 var fstRgt;
 							 for(var i=0;i<emp_data.length;i++){
