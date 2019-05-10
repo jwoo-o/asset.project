@@ -192,7 +192,7 @@ var isRun = false;
 							$("#btnSave").hide();
 							$("#btnJoin").hide();
 							$("#btnDelete").hide();
-							$("#empForm").find("input").prop("readonly",true);
+							$("#regForm").find("input").prop("readonly",true);
 							
 						}
 						$("#name").val(event.name);
@@ -204,8 +204,12 @@ var isRun = false;
 		                $("#mgr").val(event.mgr);
 		                regist.open('Join Employee');
 					},
-					eventDrop:function(event){
+					/*eventDrop:function(event){
+						if(event.joinYN=='y'){
+							return false;
+						}
 						$('#calendar').fullCalendar('destroy');
+						
 						var data = {"start":getTimeStamp(event.start),"end":getTimeStamp(event.end),"no":event.no}, dataStr = JSON.stringify(data);
 						$.ajax({url:'/calendarDate/proc',method:'post',data:dataStr,dataType:'json',contentType:'application/json; charset=UTF-8'})
 							.done(function(data) {							
@@ -221,7 +225,7 @@ var isRun = false;
 			                	}
 			                });
 						
-					},
+					},*/
 			        select:function(start, end){
 			        	$("#btnDelete").hide();
 			        	$("#btnJoin").hide();
