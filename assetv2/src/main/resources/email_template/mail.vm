@@ -11,7 +11,16 @@
 <P style="FONT-WEIGHT: bold;font-family:'Malgun Gothic';">$content</P>
 #if($type=="ip")<table style="WIDTH: 560px;font-family:'Malgun Gothic';border-collapse:collapse;"><tr style="background:#B7DEE8;"><td style="text-align: center;font-weight: 600;width:10%;border:2px solid black;">No</td><td style="background:#B7DEE8;text-align: center;font-weight: 600;width:35%;border:2px solid black;">부서</td><td style="background:#B7DEE8;text-align: center;font-weight: 600;width:15%;border:2px solid black;">관리자</td><td style="background:#B7DEE8;text-align: center;font-weight: 600;width:15%;border:2px solid black;">입사자</td><td style="background:#B7DEE8;text-align: center;font-weight: 600;width:25%;border:2px solid black;">입사예정일</td></tr>
 #foreach($data in $list)<tr><td style="text-align: center;font-weight: 500;border:2px solid black;">$velocityCount</td><td style="text-align: center;font-weight: 500;border:2px solid black;">$data.divNm</td><td style="text-align: center;font-weight: 500;border:2px solid black;">$data.mgr</td><td style="text-align: center;font-weight: 500;border:2px solid black;">$data.name</td><td style="text-align: center;font-weight: 500;border:2px solid black;">$data.start</td></tr>#end
-</table>#end
+</table>
+#elseif($type=="emp_pl")
+<table style="WIDTH: 350px;font-family:'Malgun Gothic';border-collapse:collapse;border:2px solid black"><tr><td style="background:#B7DEE8;text-align: center;font-weight: 600;width:150px;border:2px solid black;">등록자</td><td style="text-align: center;font-weight: 500;border:1px solid black;">$mName</td></tr>
+<tr><td style="background:#B7DEE8;text-align: center;font-weight: 600;border:2px solid black;">입사예정일</td><td style="text-align: center;font-weight: 500;border:1px solid black;">$start</td></tr>
+<tr><td style="background:#B7DEE8;text-align: center;font-weight: 600;border:2px solid black;">이름</td><td style="text-align: center;font-weight: 500;border:1px solid black;">$name</td></tr>
+<tr><td style="background:#B7DEE8;text-align: center;font-weight: 600;border:2px solid black;">부서</td><td style="text-align: center;font-weight: 500;border:1px solid black;">$divNm</td></tr>
+<tr><td style="background:#B7DEE8;text-align: center;font-weight: 600;border:2px solid black;">관리자</td><td style="text-align: center;font-weight: 500;border:1px solid black;">$mgr</td></tr>
+<tr><td style="background:#B7DEE8;text-align: center;font-weight: 600;border:2px solid black;">증원/충원</td><td style="text-align: center;font-weight: 500;border:1px solid black;">$addNRein</td></tr>
+</table>
+#end
 </DIV></TD>
 </TR>
 #if($type=="emp_ctf")<tr><td><img id="footer-img" src="https://i.imgur.com/KBszhhn.png"></TD></TR>#elseif($type=="delivery")<TR><TD><img id="footer-img" src="https://i.imgur.com/HvKuBZH.png"></td></tr>#end</TBODY></TABLE></BODY></HTML>
