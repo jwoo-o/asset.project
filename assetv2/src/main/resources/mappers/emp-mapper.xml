@@ -92,7 +92,7 @@
   			name like concat('%',#{mgr},'%') 
   		</if>
   		<if test="division!=null and division!=''">
-  			division=#{division}
+  			and division=#{division}
   		</if>	
   	</where>
   	
