@@ -80,9 +80,7 @@ public class CalendarServiceImpl implements CalendarService {
 						"	    	</div></div></body></html>";
 		*/
 		emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
-		
-		
-		
+		map.clear();
 		return map;
 	}
 
@@ -150,6 +148,7 @@ public class CalendarServiceImpl implements CalendarService {
 			
 				
 			emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
+			
 		}
 					
 		return map;
