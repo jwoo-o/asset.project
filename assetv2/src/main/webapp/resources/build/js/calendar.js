@@ -9,11 +9,12 @@ var isRun = false;
     	$(function () {
     		
     		function frmchk(formName) {
-    			var input=$("#"+formName).find("input");
-    			var select=$("#"+formName).find("select");
+    			var input=$(formName).find("input");
+    			var select=$(formName).find("select");
     			
     			for(i=0;i<input.length;i++){
     				if($(input[i]).val().trim()==""){
+    					alert(i);
     					return false;	
     				}
     			}
@@ -22,7 +23,6 @@ var isRun = false;
     					return false;	
     				}
     			}
-    			
     			return true;
     		}
     		function Save() {
@@ -30,7 +30,7 @@ var isRun = false;
             	if($("#no").val()!='0'){
             		url = '/calendarMdf/proc';
             	}
-            	if(!frmchk("regForm")){
+            	if(!frmchk("#regForm")){
     				alert("빈칸없이 입력하세요.");
             	}else{
             		
@@ -65,7 +65,7 @@ var isRun = false;
             	}
             }
     		function Success(){
-    			if(!frmchk("empForm")){
+    			if(!frmchk("#empForm")){
     				alert("빈칸없이 입력하세요.");
             	}else{
             		
@@ -203,6 +203,7 @@ var isRun = false;
 						$("#start").val(getTimeStamp(event.start));
 		                $("#end").val(getTimeStamp(event.end));    
 		                $("#mgr").val(event.mgr);
+		                $("#mgr_email").val(event.mgr_email);
 		                regist.open('Join Employee');
 					},
 					/*eventDrop:function(event){
