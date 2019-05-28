@@ -11,11 +11,11 @@ var isRun = false;
     		function frmchk(formName) {
     			var input=$(formName).find("input");
     			var select=$(formName).find("select");
-    			
     			for(i=0;i<input.length;i++){
     				if($(input[i]).val().trim()==""){
-    					alert(i);
-    					return false;	
+    					if(!(formName=="#regForm" && i>=5 && i<input.length-1)){
+    						return false;
+    					}				
     				}
     			}
     			for(i=0;i<select.length;i++){
@@ -41,9 +41,15 @@ var isRun = false;
             		
     	            var data = $("#regForm").serializeObject()
     	            data.divNm = $("#division option:checked").text();
+    	            data.mgr = [];
+    	            var name = $("#mgr").find(".tagit-label");
+    	            for(i=0;i<name.length;i++){
+    	            	data.mgr.push($(name[i]).text());
+    	            }
+    	            data.mgr = data.mgr.join(",");
+    	            data.mgr_email = $("#mgr").tagit("assignedTags").join(",");
     	            var dataStr = JSON.stringify(data); 
-    	               
-    	            
+    	            	            
     	            $.ajax({ url: url, data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
     	                .done(function (data) {
     	                	if(data.msg=="0001"){
@@ -183,27 +189,44 @@ var isRun = false;
 					//editable:true,
 					events:data,
 					eventClick:function(event,start,end){
+						var mgr = event.mgr.split(",");
+						var mgr_email = event.mgr_email.split(",");
 						$("#division").val(event.division);
+						$("#addNrein").val(event.addNrein);
+						$("#mgr").tagit("removeAll");
 						if(event.joinYN=='n'){
 							$("#btnSave").show();
 							$("#btnJoin").show();
 							$("#btnDelete").show();
 							$("#regForm").find("input").prop("readonly",false);
+							$("#mgr").tagit({readOnly: false});
+							$("#seat").show();
+							$("#division").removeAttr("disabled");
+							$("#addNrein").removeAttr("disabled");
+							for(i=0;i<mgr.length;i++){
+								$("#mgr").tagit("createTag", mgr[i],mgr_email[i]);
+							}
 						}else{
 							$("#btnSave").hide();
 							$("#btnJoin").hide();
 							$("#btnDelete").hide();
+							$("#seat").hide();
 							$("#regForm").find("input").prop("readonly",true);
-							
-						}
+							$("#mgr").tagit({readOnly: true});
+							$("#division").attr('disabled', 'true');
+							$("#addNrein").attr('disabled', 'true');
+							for(i=0;i<mgr.length;i++){							
+								$("#mgr").tagit("createTag",mgr[i],mgr_email[i]);			
+							}							
+						}						
 						$("#name").val(event.name);
 						$("#no").val(event.no);
-						$("#seat").val(event.seat);
-						$("#addNrein").val(event.addNrein);
+						$("#seat").prev().val(event.seat);
+						
 						$("#start").val(getTimeStamp(event.start));
 		                $("#end").val(getTimeStamp(event.end));    
-		                $("#mgr").val(event.mgr);
-		                $("#mgr_email").val(event.mgr_email);
+		               // $("#mgr").val(event.mgr);
+		               //$("#mgr_email").val(event.mgr_email);
 		                regist.open('Join Employee');
 					},
 					/*eventDrop:function(event){
@@ -232,10 +255,15 @@ var isRun = false;
 			        	$("#btnDelete").hide();
 			        	$("#btnJoin").hide();
 			        	$("#btnSave").show();
+			        	$("#seat").show();
 			        	$("#regForm")[0].reset();
 		                $("#start").val(getTimeStamp(start));
 		                $("#end").val(getTimeStamp(end));
 		                $("#no").val('0');
+		                $("#division").removeAttr("disabled");
+						$("#addNrein").removeAttr("disabled");
+		                $("#regForm").find("input").prop("readonly",false);
+		                $("#mgr").tagit("removeAll");
 		                regist.open('Join Employee');
 						$('#calendar').fullCalendar('unselect');
 			        }
@@ -279,7 +307,43 @@ var isRun = false;
 				 empRegist.open('Join Success');
 				 regist.close();
 			 })
-			 $("#mgr").autocomplete({
+			var emp_data = [];
+			$("#division").change(function() {
+				emp_data.length = 0;
+				var data = { "mgr" : '',"division" : $(this).val()};
+	        	var dataStr = JSON.stringify(data);
+				$.ajax({
+	                method: 'POST',
+	                url: "/mgrSearch/proc",
+	                dataType: "json",
+	                data:dataStr,
+	              	contentType:"application/json; charset=UTF-8"
+		         }).done(function(data) {
+		        	$.each(data, function(i, elt) {
+		        	 emp_data.push({"label":elt.name,"value":elt.email});
+		        	})
+		        	
+		         })
+			})
+			
+	         $("#mgr").tagit({
+				
+				allowSpaces: true,
+				availableTags: emp_data,
+				tagSource: emp_data,
+				showAutocompleteOnFocus: true,
+				autocomplete: {
+					delay: 0,
+					minLength: 1,
+					autoFocus: true,
+					source: emp_data,
+					appendTo: "#regist",
+					focus: function(event, ui){
+						return false;
+					}
+				}
+			})
+			 /*$("#mgr").autocomplete({
 
 		        source : function( request, response ) {
 		        	
@@ -322,7 +386,8 @@ var isRun = false;
 		    	 }
 		    	 return false;
 		        }
-		   });
+		   });*/
+	         
 			calendarData(); 
 			
     	})
