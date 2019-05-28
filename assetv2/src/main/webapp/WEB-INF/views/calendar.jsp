@@ -17,11 +17,13 @@
     <link href='/css/fullcalendar.css' rel='stylesheet' />
     <link href='/css/fullcalendar.print.css' rel='stylesheet' media='print' />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
     <script src='/js/moment.min.js'></script>
     <script src='/js/jquery.min.js'></script>
     <script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.js" type="text/javascript"></script>
+    <script src="/js/tag-it.js" type="text/javascript"></script>
     <script src='/js/fullcalendar.min.js'></script>
     <script type="text/javascript" src="/js/ko.js"></script>
     <script src="/js/jquery.serializeObject.js" type="text/javascript"></script>
@@ -66,8 +68,9 @@
             </div>
             <div class="form-group">
                 <label for="name">관리자</label>
-                <input type="text" class="form-control" id="mgr" name="mgr" maxlength="10"/>
-                <input type="hidden" id="mgr_email" name="mgr_email"/>
+                <div class="input-col"><ul id="mgr" class="auto"></ul></div>
+                <!--  <input type="text" class="form-control" id="mgr" name="mgr" maxlength="10"/>
+                <input type="hidden" id="mgr_email" name="mgr_email"/>-->
             </div>
              <div class="form-group">
                 <label for="gender">증원/충원</label>
@@ -78,7 +81,11 @@
             </div>
              <div class="form-group">
                 <label for="seat">예정 좌석</label>
-                <input type="text" class="form-control" id="seat" name="seat" maxlength="200"/>
+                <div role="wrapper" class="gj-datepicker gj-datepicker-md">
+                <input type="text" class="form-control" name="seat" role="input">
+                <i class="fa fa-map-marker" role="right-icon" id="seat"></i>
+                </div>
+                <!--<input type="text" class="form-control" id="seat" name="seat" maxlength="200"/>-->
             </div>
             
             <button type="button" id="btnSave" class="btn btn-default">Save</button>
