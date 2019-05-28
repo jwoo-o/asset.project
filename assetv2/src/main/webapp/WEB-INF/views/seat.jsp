@@ -368,12 +368,18 @@ var popup;
 				$("#"+id).css('border','2px solid #003399');
 			}
 		}
+		/*if(type.substring('detail') !=-1){
+			var id = $("#location",opener.document).val();
+			if(id !=''){
+				$("#"+id).css('border','2px solid #003399');
+			}
+		}*/
 		
 		
 		$(".seat").on('click', function() {
 			 
 			 
-			 switch (type) {
+			 /*switch (type) {
 				case 'home':
 					if($(this).children().html()!=undefined){
 						var input = $(this).find("input");
@@ -406,6 +412,44 @@ var popup;
 						window.close();
 					}
 					break;
+			}*/
+			
+			if(type=="home"){
+				
+				if($(this).children().html()!=undefined){
+					var input = $(this).find("input");
+					$("#name").val($(this).find("p").text());
+					$("#empNo").val($(input[0]).val());
+					$("#position").val($(input[1]).val());
+					$("#division").val($(input[2]).val());
+					if($(input[3]).val()!="null" && $(input[3]).val()!=''){
+						$("#profile").attr("src", "/resources/build/images/profileImage/"+$(input[3]).val());
+					}else{
+						$("#profile").attr("src","/images/profileImage/default_profile.jpg");
+					}
+					popup.open("Info");
+				}
+				
+			}else if(type=="emp"){
+				
+				if($(this).children().html()==undefined){
+					$(".seat",opener.document).val($(this).attr("id"));
+					//$("#eseat",opener.document).val($(this).attr("id"));				
+					window.close();
+				}
+				
+			}else if(type=="calendar"){
+				
+				if($(this).children().html()==undefined){
+					$("#seat",opener.document).prev().val($(this).attr("id"));
+					//$("#eseat",opener.document).val($(this).attr("id"));				
+					window.close();
+				}
+				
+			}else if(type.substring("detail")!=-1){
+				$("#location",opener.document).val($(this).attr("id"));
+				//$("#eseat",opener.document).val($(this).attr("id"));				
+				window.close();
 			}
 			
 		})

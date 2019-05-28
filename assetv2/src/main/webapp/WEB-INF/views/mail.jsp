@@ -302,7 +302,7 @@
 										</tr>
 										<tr height="22">
 											<td class="tdBack" align="left"><strong class="list_title">내용</strong></td>
-						            		<td align="left" width="80"><textarea id="content" rows="5"></textarea><div align="left"><input type="button" class="btn bg-navy btn-sm" id="previewBtn" value="Preview"></div>
+						            		<td align="left" width="80"><div class="input-col"><textarea id="content" rows="5" class="form-control"></textarea><div align="left"><input type="button" class="btn bg-navy btn-sm" id="previewBtn" value="Preview"></div></div>
 									        </td>
 										</tr>										
 										</tbody>
