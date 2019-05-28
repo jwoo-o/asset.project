@@ -159,6 +159,8 @@
 						calendar_list = data.list;
 						 $.each(data.list, function(i, elt) {
 							 var fstRgt;
+							 var mgr;
+							 var mgr_email;
 							 for(var i=0;i<emp_data.length;i++){
 								 for(key in emp_data[i]){
 									 if(emp_data[i][key].indexOf(elt.fstRgtWkrNm)!=-1){
@@ -167,7 +169,12 @@
 								 }
 							 }
 							 $issuer_tr.tagit("createTag", elt.name,elt.name)
-							 $("#ccTags").tagit("createTag", elt.mgr,elt.mgr_email);
+							 mgr = elt.mgr.split(",");
+							 mgr_email = elt.mgr_email.split(",");
+							 for(var i=0;i<mgr.length;i++){
+								 $("#ccTags").tagit("createTag", mgr[i],mgr_email[i]); 
+							 }
+							 //$("#ccTags").tagit("createTag", elt.mgr,elt.mgr_email);
 							 $("#ccTags").tagit("createTag", fstRgt.label,fstRgt.value);
 						 })
 						 $issuer_tr.tagit({

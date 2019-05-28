@@ -52,7 +52,10 @@ public class CalendarServiceImpl implements CalendarService {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<String> list = mDao.selectManagerId();
-		list.add(vo.getMgr_email().split("@")[0]);
+		String[] mgr_email = vo.getMgr_email().split(",");
+		for(int i=0;i<mgr_email.length;i++) {
+			list.add(mgr_email[i].split("@")[0]);
+		}
 		vo.setTitle("["+vo.getAddNrein()+"]"+vo.getName());
 		vo.setFstRgtWkrNm(manager.getmName());
 		vo.setLstMdfWkrNm(manager.getmName());
