@@ -357,7 +357,7 @@ var popup;
 			$("#floor_data").empty().append(n13_count_tag);
 		});
 		if(type=='calendar'){
-			var id = $("#seat",opener.document).val()
+			var id = $("#seat",opener.document).prev().val()
 			if(id !=''){
 				$("#"+id).css('border','2px solid #003399');
 			}
