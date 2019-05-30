@@ -54,7 +54,7 @@ public class MailVo {
 	}
 	@Override
 	public String toString() {
-		return "MailVo [list=" + list + ", cc=" + Arrays.toString(cc) + ", to=" + Arrays.toString(to) + ", content="
+		return "MailVo [cc=" + Arrays.toString(cc) + ", to=" + Arrays.toString(to) + ", content="
 				+ content + ", type=" + type + ", subject=" + subject + "]";
 	}
 	
