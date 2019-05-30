@@ -44,8 +44,8 @@ public class MailController {
 		logger.debug(vo.toString());
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		try {
-			map.put("msg", "0001");
 			servivce.insMailSend(vo,manager);
+			map.put("msg", "0001");
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());

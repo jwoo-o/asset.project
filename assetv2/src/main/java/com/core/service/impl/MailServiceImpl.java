@@ -45,7 +45,6 @@ public class MailServiceImpl implements MailService {
 				dao.updateIp(data);
 			}
 			map.clear();
-			map.put("msg", "0001");
 		}
 		
 		return map;
