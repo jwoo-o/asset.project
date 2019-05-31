@@ -131,6 +131,7 @@
 						isRun = false;
 						if(d.msg=="0001"){
 							alert("Request Success");
+							$("#type").val("");
 						}else{
 							alert(d.msg);
 						}
