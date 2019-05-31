@@ -167,8 +167,12 @@ var popup;
 				n3_tag +='<div class="seat1 seat n3" style="left:150px;top:547px" id="n30158"></div>';
 				n3_tag +='<div class="seat1 seat n3" style="left:205px;top:547px" id="n30159"></div>';
 				n3_tag +='<div class="seat1 seat n3" style="left:260px;top:547px" id="n30160"></div>';
-				n3_tag +='<div class="seat2 seat n3" style="left:445px;top:275px" id="n30161"></div>';
-				n3_tag +='<div class="seat2 seat n3" style="left:445px;top:330px" id="n30162"></div>';
+				
+				//2번째 추가좌석
+				n3_tag +='<div class="seat2 seat n3" style="left:255px;top:345px" id="n30161"></div>';
+				n3_tag +='<div class="seat2 seat n3" style="left:255px;top:400px" id="n30162"></div>';
+				n3_tag +='<div class="seat2 seat n3" style="left:350px;top:345px" id="n30163"></div>';
+				n3_tag +='<div class="seat2 seat n3" style="left:350px;top:400px" id="n30164"></div>';
 		//n13
 			
 			//tech 헤드석
@@ -343,6 +347,18 @@ var popup;
 					n3_count_tag += "</tr></table>";
 					n13_count_tag += "</tr></table>";
 					$("#floor_data").append(n3_count_tag);
+					
+					//qx좌석
+					for(var i=1;i<=11;i++){
+						$("#n1300"+(i+58)).append('<p>qx'+i+'</p>').off();
+						$("#n1300"+(i+58)).css("background", "#FFE400");
+					}
+					$("#n30089").append('<p>출장석</p>').off("click");
+					$("#n30122").append('<p>출장석</p>').off("click");
+					$("#n30120").append('<p>테스트석</p>').off("click");
+					
+					
+			 		
 					
 				}else{
 					alert(data.msg);
