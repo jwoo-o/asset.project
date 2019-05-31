@@ -181,7 +181,9 @@ var popup;
 				var x= 100;
 				
 				for(var j=1;j<7;j++){
-					
+					if(i==6 && j>=3){
+						break;
+					}
 					n13_tag += '<div class="seat1 seat n13" style="left:'+x+'px;top:'+y3+'px"  id="n13'+divIdAssign('n13')+'"></div>';
 					x += 55;
 				}
@@ -195,21 +197,39 @@ var popup;
 					y3 +=75;
 				}
 			}
+			var x = 255;
+			for(var i=1;i<=3;i++){
+				//var x = 260;
+				var y = 390;
+				for(var j=1;j<=3;j++){
+					n13_tag += '<div class="seat2 seat n13" style="left:'+x+'px;top:'+y+'px"  id="n13'+divIdAssign('n13')+'"></div>';
+					y+= 55;
+				}
+				if(i%2==0){
+					x +=85;
+				}else{
+					x +=40;
+				}
+				
+			}
+			
+			n13_tag +='<div class="seat2 seat n13" style="left:170px;top:430px" id="n13'+divIdAssign('n13')+'"></div>';
+			n13_tag +='<div class="seat2 seat n13" style="left:170px;top:485px" id="n13'+divIdAssign('n13')+'"></div>';
 			//헤드석
-			n13_tag +='<div class="seat1 seat n13" style="left:235px;top:865px" id="n130002"></div>';
-			n13_tag +='<div class="seat1 seat n13" style="left:325px;top:865px" id="n130003"></div>';
-			n13_tag +='<div class="seat1 seat n13" style="left:380px;top:865px" id="n130004"></div>';
-			n13_tag +='<div class="seat3 seat n13" style="left:518px;top:865px" id="n130005"></div>';
-			n13_tag +='<div class="seat1 seat n13" style="left:625px;top:865px" id="n130006"></div>';
-			n13_tag +='<div class="seat1 seat n13" style="left:715px;top:865px" id="n130007"></div>';
-			n13_tag +='<div class="seat1 seat n13" style="left:770px;top:865px" id="n130008"></div>';
-			n13_tag +='<div class="seat1 seat n13" style="left:850px;top:865px" id="n130009"></div>';
-			n13_tag +='<div class="seat1 seat n13" style="left:1015px;top:865px" id="n130010"></div>';
-			n13_tag +='<div class="seat1 seat n13" style="left:1105px;top:865px" id="n130011"></div>';
-			n13_tag +='<div class="seat1 seat n13" style="left:1160px;top:865px" id="n130013"></div>';
-			n13_tag +='<div class="seat1 seat n13" style="left:1275px;top:865px" id="n130014"></div>';
-			n13_tag +='<div class="seat1 seat n13" style="left:1405px;top:865px" id="n130015"></div>';
-			n13_tag +='<div class="seat2 seat n13" style="left:1510px;top:865px" id="n130016"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:235px;top:850px" id="n130002"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:325px;top:850px" id="n130003"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:380px;top:850px" id="n130004"></div>';
+			n13_tag +='<div class="seat3 seat n13" style="left:518px;top:850px" id="n130005"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:625px;top:850px" id="n130006"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:715px;top:850px" id="n130007"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:770px;top:850px" id="n130008"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:850px;top:850px" id="n130009"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:1015px;top:850px" id="n130010"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:1105px;top:850px" id="n130011"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:1160px;top:850px" id="n130013"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:1275px;top:850px" id="n130014"></div>';
+			n13_tag +='<div class="seat1 seat n13" style="left:1405px;top:850px" id="n130015"></div>';
+			n13_tag +='<div class="seat2 seat n13" style="left:1510px;top:850px" id="n130016"></div>';
 			
 			
 			//중앙
@@ -244,7 +264,7 @@ var popup;
 					}else{
 						x +=90;
 					}
-					n13_tag += '<div class="seat2 seat n13" style="left:'+x+'px;top:'+(590+y)+'px"  id="n13'+divIdAssign('n13')+'"></div>';
+					n13_tag += '<div class="seat2 seat n13" style="left:'+x+'px;top:'+(575+y)+'px"  id="n13'+divIdAssign('n13')+'"></div>';
 				}
 			}
 			
