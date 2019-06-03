@@ -319,16 +319,20 @@ var popup;
 					 		//alert(elt.name);
 					 		$("#"+elt.seat).append('<p>'+elt.name+'</p><input type="hidden" value="'+elt.empNo+'"><input type="hidden" value="'+elt.division+'"><input type="hidden" value="'+elt.position+'"><input type="hidden" value="'+elt.profile_name+'">');				 		
 					 		$("#"+elt.seat).css("background", colorList[Number(elt.dcode)]);
-					 		$('.employee').dialog({
+					 		/*$('.employee').dialog({
 				                uiLibrary: 'bootstrap4',
 				                iconsLibrary: 'fontawesome',
 				                autoOpen: false,
 				                resizable: false,
 				                modal: true
-				            });
+				            });*/
 					 		
 	
 					 	}
+					})
+					$.each(data.ex, function(i, elt) {
+						$("#"+elt.seat).append('<p>'+elt.name+'</p><input type="hidden" value="입사예정자"><input type="hidden" value="'+elt.divNm+'">');				 		
+				 		$("#"+elt.seat).css("background", "#47C83E");
 					})
 					n3_count_tag = "<table style='width:100%' border='1'><thead><tr><td align='center' colspan='6'><b>부서별 현황("+$(".n3 p").length+"/"+$(".n3").length+")</b></td></tr><thead><tr>";
 					n13_count_tag = "<table style='width:100%' border='1'><thead><tr><td align='center' colspan='6'><b>부서별 현황("+$(".n13 p").length+"/"+$(".n13").length+")</b></td></tr><thead><tr>";
@@ -456,8 +460,8 @@ var popup;
 					var input = $(this).find("input");
 					$("#name").val($(this).find("p").text());
 					$("#empNo").val($(input[0]).val());
-					$("#position").val($(input[1]).val());
-					$("#division").val($(input[2]).val());
+					$("#position").val($(input[2]).val());
+					$("#division").val($(input[1]).val());
 					if($(input[3]).val()!="null" && $(input[3]).val()!=''){
 						$("#profile").attr("src", "/resources/build/images/profileImage/"+$(input[3]).val());
 					}else{

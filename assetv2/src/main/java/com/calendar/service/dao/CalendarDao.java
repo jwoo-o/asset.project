@@ -50,8 +50,13 @@ public class CalendarDao {
 		return session.selectList("calendar.selectIp");
 	}
 
-	public int updateIp(CalendarVo data) {
+	public int updateIp(CalendarVo data) throws SQLException {
 		// TODO Auto-generated method stub
 		return session.update("calendar.updateIp",data);
+	}
+
+	public List<CalendarVo> selectEx() throws SQLException {
+		// TODO Auto-generated method stub
+		return session.selectList("calendar.selectEx");
 	}
 }
