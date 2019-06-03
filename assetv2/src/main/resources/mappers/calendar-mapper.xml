@@ -27,4 +27,7 @@
 	<select id="selectIp" resultType="calendarVo">
 		select p.*,(select DTL_C_NM from CMCDDTLM where GRP_C='division' and DTL_C=p.division) as divNm from planned p where p.joinYN='y' and p.ip_voip='n' order by p.start asc
 	</select>
+	<select id="selectEx" resultType="calendarVo">
+		select name,(select DTL_C_NM from CMCDDTLM where GRP_C='division' and DTL_C=p.division) as divNm,seat from planned p where p.joinYN='n'
+	</select>
 </mapper>
