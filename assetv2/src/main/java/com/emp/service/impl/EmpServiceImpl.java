@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.asset.service.dao.AssetDao;
+import com.calendar.service.dao.CalendarDao;
 import com.calendar.vo.CalendarVo;
 import com.core.service.dao.ManagerDao;
 import com.core.util.ManagerUtility;
@@ -35,6 +36,8 @@ public class EmpServiceImpl implements EmpService {
 	private AssetDao assetDao;
 	@Inject
 	private ManagerDao managerDao;
+	@Inject
+	private CalendarDao calendarDao;
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
@@ -127,6 +130,7 @@ public class EmpServiceImpl implements EmpService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("records", dao.selectList(dto));
 		map.put("count",dao.selectSeatCount());
+		map.put("ex",calendarDao.selectEx());
 		return map;
 	}
 
