@@ -10,7 +10,7 @@
 		insert into planned (name,division,addNrein,seat,title,start,end,mgr,mgr_email,fstRgtWkrNm,fstRgtDtm,lstMdfWkrNm,lstMdfDtm) values(#{name},#{division},#{addNrein},#{seat},#{title},#{start},#{end},#{mgr},#{mgr_email},#{fstRgtWkrNm},now(),#{lstMdfWkrNm},now())
 	</insert>
 	<update id="updateCal">
-		update planned set name=#{name},division=#{division},addNrein=#{addNrein},seat=#{seat},title=#{title},mgr=#{mgr},lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where no=#{no}
+		update planned set name=#{name},division=#{division},addNrein=#{addNrein},seat=#{seat},title=#{title},mgr=#{mgr},mgr_email=#{mgr_email},lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where no=#{no}
 	</update>
 	<update id="updateDate">
 		update planned set start=#{start},end=#{end},lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where no=#{no}
