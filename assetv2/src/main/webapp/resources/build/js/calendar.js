@@ -88,6 +88,7 @@ var isRun = false;
             		data.joinDate = $("#start").val();
             		data.no = $("#no").val();
             		data.seat = $("#seat").prev().val();
+            		data.ext = $("#ext").val();
             		dataStr = JSON.stringify(data);
             		
             		$.ajax({ url:'calendarJoin/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})

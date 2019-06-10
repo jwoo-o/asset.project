@@ -19,17 +19,18 @@
 		var type = $opener.find("#type").val();
 		
 		if(type=="ip"){
-			$("#ip_table").show();
+			$("#ip-table").show();
 			var tag ='';
 			$.each(list, function(i, elt) {
-			 tag += '<div class="divTableRow">'
-			 +'<div class="divTableCell colum-data">'+(i+1)+'</div>'
-			 +'<div class="divTableCell colum-data">'+elt.divNm+'</div>'
-			 +'<div class="divTableCell colum-data">'+elt.mgr+'</div>'
-			 +'<div class="divTableCell colum-data">'+elt.name+'</div>'
-			 +'<div class="divTableCell colum-data">'+elt.start+'</div></div>';
+			 tag += '<tr>'
+			 +'<td class="colum-data">'+(i+1)+'</td>'
+			 +'<td class="colum-data">'+elt.divNm+'</td>'
+			 +'<td class="colum-data">'+elt.mgr+'</td>'
+			 +'<td class="colum-data">'+elt.name+'</td>'
+			 +'<td class="colum-data">'+elt.id+'</td>'
+			 +'<td class="colum-data">'+elt.ext+'</td></tr>';
 			})
-			$(".divTableBody").append(tag)
+			$("#ip-tbody").append(tag);
 		}
 		if(type=="emp_ctf"){
 			$("#footer-img").attr("src", "https://i.imgur.com/KBszhhn.png").show();
@@ -50,7 +51,7 @@
 	</tr>
 	
 	<tr class="mail_contents">
-	<td>
+	<td style="padding: 50px 0;">
 	
 		<div class="wrapper">
 		<h4>
@@ -60,20 +61,31 @@
 				
 		</h4>		
 		<!-- 문제됨 -->	
-		<div class="divTable" style="display: none;" id="ip_table">
-				<div class="divTableBody">
-				<div class="divTableRow">
-				<div class="divTableCell colum-name"  style="width: 10%">No</div>
-				<div class="divTableCell colum-name" style="width: 35%">부서</div>
-				<div class="divTableCell colum-name" style="width: 15%">관리자</div>
-				<div class="divTableCell colum-name" style="width: 15%">입사자</div>
-				<div class="divTableCell colum-name" style="width: 25%">입사예정일</div>
-				</div>
-				</div>
-		</div>
+		<table class="ip-table" style="display: none;" id="ip-table">
+			<!--  <tr>
+				<td class="colum-name" style="width: 8%">No</td>
+				<td class="colum-name" style="width: 35%">부서</td>
+				<td class="colum-name" style="width: 15%">관리자</td>
+				<td class="colum-name" style="width: 15%">입사자</td>
+				<td class="colum-name" style="width: 17%">ID</td>
+				<td class="colum-name" style="width: 10%">EXT</td>
+			</tr>
+			-->
+			<tr>
+				<td class="colum-name" style="background:#B7DEE8;width: 8%;">No</td>
+				<td class="colum-name" style="background:#B7DEE8;width: 35%;">부서</td>
+				<td class="colum-name" style="background:#B7DEE8;width: 15%;">관리자</td>
+				<td class="colum-name" style="background:#B7DEE8;width: 15%;">입사자</td>
+				<td class="colum-name" style="background:#B7DEE8;width: 16%;">ID</td>
+				<td class="colum-name" style="background:#B7DEE8;width: 11%;">EXT</td>
+			</tr>
+			<tbody id="ip-tbody">
+				
+			</tbody>
+		</table>
 				
 			
-		</div>		
+		</div>
 	</td>
 	
 	</tr>
