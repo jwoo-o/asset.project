@@ -117,8 +117,12 @@
 				</select>
 			</div>
 	    	<div class="form-group">
-	        	<label for="name">이메일</label>
+	        	<label for="email">이메일</label>
 	        	<input type="text" class="form-control" id="email" name="email" value="@qoo10.com"/>
+	    	</div>
+	    	<div class="form-group">
+	        	<label for="ext">ext</label>
+	        	<input type="text" class="form-control" id="ext" name="ext"/>
 	    	</div>
 	    	<button type="button" id="btnSuccess" class="btn btn-default">Success</button>
 	    	<button type="button" class="btn btn-default btnCancel">Cancel</button>

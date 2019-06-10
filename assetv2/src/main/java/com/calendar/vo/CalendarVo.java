@@ -19,8 +19,10 @@ public class CalendarVo {
 	private String end;
 	/**입사좌석*/
 	private String seat;
-	/**등록자*/
+	/**계정명*/
 	private String id;
+	/**내선번호*/
+	private String ext;
 	/**부서명*/
 	private String divNm;
 	/**관리자*/
@@ -147,14 +149,21 @@ public class CalendarVo {
 	public void setLstMdfDtm(String lstMdfDtm) {
 		this.lstMdfDtm = lstMdfDtm;
 	}
+	public String getExt() {
+		return ext;
+	}
+	public void setExt(String ext) {
+		this.ext = ext;
+	}
 	@Override
 	public String toString() {
 		return "CalendarVo [no=" + no + ", name=" + name + ", division=" + division + ", addNrein=" + addNrein
-				+ ", title=" + title + ", start=" + start + ", end=" + end + ", seat=" + seat + ", id=" + id
-				+ ", divNm=" + divNm + ", mgr=" + mgr + ", mgr_email=" + mgr_email + ", joinYN=" + joinYN
+				+ ", title=" + title + ", start=" + start + ", end=" + end + ", seat=" + seat + ", id=" + id + ", ext="
+				+ ext + ", divNm=" + divNm + ", mgr=" + mgr + ", mgr_email=" + mgr_email + ", joinYN=" + joinYN
 				+ ", fstRgtWkrNm=" + fstRgtWkrNm + ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm=" + lstMdfWkrNm
 				+ ", lstMdfDtm=" + lstMdfDtm + "]";
 	}
+	
 	
 	
 	

@@ -82,7 +82,7 @@ public class CalendarServiceImpl implements CalendarService {
 						"	    	<img src='https://stcom.image-gmkt.com/css/us/qoo10/front/cm/common/image/logo_qoo10_main.png'>" + 
 						"	    	</div></div></body></html>";
 		*/
-		emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
+		//emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
 		map.clear();
 		return map;
 	}
@@ -132,6 +132,7 @@ public class CalendarServiceImpl implements CalendarService {
 		vo.setEmail(dto.getEmail());
 		vo.setSeat(dto.getSeat());
 		OfficeUtility.input(vo);
+		dto.setId(dto.getEmail().split("@")[0]);
 		dto.setLstMdfWkrNm(manager.getmName());
 		List<String> list = mDao.selectManagerId();	
 		eDao.insert(vo);
@@ -150,7 +151,7 @@ public class CalendarServiceImpl implements CalendarService {
 							"	    	</div></div></body></html>";
 			
 				
-			emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
+			//emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
 			
 		}
 					

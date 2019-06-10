@@ -19,7 +19,7 @@
 		delete from planned where no=#{no}
 	</delete>
 	<update id="updateJoin">
-		update planned set joinYN='y',lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where no=#{no}
+		update planned set id=#{id},ext=#{ext},joinYN='y',lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where no=#{no}
 	</update>
 	<update id="updateIp">
 		update planned set ip_voip='y',lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where no=#{no}
