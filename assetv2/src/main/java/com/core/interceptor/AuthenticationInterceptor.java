@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.core.exception.RequriedLoginException;
+
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
 	private static final Logger logger = 
@@ -50,7 +52,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 				response.sendError(401); 
 			}
 			else{
-				response.sendRedirect("/login");
+				throw new RequriedLoginException("Current user is not logined");
 			}
 			return false;
 		}
