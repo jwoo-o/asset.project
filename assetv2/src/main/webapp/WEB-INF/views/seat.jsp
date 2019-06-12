@@ -94,6 +94,8 @@ var popup;
 		var url;
 		if(opener){
 			url = window.opener.document.URL.split('/');
+		}else{
+			url = "seat/get"
 		}
 		
 		var type = url[url.length-1];
