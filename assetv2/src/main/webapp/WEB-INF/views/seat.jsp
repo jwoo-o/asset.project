@@ -91,7 +91,11 @@ p{
 var colorList = ["","#DDD9C4","#F2DCDB","#FABF8F","#DA9694","#CCC0DA","#FFFFCC","#FFE400","#DDD9C4","#FFC000", "#CCECFF","#FFC000","#FFCCFF","#CCECFF","#FFCCFF"];
 var popup;
 	$(function () {
-		var url = window.opener.document.URL.split('/');
+		var url;
+		if(opener){
+			url = window.opener.document.URL.split('/');
+		}
+		
 		var type = url[url.length-1];
 		var tag = "<table style='width:100%' border='1'><thead><tr><td align='center' colspan='6'><b>부서별 현황</b></td></tr><thead><tr>";
 		var n3_count_tag = '';
