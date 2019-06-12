@@ -2,6 +2,10 @@ package com.core.exception;
 
 public class RequriedLoginException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String msg;
 	
 	

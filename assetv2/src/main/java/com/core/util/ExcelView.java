@@ -12,7 +12,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.asset.vo.AssetDownDto;
-import com.asset.vo.AssetViewDto;
 
 public class ExcelView extends AbstractExcelPOIView{
 	
