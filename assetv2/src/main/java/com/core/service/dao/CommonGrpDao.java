@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import com.core.vo.CmcdGrpmDto;
 import com.core.vo.CmcdGrpmVo;
 import com.core.vo.CommonDto;
-import com.core.vo.CommonVo;
 
 @Repository
 public class CommonGrpDao {
