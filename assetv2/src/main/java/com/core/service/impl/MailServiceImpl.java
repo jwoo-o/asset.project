@@ -17,6 +17,7 @@ import com.core.service.MailService;
 import com.core.vo.MailVo;
 import com.core.vo.ManagerDto;
 
+@SuppressWarnings("deprecation")
 @Service
 public class MailServiceImpl implements MailService {
 
@@ -36,7 +37,6 @@ public class MailServiceImpl implements MailService {
 		map.put("list", vo.getList());
 		map.put("type", vo.getType());
 		map.put("content", vo.getContent());
-		@SuppressWarnings("deprecation")
 		String content = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "email_template/mail.vm","UTF-8",map);
 		service.emailGrpSendProc(vo.getSubject(), content, "ga_kr@qoo10.com", vo.getTo(), vo.getCc());
 		if(vo.getList()!=null) {

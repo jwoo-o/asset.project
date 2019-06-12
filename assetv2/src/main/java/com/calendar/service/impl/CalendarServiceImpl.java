@@ -22,6 +22,7 @@ import com.core.vo.ManagerDto;
 import com.emp.service.dao.EmpDao;
 import com.emp.vo.EmpVo;
 
+@SuppressWarnings("deprecation")
 @Service
 public class CalendarServiceImpl implements CalendarService {
 
@@ -70,7 +71,6 @@ public class CalendarServiceImpl implements CalendarService {
 		map.put("addNRein", vo.getAddNrein());
 		map.put("type", "emp_pl");
 		map.put("content", "신규 입사 예정자 안내 메일<br/>");
-		@SuppressWarnings("deprecation")
 		String content = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "email_template/mail.vm","UTF-8",map);
 		/*String content = "<html><body><div style= 'width:500;border:solid #fffff;}'><h2>신규 입사예정자 안내 메일</h2><table border='1'><tr><td style='width:200px;'><b>등록자</b></td><td>"+manager.getmName()+"</td></tr>"
 				+ "<tr><td><b>입사예정일</b></td><td>"+vo.getStart()+"</td></tr>"
@@ -82,7 +82,7 @@ public class CalendarServiceImpl implements CalendarService {
 						"	    	<img src='https://stcom.image-gmkt.com/css/us/qoo10/front/cm/common/image/logo_qoo10_main.png'>" + 
 						"	    	</div></div></body></html>";
 		*/
-		//emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
+		emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
 		map.clear();
 		return map;
 	}
@@ -151,7 +151,7 @@ public class CalendarServiceImpl implements CalendarService {
 							"	    	</div></div></body></html>";
 			
 				
-			//emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
+			emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
 			
 		}
 					

@@ -15,7 +15,6 @@ import com.asset.vo.AssetSearchDto;
 import com.asset.vo.AssetViewDto;
 import com.asset.vo.AssetVo;
 import com.asset.vo.ChartDto;
-import com.emp.vo.EmpVo;
 
 @Repository
 public class AssetDao {
