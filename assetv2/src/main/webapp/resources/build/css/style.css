@@ -21,56 +21,11 @@ body {
 	color: white
 }
 
-#empSearch:hover {
+.popup:hover {
 	background-color: #172d44;
 }
 
-#logout_bt:hover {
-	background-color: #172d44;
-}
-
-#empSearch:visited {
-	background-color: #172d44;
-}
-
-#logout_bt:visited {
-	background-color: #172d44;
-}
-
-#myPage:hover {
-	background-color: #172d44;
-}
-
-#myPage:visited {
-	background-color: #172d44;
-}
-
-#assetChart:hover {
-	background-color: #172d44;
-}
-
-#assetChart:visited {
-	background-color: #172d44;
-}
-
-
-#setCommon:hover {
-	background-color: #172d44;
-}
-#setCommon:visited{
-	background-color: #172d44;
-}
-
-#seatSearch:hover {
-	background-color: #172d44;
-}
-#seatSearch:visited{
-	background-color: #172d44;
-}
-#mail:hover {
-	background-color: #172d44;
-}
-#mail:visited{
+.popup:hover {
 	background-color: #172d44;
 }
 
