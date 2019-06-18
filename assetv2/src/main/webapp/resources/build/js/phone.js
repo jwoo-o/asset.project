@@ -84,9 +84,6 @@
 	                    });
 	            }
         }
-        function errorMasage(e){
-        	alert(e.msg);
-        }
         /*function DeleteMgt(record){
         	
         	var data = {"empNo":record.empNo},dataStr = JSON.stringify(data);
@@ -141,7 +138,7 @@
             
             grid = $('#grid').grid({
                 primaryKey: 'no',
-                dataSource: {url:'/phone/list/proc',error:errorMasage},
+                dataSource: {url:'/phone/list/proc'},
                 uiLibrary: 'bootstrap4',
                 columns: [
                     { field: 'sub_type',title: '용도', width: 100, align: 'center' },
