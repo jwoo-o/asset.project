@@ -21,16 +21,14 @@ body {
 	color: white
 }
 
-#calendar:hover {
-			background-color: #172d44;
-}
+
 #empSearch:hover {
 	background-color: #172d44;
 }
 #logout_bt:hover {
 	background-color: #172d44;	
 }	
- #myPage:hover {	
+#myPage:hover {	
 	background-color: #172d44;	
 }	
 
