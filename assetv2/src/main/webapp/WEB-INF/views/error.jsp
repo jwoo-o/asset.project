@@ -6,8 +6,12 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 	alert("${msg}")
-	window.close();
-	window.opener.location.reload();
+	if(opener){
+		window.close();
+		window.opener.location.reload();
+	}else{
+		location.href="/"
+	}
 </script>
 </head>
 </html>
