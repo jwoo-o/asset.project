@@ -14,7 +14,7 @@
 	            $("#manager").val(e.data.record.manager)
 	            $("#tel1").val(e.data.record.tel1);
 	            $("#tel2").val(e.data.record.tel2);
-	            $("#mail").val(e.data.record.mail);
+	            $("#email").val(e.data.record.mail);
 	            $("#note").val(e.data.record.note);
 
 	            regist.open('업체 수정');
