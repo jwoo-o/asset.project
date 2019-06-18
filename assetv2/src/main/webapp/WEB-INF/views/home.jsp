@@ -50,13 +50,7 @@
 		body{
 			background: #ecf0f5;
 		}
-		#calendar:hover {
-			background-color: #172d44;
-		}
 		
-		#calendar:visited {
-			background-color: #172d44;
-}
 	</style>
 </head>
 	<body>
