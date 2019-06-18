@@ -37,7 +37,7 @@ public class CalendarController {
 	public void joinEmp(Model model) throws Exception {
 		model.addAttribute("common", cService.selCommonLst());
 	}
-	@RequestMapping(value="/calendarRgt/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/calendar/register/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> calendarRgtProc(@RequestBody CalendarVo vo,HttpSession session){
 		logger.debug(vo.toString());
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -53,7 +53,7 @@ public class CalendarController {
 		return map;
 	}
 	
-	@RequestMapping(value="/calendarMdf/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/calendar/update/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> calendarMdfProc(@RequestBody CalendarVo vo,HttpSession session){
 		logger.debug(vo.toString());
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -68,7 +68,7 @@ public class CalendarController {
 		}
 		return map;
 	}
-	@RequestMapping(value="/calendarLst/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/calendar/list/proc",method=RequestMethod.POST)
 	public @ResponseBody List<CalendarVo> calendarLstProc(){
 		List<CalendarVo> list = null;
 		try {
@@ -79,7 +79,7 @@ public class CalendarController {
 		}
 		return list;
 	}
-	@RequestMapping(value="/calendarDate/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/calendar/date/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> calendarDateProc(@RequestBody CalendarVo vo,HttpSession session){
 		logger.debug(vo.toString());
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -95,7 +95,7 @@ public class CalendarController {
 		return map;
 	}
 	
-	@RequestMapping(value="/calendarDl/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/calendar/delete/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> calendarDlProc(@RequestBody CalendarVo vo){
 		logger.debug(vo.toString());
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -109,7 +109,7 @@ public class CalendarController {
 		}
 		return map;
 	}
-	@RequestMapping(value="/calendarJoin/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/calendar/join/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> calendarJoinProc(@RequestBody CalendarJoinDto dto,HttpSession session){
 		logger.debug(dto.toString());
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -124,7 +124,7 @@ public class CalendarController {
 		}
 		return map;
 	}
-	@RequestMapping(value="/ipConfirm/proc")
+	@RequestMapping(value="/calendar/ipConfirm/proc")
 	public @ResponseBody Map<String, Object> ipConfirmProc(){
 		Map<String, Object> map = new HashMap<String,Object>();
 		try {

@@ -10,6 +10,7 @@
   	<typeAlias type="com.asset.vo.AssetDto" alias="assetDto"/>
   	<typeAlias type="com.asset.vo.AssetDownDto" alias="assetDownDto"/>
   	<typeAlias type="com.asset.vo.ChartDto" alias="chartDto"/>
+  	<typeAlias type="com.asset.vo.PhoneVo" alias="phoneVo"/>
   	<!-- 관리자 -->
   	<typeAlias type="com.asset.vo.AssetSearchDto" alias="assetSearchDto"/>
   	<typeAlias type="com.core.vo.ManagerVo" alias="managerVo"/>

@@ -26,9 +26,9 @@ var isRun = false;
     			return true;
     		}
     		function Save() {
-            	var url = '/calendarRgt/proc';
+            	var url = '/calendar/register/proc';
             	if($("#no").val()!='0'){
-            		url = '/calendarMdf/proc';
+            		url = '/calendar/update/proc';
             	}
             	if(!frmchk("#regForm")){
     				alert("빈칸없이 입력하세요.");
@@ -91,7 +91,7 @@ var isRun = false;
             		data.ext = $("#ext").val();
             		dataStr = JSON.stringify(data);
             		
-            		$.ajax({ url:'calendarJoin/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
+            		$.ajax({ url:'calendar/join/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
 	                .done(function (data) {
 	                	if(data.msg=="0001"){
 		                	empRegist.close();
@@ -133,7 +133,7 @@ var isRun = false;
     		function Delete(){
     			if (confirm('Are you sure?')) {
                 	var data = {"no":$("#no").val()},dataStr = JSON.stringify(data);
-    				 $.ajax({ url: '/calendarDl/proc', data:dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
+    				 $.ajax({ url: '/calendar/delete/proc', data:dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
     	                .done(function (data) {
     	                	if(data.msg=="0001"){
     	                		 regist.close();
@@ -157,7 +157,7 @@ var isRun = false;
     		function calendarData(){
     		
 	    		$.ajax({
-					url: '/calendarLst/proc', method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'
+					url: '/calendar/list/proc', method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'
 				}).done(function(data) {
 					if(data.msg="0001"){
 						$.each(data, function(i, elt) {
@@ -315,7 +315,7 @@ var isRun = false;
 	        	var dataStr = JSON.stringify(data);
 				$.ajax({
 	                method: 'POST',
-	                url: "/mgrSearch/proc",
+	                url: "/emp/mgrSearch/proc",
 	                dataType: "json",
 	                data:dataStr,
 	              	contentType:"application/json; charset=UTF-8"

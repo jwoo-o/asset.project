@@ -42,7 +42,7 @@
         	var dataStr = JSON.stringify(data);
 			$.ajax({
                 method: 'POST',
-                url: "/mgrSearch/proc",
+                url: "/emp/mgrSearch/proc",
                 dataType: "json",
                 data:dataStr,
               	contentType:"application/json; charset=UTF-8"
@@ -152,7 +152,7 @@
 					$("#issuer_tr").show();
 					$("#content").val()
 					$.ajax({
-						url:"/ipConfirm/proc",
+						url:"/calendar/ipConfirm/proc",
 						contentType:"application/json; charset=UTF-8",
 						dataType:"json",
 						method:"post"			

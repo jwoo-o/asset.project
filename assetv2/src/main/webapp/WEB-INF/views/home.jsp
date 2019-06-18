@@ -53,6 +53,9 @@
 		#calendar:hover {
 			background-color: #172d44;
 		}
+		#phoneBook:hover {
+			background-color: #172d44;
+		}
 	</style>
 </head>
 	<body>
@@ -77,6 +80,9 @@
 	            </li>
 	            <li style="padding-top: 2px">
 	                <a id="assetChart"  title="인원 및 자산 현황"><span class="fa fa-pie-chart na" style="color: white; font-size:large;"></span></a>
+	            </li>
+	            <li>
+	                <a id="phoneBook" title="업체 전화부"><span class="glyphicon glyphicon-earphone na" style="color: white; font-size:large;"></span></a>
 	            </li>
 	            <li>
 	                <a id="calendar" title="입사 예정"><span class="glyphicon glyphicon-calendar na" style="color: white; font-size:large;"></span></a>

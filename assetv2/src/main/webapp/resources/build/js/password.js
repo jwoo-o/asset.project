@@ -42,7 +42,7 @@
 			 			var mId = $("#mId").val();
 			 			var data = {"mId":mId,"pwd":pwd,"newPwd":newPwd},dataStr = JSON.stringify(data);
 			 			$.ajax({
-			 				url:"password/proc",
+			 				url:"/password/proc",
 			 				data:dataStr,
 			 				dataType:"json",
 			 				contentType:"application/json; charset=utf-8",

@@ -46,7 +46,7 @@
 				
 				var x = 600;
 				var y = 825;
-				var url = '/register';
+				var url = '/asset/register';
 				var title = 'Asset Register';
 				
 				popup(url, title, x, y);
@@ -59,7 +59,14 @@
 			    
 			    popup(url,title,x,y);
 			})
-			
+			$("#phoneBook").click(function() {
+				var x = 1000;
+				var y = 900;
+				var title='Phone Search';
+				var url = '/phoneBook';
+				
+				popup(url, title, x, y);
+			})
 			
 			$("#empSearch").click(function() {
 				var x = 1000;
@@ -74,7 +81,7 @@
 				var x = 800;
 				var y = 800;
 				var title='Chart Search';
-				var url = '/chart';
+				var url = '/asset/chart';
 				
 				popup(url, title, x, y);
 				
@@ -130,7 +137,7 @@
 					$("#sort").val(s);
 					$("#key").val(k);
 					$("#asset_search").serialize();
-					$("#asset_search").attr("action", "/excelDownload");
+					$("#asset_search").attr("action", "/excel/download");
 					$("#asset_search").attr("method","post");
 					$("#asset_search").submit();
 					
@@ -145,7 +152,7 @@
 				var data = $("#asset_search").serializeObject(),dataStr = JSON.stringify(data);
 				
 				$.ajax({
-					url:"/list/proc",
+					url:"/asset/list/proc",
 					method: "post",
 					dataType: "json",
 					data : dataStr,
@@ -182,7 +189,7 @@
 							$("#view").append(tag);
 							$("#view").find("tr").click(function() {
 									var tds = $(this).find("td");
-									var url = '/detail?aNo='+$(tds[0]).html();
+									var url = '/asset/detail?aNo='+$(tds[0]).html();
 									var x = 600;
 									var y = 860;
 									var title = 'Asset Modify';

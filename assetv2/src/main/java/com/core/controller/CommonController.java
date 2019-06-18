@@ -63,7 +63,7 @@ public class CommonController {
 		}
 		return map;
 	}
-	@RequestMapping(value="/common/write")
+	@RequestMapping(value="/common/register")
 	public String commonWrite(Model model,String grpC) throws Exception{
 		logger.debug(grpC);
 		if(grpC!="" && grpC!=null) {
@@ -73,7 +73,7 @@ public class CommonController {
 		return "commonRegister";
 		
 	}
-	@RequestMapping(value="/common/write/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/common/register/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> commonWriteProc(@RequestBody CmcdGrpmVo vo,HttpSession session){
 		logger.debug(vo.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -89,7 +89,7 @@ public class CommonController {
 		return map;
 	}
 	
-	@RequestMapping(value="/common/subWrite/proc")
+	@RequestMapping(value="/common/subRegister/proc")
 	public @ResponseBody Map<String, Object> commonSubWriteProc(@RequestBody List<CmcdDtlmDto> list,HttpSession session){
 		
 		for(CmcdDtlmDto dto : list) {
@@ -123,6 +123,5 @@ public class CommonController {
 		return map;
 		
 	}
-	@RequestMapping(value="/seat")
-	public void seat() {}
+	
 }
