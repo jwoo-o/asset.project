@@ -73,7 +73,10 @@
             <div class="form-group">
                 <label for="type">구분</label>
                 <select class="form-control" id="type" name="type">
-                	
+                	<option value="">선택</option>
+                	<c:forEach items="${common.phone_type}" var="type">
+                		<option value="${type.cCode}">${type.cName}</option>
+   					</c:forEach>
                 </select>
             </div>
             <div class="form-group">
