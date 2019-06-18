@@ -6,10 +6,12 @@ public class PhoneVo {
 	private String type;
 	private String sub_type;
 	private String company_name;
+	private String manager;
 	private String tel1;
 	private String tel2;
 	private String email;
 	private String note;
+	private String status;
 	
 	/**최초등록작업자이름*/
 	private String fstRgtWkrNm;
@@ -43,6 +45,12 @@ public class PhoneVo {
 	public void setCompany_name(String company_name) {
 		this.company_name = company_name;
 	}
+	public String getManager() {
+		return manager;
+	}
+	public void setManager(String manager) {
+		this.manager = manager;
+	}
 	public String getTel1() {
 		return tel1;
 	}
@@ -66,6 +74,12 @@ public class PhoneVo {
 	}
 	public void setNote(String note) {
 		this.note = note;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public String getFstRgtWkrNm() {
 		return fstRgtWkrNm;
@@ -94,10 +108,14 @@ public class PhoneVo {
 	@Override
 	public String toString() {
 		return "PhoneVo [no=" + no + ", type=" + type + ", sub_type=" + sub_type + ", company_name=" + company_name
-				+ ", tel1=" + tel1 + ", tel2=" + tel2 + ", email=" + email + ", note=" + note + ", fstRgtWkrNm="
-				+ fstRgtWkrNm + ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm=" + lstMdfWkrNm + ", lstMdfDtm=" + lstMdfDtm
-				+ "]";
+				+ ", manager=" + manager + ", tel1=" + tel1 + ", tel2=" + tel2 + ", email=" + email + ", note=" + note
+				+ ", status=" + status + ", fstRgtWkrNm=" + fstRgtWkrNm + ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm="
+				+ lstMdfWkrNm + ", lstMdfDtm=" + lstMdfDtm + "]";
 	}
+	
+	
+	
+	
 	
 	
 	

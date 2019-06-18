@@ -146,7 +146,7 @@
                     { field: 'manager', title: '담당자', sortable: true, align: 'center' },
                     { field: 'tel1', title: '연락처', sortable: true, align: 'center' },
                     { field: 'email', title: '이메일', sortable: true, align: 'center' },
-                    { field: 'note', title: '비고', width: 70, align: 'center' },
+                    { field: 'status', title: '상태', width: 70, align: 'center' },
                     { title: '', field: 'Edit', width: 42, type: 'icon', icon: 'fa fa-pencil', tooltip: 'Edit', events: { 'click': Edit } },
                     { title: '', field: 'Delete', width: 42, type: 'icon', icon: 'fa fa-remove', tooltip: 'Delete', events: { 'click': Delete } }
                 ],
