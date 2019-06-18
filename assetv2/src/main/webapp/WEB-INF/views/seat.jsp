@@ -311,7 +311,7 @@ var popup;
 			var data = {"search":''}
 			var dataStr = JSON.stringify(data);
 			$.ajax({
-				url:"empSeat/proc",
+				url:"/seat/list/proc",
 				dataType:"json",
 				data:dataStr,
 				contentType:"application/json; charset=utf-8",

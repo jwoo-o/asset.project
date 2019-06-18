@@ -37,7 +37,7 @@ public class EmpController {
 	private EmpService service;
 	@Inject CommonServie cService;
 	
-	@RequestMapping(value="/empSC/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/emp/assetSearch/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> searchEmp(@RequestBody EmpDto dto){
 		logger.debug(dto.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -57,7 +57,7 @@ public class EmpController {
 		model.addAttribute("common", cService.selCommonLst());
 		return "manager";
 	}
-	@RequestMapping(value="/empLst/proc")
+	@RequestMapping(value="/emp/list/proc")
 	public @ResponseBody Map<String,Object> empLst(SearchDto dto) {
 		logger.debug(dto.toString());
 		Map<String,Object> map = null;
@@ -71,7 +71,7 @@ public class EmpController {
 	}
 	
 	
-	@RequestMapping(value="/empRgt/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/emp/register/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> empRstProc(@RequestBody EmpVo vo) {
 		logger.debug(vo.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -85,7 +85,7 @@ public class EmpController {
 		}
 		return map;
 	}
-	@RequestMapping(value="/empMdf/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/emp/update/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> empMdfProc(@RequestBody EmpVo vo,HttpSession session) {
 		logger.debug(vo.toString());
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
@@ -100,7 +100,7 @@ public class EmpController {
 		}
 		return map;
 	}
-	@RequestMapping(value="/empDl/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/emp/delete/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> empDlProc(@RequestBody EmpVo vo,HttpSession session) {
 		logger.debug(vo.toString());
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
@@ -116,14 +116,8 @@ public class EmpController {
 		}
 		return map;
 	}
-	@RequestMapping(value="/empDtl")
-	public String empDtl(String empNo,Model model) throws Exception {
-		
-		model.addAttribute("vo", service.selGetEmp(empNo));
-		return "emp";
-	}
 	
-	@RequestMapping(value="/mgrSearch/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/emp/mgrSearch/proc",method=RequestMethod.POST)
 	public @ResponseBody List<EmpVo> mgrSearchProc(@RequestBody CalendarVo vo){
 		logger.debug(vo.toString());
 		List<EmpVo> list = new ArrayList<EmpVo>();
@@ -136,7 +130,10 @@ public class EmpController {
 		}
 		return list;
 	}
-	@RequestMapping(value="/empSeat/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/seat")
+	public void seat() {}
+	
+	@RequestMapping(value="/seat/list/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String,Object> empSeatProc(@RequestBody SearchDto dto) {
 		logger.debug(dto.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -150,7 +147,7 @@ public class EmpController {
 		}
 		return map;
 	}
-	@RequestMapping(value="/empImgUld/proc")
+	@RequestMapping(value="/emp/imgUpload/proc")
 	public @ResponseBody Map<String, Object> empImgUldProc(@RequestParam(value="profile",required=false)MultipartFile profile,String empNo,String original_name){
 		logger.debug("file name : "+profile.getOriginalFilename()+", empNo : "+empNo+", original_name : "+original_name);
 		ProfileDto dto = new ProfileDto();

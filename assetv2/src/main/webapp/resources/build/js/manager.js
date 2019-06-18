@@ -55,7 +55,7 @@
 	            var data = $("#regForm").serializeObject(),dataStr = JSON.stringify(data); 
 	               
 	            
-	            $.ajax({ url: '/empRgt/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
+	            $.ajax({ url: '/emp/register/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
 	                .done(function (data) {
 	                	if(data.msg=="0001"){
 	                		regist.close();
@@ -78,7 +78,7 @@
         
         function Revise() {
             var data = $("#mdfForm").serializeObject(), dataStr = JSON.stringify(data);
-            $.ajax({ url: '/empMdf/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
+            $.ajax({ url: '/emp/update/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
                 .done(function (data) {
                 	if(data.msg=="0001"){
                 		modify.close();
@@ -101,7 +101,7 @@
         	data.append("profile",$("input[name=profile]")[0].files[0]);
         	data.append("empNo",$("#eempNo").val());
         	data.append("original_name",$("#original_name").val());
-        	$.ajax({url:'/empImgUld/proc',data:data,type:'post',contentType:false,dataType: "json",processData:false})
+        	$.ajax({url:'/emp/imgUpload/proc',data:data,type:'post',contentType:false,dataType: "json",processData:false})
         	.done(function(data) {
         		if(data.msg!="0001"){
         			alert(data.msg);
@@ -123,7 +123,7 @@
         	if($("#mgrAuth").val()!=0){
 	            if (confirm('Are you sure?')) {
 	            	var data = { empNo: e.data.id,name: e.data.record.name,manager:e.data.record.manager }, dataStr = JSON.stringify(data);
-	                $.ajax({ url: '/empDl/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
+	                $.ajax({ url: '/emp/delete/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
 	                    .done(function (data) {
 	                    	if(data.msg=="0001"){
 	                    		 grid.reload();
@@ -214,7 +214,7 @@
             
             grid = $('#grid').grid({
                 primaryKey: 'empNo',
-                dataSource: {url:'/empLst/proc'},
+                dataSource: {url:'/emp/list/proc'},
                 uiLibrary: 'bootstrap4',
                 columns: [
                     { field: 'empNo',title: '사번', width: 100, align: 'center' },
@@ -347,7 +347,7 @@
             		$("#managerDiv").hide();
             		
             		var data = {"empNo":$("#eempNo").val()},dataStr = JSON.stringify(data);
-               	 	$.ajax({ url: '/managerDl/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
+               	 	$.ajax({ url: '/manager/delete/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
                     .done(function (data) {
 	                   	 if(data.msg=='0001'){
 	                    	alert("계정 삭제 완료");                    	

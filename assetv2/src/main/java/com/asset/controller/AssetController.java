@@ -49,7 +49,7 @@ public class AssetController {
 		
 	}
 	/**자산 리스트 검색*/
-	@RequestMapping(value = "/list/proc", method = RequestMethod.POST)
+	@RequestMapping(value = "/asset/list/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetLst(@RequestBody AssetSearchDto dto) {
 		logger.debug(dto.toString());
 		
@@ -66,12 +66,13 @@ public class AssetController {
 		return map;
 	}
 	/***/
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public void assetRst(Model model) throws Exception{
+	@RequestMapping(value = "asset/register", method = RequestMethod.GET)
+	public String assetRst(Model model) throws Exception{
 		model.addAttribute("common",cService.selCommonLst());
+		return "register";
 	}
 
-	@RequestMapping(value = "/register/proc", method = RequestMethod.POST)
+	@RequestMapping(value = "asset/register/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetRst(@RequestBody AssetVo vo, HttpSession session) {
 		logger.debug(vo.toString());
 		
@@ -89,7 +90,7 @@ public class AssetController {
 
 	}
 
-	@RequestMapping("/detail")
+	@RequestMapping("asset/detail")
 	public String assetDtl(@RequestParam int aNo, Model model)throws Exception {
 		AssetDto dto = new AssetDto();
 		dto.setaNo(aNo);
@@ -99,7 +100,7 @@ public class AssetController {
 		return "/register";
 	}
 
-	@RequestMapping(value = "/update/proc", method = RequestMethod.POST)
+	@RequestMapping(value = "asset/update/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetMdf(@RequestBody AssetVo vo, HttpSession session) {
 		logger.debug(vo.toString());
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
@@ -115,7 +116,7 @@ public class AssetController {
 		return map;
 	}
 
-	@RequestMapping(value = "/delete/proc", method = RequestMethod.POST)
+	@RequestMapping(value = "asset/delete/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetDl(@RequestBody AssetDto dto, HttpSession session) {
 		
 		logger.debug(dto.toString());
@@ -131,7 +132,7 @@ public class AssetController {
 		}
 		return map;
 	}
-	@RequestMapping(value = "/deleteY/proc", method = RequestMethod.POST)
+	@RequestMapping(value = "asset/deleteY/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetDlY(@RequestBody AssetDto dto) {
 
 		logger.debug(dto.toString());
@@ -146,7 +147,7 @@ public class AssetController {
 		}
 		return map;
 	}
-	@RequestMapping(value="/assetNoSearch/proc",method = RequestMethod.POST)
+	@RequestMapping(value="asset/assetNoSearch/proc",method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetNo(@RequestBody String category){
 		logger.debug(category);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -160,11 +161,11 @@ public class AssetController {
 		}
 		return map;
 	}
-	@RequestMapping("/chart")
+	@RequestMapping("/asset/chart")
 	public String chartView() {
 		return "chart";
 	}
-	@RequestMapping(value="/chart/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/asset/chart/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> chartData(@RequestBody ChartDto dto) {
 		logger.debug(dto.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
