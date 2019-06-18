@@ -100,8 +100,8 @@
                 <input type="text" class="form-control" id="tel2" name="tel2">
             </div>
              <div class="form-group">
-                <label for="mail">이메일</label>
-                <input type="text" class="form-control" id="mail" name="mail">
+                <label for="email">이메일</label>
+                <input type="text" class="form-control" id="email" name="mail">
             </div>
              <div class="form-group">
                 <label for="note">비고</label>
