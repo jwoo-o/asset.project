@@ -12,6 +12,7 @@
     	tel1,
     	tel2,
     	email,
+    	manager,
     	note,
     	status,
     	fstRgtWkrNm,

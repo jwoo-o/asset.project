@@ -17,14 +17,15 @@ public class PhoneDao {
 	@Inject
 	private SqlSession session;
 	
-	public List<PhoneVo> selectCount(SearchDto dto) throws SQLException {
-		// TODO Auto-generated method stub
-		return session.selectList("phone.list",dto);
-	}
-
-	public int selectList(SearchDto dto) throws SQLException {
+	public int selectCount(SearchDto dto) throws SQLException {
 		// TODO Auto-generated method stub
 		return session.selectOne("phone.count",dto);
+		
+	}
+
+	public List<PhoneVo> selectList(SearchDto dto) throws SQLException {
+		// TODO Auto-generated method stub
+		return session.selectList("phone.list",dto);
 	}
 
 	public void insert(PhoneVo vo) throws SQLException {
