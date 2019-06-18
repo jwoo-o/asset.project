@@ -101,7 +101,7 @@
             </div>
              <div class="form-group">
                 <label for="email">이메일</label>
-                <input type="text" class="form-control" id="email" name="mail">
+                <input type="text" class="form-control" id="email" name="email">
             </div>
              <div class="form-group">
                 <label for="note">비고</label>
