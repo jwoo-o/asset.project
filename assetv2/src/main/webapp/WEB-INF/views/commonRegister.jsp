@@ -207,6 +207,10 @@ body {
 		
 		
 		$("#btnUpd").on('click', function() {
+			if($("#tGrpC").val()=="" || grpCNm.val()==""){
+				alert("그룹코드와 그룹코드명은 필수 사항입니다.");
+				return false;
+			}
 		 	if($("#vldStC").val()=="C"){
 				$("#grpC").val($("#tGrpC").val());
 		 	}else if($("#vldStC").val()=="U"){
@@ -214,7 +218,7 @@ body {
 		 	}
 			var data = $("#formInput").serializeObject(),dataStr = JSON.stringify(data);
 			$.ajax({
-				url:"<c:url value='/common/write/proc'/>",
+				url:"<c:url value='/common/register/proc'/>",
 				contentType:"application/json; charset=utf-8",
 				dataType:"json",
 				method:"post",
@@ -244,7 +248,7 @@ body {
 			
 			$.ajax({
 				url:"<c:url value='/common/delete/proc'/>",
-				//contentType:"application/json; charset=utf-8",
+				contentType:"application/json; charset=utf-8",
 				dataType:"json",
 				method:"post",
 				data:dataStr
@@ -369,7 +373,7 @@ body {
 			}
 			
 			$.ajax({
-		   		url : "<c:url value='/common/subWrite/proc'/>"
+		   		url : "<c:url value='/common/subRegister/proc'/>"
 				, method : "post"
 		   		, dataType : "json"
 		   		, data : JSON.stringify(data)

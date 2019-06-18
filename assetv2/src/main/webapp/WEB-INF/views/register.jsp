@@ -10,10 +10,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GIOSIS MANAGER</title>
-    <link href="css/style.css" rel="stylesheet" type="text/css">
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -28,7 +28,7 @@
 			
 			var assetNo;
 			//var mInch = $('<tr height="22" id="inch"><td class="tdBack" align="left" width="15%"><strong class="list_title">종류</strong></td><td align="left">&nbsp;<select class="SelectBox" id="mInch" name="mInch"><option value="">선택하세요</option><option value="0">none</option><option value="1">17인치</option><option value="2">19인치</option><option value="3">24인치</option><option value="4">27인치</option></select></td></tr>');
-			var url='/register/proc';
+			var url='/asset/register/proc';
 			if("${vo.assetNo}"!=""){
 				
 				$("#category").val("${vo.category}").prop("selected", true);
@@ -54,7 +54,7 @@
 					$("#position option").not(":selected").remove();
 					$("#division option").not(":selected").remove();
 				}
-				url = '/update/proc' 
+				url = '/asset/update/proc' 
 			}else{
 				$("#buying").datepicker();
 			}
@@ -69,7 +69,7 @@
 					$("#assetNo").val("");
 				}else{
 					$.ajax({
-						url:"/assetNoSearch/proc",
+						url:"/asset/noSearch/proc",
 						dataType:"json",
 						method:"post",
 						data:category,
@@ -100,14 +100,14 @@
 			
 			
 			$("#deleteBt").click(function() {
-				var url = "/delete/proc";
+				var url = "/asset/delete/proc";
 				if($("#status").val()=="d"){
 					var result = confirm('Are you sure?'); 
 					
 					if(!result) { 
 						return false;	
 					} else {
-						url = "/deleteY/proc";
+						url = "/asset/deleteY/proc";
 					}
 				}
 				
@@ -177,6 +177,14 @@
 					$.empSearch();
 					
 			})
+			$("#btnLocation").click(function() {
+				var x = 2000;
+			 	var y = 1000;
+				var url = '/seat';
+				var title = 'Seat Search';
+				    
+				    popup(url,title,x,y);
+			})
 			$("#userName").keypress(function(e) {
 				if("${mgr.auth}"!=0){
 					if(e.which==13)
@@ -191,7 +199,7 @@
 				
 				
 				$.ajax({
-					url:"/empSC/proc",
+					url:"/emp/assetSearch/proc",
 					method:"post",
 					dataType:"json",
 					data:dataStr,

@@ -122,7 +122,7 @@
 		                    		 grpC = val;
 		                     	tag += '<td align="center">'+val+'</td>'
 		                     })
-		                     tag += '<td align="center"><a href="/common/write?grpC='+grpC+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a></td></tr>';
+		                     tag += '<td align="center"><a href="/common/register?grpC='+grpC+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a></td></tr>';
 		               })
 			 		}else{
 			 			tag += '<tr height="18"><td align="center" colspan="6">NO DATA</td></tr>';
@@ -157,7 +157,7 @@
 			 	
 			})
 			$("#btnReg").on('click', function() {
-			   location.href='/common/write';
+			   location.href='/common/register';
 			})
 			$("#btnNext").on('click', function() {
 			 		

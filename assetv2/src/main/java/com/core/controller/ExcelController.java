@@ -28,7 +28,7 @@ public class ExcelController {
 	@Inject
 	private AssetService service;
 	
-	@RequestMapping(value="/excelDownload",method=RequestMethod.POST)
+	@RequestMapping(value="/excel/download",method=RequestMethod.POST)
 	public String excelForm(AssetSearchDto dto,HttpServletResponse response,Map<String, Object> map) {
 		logger.debug(dto.toString());
 		Date date = new Date();

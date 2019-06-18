@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="phone">
+  <select id="list" resultType="phoneVo">
+    	select 
+    	no,
+    	(select DTL_C_NM from CMCDDTLM c where c.GRP_C='phone_type' and c.DTL_C=type) as type,
+    	sub_type,
+    	company_name,
+    	tel1,
+    	tel2,
+    	email,
+    	note,
+    	status,
+    	fstRgtWkrNm,
+    	fstRgtDtm,
+    	lstMdfWkrNm,
+    	lstMdfDtm
+        from phone
+        <where>
+        	<if test="search!=null and search!='' and keyword!=null and keyword!=''">
+	        	<choose>
+	        		<when test="keyword=='name'">
+	        			${keyword} like concat('%',#{search},'%')
+	        		</when>
+	        		<otherwise>
+	        			${keyword}=#{search}
+	        		</otherwise>
+	        	</choose>
+        	</if>
+        </where>
+        <choose>
+        	<when test="sortBy!= null and sortBy!=''">
+        	order by ${sortBy} ${direction}
+        	</when>
+        	<otherwise>
+        	order by no asc
+        	</otherwise>
+        </choose>
+        <if test="limit!=0">
+         limit ${page},${limit}
+        </if>
+       
+  </select>
+  <insert id="insert">
+  	insert into phone (type,sub_type,company_name,manager,tel1,tel2,mail,note,fstRgtWkrNm,fstRgtDtm,lstMdfWkrNm,lstMdfDtm) values(#{type},#{sub_type},#{company_name},#{manager},#{tel1},#{tel2},#{mail},#{note},#{fstRgtWkrNm},now(),#{lstMdfWkrNm},now())
+  </insert>
+  <update id="update">
+  	update phone set type=#{type},sub_type=#{sub_type},company_name=#{company_name},manager=#{manager},tel1=#{tel1},tel2=#{tel2},mail=#{mail},note=#{note},lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where no=#{no}
+  </update>
+  <update id="delete">
+  	update phone set status='n',lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where no=#{no}
+  </update>
+  <select id="count" resultType="int">
+  	select count(*) from phone
+  	<where>
+        	<if test="search!=null and search!='' and keyword!=null and keyword!=''">
+	        	<choose>
+	        		<when test="keyword=='name'">
+	        			${keyword} like concat('%',#{search},'%')
+	        		</when>
+	        		<otherwise>
+	        			${keyword}=#{search}
+	        		</otherwise>
+	        	</choose>
+        	</if>
+        </where>
+  </select>
+</mapper>
