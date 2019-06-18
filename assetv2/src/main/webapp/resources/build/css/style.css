@@ -21,14 +21,31 @@ body {
 	color: white
 }
 
-.popup:hover {
+#calendar:hover {
+			background-color: #172d44;
+}
+#empSearch:hover {
 	background-color: #172d44;
 }
+#logout_bt:hover {
+	background-color: #172d44;	
+}	
+ #myPage:hover {	
+	background-color: #172d44;	
+}	
 
-.popup:hover {
-	background-color: #172d44;
-}
-
+#assetChart:hover {	
+	background-color: #172d44;	
+}	
+ #setCommon:hover {	
+	background-color: #172d44;	
+}	
+#seatSearch:hover {	
+	background-color: #172d44;	
+}	
+#mail:hover {	
+	background-color: #172d44;	
+}	
 /* Layout */
 .wrapper {
 	min-height: 100%;
