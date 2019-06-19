@@ -66,13 +66,13 @@ public class AssetController {
 		return map;
 	}
 	/***/
-	@RequestMapping(value = "asset/register", method = RequestMethod.GET)
+	@RequestMapping(value = "/asset/register", method = RequestMethod.GET)
 	public String assetRst(Model model) throws Exception{
 		model.addAttribute("common",cService.selCommonLst());
 		return "register";
 	}
 
-	@RequestMapping(value = "asset/register/proc", method = RequestMethod.POST)
+	@RequestMapping(value = "/asset/register/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetRst(@RequestBody AssetVo vo, HttpSession session) {
 		logger.debug(vo.toString());
 		
@@ -90,7 +90,7 @@ public class AssetController {
 
 	}
 
-	@RequestMapping("asset/detail")
+	@RequestMapping("/asset/detail")
 	public String assetDtl(@RequestParam int aNo, Model model)throws Exception {
 		AssetDto dto = new AssetDto();
 		dto.setaNo(aNo);
@@ -100,7 +100,7 @@ public class AssetController {
 		return "/register";
 	}
 
-	@RequestMapping(value = "asset/update/proc", method = RequestMethod.POST)
+	@RequestMapping(value = "/asset/update/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetMdf(@RequestBody AssetVo vo, HttpSession session) {
 		logger.debug(vo.toString());
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
@@ -116,7 +116,7 @@ public class AssetController {
 		return map;
 	}
 
-	@RequestMapping(value = "asset/delete/proc", method = RequestMethod.POST)
+	@RequestMapping(value = "/asset/delete/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetDl(@RequestBody AssetDto dto, HttpSession session) {
 		
 		logger.debug(dto.toString());
@@ -132,7 +132,7 @@ public class AssetController {
 		}
 		return map;
 	}
-	@RequestMapping(value = "asset/deleteY/proc", method = RequestMethod.POST)
+	@RequestMapping(value = "/asset/deleteY/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetDlY(@RequestBody AssetDto dto) {
 
 		logger.debug(dto.toString());
@@ -147,7 +147,7 @@ public class AssetController {
 		}
 		return map;
 	}
-	@RequestMapping(value="asset/assetNoSearch/proc",method = RequestMethod.POST)
+	@RequestMapping(value="/asset/noSearch/proc",method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetNo(@RequestBody String category){
 		logger.debug(category);
 		Map<String, Object> map = new HashMap<String, Object>();
