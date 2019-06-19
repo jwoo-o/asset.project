@@ -6,7 +6,8 @@
   <select id="list" resultType="phoneVo">
     	select 
     	no,
-    	(select DTL_C_NM from CMCDDTLM c where c.GRP_C='phone_type' and c.DTL_C=type) as type,
+    	(select DTL_C_NM from CMCDDTLM c where c.GRP_C='phone_type' and c.DTL_C=type) as type_name,
+    	type,
     	sub_type,
     	company_name,
     	tel1,
