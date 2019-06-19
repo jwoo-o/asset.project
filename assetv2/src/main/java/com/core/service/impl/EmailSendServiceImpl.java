@@ -30,26 +30,16 @@ public class EmailSendServiceImpl implements EmailSendService {
 	public void emailSendProc(String subject, String content, String from, List<String> rcvEmlAddr, String rcvNm,
 			String wkrId) throws Exception {
 		// TODO Auto-generated method stub
-		try{
-			// 이메일 발송
+		
 			for (String toAddr : rcvEmlAddr) {
 				sendEml(subject, content,from, toAddr+"@qoo10.com");
 			}
-		}catch(MailException e){
-			logger.error(e.getMessage(), e);
-			
-		}
 	}
 	@Override
 	public void emailGrpSendProc(String subject, String content, String from, String[] to, String[] cc)
 			throws Exception {
 		
-		try {
 			sendGrpEml(subject, content, from, to, cc);
-		}catch (Exception e) {
-			// TODO: handle exception
-			logger.error(e.getMessage(), e);
-		}
 		
 	}
 	

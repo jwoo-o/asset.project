@@ -141,16 +141,15 @@
                 dataSource: {url:'/phone/list/proc'},
                 uiLibrary: 'bootstrap4',
                 columns: [
-                    { field: 'no',title: 'No', width: 50, align: 'center' },
-                    { field: 'sub_type',title: '용도', width: 130, align: 'center' },
-                    { field: 'company_name',title: '업체명',sortable: true, align: 'center' },
-                    { field: 'manager', title: '담당자',width: 100, sortable: true, align: 'center' },
+                    { field: 'sub_type',title: '용도',sortable: true, align: 'center' },
+                    { field: 'company_name',title: '업체명', align: 'center' },
+                    { field: 'manager', title: '담당자',width: 200, sortable: true, align: 'center' },
                     { field: 'tel1', title: '연락처', sortable: true, align: 'center' },
                     { field: 'email', title: '이메일', sortable: true, align: 'center' },
-                    { field: 'status', title: '상태', width: 50, align: 'center' },
-                    { title: '', field: 'Edit', width: 42, type: 'icon', icon: 'fa fa-pencil', tooltip: 'Edit', events: { 'click': Edit } },
+                    { field: 'note', title: '상태', align: 'center' },
                     { title: '', field: 'Delete', width: 42, type: 'icon', icon: 'fa fa-remove', tooltip: 'Delete', events: { 'click': Delete } }
                 ],
+                grouping: { groupBy : 'type_name'},
                 pager: { limit: 10, sizes: [10, 20, 50] }
             });
             

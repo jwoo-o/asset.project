@@ -4,6 +4,7 @@ public class PhoneVo {
 
 	private int no;
 	private String type;
+	private String type_name;
 	private String sub_type;
 	private String company_name;
 	private String manager;
@@ -21,6 +22,14 @@ public class PhoneVo {
 	private String lstMdfWkrNm;
 	/**최종변경일시*/
 	private String lstMdfDtm;
+	
+	
+	public String getType_name() {
+		return type_name;
+	}
+	public void setType_name(String type_name) {
+		this.type_name = type_name;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -107,16 +116,12 @@ public class PhoneVo {
 	}
 	@Override
 	public String toString() {
-		return "PhoneVo [no=" + no + ", type=" + type + ", sub_type=" + sub_type + ", company_name=" + company_name
-				+ ", manager=" + manager + ", tel1=" + tel1 + ", tel2=" + tel2 + ", email=" + email + ", note=" + note
-				+ ", status=" + status + ", fstRgtWkrNm=" + fstRgtWkrNm + ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm="
-				+ lstMdfWkrNm + ", lstMdfDtm=" + lstMdfDtm + "]";
+		return "PhoneVo [no=" + no + ", type=" + type + ", type_name=" + type_name + ", sub_type=" + sub_type
+				+ ", company_name=" + company_name + ", manager=" + manager + ", tel1=" + tel1 + ", tel2=" + tel2
+				+ ", email=" + email + ", note=" + note + ", status=" + status + ", fstRgtWkrNm=" + fstRgtWkrNm
+				+ ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm=" + lstMdfWkrNm + ", lstMdfDtm=" + lstMdfDtm + "]";
 	}
-	
-	
-	
-	
-	
+
 	
 	
 	
