@@ -14,7 +14,7 @@
 	            $("#manager").val(e.data.record.manager)
 	            $("#tel1").val(e.data.record.tel1);
 	            $("#tel2").val(e.data.record.tel2);
-	            $("#email").val(e.data.record.mail);
+	            $("#email").val(e.data.record.email);
 	            $("#note").val(e.data.record.note);
 
 	            regist.open('업체 수정');
@@ -141,21 +141,19 @@
                 dataSource: {url:'/phone/list/proc'},
                 uiLibrary: 'bootstrap4',
                 columns: [
-                    { field: 'sub_type',title: '용도',sortable: true, align: 'center' },
+                    { field: 'sub_type',title: '용도', align: 'center' },
                     { field: 'company_name',title: '업체명', align: 'center' },
-                    { field: 'manager', title: '담당자',width: 200, sortable: true, align: 'center' },
-                    { field: 'tel1', title: '연락처', sortable: true, align: 'center' },
-                    { field: 'email', title: '이메일', sortable: true, align: 'center' },
-                    { field: 'note', title: '상태', align: 'center' },
+                    { field: 'manager', title: '담당자',width: 200,  align: 'center' },
+                    { field: 'tel1', title: '연락처',  align: 'center' },
+                    { field: 'email', title: '이메일', align: 'center' },
+                    { field: 'note', title: '참고', align: 'center' },
+                    { title: '', field: 'Edit', width: 42, type: 'icon', icon: 'fa fa-pencil', tooltip: 'Edit', events: { 'click': Edit } },
                     { title: '', field: 'Delete', width: 42, type: 'icon', icon: 'fa fa-remove', tooltip: 'Delete', events: { 'click': Delete } }
                 ],
                 grouping: { groupBy : 'type_name'},
                 pager: { limit: 10, sizes: [10, 20, 50] }
             });
             
-
-            
-
 
             regist = $('#regist').dialog({
                 uiLibrary: 'bootstrap4',

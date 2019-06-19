@@ -22,7 +22,8 @@
     	lstMdfDtm
         from phone
         <where>
-        	<if test="search!=null and search!='' and keyword!=null and keyword!=''">
+        	<choose>
+        		<when test="search!=null and search!='' and keyword!=null and keyword!=''">
 	        	<choose>
 	        		<when test="keyword=='name'">
 	        			${keyword} like concat('%',#{search},'%')
@@ -31,14 +32,20 @@
 	        			${keyword}=#{search}
 	        		</otherwise>
 	        	</choose>
-        	</if>
+        		</when>
+        		<otherwise>
+        			status='y'
+        		</otherwise>
+        	</choose>
+        	
+        	
         </where>
         <choose>
         	<when test="sortBy!= null and sortBy!=''">
         	order by ${sortBy} ${direction}
         	</when>
         	<otherwise>
-        	order by no asc
+        	order by type asc,sub_type asc
         	</otherwise>
         </choose>
         <if test="limit!=0">
