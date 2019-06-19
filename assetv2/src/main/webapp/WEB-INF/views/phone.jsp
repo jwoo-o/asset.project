@@ -47,8 +47,6 @@
                 	<select id="keyword" class="form-control mb-2 mr-sm-2 mb-sm-0">
                 		<option value="">선택</option>
                 		<option value="type">구분</option>
-                		<option value="sub_type">용도</option>
-                		<option value="company_name">업체명</option>
                 		<option value="status">상태</option>
                 	</select>
                 	<span id="s"></span>
