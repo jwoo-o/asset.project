@@ -71,6 +71,16 @@ var isRun = false;
             	}
             }
     		function Success(){
+    			email_re= /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    			ext_re = /^[0-9]+$/;
+    			if(!email_re.test($("#email").val())){
+    				alert("올바른 이메일을 입력하세요.");
+    				return false;
+    			}
+    			if(!ext_re.test($("#ext").val())){
+    				alert("올바른 내선번호를 입력하세요");
+    				return false;
+    			}
     			if(!frmchk("#empForm")){
     				alert("빈칸없이 입력하세요.");
             	}else{
