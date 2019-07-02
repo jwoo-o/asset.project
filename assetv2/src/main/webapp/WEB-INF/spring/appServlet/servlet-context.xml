@@ -75,7 +75,7 @@
 			<exclude-mapping path="/" />
 			<exclude-mapping path="/logout" />
 			<exclude-mapping path="/seat" />
-			<exclude-mapping path="/empSeat/proc" />
+			<exclude-mapping path="/seat/list/proc" />
 			<beans:ref bean="authenticationInterceptor" />
 		</interceptor>
 	</interceptors>
