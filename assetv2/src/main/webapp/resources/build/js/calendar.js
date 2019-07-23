@@ -205,19 +205,7 @@ var isRun = false;
 						$("#division").val(event.division);
 						$("#addNrein").val(event.addNrein);
 						$("#mgr").tagit("removeAll");
-						if(event.joinYN=='n'){
-							$("#btnSave").show();
-							$("#btnJoin").show();
-							$("#btnDelete").show();
-							$("#regForm").find("input").prop("readonly",false);
-							$("#mgr").tagit({readOnly: false});
-							$("#seat").show();
-							$("#division").removeAttr("disabled");
-							$("#addNrein").removeAttr("disabled");
-							for(i=0;i<mgr.length;i++){
-								$("#mgr").tagit("createTag", mgr[i],mgr_email[i]);
-							}
-						}else{
+						if(mgr_data=="" || event.joinYN=='y'){
 							$("#btnSave").hide();
 							$("#btnJoin").hide();
 							$("#btnDelete").hide();
@@ -229,7 +217,19 @@ var isRun = false;
 							for(i=0;i<mgr.length;i++){							
 								$("#mgr").tagit("createTag",mgr[i],mgr_email[i]);			
 							}							
-						}						
+						}else{
+							$("#btnSave").show();
+							$("#btnJoin").show();
+							$("#btnDelete").show();
+							$("#regForm").find("input").prop("readonly",false);
+							$("#mgr").tagit({readOnly: false});
+							$("#seat").show();
+							$("#division").removeAttr("disabled");
+							$("#addNrein").removeAttr("disabled");
+							for(i=0;i<mgr.length;i++){
+								$("#mgr").tagit("createTag", mgr[i],mgr_email[i]);
+							}						
+						}
 						$("#name").val(event.name);
 						$("#no").val(event.no);
 						$("#seat").prev().val(event.seat);
@@ -263,6 +263,16 @@ var isRun = false;
 						
 					},*/
 			        select:function(start, end){
+			        	if(mgr_data==""){
+				    		$("#btnSave").hide();
+							$("#btnJoin").hide();
+							$("#btnDelete").hide();
+							$("#seat").hide();
+							$("#regForm").find("input").prop("readonly",true);
+							$("#mgr").tagit({readOnly: true});
+							$("#division").attr('disabled', 'true');
+							$("#addNrein").attr('disabled', 'true');
+			    		}else{
 			        	$("#btnDelete").hide();
 			        	$("#btnJoin").hide();
 			        	$("#btnSave").show();
@@ -275,8 +285,9 @@ var isRun = false;
 						$("#addNrein").removeAttr("disabled");
 		                $("#regForm").find("input").prop("readonly",false);
 		                $("#mgr").tagit("removeAll");
-		                regist.open('Join Employee');
-						$('#calendar').fullCalendar('unselect');
+		                regist.open('Join Employee');	
+			    		}
+			        	$('#calendar').fullCalendar('unselect');
 			        }
 			        	   
 				})

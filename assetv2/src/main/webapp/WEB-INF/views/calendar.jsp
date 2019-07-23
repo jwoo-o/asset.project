@@ -10,14 +10,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="Content-Style-Type" content="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <link href='/css/fullcalendar.css' rel='stylesheet' />
     <link href='/css/fullcalendar.print.css' rel='stylesheet' media='print' />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
+    <link href="/css/jquery.tagit.css" rel="stylesheet" type="text/css">
     <script src='/js/moment.min.js'></script>
     <script src='/js/jquery.min.js'></script>
     <script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -28,9 +28,12 @@
     <script type="text/javascript" src="/js/ko.js"></script>
     <script src="/js/jquery.serializeObject.js" type="text/javascript"></script>
     <script src="/js/common.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/js/calendar.js"></script>
+    <script type="text/javascript">
+   		var mgr_data = "${mgr}"
+    </script>
+    <script type="text/javascript" src="/js/calendar.js"></script>  
 </head>
-<body  class="content-wrapper2">
+<body  class="content-wrapper2" style="max-height: 870px; max-width: 1000px;">
 	
 		
 		   <!-- Main content -->
@@ -129,5 +132,5 @@
 	    </form>
     </div>
 </body>
-	
+
 </html>
