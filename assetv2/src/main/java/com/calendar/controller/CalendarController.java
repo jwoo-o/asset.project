@@ -142,7 +142,7 @@ public class CalendarController {
 	public String calendarView(Model model,HttpServletRequest request){
 		try {
 			model.addAttribute("common", cService.selCommonLst());
-			logger.debug(request.getRemoteAddr());
+			logger.error(request.getRemoteAddr());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
