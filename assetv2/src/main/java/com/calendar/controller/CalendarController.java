@@ -137,5 +137,10 @@ public class CalendarController {
 		}
 		return map;
 	}
+	@RequestMapping("/calendar/view")
+	public String calendarView(Model model) throws Exception {
+		model.addAttribute("common", cService.selCommonLst());
+		return "calendar";
+	}
 	
 }

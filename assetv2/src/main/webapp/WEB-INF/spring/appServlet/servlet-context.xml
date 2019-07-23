@@ -76,6 +76,8 @@
 			<exclude-mapping path="/logout" />
 			<exclude-mapping path="/seat" />
 			<exclude-mapping path="/seat/list/proc" />
+			<exclude-mapping path="/calendar/view" />
+			<exclude-mapping path="/calendar/list/proc" />
 			<beans:ref bean="authenticationInterceptor" />
 		</interceptor>
 	</interceptors>
