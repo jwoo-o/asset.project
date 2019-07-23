@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -138,9 +139,16 @@ public class CalendarController {
 		return map;
 	}
 	@RequestMapping("/calendar/view")
-	public String calendarView(Model model) throws Exception {
-		model.addAttribute("common", cService.selCommonLst());
-		return "calendar";
+	public String calendarView(Model model,HttpServletRequest request){
+		try {
+			model.addAttribute("common", cService.selCommonLst());
+			logger.debug(request.getRemoteAddr());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "calendar1";
 	}
 	
 }
