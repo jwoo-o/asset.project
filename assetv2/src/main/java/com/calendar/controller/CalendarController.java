@@ -1,5 +1,6 @@
 package com.calendar.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.calendar.service.CalendarService;
 import com.calendar.vo.CalendarJoinDto;
 import com.calendar.vo.CalendarVo;
+import com.core.exception.NotAccessException;
 import com.core.service.CommonServie;
 import com.core.vo.ManagerDto;
 
@@ -134,21 +136,22 @@ public class CalendarController {
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());
-			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");	
+			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
 		}
 		return map;
 	}
 	@RequestMapping("/calendar/view")
-	public String calendarView(Model model,HttpServletRequest request){
-		try {
-			model.addAttribute("common", cService.selCommonLst());
-			logger.error(request.getRemoteAddr());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return "calendar1";
+	public String calendarView(Model model,HttpServletRequest request)throws Exception{
+		String ip = request.getRemoteAddr();
+		String [] c = ip.split("\\.");
+		logger.debug(ip);
+		String d = c[c.length-1];
+			//model.addAttribute("common", cService.selCommonLst());
+			if(ip.contains("192.168.70") && Integer.parseInt(d)>220 && Integer.parseInt(d)<=230) {
+				return "calendar";
+			}else {
+				throw new NotAccessException("The Ip address does not have access authority.");
+			}
 	}
 	
 }
