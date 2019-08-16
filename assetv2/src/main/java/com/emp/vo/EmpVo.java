@@ -19,6 +19,7 @@ public class EmpVo {
 	private String office;
 	private String seat;
 	private String profile_name;
+	private String office_number;
 	
 	
 	public String getPcode() {
@@ -117,13 +118,27 @@ public class EmpVo {
 	public void setProfile_name(String profile_name) {
 		this.profile_name = profile_name;
 	}
+	public String getOffice_number() {
+		return office_number;
+	}
+	public void setOffice_number(String office_number) {
+		this.office_number = office_number;
+	}
 	@Override
 	public String toString() {
 		return "EmpVo [empNo=" + empNo + ", name=" + name + ", division=" + division + ", position=" + position
 				+ ", gender=" + gender + ", joinDate=" + joinDate + ", pcode=" + pcode + ", dcode=" + dcode
 				+ ", status=" + status + ", email=" + email + ", manager=" + manager + ", auth=" + auth + ", office="
-				+ office + ", seat=" + seat + ", profile_name=" + profile_name + "]";
+				+ office + ", seat=" + seat + ", profile_name=" + profile_name + ", office_number=" + office_number
+				+ ", getPcode()=" + getPcode() + ", getDcode()=" + getDcode() + ", getEmpNo()=" + getEmpNo()
+				+ ", getName()=" + getName() + ", getDivision()=" + getDivision() + ", getPosition()=" + getPosition()
+				+ ", getGender()=" + getGender() + ", getJoinDate()=" + getJoinDate() + ", getStatus()=" + getStatus()
+				+ ", getEmail()=" + getEmail() + ", getManager()=" + getManager() + ", getAuth()=" + getAuth()
+				+ ", getOffice()=" + getOffice() + ", getSeat()=" + getSeat() + ", getProfile_name()="
+				+ getProfile_name() + ", getOffice_number()=" + getOffice_number() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
+	
 	
 	
 	
