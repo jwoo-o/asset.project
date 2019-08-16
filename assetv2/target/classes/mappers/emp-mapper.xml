@@ -19,7 +19,8 @@
         e.email,
         e.office,
         e.seat,
-        e.profile_name
+        e.profile_name,
+        e.office_number
         from employee e
         <where>
         	<if test="search!=null and search!='' and keyword!=null and keyword!=''">
@@ -56,10 +57,10 @@
   	from employee where name=#{userName}
   </select>
   <insert id="insert">
-  	insert into employee values(#{empNo},#{name},#{division},#{position},#{gender},#{joinDate},'y',#{email},'n',#{office},#{seat},null)
+  	insert into employee values(#{empNo},#{name},#{division},#{position},#{gender},#{joinDate},'y',#{email},'n',#{office},#{seat},null,#{office_number})
   </insert>
   <update id="update">
-  	update employee set division=#{division},position=#{position},status=#{status},manager=#{manager},office=#{office},seat=#{seat} where employeeNumber=#{empNo}
+  	update employee set division=#{division},position=#{position},status=#{status},manager=#{manager},office=#{office},seat=#{seat},offcie_number=#{office_number} where employeeNumber=#{empNo}
   </update>
   <delete id="delete">
   	delete from employee where employeeNumber=#{empNo}

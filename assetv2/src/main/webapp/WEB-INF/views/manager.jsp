@@ -115,6 +115,10 @@
 	                </c:forEach>
                 </select>
             </div>
+            <div class="form-group ga_only">
+                <label for="office_number">사무실전화번호</label>
+                <input type="text" class="form-control" name="office_number" maxlength="12" value="02-6004-">
+            </div>
             <div class="form-group">
                 <label for="seat">좌석</label>
                 <div role="wrapper" class="gj-datepicker gj-datepicker-md gj-unselectable">
@@ -171,6 +175,10 @@
 	                	<option value="${division.cCode }">${division.cName }</option>
 	                </c:forEach>
                 </select>
+            </div>
+            <div class="form-group ga_only">
+                <label for="office_number">사무실전화번호</label>
+                <input type="text" class="form-control" id="office_number" name="office_number" maxlength="12" value="02-6004-">
             </div>
             <div class="form-group">
                 <label for="seat">좌석</label>

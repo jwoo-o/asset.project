@@ -9,6 +9,14 @@
         function Edit(e) {
         	
         	if($("#mgrAuth").val()!=0){
+        		
+        		if(e.data.record.dcode=="7"){
+        			$(".ga_only").show();
+        			$("#office_number").val(e.data.record.office_number);
+        		}else{
+        			$("#office_number").val("");
+        			$(".ga_only").hide();
+        		}
 	            $("#eempNo").val(e.data.id);
 	            $("#ename").val(e.data.record.name);
 	            $("#eposition").val(e.data.record.pcode).prop("selected",true);
@@ -205,6 +213,14 @@
         $(document).ready(function () {
         	
         	
+        	$("#division,#edivision").change(function() {
+        	 
+        		if($(this).val()=="7"){
+        			$(".ga_only").show();
+        		}else{
+        			$(".ga_only").hide();
+        		}
+        	})
         
         	$("#joinDate").datepicker({format:'yyyy-mm-dd',header: true, modal: true, footer: true });
         	 if($("#mgrAuth").val()==0){

@@ -81,6 +81,7 @@ var isRun = false;
     				alert("올바른 내선번호를 입력하세요");
     				return false;
     			}
+    			
     			if(!frmchk("#empForm")){
     				alert("빈칸없이 입력하세요.");
             	}else{
@@ -326,6 +327,12 @@ var isRun = false;
 			 $("#btnDelete").on('click', Delete);
 			 $("#btnSuccess").on('click', Success);
 			 $("#btnJoin").click(function() {
+				 
+				 if($("#division").val()=="7"){
+					 $("#ga_only").show();
+				 }else{
+					 $("#ga_only").hide();
+				 }					 
 				 empRegist.open('Join Success');
 				 regist.close();
 			 })
@@ -363,7 +370,11 @@ var isRun = false;
 					focus: function(event, ui){
 						return false;
 					}
-				}
+				},
+				beforeTagAdded: function(event, ui) {
+			        // do something special			        
+			    return $.isValidateEmail(ui.tagLabel);			        
+			    }
 			})
 			 /*$("#mgr").autocomplete({
 
@@ -409,7 +420,14 @@ var isRun = false;
 		    	 return false;
 		        }
 		   });*/
-	         
+			$.isValidateEmail = function(mail){
+				var expression = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				if (expression.test(mail)) {
+					return true;
+				} else {
+					return false;
+				}
+			}
 			calendarData(); 
 			
     	})
