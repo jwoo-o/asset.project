@@ -22,6 +22,8 @@ public class CalendarJoinDto {
 	private String id;
 	/**내선번호*/
 	private String ext;
+	/**회사전화번호*/
+	private String office_number;
 	/**직위명*/
 	private String posNm;
 	/**부서명*/
@@ -140,14 +142,21 @@ public class CalendarJoinDto {
 	public void setExt(String ext) {
 		this.ext = ext;
 	}
+	public String getOffice_number() {
+		return office_number;
+	}
+	public void setOffice_number(String office_number) {
+		this.office_number = office_number;
+	}
 	@Override
 	public String toString() {
 		return "CalendarJoinDto [no=" + no + ", name=" + name + ", division=" + division + ", empNo=" + empNo
 				+ ", position=" + position + ", gender=" + gender + ", joinDate=" + joinDate + ", email=" + email
-				+ ", id=" + id + ", posNm=" + posNm + ", divNm=" + divNm + ", seat=" + seat + ", ext=" + ext
-				+ ", fstRgtWkrNm=" + fstRgtWkrNm + ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm=" + lstMdfWkrNm
-				+ ", lstMdfDtm=" + lstMdfDtm + "]";
+				+ ", id=" + id + ", ext=" + ext + ", office_number=" + office_number + ", posNm=" + posNm + ", divNm="
+				+ divNm + ", seat=" + seat + ", fstRgtWkrNm=" + fstRgtWkrNm + ", fstRgtDtm=" + fstRgtDtm
+				+ ", lstMdfWkrNm=" + lstMdfWkrNm + ", lstMdfDtm=" + lstMdfDtm + "]";
 	}
+	
 	
 	
 	

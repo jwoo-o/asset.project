@@ -127,6 +127,10 @@
 	        	<label for="ext">ext</label>
 	        	<input type="text" class="form-control" id="ext" name="ext"/>
 	    	</div>
+	    	<div class="form-group" style="display: none;" id="ga_only">
+                <label for="edivision">사무실전화번호</label>
+                <input type="text" class="form-control" id="office_number" name="office_number" maxlength="12" value="02-6004-">
+            </div>
 	    	<button type="button" id="btnSuccess" class="btn btn-default">Success</button>
 	    	<button type="button" class="btn btn-default btnCancel">Cancel</button>
 	    </form>
