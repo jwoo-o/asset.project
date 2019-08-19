@@ -264,6 +264,7 @@
             });
             $('#btnAdd').on('click', function () {
                $("#regForm")[0].reset();
+               $(".ga_only").hide();
                 regist.open('사원 등록');
             });
             $('#btnSave').on('click', Save);

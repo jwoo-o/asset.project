@@ -53,7 +53,34 @@
 	        	
 	         })
 	         
-	         
+			          // 라디오버튼 클릭시 이벤트 발생
+		    $("input:radio[name=task_type]").click(function(){
+		 
+		        if($("input[name=task_type]:checked").val() == "GA"){
+		           
+		        	$("#type option").remove();
+		        	
+		        	var tag = '<option value=""></option>'
+		        	+'<option value="ip">IP/VOIP 발급</option>'
+		        	+'<option value="emp_ctf">명함/사원증 수령</option>'
+		        	+'<option value="delivery">택배 수령</option>';
+		        	$("#type").html(tag);
+		        	$(".ga").show();
+		        	$(".hr").hide();
+		        	
+		        	
+		        	
+		        }else if($("input[name=task_type]:checked").val() == "HR"){
+		        	
+					$("#type option").remove();
+					$("#issuer_tr").hide();
+		        	var tag = '<option value=""></option>'
+		        	+'<option value="pass">최종합격 안내</option>';
+		        	$("#type").html(tag);
+		        	$(".ga").hide();
+		        	
+		        }
+		    });
 			
 			$("#btnPlus").on('click',function() {
 			 
@@ -67,7 +94,6 @@
 			$("#toTags").tagit({
 				
 				allowSpaces: true,
-				availableTags: emp_data,
 				tagSource: emp_data,
 				showAutocompleteOnFocus: true,
 				autocomplete: {
@@ -78,7 +104,11 @@
 					focus: function(event, ui){
 						return false;
 					}
-				}
+				},
+				beforeTagAdded: function(event, ui) {
+			        // do something special			        
+			    return $.isValidateEmail(ui.tagLabel);			        
+			    }
 			})
 			$("#ccTags").tagit({
 				
@@ -94,7 +124,11 @@
 					focus: function(event, ui){
 						return false;
 					}
-				}
+				},
+				beforeTagAdded: function(event, ui) {
+			        // do something special			        
+			    return $.isValidateEmail(ui.tagLabel);			        
+			    }
 			})
 			
 			
@@ -114,10 +148,15 @@
 					data.cc = cc;
 					data.content = $("#content").val().replace(/(?:\r\n|\r|\n)/g, '<br/>');
 					data.subject = $("#subject").val();
+					
 					if($("#type").val()=="ip"){
 						
-						data.list = calendar_list;
-							
+						data.list = calendar_list;						
+					}
+					else if($("#type").val()=="pass"){
+						data.entry_date = $("#entry_date").val();
+						data.entry_time = $("input[name=entry_time]:checked").val();
+						
 					}
 					var dataStr = JSON.stringify(data);
 					$.ajax({
@@ -191,7 +230,7 @@
 				case "emp_ctf":
 					$("#issuer_tr").hide();
 					content +='명함 제작 및 사원증 제작 완료되어' 
-						+'수령 안내 드리오니,\n 경영지원실에서 수령 해주시길 부탁드립니다.\n\n'
+						+' 안내드리오니,\n 경영지원실에서 수령하시면 되겠습니다.\n\n'
 						+'보안 이슈로 인해 사원증의 경우 '
 						+'분실 시 \n“분실 사유서 제출” 및 <font color="red">“재발급 비용 1만원”</font>이\n 부과되오니 관리를 철저히 해주시기 바랍니다.';
 					$("#content").val(content);
@@ -202,6 +241,16 @@
 					content +='문서수발실에서 택배를 전달받아\n3층 메일룸에 보관되어있으니, 수령하시면 되겠습니다.';
 					$("#content").val(content);
 					$("#subject").val("택배 수령 안내");
+					break;
+				case "pass":
+					var tag = '<tr height="22"><td class="tdBack" align="left"><strong class="list_title">일시</strong></td><td align="left" width="80"><div class="input-col"><ul id="ccTags" class="auto"></ul></div></td></tr>';
+					$(".hr").show();	
+					content ='Qoo10 경영지원실 입니다.\n'
+						+'최종합격을 진심으로 축하드립니다.\n\n'
+						+'입사일정을 아래와 같이 안내드리오니 확인 부탁드리며,\n'
+						+'해당일에 출근해주시기를 바랍니다.';
+					$("#content").val(content);
+					$("#subject").val("[Qoo10]합격 안내");
 					break;
 				default:
 					$("#issuer_tr").hide();
@@ -237,8 +286,7 @@
                 ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
 			})
 			
-			$("#joinDate").datepicker();
-			
+			$("#entry_date").datepicker().datepicker("setDate",'today');
 			 
 			$.frmchk = function() {
 				if($("#toTags").find("span").html()==undefined){
@@ -247,6 +295,14 @@
 					return false;
 					}
 			return true;
+			}
+			$.isValidateEmail = function(mail){
+				var expression = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				if (expression.test(mail)) {
+					return true;
+				} else {
+					return false;
+				}
 			}
 				
 		})
@@ -268,13 +324,27 @@
 		                </div><!-- /.box-header -->
 		                
 						<div class="box-body">
+							
 							  <div id="writeDiv">
 										<form id="empForm">
 										<input type="hidden" id="subject">
 										<table class="table table-bordered text-sm" style="table-layout: fixed;" id="inputTable">
-										<tbody>
+										<thead>
 										<tr height="22">
-											<td class="tdBack" align="left" width="15%"><strong class="list_title">종류</strong></td>
+											<td class="tdBack" align="left" width="17%"><strong class="list_title">GA/HR</strong></td>
+											<td align="left">
+												<label class="radio-inline">
+	  												<input type="radio" name="task_type" value="GA" checked="checked"> GA
+												</label>
+												<label class="radio-inline">
+	  												<input type="radio" name="task_type" value="HR"> HR
+												</label>
+											</td>
+										</tr>
+										</thead>
+										<tbody id="ga_tbody">								
+										<tr height="22">
+											<td class="tdBack" align="left"><strong class="list_title">종류</strong></td>
 											<td align="left"><div style="width: 130px;">
 												<select class="form-control input-sm col-xs-3" id="type" name="type">
 										    		<option value=""></option>								       		
@@ -305,7 +375,20 @@
 											<td class="tdBack" align="left"><strong class="list_title">내용</strong></td>
 						            		<td align="left" width="80"><div class="input-col"><textarea id="content" rows="5" class="form-control"></textarea><div align="left"><input type="button" class="btn bg-navy btn-sm" id="previewBtn" value="Preview"></div></div>
 									        </td>
-										</tr>										
+										</tr>
+										<tr height="22" class="hr" style="display: none;">
+											<td class="tdBack" align="left"><strong class="list_title">일시</strong></td>
+						            		<td align="left" width="80"><div style="width: 100px;">
+						            			<input type="text" class="form-control input-sm col-xs-3" id="entry_date" name="entry_date" style="margin-right: 10px;">
+						            			</div>
+						            			<label class="radio-inline input-sm">
+	  												<input type="radio" name="entry_time" value="09:30" checked="checked"> 09:30
+												</label>
+												<label class="radio-inline input-sm col-xs-3">
+	  												<input type="radio" name="entry_time" value="09:00"> 09:00
+												</label>
+									        </td>
+										</tr>									
 										</tbody>
 										</table>
 										</form>

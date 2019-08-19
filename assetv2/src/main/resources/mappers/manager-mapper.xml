@@ -6,7 +6,8 @@
   <select id="login" resultType="managerVo">
     	select mNo,mName,mId,empNo,auth,dept dcode,
     	(select DTL_C_NM from CMCDDTLM c where c.GRP_C='division' and c.DTL_C=dept) dept,
-    	(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='position' and c1.DTL_C=position) position
+    	(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='position' and c1.DTL_C=position) position,
+    	(select office_number from employee e where e.employeeNumber = empNo) office_number
     	from manager where mId = #{mId} and pwd = SHA2(#{pwd},256)
   </select>
   <insert id="insert">

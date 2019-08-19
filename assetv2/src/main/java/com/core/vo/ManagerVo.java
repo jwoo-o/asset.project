@@ -11,6 +11,7 @@ public class ManagerVo {
 	private String pwd;
 	private String auth;
 	private String dCode;
+	private String office_number;
 	
 	public String getmNo() {
 		return mNo;
@@ -62,9 +63,12 @@ public class ManagerVo {
 		this.auth = auth;
 	}
 	
-	
-	
-	
+	public String getOffice_number() {
+		return office_number;
+	}
+	public void setOffice_number(String office_number) {
+		this.office_number = office_number;
+	}
 	public String getdCode() {
 		return dCode;
 	}
@@ -74,7 +78,8 @@ public class ManagerVo {
 	@Override
 	public String toString() {
 		return "ManagerVo [mNo=" + mNo + ", mName=" + mName + ", mId=" + mId + ", empNo=" + empNo + ", dept=" + dept
-				+ ", position=" + position + ", pwd=" + pwd + ", auth=" + auth + ", dCode=" + dCode + "]";
+				+ ", position=" + position + ", pwd=" + pwd + ", auth=" + auth + ", dCode=" + dCode + ", office_number="
+				+ office_number + "]";
 	}
 	
 	

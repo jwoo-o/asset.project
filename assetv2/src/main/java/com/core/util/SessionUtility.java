@@ -15,7 +15,7 @@ public class SessionUtility {
 		dto.setDivision(vo.getDept());
 		dto.setAuth(vo.getAuth());
 		dto.setdCode(vo.getdCode());
-		
+		dto.setOffice_number(vo.getOffice_number());
 		return dto;
 	}
 }

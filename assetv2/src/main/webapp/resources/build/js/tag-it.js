@@ -445,9 +445,9 @@
                 value = this.options.preprocessTag(value);
             }
 
-            if (value === '') {
+            /*if (value === '') {
                 return false;
-            }
+            }*/
 
             if (!this.options.allowDuplicates && !this._isNew(value)) {
                 var existingTag = this._findTagByLabel(value);
@@ -495,6 +495,13 @@
             // Unless options.singleField is set, each tag has a hidden input field inline.
             if (!this.options.singleField) {
                 var escapedValue = value;
+                if(labelname==''){
+                	return false;
+                }
+                if (value === '') {
+                	escapedValue = labelname;
+            	}
+
                 tag.append('<input type="hidden" value="' + escapedValue + '" name="' + this.options.fieldName + '" class="tagit-hidden-field" />');
             }
 
