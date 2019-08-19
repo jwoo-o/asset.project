@@ -13,6 +13,8 @@ public class MailVo {
 	private String content;
 	private String type;
 	private String subject;
+	private String entry_date;
+	private String entry_time;
 	
 	public List<CalendarVo> getList() {
 		return list;
@@ -52,11 +54,26 @@ public class MailVo {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
+	public String getEntry_date() {
+		return entry_date;
+	}
+	public void setEntry_date(String entry_date) {
+		this.entry_date = entry_date;
+	}
+	public String getEntry_time() {
+		return entry_time;
+	}
+	public void setEntry_time(String entry_time) {
+		this.entry_time = entry_time;
+	}
 	@Override
 	public String toString() {
-		return "MailVo [cc=" + Arrays.toString(cc) + ", to=" + Arrays.toString(to) + ", content="
-				+ content + ", type=" + type + ", subject=" + subject + "]";
+		return "MailVo [list=" + list + ", cc=" + Arrays.toString(cc) + ", to=" + Arrays.toString(to) + ", content="
+				+ content + ", type=" + type + ", subject=" + subject + ", entry_date=" + entry_date + ", entry_time="
+				+ entry_time + "]";
 	}
+	
+	
 	
 	
 	

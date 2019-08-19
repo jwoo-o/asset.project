@@ -141,6 +141,19 @@ $.gfn_formReset=function(objectId) {
     // textarea 초기화
     _form.find('textarea').val('');
 }
+/**
+ * 이메일 유효성 체크
+ */
+$.isValidateEmail = function(mail){
+	var expression = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	if (expression.test(mail)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+
 
 $.gfn_Alert=function(alertId, alertClass, alertContent){
 	var msg = "<div class=\"alert " + alertClass + " alert-dismissible fade in\" role=\"alert\">"

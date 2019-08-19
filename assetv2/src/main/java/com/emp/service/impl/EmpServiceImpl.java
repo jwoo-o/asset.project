@@ -89,8 +89,6 @@ public class EmpServiceImpl implements EmpService {
 			map.put("note", "");
 			map.put("status", "y");
 		}
-		if(!vo.getDivision().equals("7"))
-			vo.setOffice_number("");
 		assetDao.updateEmp(map);
 		dao.update(vo);
 		
