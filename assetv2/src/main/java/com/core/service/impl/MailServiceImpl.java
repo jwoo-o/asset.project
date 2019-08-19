@@ -34,11 +34,20 @@ public class MailServiceImpl implements MailService {
 	public Map<String, Object> insMailSend(MailVo vo,ManagerDto dto) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String,Object>();
+		String sender = "ga_kr@qoo10.com";
 		map.put("list", vo.getList());
 		map.put("type", vo.getType());
 		map.put("content", vo.getContent());
+		if(vo.getType().equals("pass")) {
+			map.put("name",dto.getmName());
+			map.put("division", dto.getDivision());
+			map.put("entry_date", vo.getEntry_date());
+			map.put("entry_time", vo.getEntry_time());
+			map.put("office_number", dto.getOffice_number());
+			sender = "hr_kr@qoo10.com";
+		}		
 		String content = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "email_template/mail.vm","UTF-8",map);
-		service.emailGrpSendProc(vo.getSubject(), content, "ga_kr@qoo10.com", vo.getTo(), vo.getCc());
+		service.emailGrpSendProc(vo.getSubject(), content, sender, vo.getTo(), vo.getCc());
 		if(vo.getList()!=null) {
 			for(CalendarVo data : vo.getList()) {
 				data.setLstMdfWkrNm(dto.getmName());

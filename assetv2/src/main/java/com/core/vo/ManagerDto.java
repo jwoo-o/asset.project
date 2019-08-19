@@ -8,6 +8,7 @@ public class ManagerDto {
 	private String division;
 	private String auth;
 	private String dCode;
+	private String office_number;
 	
 	public String getmNo() {
 		return mNo;
@@ -48,10 +49,21 @@ public class ManagerDto {
 	public void setdCode(String dCode) {
 		this.dCode = dCode;
 	}
+	
+	public String getOffice_number() {
+		return office_number;
+	}
+	public void setOffice_number(String office_number) {
+		this.office_number = office_number;
+	}
 	@Override
 	public String toString() {
 		return "ManagerDto [mNo=" + mNo + ", mName=" + mName + ", mId=" + mId + ", division=" + division + ", auth="
-				+ auth + ", dCode=" + dCode + "]";
+				+ auth + ", dCode=" + dCode + ", office_number=" + office_number + ", getmNo()=" + getmNo()
+				+ ", getmName()=" + getmName() + ", getmId()=" + getmId() + ", getDivision()=" + getDivision()
+				+ ", getAuth()=" + getAuth() + ", getdCode()=" + getdCode() + ", getOffice_number()="
+				+ getOffice_number() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
 	}
 	
 	
