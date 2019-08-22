@@ -55,7 +55,10 @@
 	         
 			          // 라디오버튼 클릭시 이벤트 발생
 		    $("input:radio[name=task_type]").click(function(){
-		 
+		 		$("#content").val("");
+		 		$("#ccTags").tagit("removeAll")
+				$("#issuer_tr").tagit("removeAll")
+				$("#toTags").tagit("removeAll");
 		        if($("input[name=task_type]:checked").val() == "GA"){
 		           
 		        	$("#type option").remove();
@@ -75,7 +78,8 @@
 					$("#type option").remove();
 					$("#issuer_tr").hide();
 		        	var tag = '<option value=""></option>'
-		        	+'<option value="pass">최종합격 안내</option>';
+		        	+'<option value="pass">최종합격 안내</option>'
+		        	+'<option value="document">입사자 제출 서류 안내</option>';
 		        	$("#type").html(tag);
 		        	$(".ga").hide();
 		        	
@@ -146,7 +150,7 @@
 					data.type=$("#type").val();
 					data.to = to;
 					data.cc = cc;
-					data.content = $("#content").val().replace(/(?:\r\n|\r|\n)/g, '<br/>');
+					data.content = $("#content").val().replace(/(?:\r\n|\r|\n)/g, '<br/>').replace();
 					data.subject = $("#subject").val();
 					
 					if($("#type").val()=="ip"){
@@ -178,11 +182,12 @@
 					
 				}
 			})
-			$("#type").change(function() {
+			$("#type").on("change",function() {
 				var content ="안녕하세요 경영지원실입니다.\n\n";
 				$("#ccTags").tagit("removeAll")
 				$("#issuer_tr").tagit("removeAll")
-				$("#toTags").tagit("removeAll")
+				$("#toTags").tagit("removeAll");
+				$("#content").val("");
 				switch ($(this).val()) {
 				case "ip":
 					content +='신규입사자 관련으로 IP/VOIP 할당 요청드립니다.\n'
@@ -243,8 +248,10 @@
 					$("#subject").val("택배 수령 안내");
 					break;
 				case "pass":
-					var tag = '<tr height="22"><td class="tdBack" align="left"><strong class="list_title">일시</strong></td><td align="left" width="80"><div class="input-col"><ul id="ccTags" class="auto"></ul></div></td></tr>';
-					$(".hr").show();	
+					$(".hr").show();
+					$("#hr_pass").show();
+					$("#entry_date").datepicker("setDate",'today');
+					$(".hr").insertAfter($("#email_tbody tr:last-child"));
 					content ='Qoo10 경영지원실 입니다.\n'
 						+'최종합격을 진심으로 축하드립니다.\n\n'
 						+'입사일정을 아래와 같이 안내드리오니 확인 부탁드리며,\n'
@@ -252,9 +259,33 @@
 					$("#content").val(content);
 					$("#subject").val("[Qoo10]합격 안내");
 					break;
+				case "document":
+					$(".hr").show();
+					$("#hr_pass").hide();
+					$("#entry_date").val("");
+					$(".hr").insertAfter($("#email_tbody tr:first-child"));
+					content +='입사을 진심으로 축하드립니다.\n\n'
+							+'첨부파일 확인하시고, ';
+						
+						$("#entry_date").on("change", function() {
+						 
+							content += '하기 서류를\n'+$(this).val()+' 까지 제출하여 주시기 바랍니다.\n\n'
+							+'\t1. 명함 신청서(Biz Card)\n'
+							+'\t2. Glosis Introduction\n'
+							+'\t3. 사진파일(jpg파일)\n'
+							+'\t4. 신상명세서\n'
+							+'\t5. <font color="red">영업비밀보호서약서 – 출력본으로 제출. 자필서명 필수</font>\n\n'
+							+'5번에 해당하는 영엉비밀보호서약서는 출력하여\n'
+							+'3층 경영지원실로 제출바라며,\n'
+							+'1(QR코드 포함),3,4번의 서류들은\n이메일로 제출하여 주시기 바랍니다.';
+							
+							$("#content").val(content);
+						})
+					break;
 				default:
 					$("#issuer_tr").hide();
 					$("#subject").val("");
+					$("#content").val("");
 					break;
 				}
 			})
@@ -342,7 +373,7 @@
 											</td>
 										</tr>
 										</thead>
-										<tbody id="ga_tbody">								
+										<tbody id="email_tbody">								
 										<tr height="22">
 											<td class="tdBack" align="left"><strong class="list_title">종류</strong></td>
 											<td align="left"><div style="width: 130px;">
@@ -381,12 +412,14 @@
 						            		<td align="left" width="80"><div style="width: 100px;">
 						            			<input type="text" class="form-control input-sm col-xs-3" id="entry_date" name="entry_date" style="margin-right: 10px;">
 						            			</div>
-						            			<label class="radio-inline input-sm">
-	  												<input type="radio" name="entry_time" value="09:30" checked="checked"> 09:30
-												</label>
-												<label class="radio-inline input-sm col-xs-3">
-	  												<input type="radio" name="entry_time" value="09:00"> 09:00
-												</label>
+						            			<div id="hr_pass">
+							            			<label class="radio-inline input-sm">
+		  												<input type="radio" name="entry_time" value="09:30" checked="checked"> 09:30
+													</label>
+													<label class="radio-inline input-sm col-xs-3">
+		  												<input type="radio" name="entry_time" value="09:00"> 09:00
+													</label>
+												</div>
 									        </td>
 										</tr>									
 										</tbody>

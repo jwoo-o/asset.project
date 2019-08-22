@@ -21,7 +21,7 @@
 		
 		var $opener = $(window.opener.document);
 		var list = window.opener.calendar_list
-		$("#contents").html($opener.find("#content").val().replace(/(?:\r\n|\r|\n)/g, '<br/>'));
+		$("#contents").html($opener.find("#content").val().replace(/(?:\r\n|\r|\n)/g, '<br/>').replace(/(?:\t)/g, '&nbsp;&nbsp;&nbsp;'));
 		var type = $opener.find("#type").val();
 		
 		if(type=="ip"){
@@ -38,7 +38,7 @@
 			})
 			$("#ip-tbody").append(tag);
 		}
-		if(type=="emp_ctf"){
+		if(type=="emp_ctf" || type=="document"){
 			$("#footer-img").attr("src", "https://i.imgur.com/KBszhhn.png").show();
 		}
 		if(type=="delivery"){
