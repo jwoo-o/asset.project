@@ -1,6 +1,9 @@
 package com.core.service.impl;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -29,11 +32,15 @@ public class MailServiceImpl implements MailService {
 	@Resource(name="velocityEngine")
     VelocityEngine velocityEngine;
 	
+	@Resource(name="mailPath")
+	private String mailPath;
+	
 	
 	@Override
 	public Map<String, Object> insMailSend(MailVo vo,ManagerDto dto) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String,Object>();
+		List<File> file_list = new ArrayList<File>();
 		String sender = "ga_kr@qoo10.com";
 		map.put("list", vo.getList());
 		map.put("type", vo.getType());
@@ -45,9 +52,24 @@ public class MailServiceImpl implements MailService {
 			map.put("entry_time", vo.getEntry_time());
 			map.put("office_number", dto.getOffice_number());
 			sender = "hr_kr@qoo10.com";
-		}		
+		}
+		if(vo.getType().equals("document")) {
+			sender = "hr_kr@qoo10.com";
+			File bizCard = new File(mailPath+"/v1.Biz Card.xlsx");
+			File instruction = new File(mailPath+"/2.Giosis instruction.pdf");
+			File qnumber = new File(mailPath+"/3.Qnumber 등록.docx");
+			File info = new File(mailPath+"/4.신상명세서form.xlsx");
+			File pledge = new File(mailPath+"/5.영업비밀보호경업금지서약.docx");
+			
+			
+			file_list.add(bizCard);
+			file_list.add(instruction);
+			file_list.add(qnumber);
+			file_list.add(info);
+			file_list.add(pledge);
+		}
 		String content = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "email_template/mail.vm","UTF-8",map);
-		service.emailGrpSendProc(vo.getSubject(), content, sender, vo.getTo(), vo.getCc());
+		service.emailGrpSendProc(vo.getSubject(), content, sender, vo.getTo(), vo.getCc(),file_list);
 		if(vo.getList()!=null) {
 			for(CalendarVo data : vo.getList()) {
 				data.setLstMdfWkrNm(dto.getmName());
