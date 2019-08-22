@@ -62,6 +62,9 @@
 	<constructor-arg value="/var/webapps/upload/profile_images">
 	</constructor-arg>
 	</bean>
+	<bean id = "mailPath" class="java.lang.String">
+		<constructor-arg value="/var/webapps/mail_file"/>
+	</bean>
 	
 	<context:component-scan base-package="com.asset.service.dao"></context:component-scan>
 	<context:component-scan base-package="com.asset.service.impl"></context:component-scan>

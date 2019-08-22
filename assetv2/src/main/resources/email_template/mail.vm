@@ -34,4 +34,4 @@
 #end
 </DIV></TD>
 </TR>
-#if($type=="emp_ctf")<tr><td><img id="footer-img" src="https://i.imgur.com/KBszhhn.png"></TD></TR>#elseif($type=="delivery")<TR><TD><img id="footer-img" src="https://i.imgur.com/HvKuBZH.png"></td></tr>#elseif($type=="pass")<TR><TD><img id="footer-img" src="https://i.imgur.com/vWyiymx.png"></td></tr>#end</TBODY></TABLE></BODY></HTML>
+#if($type=="emp_ctf" || $type=="document")<tr><td><img id="footer-img" src="https://i.imgur.com/KBszhhn.png"></TD></TR>#elseif($type=="delivery")<TR><TD><img id="footer-img" src="https://i.imgur.com/HvKuBZH.png"></td></tr>#elseif($type=="pass")<TR><TD><img id="footer-img" src="https://i.imgur.com/vWyiymx.png"></td></tr>#end</TBODY></TABLE></BODY></HTML>
