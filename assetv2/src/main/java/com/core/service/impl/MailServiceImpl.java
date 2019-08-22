@@ -55,7 +55,7 @@ public class MailServiceImpl implements MailService {
 		}
 		if(vo.getType().equals("document")) {
 			sender = "hr_kr@qoo10.com";
-			File bizCard = new File(mailPath+"/v1.Biz Card.xlsx");
+			File bizCard = new File(mailPath+"/1.Biz Card.xlsx");
 			File instruction = new File(mailPath+"/2.Giosis instruction.pdf");
 			File qnumber = new File(mailPath+"/3.Qnumber 등록.docx");
 			File info = new File(mailPath+"/4.신상명세서form.xlsx");
