@@ -264,6 +264,7 @@
 					$("#hr_pass").hide();
 					$("#entry_date").val("");
 					$(".hr").insertAfter($("#email_tbody tr:first-child"));
+					$("#subject").val("[경영지원실] 입사자 제출 서류 안내");
 					content +='입사을 진심으로 축하드립니다.\n\n'
 							+'첨부파일 확인하시고, ';
 						
