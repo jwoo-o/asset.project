@@ -151,6 +151,7 @@
             <input type="hidden" class="form-control" id="eempNo" name="empNo">
             <input type="hidden" class="form-control" id="eemail" name="email">
             <input type="hidden" class="form-control" id="original_name">
+            <input type="hidden" class="form-control" id="isManager">            
             <div class="form-group" style="text-align: center;">  
 	       		<img alt="사진" src="/images/profileImage/default_profile.jpg" width="150px" height="170px" id="profile">
 	        </div>

@@ -45,7 +45,7 @@ public class EmpController {
 			map.put("emp", service.selGetEmp(dto.getUserName()));
 		}catch (Exception e) {
 			// TODO: handle exception
-			logger.error(e.getMessage());
+			logger.error(e.getMessage(),e);
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
 		}
 		
@@ -65,7 +65,7 @@ public class EmpController {
 			map =  service.selEmpList(dto);
 		}catch (Exception e) {
 			// TODO: handle exception
-			logger.error(e.getMessage());
+			logger.error(e.getMessage(),e);
 		}
 		return map;
 	}
@@ -81,7 +81,7 @@ public class EmpController {
 		}catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
-			logger.error(e.getMessage());
+			logger.error(e.getMessage(),e);
 		}
 		return map;
 	}
@@ -96,7 +96,7 @@ public class EmpController {
 		}catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
-			logger.error(e.getMessage());
+			logger.error(e.getMessage(),e);
 		}
 		return map;
 	}
@@ -112,7 +112,7 @@ public class EmpController {
 			// TODO: handle exception
 			
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
-			logger.error(e.getMessage());
+			logger.error(e.getMessage(),e);
 		}
 		return map;
 	}
@@ -126,7 +126,7 @@ public class EmpController {
 		}catch (Exception e) {
 			// TODO: handle exception
 			
-			logger.error(e.getMessage());
+			logger.error(e.getMessage(),e);
 		}
 		return list;
 	}
@@ -143,7 +143,7 @@ public class EmpController {
 		}catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
-			logger.error(e.getMessage());
+			logger.error(e.getMessage(),e);
 		}
 		return map;
 	}
@@ -161,7 +161,7 @@ public class EmpController {
 		}catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
-			logger.error(e.getMessage());
+			logger.error(e.getMessage(),e);
 		}
 		return map;
 		

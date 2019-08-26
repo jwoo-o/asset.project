@@ -35,9 +35,11 @@
 	            	$("#managerDiv").show();
 	            	$("#manager").prop("checked",true);
 	            	$("#auth").val(e.data.record.auth).prop("selected",true);
+	            	$("#isManager").val('y');
 	            }else{
 	            	$("#managerDiv").hide();
 	            	$("#manager").prop("checked",false);
+	            	$("#isManager").val('n');	            	
 	            }
 	            modify.open('사원 수정');
         	}else{
@@ -324,7 +326,7 @@
                 		break;
             		case 'status':
             			$(select).append("<option value='y'>정상</option><option value='n'>휴직</option>");
-            			$("#s").append(select).show();;
+            			$("#s").append(select).show();
             			break;
             		case 'manager':
             			$(select).append("<option value='y'></option>");
@@ -335,7 +337,7 @@
             				var option = $("<option value='"+office_val[i]+"'>"+office_data[i]+"</option>")
             				$(select).append(option);
             			}
-            			$("#s").append(select).show();;
+            			$("#s").append(select).show();
             			break;
             			
             	}
@@ -361,22 +363,25 @@
             	if($("#manager").is(":checked")){
             		$("#managerDiv").show();
             	}else{
-            		$("#managerDiv").hide();
+            		if($("#isManager").val()=='y'){
+            			$("#managerDiv").hide();
+                		
+                		var data = {"empNo":$("#eempNo").val()},dataStr = JSON.stringify(data);
+                   	 	$.ajax({ url: '/manager/delete/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
+                        .done(function (data) {
+    	                   	 if(data.msg=='0001'){
+    	                    	alert("계정 삭제 완료");                    	
+    	                   	}else{
+    	                   		alert(data.msg);
+    	                   	}
+                        })
+                        .fail(function (e,data) {
+                        	if(e.status == 401){
+                        		onErrorFunc(e);
+                        	}
+                        });
+            		}
             		
-            		var data = {"empNo":$("#eempNo").val()},dataStr = JSON.stringify(data);
-               	 	$.ajax({ url: '/manager/delete/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
-                    .done(function (data) {
-	                   	 if(data.msg=='0001'){
-	                    	alert("계정 삭제 완료");                    	
-	                   	}else{
-	                   		alert(data.msg);
-	                   	}
-                    })
-                    .fail(function (e,data) {
-                    	if(e.status == 401){
-                    		onErrorFunc(e);
-                    	}
-                    });
             	}
             })
             $(".seatMap").click(function() {
