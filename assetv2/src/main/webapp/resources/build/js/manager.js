@@ -367,7 +367,7 @@
             			$("#managerDiv").hide();
                 		
                 		var data = {"empNo":$("#eempNo").val()},dataStr = JSON.stringify(data);
-                   	 	$.ajax({ url: '/manager/delete/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
+                   	 	$.ajax({ url: '/account/delete/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
                         .done(function (data) {
     	                   	 if(data.msg=='0001'){
     	                    	alert("계정 삭제 완료");                    	
