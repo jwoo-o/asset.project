@@ -150,7 +150,7 @@
 					data.type=$("#type").val();
 					data.to = to;
 					data.cc = cc;
-					data.content = $("#content").val().replace(/(?:\r\n|\r|\n)/g, '<br/>').replace();
+					data.content = $("#content").val().replace(/(?:\r\n|\r|\n)/g, '<br/>').replace(/(?:\t)/g, '&nbsp;&nbsp;&nbsp;');
 					data.subject = $("#subject").val();
 					
 					if($("#type").val()=="ip"){
@@ -174,7 +174,7 @@
 						isRun = false;
 						if(d.msg=="0001"){
 							alert("Request Success");
-							$("#type").val("");
+							
 						}else{
 							alert(d.msg);
 						}
