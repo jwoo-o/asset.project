@@ -65,7 +65,7 @@ public class ManagerController {
 		return map;
 	}
 	
-	@RequestMapping(value="/manager/delete/proc",method=RequestMethod.POST)
+	@RequestMapping(value="/account/delete/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> managerDlProc(@RequestBody ManagerVo vo){
 		Map<String, Object> map = new HashMap<String, Object>();
 		logger.debug(vo.toString());
