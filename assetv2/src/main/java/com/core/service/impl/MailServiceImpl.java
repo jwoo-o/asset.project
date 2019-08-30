@@ -68,6 +68,9 @@ public class MailServiceImpl implements MailService {
 			file_list.add(info);
 			file_list.add(pledge);
 		}
+		if(vo.getType().equals("fail")) {
+			sender = "hr_kr@qoo10.com";
+		}
 		String content = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "email_template/mail.vm","UTF-8",map);
 		service.emailGrpSendProc(vo.getSubject(), content, sender, vo.getTo(), vo.getCc(),file_list);
 		if(vo.getList()!=null) {

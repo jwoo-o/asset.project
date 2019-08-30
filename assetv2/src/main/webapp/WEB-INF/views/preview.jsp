@@ -50,6 +50,10 @@
 			$("#pass_id").html("${mgr.division} ${mgr.mName} ${mgr.office_number}");
 			$("#footer-img").attr("src", "https://i.imgur.com/vWyiymx.png").show();
 		}
+		if(type=="fail"){
+			$("table").hide();
+			$("body").append('<img src="https://i.imgur.com/sySeIx2.jpg">');
+		}
 	})
 </script>
 </head>
