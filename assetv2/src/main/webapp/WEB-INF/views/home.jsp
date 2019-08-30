@@ -33,6 +33,7 @@
 	    	if("${mgr.auth}"==0){
 	 			$("#requestBt").remove();
 	 			$("#setCommon").remove();
+	 			$("#phoneBook").remove();
 	 		}
 	    	if("${mgr.dCode}"!=7){
 	    		$("#calendar").hide();

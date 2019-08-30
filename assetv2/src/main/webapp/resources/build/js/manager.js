@@ -303,7 +303,7 @@
             		case 'name':
             			
             			var input = $('<input id="search" type="text" placeholder="name...." class="form-control mb-2 mr-sm-2 mb-sm-0" />');
-            			$("#s").append(input);
+            			$("#s").append(input).show();
             			break;
             	
             		case 'division':
@@ -342,6 +342,14 @@
             			
             	}
             })
+            $("#s input[id='search']").keypress(function(e) {
+            	
+            	if(e.which==13){
+            		keyword = $("#keyword").val();
+                	search = $("#search").val();
+                    grid.reload({ keyword : keyword, search : search,page : 1 });
+            	}
+            })
             $("#profile_upload").change(function() {
              
             	var upload_name = $('input[type=file]')[0].files[0].name;
@@ -363,9 +371,8 @@
             	if($("#manager").is(":checked")){
             		$("#managerDiv").show();
             	}else{
-            		if($("#isManager").val()=='y'){
-            			$("#managerDiv").hide();
-                		
+            		$("#managerDiv").hide();
+            		if($("#isManager").val()=='y'){	
                 		var data = {"empNo":$("#eempNo").val()},dataStr = JSON.stringify(data);
                    	 	$.ajax({ url: '/account/delete/proc', data: dataStr, method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'})
                         .done(function (data) {

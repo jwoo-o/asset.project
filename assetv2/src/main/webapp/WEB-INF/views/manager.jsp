@@ -57,7 +57,7 @@
         <div class="row" style="background: #ffffff">
             <div class="col-9">
             <input type="hidden" id="mgrAuth" value="${mgr.auth }">
-                <form class="form-inline" id="srchForm">
+                <form class="form-inline" id="srchForm" onsubmit="return false">
                 	
                 	<select id="keyword" class="form-control mb-2 mr-sm-2 mb-sm-0">
                 		<option value="">선택</option>
