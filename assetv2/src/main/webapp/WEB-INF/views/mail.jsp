@@ -79,7 +79,8 @@
 					$("#issuer_tr").hide();
 		        	var tag = '<option value=""></option>'
 		        	+'<option value="pass">최종합격 안내</option>'
-		        	+'<option value="document">입사자 제출 서류 안내</option>';
+		        	+'<option value="document">입사자 제출 서류 안내</option>'
+		        	+'<option value="fail">불합격 통지 안내</option>';
 		        	$("#type").html(tag);
 		        	$(".ga").hide();
 		        	
@@ -187,7 +188,10 @@
 				$("#ccTags").tagit("removeAll")
 				$("#issuer_tr").tagit("removeAll")
 				$("#toTags").tagit("removeAll");
-				$("#content").val("");
+				$("#content").val("").show();
+				if($(this).val()=="fail"){
+					$("#content").hide();
+				}
 				switch ($(this).val()) {
 				case "ip":
 					content +='신규입사자 관련으로 IP/VOIP 할당 요청드립니다.\n'
@@ -282,6 +286,10 @@
 							
 							$("#content").val(content);
 						})
+					break;
+				case "fail":
+					$(".hr").hide();
+					$("#subject").val("[Qoo10]채용결과 안내");
 					break;
 				default:
 					$("#issuer_tr").hide();
