@@ -83,7 +83,7 @@ body {
 											<label class="control-label col-md-4 col-sm-4 col-xs-5"
 												for="dmnNm">그룹코드명<span class="required">*</span></label>
 											<div class="col-md-8 col-sm-8 col-xs-7">
-												<input type="text" class="form-control" name="grpCNm" required="required" value="${map.cmcdGrpm.grpCNm }">
+												<input type="text" class="form-control" name="grpCNm" id="grpCNm" required="required" value="${map.cmcdGrpm.grpCNm }">
 											</div>
 										</div>
 										<div class="form-group">
@@ -109,7 +109,7 @@ body {
 							</div>
 							<div class="button-group pull-right">
 								<button type="button" class="btn btn-default" name="btnCan"
-									id="btnCan" onclick="history.go(-1)">
+									id="btnCan" onclick="location.href='/common'">
 									<i class="fa fa-list-ul"></i> 목록
 								</button>
 								<button type="button" class="btn btn-danger" name="btnDl"
@@ -207,7 +207,7 @@ body {
 		
 		
 		$("#btnUpd").on('click', function() {
-			if($("#tGrpC").val()=="" || grpCNm.val()==""){
+			if($("#tGrpC").val()=="" || $("#grpCNm").val()==""){
 				alert("그룹코드와 그룹코드명은 필수 사항입니다.");
 				return false;
 			}
@@ -243,15 +243,14 @@ body {
 			})
 		});
 		$("#btnDl").click(function() {
-			alert($("#vldStC").next().html());
-			var data = {"grpC":$("#vldStC").next().html()},dataStr = JSON.stringify(data);
+			var data = $("#vldStC").next().html();
 			
 			$.ajax({
 				url:"<c:url value='/common/delete/proc'/>",
 				contentType:"application/json; charset=utf-8",
 				dataType:"json",
 				method:"post",
-				data:dataStr
+				data:data
 			}).done(function(data) {
 			 
 				if(data.msg=="0001"){
@@ -386,6 +385,10 @@ body {
 				}else{
 					alert(code.msg);
 				}
+			}).fail(function(e) {
+				if(e.status == 401){
+            		onErrorFunc(e);
+            	}	
 			});
 		})
 		$("#tableBody").on("change","input[type='text']",function() {

@@ -29,6 +29,9 @@
   	<typeAlias type="com.core.vo.CmcdDtlmVo" alias="cmcdDtlmVo"/>
   	<typeAlias type="com.core.vo.CmcdDtlmDto" alias="cmcdDtlmDto"/>
   	
+  	<!-- Department -->
+  	<typeAlias type="com.core.vo.DeptVo" alias="deptVo"/>
+  	<typeAlias type="com.core.vo.DeptViewDto" alias="deptViewDto"/>
   	
   </typeAliases>
 </configuration>

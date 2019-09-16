@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dept">
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="dept_no">
+		insert into dept (
+			dept_nm,
+			country,
+			dept_mgr_no,
+			org_no,
+			emp_no,
+			use_yn,
+			fstRgtWkrNm,
+			fstRgtDtm,
+			lstMdfWkrNm,
+			lstMdfDtm
+		)values(
+			#{dept_nm},
+			#{country},
+			#{dept_mgr_no},
+			#{org_no},
+			#{emp_no},
+			'y',
+			#{fstRgtWkrNm},
+			now(),
+			#{lstMdfWkrNm}
+			,now()
+		)
+	</insert>
+	
+	<select id="select" resultType="deptViewDto">
+		
+		select 
+			dept_no,
+			dept_nm,
+			country,
+			dept_mgr_no,
+			(select dept_nm from dept d1 where d1.dept_no=dept_mgr_no) dept_mgr_nm,
+			(select name from employee e1 where e1.employeeNumber=emp_no) emp_nm,
+			emp_no,
+			lstMdfWkrNm,
+			lstMdfDtm
+		from dept
+		<where>
+			use_yn = 'y'
+			<if test="search!=''and search!=null">
+				<choose>
+					<when test="keyword=='dept_nm'">
+						and dept_nm like CONCAT('%',#{search},'%')
+					</when>
+					<otherwise>
+						and ${keyword} = #{search}
+					</otherwise>
+				</choose>
+			</if>
+		</where>
+		order by 
+	</select>
+	<select id="selectCount" resultType="int">
+		select count(*) from dept
+		<where>
+			use_yn = 'y'
+			<if test="search!=''and search!=null">
+				<choose>
+					<when test="keyword=='dept_nm'">
+						and dept_nm like CONCAT('%',#{search},'%')
+					</when>
+					<otherwise>
+						and ${keyword} = #{search}
+					</otherwise>
+				</choose>
+			</if>
+		</where>
+		
+	</select>
+</mapper>

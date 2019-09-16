@@ -46,6 +46,7 @@ public class CommonController {
 	}
 	@RequestMapping(value="/common")
 	public void commonView() throws Exception {
+		
 		logger.info("{}  common");
 	}
 	
@@ -89,7 +90,7 @@ public class CommonController {
 		return map;
 	}
 	
-	@RequestMapping(value="/common/subRegister/proc")
+	@RequestMapping(value="/common/subRegister/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> commonSubWriteProc(@RequestBody List<CmcdDtlmDto> list,HttpSession session){
 		
 		for(CmcdDtlmDto dto : list) {
@@ -107,13 +108,12 @@ public class CommonController {
 		}
 		return map;
 	}
-	@RequestMapping(value="/common/delete/proc")
+	@RequestMapping(value="/common/delete/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> commonDeleteProc(@RequestBody String grpC){
-		logger.debug(grpC);
+		logger.debug("grpc : {}",grpC);
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			map = service.delCommonDeleteProc(grpC);
-			map.put("msg", "0001");
 		}catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.toString(),e);
