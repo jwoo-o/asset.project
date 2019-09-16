@@ -27,36 +27,68 @@
 <script src="js/jquery.session.js" type="text/javascript"></script>
 <script src="js/jquery.serializeObject.js" type="text/javascript"></script>
 <style type="text/css">
-	body{
-			background: #ecf0f5;
-		}
+body {
+	background: #ecf0f5;
+}
+.m-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	line-height: 20px;
+	width: 100%;
+	font-size: 13px;
+}
+
+.m-tabs .mtab {
+	float: left;
+	text-align: center;
+	padding: 7px 15px;
+	background-color: #D3D3D3;
+	border-right: 1px solid #fff;
+}
+
+.m-tabs .mtab a {
+	font-weight: 500;
+	color: #fff;
+}
+
+.m-tabs .active {
+	background-color: #3C8DBC;
+}
 </style>
 <title>Insert title here</title>
 </head>
 <body>
 	<!-- Main content -->
-	<section class="content" >
-		<div class="row" >
+	<section class="content">
+		<div class="row">
 			<div class="col-md-12">
 				<div class="box box-primary">
 
 					<div class="box-header with-border">
 						<h3 class="box-title">
-							<strong>Common Register</strong>
+							<strong>Common</strong>
 						</h3>
 					</div>
+					<div class="m-tabs">
+						<div class="mtab active" >
+							<a data-link="common">Common</a>
+						</div>
+						<div class="mtab">
+							<a data-link="dept">Dept</a>
+						</div>
+					</div>
 					<!-- /.box-header -->
-
+						
 						<!-- /content -->
 						<div class="box-body">
 							<div class="panel-body">
-								<form class="form-horizontal" id="searchForm">
+								<form class="form-horizontal" id="searchForm" onsubmit="return false">
 									<div class="form-group">
 										<div class="search-group col-md-8 col-sm-12 col-xs-12">
 											<div class="form-inline">
-												<select class="form-control" name="keyword">
-													<option value="GRP_C_NM">도메인한글명</option>
-													<option value="GRP_C">도메인ID</option>
+												<select class="form-control" name="keyword" id="keyword">
+													<option value="GRP_C_NM">그룹코드명</option>
+													<option value="GRP_C">그룹코드</option>
 												</select> <input type="text" class="form-control" name="search">
 											</div>
 										</div>
@@ -72,12 +104,24 @@
 								</form>
 							</div>
 							<table class="table table-hover text-sm">
-								<thead>
+								<thead id="common_thead">
 									<tr>
-										<td class="tdBack" align="center"><strong class="list_title">그룹코드명</strong></td>
 										<td class="tdBack" align="center"><strong class="list_title">그룹코드</strong></td>
+										<td class="tdBack" align="center"><strong class="list_title">그룹코드명</strong></td>
 										<td class="tdBack" align="center"><strong class="list_title">업무영역</strong></td>
 										<td class="tdBack" align="center"><strong class="list_title">설명</strong></td>
+										<td class="tdBack" align="center"><strong class="list_title">최종변경일</strong></td>
+										<td class="tdBack" align="center"><strong class="list_title">편집</strong></td>
+									</tr>
+								</thead>
+								<thead id="dept_thead" style="display: none">
+									<tr>
+										<td class="tdBack" align="center"><strong class="list_title">부서코드</strong></td>
+										<td class="tdBack" align="center"><strong class="list_title">부서명</strong></td>
+										<td class="tdBack" align="center"><strong class="list_title">사업국가</strong></td>
+										<td class="tdBack" align="center"><strong class="list_title">상위부서코드</strong></td>
+										<td class="tdBack" align="center"><strong class="list_title">상위부서명</strong></td>
+										<td class="tdBack" align="center"><strong class="list_title">부서장</strong></td>
 										<td class="tdBack" align="center"><strong class="list_title">최종변경일</strong></td>
 										<td class="tdBack" align="center"><strong class="list_title">편집</strong></td>
 									</tr>
@@ -94,16 +138,20 @@
 				</div>
 			</div>
 	</section>
+	
+	
 	<script type="text/javascript">
 	var row = 1;
-	function dataSearch(){
+	var url = "/common/search/proc";
+	var linkUrl = "common";
+	function dataSearch(url){
 		
 		var data = $("#searchForm").serializeObject()
 		data.next = row;
 		var dataStr = JSON.stringify(data);
 		 	
 		 	$.ajax({
-		 		url:'/common/search/proc',
+		 		url:url,
 		 		contentType:'application/json; charset=utf-8',
 		 		dataType:'json',
 		 		method:'post',
@@ -113,19 +161,40 @@
 		 		if(data.msg=='0001'){
 		 			var list = data.list;
 		 			if(list.length>0){
-		 				var grpC = '';
-			 			$.each(list, function(i, elt) {
-		                     tag += '<tr>';
-		                     $.each(elt, function(key, val) {
-		                    	
-		                    	 if(key=='grpC')
-		                    		 grpC = val;
-		                     	tag += '<td align="center">'+val+'</td>'
-		                     })
-		                     tag += '<td align="center"><a href="/common/register?grpC='+grpC+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a></td></tr>';
-		               })
+		 				if(linkUrl=="common"){
+		 					var grpC = '';
+				 			$.each(list, function(i, elt) {
+			                     tag += '<tr>';
+			                     $.each(elt, function(key, val) {
+			                    	
+			                    	 if(key=='grpC')
+			                    		 grpC = val;
+			                     	tag += '<td align="center">'+val+'</td>'
+			                     })
+			                     tag += '<td align="center"><a href="/common/register?grpC='+grpC+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a></td></tr>';
+			               })			
+						}else{
+							var dept_no = '';
+							var emp_no = '';
+							$.each(list, function(i, elt) {
+			                     tag += '<tr>';
+			                     $.each(elt, function(key, val) {
+			                    	
+									if(key=='emp_no'){ 
+			                    		 emp_no = val;
+			                    		 
+			                    	 }else{
+			                    		 if(key=='dept_no'){
+				                    		 dept_no = val;
+				                    	 }
+				                     	tag += '<td align="center">'+val+'</td>'
+			                    	 }	                    	 
+			                     })
+			                     tag += '<td align="center"><a href="/dept/register?dept_no='+dept_no+'&emp_no='+emp_no+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a></td></tr>';
+			               })
+						}			
 			 		}else{
-			 			tag += '<tr height="18"><td align="center" colspan="6">NO DATA</td></tr>';
+			 			tag += '<tr height="18"><td align="center" colspan="8">NO DATA</td></tr>';
 			 		}
 		 			$("#data_view_tbody").append(tag);
 		 			if(data.next>row){
@@ -150,23 +219,72 @@
 		$(function () {
 			
 	
+			$(".mtab a").on('click', function() {
+				
+				if(!$(this).parent().hasClass("active")){
+					row = 1;
+					$("#keyword").empty();
+					linkUrl = $(this).data("link");
+					if(linkUrl=="common"){
+						url = "/common/search/proc";			
+						$("#keyword").append('<option value="GRP_C_NM">그룹코드명</option>');
+						$("#keyword").append('<option value="GRP_C">그룹코드</option>');
+						$("#dept_thead").hide();
+						$("#common_thead").show();
+						$("strong:first").html("common");
+						
+					}else{
+						url = "/dept/search/proc";
+						$("#keyword").append('<option value="dept_nm">부서명</option>');
+						$("#keyword").append('<option value="country">사업국가</option>');	
+						$("#keyword").append('<option value="emp_nm">부서장</option>');	
+						$("#common_thead").hide();
+						$("#dept_thead").show();
+						$("strong:first").html("department");
+						
+						$("#keyword").on('change',function(){
+							$(this).next().remove();
+							var keyword = $(this).val();
+							if(keyword=='country'){
+								
+								
+							}
+							
+							
+						})
+						
+						
+					}
+					$(".mtab").removeClass("active");
+					$(this).parent().addClass("active");
+				 	$("#data_view_tbody").empty();
+				 	dataSearch(url);
+				}
+				
+			 	
+			})
+			
 			$("#btnSrch").on('click', function() {
 			 	$("#data_view_tbody").empty();
 			 	row = 1;
-			 	dataSearch();
+			 	dataSearch(url);
 			 	
 			})
+			
 			$("#btnReg").on('click', function() {
-			   location.href='/common/register';
+				if(linkUrl=="common"){
+			   		location.href='/common/register';
+				}else{
+					location.href='/dept/register';
+				}
 			})
 			$("#btnNext").on('click', function() {
-			 		
-				dataSearch();
+			 	row++;
+				dataSearch(url);
 				
 			})
-			
-			
-			dataSearch();
+						
+			dataSearch(url);
 		})
 		
 	</script>
