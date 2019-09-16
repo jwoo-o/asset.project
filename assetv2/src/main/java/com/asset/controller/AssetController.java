@@ -65,12 +65,12 @@ public class AssetController {
 		}
 		return map;
 	}
-	/***/
+	/*
 	@RequestMapping(value = "/asset/register", method = RequestMethod.GET)
 	public String assetRst(Model model) throws Exception{
 		model.addAttribute("common",cService.selCommonLst());
 		return "register";
-	}
+	}*/
 
 	@RequestMapping(value = "/asset/register/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetRst(@RequestBody AssetVo vo, HttpSession session) {

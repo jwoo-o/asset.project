@@ -57,6 +57,11 @@
 		#phoneBook:hover {
 			background-color: #172d44;
 		}
+		#OrganizationChart:hover {
+			background-color: #172d44;
+		}
+		
+		
 	</style>
 </head>
 	<body>
@@ -97,6 +102,10 @@
 	            <li>
 	                <a id="empSearch"  title="사원 검색"><span class="glyphicon glyphicon-user na" style="color: white; font-size:large;"></span></a>
 	            </li>
+	            <li style="padding-top: 2px">
+	                <a id="OrganizationChart"  title="조직도"><span class="fa fa-users na" style="color: white; font-size:large;"></span></a>
+	            </li>
+	            
              	<li>
 	                <a id="setCommon" title="설정"><span class="glyphicon glyphicon-cog na" style="color: white; font-size:large;"></span></a>
 	            </li>
