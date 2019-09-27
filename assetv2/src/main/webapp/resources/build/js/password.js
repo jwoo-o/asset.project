@@ -1,6 +1,7 @@
 /**
  * passowrd.jsp script
  */
+var isRun = false;
     	$(function () {
     		var key = false;
     		var isPwd = false;
@@ -40,6 +41,10 @@
 			 			var pwd = SHA256($("#pwd").val());
 			 			var newPwd = SHA256($("#newPwd").val());
 			 			var mId = $("#mId").val();
+			 			if(isRun == true){
+			 				return;
+			 			}
+			 			isRun = true;
 			 			var data = {"mId":mId,"pwd":pwd,"newPwd":newPwd},dataStr = JSON.stringify(data);
 			 			$.ajax({
 			 				url:"/password/proc",
@@ -62,6 +67,7 @@
 			 				}else{
 			 					$.gfn_Alert("alert-message-center", "alert-error", data.msg);
 			 				}
+			 				isRun = false;
 			 			}).fail(function(e) {
 							if(e.status==401){
 								onErrorFunc(e);

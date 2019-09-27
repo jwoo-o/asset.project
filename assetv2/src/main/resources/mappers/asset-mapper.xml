@@ -12,7 +12,7 @@
 		a.modelNm,
 		IFNULL(e.name,'') userName,
 		IFNULL((select DTL_C_NM from CMCDDTLM c2 where c2.GRP_C='position' and c2.DTL_C=e.position),'') position,
-		IFNULL((select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='division' and c1.DTL_C=e.division),'') division,
+		IFNULL((SELECT CONCAT(dept_nm,' ', DTL_C_NM) AS dept_nm FROM dept d, CMCDDTLM c where c.GRP_C='organization' and c.DTL_C = d.org_no and dept_mgr_no=2 and d.dept_no = e.division),'') division,
 		a.buying,
 		IFNULL((select DTL_C_NM from CMCDDTLM c3 where c3.GRP_C='mInch' and c3.DTL_C=a.mInch),'') mInch,
 		a.note
@@ -79,8 +79,10 @@
   	select 
 	a.aNo,a.assetNo,a.category,a.serialNo,a.buying,a.price,a.status,a.modelNm,a.note,a.mInch,
     e.name userName,
+    IFNULL((select DTL_C_NM from CMCDDTLM c2 where c2.GRP_C='position' and c2.DTL_C=e.position),'') pos_nm,
+	IFNULL((SELECT CONCAT(dept_nm,' ', DTL_C_NM) AS dept_nm FROM dept d, CMCDDTLM c where c.GRP_C='organization' and c.DTL_C = d.org_no and dept_mgr_no=2 and d.dept_no = e.division),'') div_nm,
     e.employeeNumber empNo,e.position,e.division
-    from asset a left outer join employee e on a.empNo=e.employeeNumber where a.aNo=#{aNo}
+from asset a left outer join employee e on a.empNo=e.employeeNumber where a.aNo=#{aNo}
   </select>
   <select id="asNo" resultType="String">
   	select max(assetNo) from asset where category=#{category}
@@ -102,7 +104,7 @@
 		a.serialNo,
 		e.name userName,
 		IFNULL((select DTL_C_NM from CMCDDTLM c2 where c2.GRP_C='position' and c2.DTL_C=e.position),'') position,
-		IFNULL((select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='division' and c1.DTL_C=e.division),'') division,
+		IFNULL((SELECT CONCAT(dept_nm,' ', DTL_C_NM) AS dept_nm FROM dept d, CMCDDTLM c where c.GRP_C='organization' and c.DTL_C = d.org_no and dept_mgr_no=2 and d.dept_no = e.division),'') division,
 		a.buying,
 		IFNULL((select DTL_C_NM from CMCDDTLM c3 where c3.GRP_C='mInch' and c3.DTL_C=a.mInch),'') mInch,
 		a.price,
@@ -171,8 +173,11 @@
 			<when test="categorys=='buying'">
 				year(${categorys}) categorys,
 			</when>
-			<when test="categorys=='position' or categorys=='division'">
+			<when test="categorys=='position'">
 				IFNULL((select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C=#{categorys} and c1.DTL_C=${categorys}),'보관') categorys,
+			</when>
+			<when test="categorys=='division'">
+				IFNULL((SELECT CONCAT(dept_nm,' ', DTL_C_NM) AS dept_nm FROM dept d, CMCDDTLM c where c.GRP_C='organization' and c.DTL_C = d.org_no  and d.dept_no = division),'보관') categorys,
 			</when>
 			
 		</choose>

@@ -24,6 +24,7 @@ import com.asset.vo.AssetSearchDto;
 import com.asset.vo.AssetVo;
 import com.asset.vo.ChartDto;
 import com.core.service.CommonServie;
+import com.core.service.DeptService;
 import com.core.vo.ManagerDto;
 
 /**
@@ -39,6 +40,9 @@ public class AssetController {
 	
 	@Inject
 	private CommonServie cService;
+	
+	@Inject
+	private DeptService dService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -46,6 +50,7 @@ public class AssetController {
 	@RequestMapping("/home")
 	public void home(Model model) throws Exception {
 		model.addAttribute("common",cService.selCommonLst());
+		model.addAttribute("dept", dService.selDivisionSearch());
 		
 	}
 	/**자산 리스트 검색*/
@@ -65,12 +70,12 @@ public class AssetController {
 		}
 		return map;
 	}
-	/*
+	
 	@RequestMapping(value = "/asset/register", method = RequestMethod.GET)
 	public String assetRst(Model model) throws Exception{
 		model.addAttribute("common",cService.selCommonLst());
 		return "register";
-	}*/
+	}
 
 	@RequestMapping(value = "/asset/register/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetRst(@RequestBody AssetVo vo, HttpSession session) {

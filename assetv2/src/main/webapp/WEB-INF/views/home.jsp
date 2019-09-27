@@ -35,9 +35,7 @@
 	 			$("#setCommon").remove();
 	 			$("#phoneBook").remove();
 	 		}
-	    	if("${mgr.dCode}"!=7){
-	    		$("#calendar").hide();
-	    	}
+	    	
 	    	
 	    	
 	    })
@@ -173,8 +171,8 @@
 							        <td align="left" >&nbsp; 
 							             <select class="SelectBox" id="division" name="division"> 
 								            <option value="">All</option>
-						              		<c:forEach var="division" items="${common.division }">
-						              			<option value="${division.cCode }">${division.cName}</option>
+						              		<c:forEach var="dept" items="${dept }">
+						              			<option value="${dept.dept_no }">${dept.dept_nm}</option>
 						              		</c:forEach> 	
 							             </select>
 							        </td>

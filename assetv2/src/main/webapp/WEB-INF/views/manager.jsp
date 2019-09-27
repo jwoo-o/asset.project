@@ -26,28 +26,39 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="/js/common.js" type="text/javascript"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  	<script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.js" type="text/javascript"></script>
+  	<script src="/js/gijgo.js" type="text/javascript"></script>
   	<script src="js/jquery.serializeObject.js" type="text/javascript"></script>
   	<script type="text/javascript">
-  	var division_data = new Array();
-    var position_data = new Array();
+  	var position_data = new Array();
+    var dept_data = new Array();
     var office_data = new Array();
-    var division_val = new Array();
+    var dept_val = new Array();
     var position_val = new Array();
     var office_val = new Array();
+    var country_val = new Array();
+    var country_data = new Array();
     
-    '<c:forEach items="${common.position}" var="position">'
+   	<c:forEach items="${common.position}" var="position">
     	position_data.push("${position.cName}");
     	position_val.push("${position.cCode}")
-    '</c:forEach>'
-    '<c:forEach items="${common.division}" var="division">'
-    	division_data.push("${division.cName}")
-    	division_val.push("${division.cCode}")
-    '</c:forEach>'
-    '<c:forEach items="${common.office}" var="office">'
-    	office_data.push("${office.cName}")
-    	office_val.push("${office.cCode}")
-    '</c:forEach>'
+    </c:forEach>
+    <c:forEach items="${common.country}" var="country">
+    	country_data.push("${country.cName}")
+    	country_val.push("${country.cCode}")
+    </c:forEach>
+    	 <c:forEach items="${common.office}" var="office">
+     	office_data.push("${office.cName}")
+     	office_val.push("${office.cCode}")
+     </c:forEach>
+    
+    <c:forEach items="${dept}" var="dept">
+    	var num ='';
+    	for(var i=1;i<${dept.level};i++){
+    		num += "&nbsp;&nbsp;"
+    	}
+    	dept_data.push(num+"${dept.dept_nm}"+" ${dept.org_nm}");
+    	dept_val.push("${dept.dept_no}")
+    </c:forEach>
       
   	</script>
   	<script src="/js/manager.js" type="text/javascript"></script>
@@ -62,7 +73,8 @@
                 	<select id="keyword" class="form-control mb-2 mr-sm-2 mb-sm-0">
                 		<option value="">선택</option>
                 		<option value="name">이름</option>
-                		<option value="division">부서</option>
+                		<option value="country">사업국가</option>
+                		<option value="dept">부서</option>
                 		<option value="position">직위</option>
                 		<option value="office">사무실</option>
                 		<option value="status">상태</option>
@@ -86,8 +98,10 @@
         </div>
     </div>
 
-    <div id="regist" style="display: none">
+    <div id="regist">
         <form id="regForm">
+        	<input type="hidden" id="basic_dept" name="basic_dept">
+        	<input type="hidden" id="division" name="division">
             <div class="form-group">
                 <label for="empNo">사번</label>
                 <input type="text" class="form-control" id="empNo" name="empNo">
@@ -106,18 +120,40 @@
                 </select>
 
             </div>
+            <div class="form-group">
+                <label for="country">사업국가</label>
+                <select class="form-control" id="country" name="country">
+                <option value="">선택하세요</option>
+	                <c:forEach var="country" items="${common.country }">               	
+	                		<option value="${country.cCode }">${country.cName }</option>
+                </c:forEach>
+                </select>
+
+            </div>
              <div class="form-group">
                 <label for="division">부서</label>
-                <select class="form-control" id="division" name="division">
-	                <option value=""></option>
-	                <c:forEach var="division" items="${common.division }">
-	                	<option value="${division.cCode }">${division.cName }</option>
-	                </c:forEach>
+                <select class="form-control dept" id="first_dept" name="first_dept">
+	                <option value="">## NONE ##</option>
                 </select>
             </div>
+             <div class="form-group">
+              <select class="form-control dept" id="second_dept" name="second_dept">
+	                <option value="">## NONE ##</option>
+                </select>
+             </div>
+              <div class="form-group">
+              <select class="form-control dept" id="three_dept" name="three_dept">
+	                <option value="">## NONE ##</option>
+                </select>
+             </div>
+              <div class="form-group">
+              <select class="form-control dept" id="four_dept" name="four_dept">
+	                <option value="">## NONE ##</option>
+                </select>
+             </div>
             <div class="form-group ga_only">
                 <label for="office_number">사무실전화번호</label>
-                <input type="text" class="form-control" name="office_number" maxlength="12" value="02-6004-">
+                <input type="tel" class="form-control" name="office_number" id="office_number" maxlength="12">
             </div>
             <div class="form-group">
                 <label for="seat">좌석</label>
@@ -145,13 +181,15 @@
             <button type="button" id="btnCancel" class="btn btn-default">Cancel</button>
         </form>
     </div>
-    <div id="modify" style="display: none">
+    <div id="modify">
         <form id="mdfForm" enctype="multipart/form-data">
         	
             <input type="hidden" class="form-control" id="eempNo" name="empNo">
             <input type="hidden" class="form-control" id="eemail" name="email">
             <input type="hidden" class="form-control" id="original_name">
-            <input type="hidden" class="form-control" id="isManager">            
+            <input type="hidden" class="form-control" id="isManager">
+            <input type="hidden" id="ebasic_dept" name="basic_dept">
+            <input type="hidden" id="edivision" name="division">  
             <div class="form-group" style="text-align: center;">  
 	       		<img alt="사진" src="/images/profileImage/default_profile.jpg" width="150px" height="170px" id="profile">
 	        </div>
@@ -168,18 +206,40 @@
 	                </c:forEach>
                 </select>
             </div>
-             <div class="form-group">
-                <label for="edivision">부서</label>
-                <select class="form-control" id="edivision" name="division">
-                	<option value=""></option>
-	                <c:forEach var="division" items="${common.division }">
-	                	<option value="${division.cCode }">${division.cName }</option>
+            <div class="form-group">
+                <label for="country">사업국가</label>
+                <select class="form-control" id="ecountry" name="country">
+	                <option value="">선택하세요</option>
+	                <c:forEach var="country" items="${common.country }">
+	                	<option value="${country.cCode }">${country.cName }</option>
 	                </c:forEach>
                 </select>
+
             </div>
+             <div class="form-group">
+                <label for="division">부서</label>
+                <select class="form-control dept" id="efirst_dept" name="first_dept">
+	                <option value="">## NONE ##</option>
+                </select>
+            </div>
+             <div class="form-group">
+              <select class="form-control dept" id="esecond_dept" name="second_dept">
+	                <option value="">## NONE ##</option>
+                </select>
+             </div>
+              <div class="form-group">
+              <select class="form-control dept" id="ethree_dept" name="three_dept">
+	                <option value="">## NONE ##</option>
+                </select>
+             </div>
+              <div class="form-group">
+              <select class="form-control dept" id="efour_dept" name="four_dept">
+	                <option value="">## NONE ##</option>
+                </select>
+             </div>
             <div class="form-group ga_only">
                 <label for="office_number">사무실전화번호</label>
-                <input type="text" class="form-control" id="office_number" name="office_number" maxlength="12" value="02-6004-">
+                <input type="text" class="form-control" id="eoffice_number" name="office_number" maxlength="12">
             </div>
             <div class="form-group">
                 <label for="seat">좌석</label>

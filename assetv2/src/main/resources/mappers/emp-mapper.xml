@@ -7,11 +7,20 @@
     	select 
     	e.employeeNumber as empNo,
     	e.name as name,
-    	(select DTL_C_NM from CMCDDTLM c where c.GRP_C='division' and c.DTL_C=division) as division,
     	(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='position' and c1.DTL_C=position) as position,
         e.division as dcode,
         e.position as pcode,
+        e.basic_dept,
+        (select dept_nm from dept where dept_no=e.basic_dept) basic_dept_nm,
+        (select DTL_C_NM from CMCDDTLM c2 where c2.GRP_C='organization' and c2.DTL_C in(select org_no from dept where dept_no=e.basic_dept)) as basic_dept_org_nm,
+        e.first_dept,
+        ifnull((select dept_nm from dept where dept_no=e.first_dept),"") first_dept_nm,
+        ifnull((select DTL_C_NM from CMCDDTLM c3 where c3.GRP_C='organization' and c3.DTL_C in(select org_no from dept where dept_no=e.first_dept)),"") as first_dept_org_nm,
+        e.second_dept,
+        e.three_dept,
+        e.four_dept,
         e.gender,
+        e.country,
         e.joinDate,
         e.status,
         e.manager,
@@ -20,7 +29,9 @@
         e.office,
         e.seat,
         e.profile_name,
-        e.office_number
+        e.office_number,
+        (SELECT DTL_C_NM from CMCDDTLM c where c.GRP_c='color' and c.DTL_C = (SELECT color from dept where dept_no=e.division)) color
+        
         from employee e
         <where>
         	<if test="search!=null and search!='' and keyword!=null and keyword!=''">
@@ -28,6 +39,9 @@
 	        		<when test="keyword=='name'">
 	        			${keyword} like concat('%',#{search},'%')
 	        		</when>
+	        		<when test="keyword=='dept'">
+						and (first_dept=#{search} or second_dept=#{search} or three_dept=#{search} or four_dept=#{search})
+					</when>
 	        		<otherwise>
 	        			${keyword}=#{search}
 	        		</otherwise>
@@ -54,13 +68,13 @@
   	position,
   	gender,
   	joinDate
-  	from employee where name=#{userName}
+  	from employee where employeeNumber=#{empNo}
   </select>
   <insert id="insert">
-  	insert into employee values(#{empNo},#{name},#{division},#{position},#{gender},#{joinDate},'y',#{email},'n',#{office},#{seat},null,#{office_number})
+  	insert into employee values(#{empNo},#{name},#{first_dept},#{country},#{position},#{gender},#{joinDate},'y',#{email},'n',#{office},#{seat},null,#{office_number},#{first_dept},#{second_dept},#{three_dept},#{four_dept},#{basic_dept})
   </insert>
   <update id="update">
-  	update employee set division=#{division},position=#{position},status=#{status},manager=#{manager},office=#{office},seat=#{seat},office_number=#{office_number} where employeeNumber=#{empNo}
+  	update employee set division=#{first_dept},first_dept=#{first_dept},second_dept=#{second_dept},three_dept=#{three_dept},four_dept=#{four_dept},basic_dept=#{basic_dept},position=#{position},country=#{country},status=#{status},manager=#{manager},office=#{office},seat=#{seat},office_number=#{office_number} where employeeNumber=#{empNo}
   </update>
   <delete id="delete">
   	delete from employee where employeeNumber=#{empNo}
@@ -73,6 +87,9 @@
 	        		<when test="keyword=='name'">
 	        			${keyword} like concat('%',#{search},'%')
 	        		</when>
+	        		<when test="keyword=='dept'">
+						and (first_dept=#{search} or second_dept=#{search} or three_dept=#{search} or four_dept=#{search})
+					</when>
 	        		<otherwise>
 	        			${keyword}=#{search}
 	        		</otherwise>
@@ -87,27 +104,121 @@
   	select manager from employee where employeeNumber=#{empNo}
   </select>
   <select id="mgrList" resultType="empVo">
-  	select name,email,employeeNumber empNo from employee 
+  	select name,email,employeeNumber empNo,division dcode,position pcode,
+  	(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='position' and c1.DTL_C=position) as position,
+  	(SELECT CONCAT(dept_nm,' ', DTL_C_NM) AS dept_nm FROM dept d, CMCDDTLM c where c.GRP_C='organization' and c.DTL_C = d.org_no and dept_mgr_no=2 and d.dept_no = division) division 
+  	 from employee 
   	<where>
   		<if test="mgr!=null and mgr!=''">
   			name like concat('%',#{mgr},'%') 
   		</if>
   		<if test="division!=null and division!=''">
   			and division=#{division}
-  		</if>	
+  		</if>
+  		
   	</where>
   	
   </select>
   <select id="seatCount" resultType="seatDto">
-  	SELECT division as dCode,count(*) count,office,DTL_C_NM division 
+  	SELECT division as dCode,count(*) count,office,
+  	(SELECT CONCAT(dept_nm,' ', DTL_C_NM) AS dept_nm FROM dept d, CMCDDTLM c where c.GRP_C='organization' and c.DTL_C = d.org_no and dept_mgr_no=2 and d.dept_no =e.division) division,
+  	(SELECT DTL_C_NM from CMCDDTLM c where c.GRP_c='color' and c.DTL_C = (SELECT color from dept where dept_no=e.division)) color
   	FROM 
-  		assetdb.employee e,assetdb.CMCDDTLM c 
+  		employee e 
   	where 
-  		e.division=c.DTL_C and c.GRP_C='division' and seat like '%n%' 
+  		seat like '%n%' and country = 'kr'
   	group by division order by office desc ; 
   </select>
   
   <update id="updateImg">
   	update employee set profile_name=#{profile_name} where employeeNumber=#{empNo}
   </update>
+  
+  <select id="selectDeptMgr" resultType="empVo">
+  	select name,employeeNumber as empNo from employee
+  	where
+  		position &gt; 1
+  	and
+  		employeeNumber not in(select emp_no from dept where emp_no is not null)
+	and country=#{country} 
+
+  </select>
+  
+  <select id="selectOrgList" resultType="Map">
+  	select 
+  		name,
+  		(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='position' and c1.DTL_C=position) as pos_nm,
+  		basic_dept
+  	from employee
+  	where employeeNumber not in(select emp_no from dept where emp_no is not null and country=#{country}) and country=#{country}
+    order by position desc,joinDate asc
+  </select>
+  <select id="selectEmpCount" resultType="Map">
+  
+  select e.division,count(*) count,(select dept_nm from dept where emp_no=e.employeeNumber) div_nm
+  from employee e where e.employeeNumber="G00001"
+  group by div_nm
+  union
+  	(SELECT e.division,count(*) count,
+  	(SELECT CONCAT(dept_nm,' ', DTL_C_NM) AS dept_nm FROM dept d, CMCDDTLM c where c.GRP_C='organization' and c.DTL_C = d.org_no and dept_mgr_no in(select d1.dept_no from dept d1 where dept_nm=#{country} and org_no=1)  and d.dept_no =e.division) div_nm
+  	FROM 
+  		employee e 
+  	where 
+  		country = #{country}
+  	group by div_nm)
+  </select>
+  
+  <update id="updateCountry">
+  		update employee set country=#{country} where division=#{dept_no}
+  </update>
+  
+  <update id="updateHighLevelDept">
+  		update employee set four_dept=three_dept,three_dept=second_dept,second_dept=first_dept,first_dept=#{dept_mgr_no},division=#{dept_mgr_no} where division=#{dept_no}
+  </update>
+  <update id="updateSecondLevelDept">
+  		update employee set four_dept=second_dept,three_dept=first_dept,second_dept=#{second_dept},first_dept=#{first_dept},division=#{first_dept} where division=#{division}
+  </update>
+  <update id="updateDownSecondLevelDept">
+  		update employee set first_dept=second_dept,division=second_dept,second_dept=three_dept,three_dept=four_dept,four_dept = 0 where second_dept=#{dept_no}
+  </update>
+  
+  <update id="updateDownThreeLevelDept">
+  		update employee set first_dept=three_dept,division=three_dept,second_dept=four_dept,three_dept= 0,four_dept=0 where three_dept=#{dept_no}
+  </update>
+  
+  <update id="updateThreeLevelDept">
+  		update employee set four_dept=three_dept,three_dept=second_dept,second_dept=#{second_dept},first_dept=#{first_dept},division=#{first_dept} where second_dept=#{division}
+  </update>
+  <update id="updateFourLevelDept">
+  		update employee set first_dept=#{first_dept},second_dept=#{second_dept},division=#{first_dept} where three_dept=#{division}
+  </update>
+  <update id="updateFiveLevelDept">
+  		update employee set first_dept=#{first_dept},second_dept=#{second_dept},three_dept=four_dept,four_dpet=0,division=#{first_dept} where four_dept=#{division}
+  </update>
+  
+  
+  
+   <update id="updateChangefirstLevelDept">
+  		update employee set first_dept=#{dept_mgr_no},division=#{dept_mgr_no} where second_dept=#{dept_no}
+  </update>
+  <update id="updateChangeSecondLevelDept">
+  		update employee set first_dept=#{dept_mgr_no},division=#{dept_mgr_no},second_dept=three_dept,three_dept=four_dept,four_dept=0 where three_dept=#{dept_no}
+  </update>
+   <update id="updateChangeThreeLevelDept">
+  		update employee set first_dept=#{dept_mgr_no},division=#{dept_mgr_no},second_dept=four_dept,three_dept=0,four_dept=0 where four_dept=#{dept_no}
+  </update>
+  
+  
+  
+  
+  <update id="updateTeamThreeDept">
+  		update employee set first_dept=#{first_dept},second_dept=#{second_dept},three_dept=#{division},four_dept=0,division=#{first_dept} where four_dept=#{division} || three_dept=#{division} || second_dept=#{division}
+  </update>
+  <update id="updateTeamFourDept">
+    	update employee set first_dept=#{first_dept},second_dept=#{second_dept},three_dept=#{three_dept},four_dept=#{division},division=#{first_dept} where four_dept=#{division} || three_dept=#{division} || second_dept=#{division}
+  </update>
+  
+  
+ 
+  
 </mapper>

@@ -56,19 +56,36 @@
         	<input type="hidden" name="start" id="start">
         	<input type="hidden" name="end" id="end">
         	<input type="hidden" name="no" id="no">
+        	<input type="hidden" name="division" id="division">
+        	<input type="hidden" name="basic_dept" id="basic_dept">
             <div class="form-group">
                 <label for="name">이름</label>
                 <input type="text" class="form-control" id="name" name="name" maxlength="10"/>
             </div>
              <div class="form-group">
-                <label for="division">부서</label>
-                <select class="form-control" id="division" name="division">
-	                <option value=""></option>
-	                <c:forEach var="division" items="${common.division }">
-	                	<option value="${division.cCode }">${division.cName }</option>
+                <label for="first_dept">부서</label>
+                <select class="form-control" id="first_dept" name="first_dept">
+	                <option value="">## NONE ##</option>
+	                <c:forEach var="dept" items="${dept}">
+	                	<option value="${dept.dept_no }">${dept.dept_nm}</option>
 	                </c:forEach>
                 </select>
             </div>
+             <div class="form-group">
+              <select class="form-control dept" id="second_dept" name="second_dept">
+	                <option value="">## NONE ##</option>
+                </select>
+             </div>
+              <div class="form-group">
+              <select class="form-control dept" id="three_dept" name="three_dept">
+	                <option value="">## NONE ##</option>
+                </select>
+             </div>
+              <div class="form-group">
+              <select class="form-control dept" id="four_dept" name="four_dept">
+	                <option value="">## NONE ##</option>
+                </select>
+             </div>
             <div class="form-group">
                 <label for="name">관리자</label>
                 <div class="input-col"><ul id="mgr" class="auto"></ul></div>
@@ -127,9 +144,9 @@
 	        	<label for="ext">ext</label>
 	        	<input type="text" class="form-control" id="ext" name="ext"/>
 	    	</div>
-	    	<div class="form-group" style="display: none;" id="ga_only">
-                <label for="edivision">사무실전화번호</label>
-                <input type="text" class="form-control" id="office_number" name="office_number" maxlength="12" value="02-6004-">
+	    	<div class="form-group" id="ga_only">
+                <label for="office_number">사무실전화번호</label>
+                <input type="text" class="form-control" id="office_number" name="office_number" maxlength="12">
             </div>
 	    	<button type="button" id="btnSuccess" class="btn btn-default">Success</button>
 	    	<button type="button" class="btn btn-default btnCancel">Cancel</button>

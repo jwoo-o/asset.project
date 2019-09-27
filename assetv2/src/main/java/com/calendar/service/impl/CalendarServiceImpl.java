@@ -127,10 +127,16 @@ public class CalendarServiceImpl implements CalendarService {
 		vo.setName(dto.getName());
 		vo.setGender(dto.getGender());
 		vo.setDivision(dto.getDivision());
+		vo.setBasic_dept(dto.getBasic_dept());
+		vo.setFirst_dept(dto.getFirst_dept());
+		vo.setSecond_dept(dto.getSecond_dept());
+		vo.setThree_dept(dto.getThree_dept());
+		vo.setFour_dept(dto.getFour_dept());
 		vo.setPosition(dto.getPosition());
 		vo.setJoinDate(dto.getJoinDate());
 		vo.setEmail(dto.getEmail());
 		vo.setSeat(dto.getSeat());
+		vo.setCountry("kr");
 		vo.setOffice_number(dto.getOffice_number());
 		OfficeUtility.input(vo);
 		dto.setId(dto.getEmail().split("@")[0]);
