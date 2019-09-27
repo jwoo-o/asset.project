@@ -7,10 +7,12 @@
 		select * from planned p
 	</select>
 	<insert id="insertCal">
-		insert into planned (name,division,addNrein,seat,title,start,end,mgr,mgr_email,fstRgtWkrNm,fstRgtDtm,lstMdfWkrNm,lstMdfDtm) values(#{name},#{division},#{addNrein},#{seat},#{title},#{start},#{end},#{mgr},#{mgr_email},#{fstRgtWkrNm},now(),#{lstMdfWkrNm},now())
+		insert into planned (name,division,addNrein,seat,title,start,end,mgr,mgr_email,first_dept,second_dept,three_dept,four_dept,basic_dept,fstRgtWkrNm,fstRgtDtm,lstMdfWkrNm,lstMdfDtm) 
+		values
+		(#{name},#{division},#{addNrein},#{seat},#{title},#{start},#{end},#{mgr},#{mgr_email},#{first_dept},#{second_dept},#{three_dept},#{four_dept},#{basic_dept},#{fstRgtWkrNm},now(),#{lstMdfWkrNm},now())
 	</insert>
 	<update id="updateCal">
-		update planned set name=#{name},division=#{division},addNrein=#{addNrein},seat=#{seat},title=#{title},mgr=#{mgr},mgr_email=#{mgr_email},lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where no=#{no}
+		update planned set name=#{name},division=#{division},addNrein=#{addNrein},first_dept=#{first_dept},second_dept=#{second_dept},three_dept=#{three_dept},four_dept=#{four_dept},basic_dept=#{basic_dept},seat=#{seat},title=#{title},mgr=#{mgr},mgr_email=#{mgr_email},lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where no=#{no}
 	</update>
 	<update id="updateDate">
 		update planned set start=#{start},end=#{end},lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where no=#{no}
@@ -25,9 +27,9 @@
 		update planned set ip_voip='y',lstMdfWkrNm=#{lstMdfWkrNm},lstMdfDtm=now() where no=#{no}
 	</update>
 	<select id="selectIp" resultType="calendarVo">
-		select p.*,(select DTL_C_NM from CMCDDTLM where GRP_C='division' and DTL_C=p.division) as divNm from planned p where p.joinYN='y' and p.ip_voip='n' order by p.start asc
+		select p.*,(SELECT CONCAT(dept_nm,' ', DTL_C_NM) AS dept_nm FROM dept d, CMCDDTLM c where c.GRP_C='organization' and c.DTL_C = d.org_no and dept_mgr_no=2 and d.dept_no =p.division) as divNm from planned p where p.joinYN='y' and p.ip_voip='n' order by p.start asc
 	</select>
 	<select id="selectEx" resultType="calendarVo">
-		select name,(select DTL_C_NM from CMCDDTLM where GRP_C='division' and DTL_C=p.division) as divNm,seat from planned p where p.joinYN='n'
+		select name,(SELECT CONCAT(dept_nm,' ', DTL_C_NM) AS dept_nm FROM dept d, CMCDDTLM c where c.GRP_C='organization' and c.DTL_C = d.org_no and dept_mgr_no=2 and d.dept_no =p.division) as divNm,seat from planned p where p.joinYN='n'
 	</select>
 </mapper>

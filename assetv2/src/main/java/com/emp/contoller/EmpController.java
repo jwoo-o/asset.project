@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.calendar.vo.CalendarVo;
 import com.core.service.CommonServie;
+import com.core.service.DeptService;
 import com.core.vo.ManagerDto;
 import com.emp.service.EmpService;
 import com.emp.vo.EmpDto;
@@ -35,7 +36,10 @@ public class EmpController {
 	
 	@Inject
 	private EmpService service;
-	@Inject CommonServie cService;
+	@Inject 
+	private CommonServie cService;
+	@Inject
+	private DeptService dService;
 	
 	@RequestMapping(value="/emp/assetSearch/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> searchEmp(@RequestBody EmpDto dto){
@@ -55,6 +59,7 @@ public class EmpController {
 	@RequestMapping(value="/emp")
 	public String emp(Model model) throws Exception {
 		model.addAttribute("common", cService.selCommonLst());
+		model.addAttribute("dept", dService.selDeptSearch());
 		return "manager";
 	}
 	@RequestMapping(value="/emp/list/proc")
@@ -76,8 +81,7 @@ public class EmpController {
 		logger.debug(vo.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			service.insEmpRst(vo);
-			map.put("msg","0001");
+			map = service.insEmpRst(vo);
 		}catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
@@ -91,11 +95,17 @@ public class EmpController {
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			service.updEmpMdf(vo,manager);
-			map.put("msg","0001");
+			map = service.updEmpMdf(vo,manager);
+			
 		}catch (Exception e) {
 			// TODO: handle exception
-			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
+			if(e.getMessage().equals("부서장인 상태에서 부서를 변경 할 수 없습니다")) {
+				map.put("msg", "부서장인 상태에서 부서를 변경 할 수 없습니다");
+				
+			}else {
+				map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
+			}
+			
 			logger.error(e.getMessage(),e);
 		}
 		return map;
@@ -106,11 +116,9 @@ public class EmpController {
 		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			service.delEmpDl(vo,manager);
-			map.put("msg","0001");
+			map = service.delEmpDl(vo,manager);
 		}catch (Exception e) {
-			// TODO: handle exception
-			
+			// TODO: handle exception	
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
 			logger.error(e.getMessage(),e);
 		}
@@ -139,7 +147,7 @@ public class EmpController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			map =  service.selSeatList(dto);
-			map.put("msg","0001");
+		
 		}catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
@@ -157,7 +165,6 @@ public class EmpController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {			
 			map = service.updImgUpload(dto);
-			map.put("msg","0001");
 		}catch (Exception e) {
 			// TODO: handle exception
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
@@ -167,5 +174,25 @@ public class EmpController {
 		
 	}
 	
+	@RequestMapping(value="/emp/organization",method=RequestMethod.GET)
+	public String organization() throws Exception{
+	
+		return "organization";
+	}
+	@RequestMapping(value="/emp/organization/proc",method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> organizationProc(@RequestBody String country) throws Exception{
+	
+		logger.debug("country : {}",country);
+		Map<String, Object> map = new HashMap<String,Object>();
+		try {
+			map = dService.selOrgChart(country);
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage(),e);
+			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
+		}
+		
+		return map;
+	}
 	
 }

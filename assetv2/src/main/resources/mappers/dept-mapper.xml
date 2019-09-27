@@ -5,44 +5,49 @@
 <mapper namespace="dept">
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="dept_no">
+
 		insert into dept (
 			dept_nm,
-			country,
 			dept_mgr_no,
 			org_no,
+			country,
 			emp_no,
 			use_yn,
+			color,
 			fstRgtWkrNm,
 			fstRgtDtm,
 			lstMdfWkrNm,
 			lstMdfDtm
 		)values(
 			#{dept_nm},
-			#{country},
 			#{dept_mgr_no},
 			#{org_no},
-			#{emp_no},
+			#{country},
+			#{emp_no},	
 			'y',
+			#{color},
 			#{fstRgtWkrNm},
 			now(),
-			#{lstMdfWkrNm}
-			,now()
+			#{lstMdfWkrNm},
+			now()
 		)
 	</insert>
 	
 	<select id="select" resultType="deptViewDto">
 		
 		select 
-			dept_no,
-			dept_nm,
-			country,
-			dept_mgr_no,
-			(select dept_nm from dept d1 where d1.dept_no=dept_mgr_no) dept_mgr_nm,
-			(select name from employee e1 where e1.employeeNumber=emp_no) emp_nm,
+			d.dept_no,
+			d.dept_nm,
+			d.dept_mgr_no,
+			(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='organization' and c1.DTL_C=org_no) org_nm,
+			(select d1.dept_nm from dept d1 where d1.dept_no=d.dept_mgr_no) dept_mgr_nm,
+				(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='country' and c1.DTL_C=country) country,
+			(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='organization' and c1.DTL_C in(select org_no from dept d2 where d2.dept_no=d.dept_mgr_no)) mgr_org_nm,
+			ifnull((select name from employee e1 where e1.employeeNumber=emp_no),"") emp_nm,
 			emp_no,
 			lstMdfWkrNm,
 			lstMdfDtm
-		from dept
+		from dept d
 		<where>
 			use_yn = 'y'
 			<if test="search!=''and search!=null">
@@ -50,14 +55,30 @@
 					<when test="keyword=='dept_nm'">
 						and dept_nm like CONCAT('%',#{search},'%')
 					</when>
+					<when test="keyword=='emp_nm'">
+						and emp_no=(select employeeNumber from employee where name=#{search})
+					</when>	
 					<otherwise>
 						and ${keyword} = #{search}
-					</otherwise>
+					</otherwise>				
 				</choose>
 			</if>
 		</where>
-		order by 
+		order by org_no
+		limit ${next},10
 	</select>
+	<update id="update">
+		update dept 
+		set 
+			dept_mgr_no=#{dept_mgr_no},
+			org_no=#{org_no},
+			emp_no=#{emp_no},
+			color=#{color},
+			lstMdfWkrNm=#{lstMdfWkrNm},
+			lstMdfDtm=now()
+		where
+		dept_no = #{dept_no}
+	</update>
 	<select id="selectCount" resultType="int">
 		select count(*) from dept
 		<where>
@@ -67,12 +88,141 @@
 					<when test="keyword=='dept_nm'">
 						and dept_nm like CONCAT('%',#{search},'%')
 					</when>
+					<when test="keyword=='emp_nm'">
+						and emp_no=(select employeeNumber from employee where name=#{search})
+					</when>
 					<otherwise>
 						and ${keyword} = #{search}
-					</otherwise>
+					</otherwise>				
 				</choose>
 			</if>
 		</where>
 		
 	</select>
+	
+	
+	<select id="selectMgr" resultType="deptVo">
+		select dept_no,dept_nm,(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='organization' and c1.DTL_C=org_no) org_nm
+		from dept
+		where
+			<choose>
+				<when test="org_no>4">
+					org_no &lt; #{org_no} and org_no &gt; 1
+					and use_yn = 'y'
+				</when>
+				<otherwise>
+					org_no &lt; #{org_no}
+					and use_yn = 'y'
+				</otherwise>
+			</choose>
+			<if test="org_no>1">
+				and country = #{country}
+			</if>	 
+			
+			
+	</select>
+	<select id="selectDtl" resultType="deptViewDto">
+		select 
+			fa.dept_no,
+			fa.dept_nm,
+			(select c1.DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='organization' and c1.DTL_C=fa.org_no) org_nm,
+			fa.org_no,
+			fa.emp_no,
+			(select name from employee where employeeNumber=fa.emp_no) emp_nm,
+			fa.country,
+			fa.color,
+			fa.dept_mgr_no,
+			(select node.dept_nm from dept node where node.dept_no = fa.dept_mgr_no) dept_mgr_nm,
+			(select c2.DTL_C_NM from CMCDDTLM c2 where c2.GRP_C='organization' and c2.DTL_C in(select s.org_no from dept s where s.dept_no=fa.dept_mgr_no)) mgr_org_nm
+		from dept fa
+		where
+			fa.dept_no = #{dept_no}
+		
+	</select>
+	<select id="selectSubList" resultType="deptViewDto">
+		select 
+			fa.dept_no,
+			fa.dept_nm,
+			(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='organization' and c1.DTL_C=fa.org_no) org_nm,
+			fa.emp_no,
+			ifnull((select name from employee where employeeNumber=fa.emp_no),'') emp_nm
+		from dept fa
+		where
+			fa.dept_mgr_no = #{dept_no} and use_yn='y'
+		
+	</select>
+	
+	<select id="selectOrgChart" resultType="Map">
+		select 
+			dept_no,
+			dept_nm,
+			dept_mgr_no,
+			(select name from employee where employeeNumber=emp_no) emp_nm,
+			(select DTL_C_NM from CMCDDTLM where GRP_C='position' and DTL_C in(select position from employee where employeeNumber=emp_no)) position,
+			ifnull((select DTL_C_NM from CMCDDTLM where GRP_C='organization' and DTL_C=org_no and not DTL_C_NM="CEO"),"") org_nm
+		from dept 
+		where 
+			dept_nm="CEO" 
+		UNION 
+		(select 
+			dept_no,
+			dept_nm,
+			dept_mgr_no,
+			(select name from employee where employeeNumber=emp_no) emp_nm,
+			(select DTL_C_NM from CMCDDTLM where GRP_C='position' and DTL_C in(select position from employee where employeeNumber=emp_no)) position,
+			ifnull((select DTL_C_NM from CMCDDTLM where GRP_C='organization' and DTL_C=org_no and not DTL_C_NM="Country"),"") org_nm
+		from dept 
+		where 
+			country=#{country} and use_yn='y')
+	</select>
+	<select id="selectDeptSearch" resultType="deptViewDto">
+	  SELECT CASE WHEN LEVEL-1 > 0 then CONCAT(CONCAT(REPEAT('', level  - 1),'┗ '), dept.dept_nm)
+	                 ELSE dept.dept_nm
+	           END AS dept_nm
+	     , dept.dept_no
+	     ,(select c.DTL_C_NM from CMCDDTLM c where c.GRP_C = 'organization' and c.DTL_C = dept.org_no) org_nm
+	     ,fnc.level
+	  FROM
+	     (SELECT get_group_tree() AS id, @level AS level
+	        FROM (SELECT @start_with:=2, @id:=@start_with, @level:=0) vars
+	          JOIN dept
+	         WHERE @id IS NOT NULL and use_yn='y') fnc
+	  JOIN dept dept ON fnc.id = dept.dept_no
+	</select>
+	<select id="selectCountry" resultType="int">
+		select dept_no from dept where dept_nm=#{dept_nm}
+	</select>
+	
+	<select id="selectCEO" resultType="deptViewDto">
+		select 
+			fa.dept_no,
+			fa.dept_nm,
+			fa.emp_no,
+			ifnull((select name from employee where employeeNumber=fa.emp_no),'') emp_nm
+		from dept fa
+		where
+			fa.dept_no = 1
+		
+	</select>
+	
+	<select id="selectDivision" resultType="deptViewDto">
+		select concat(dept_nm,' ',DTL_C_NM) dept_nm,dept_no from dept , CMCDDTLM where GRP_C='organization' and DTL_C = org_no and dept_mgr_no=2
+	</select>
+	
+	<select id="selectMgrEmp" resultType="deptVo">
+		select dept_no from dept where emp_no=#{empNo}
+	</select>
+	
+	<select id="selectHighLevel" resultType="Map">
+		select
+			d1.dept_no d1_no,d1.org_no d1_org_no,
+		    d2.dept_no d2_no,d2.org_no d2_org_no,
+		    d3.dept_no d3_no,d3.org_no d3_org_no
+   
+		from
+		dept d1 left join dept d2 on d1.dept_no=d2.dept_mgr_no left join dept d3 on d2.dept_no=d3.dept_mgr_no where d3.dept_no=#{dept_no}
+    
+	</select>
+	
+	
 </mapper>

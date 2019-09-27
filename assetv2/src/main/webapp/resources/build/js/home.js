@@ -1,6 +1,7 @@
 /**
  * home.jsp 스크립트 파일
  */
+var isRun = false;
 		$(function(){
 			
 			var s = 'assetNo';
@@ -86,6 +87,14 @@
 				popup(url, title, x, y);
 				
 			})
+			$("#OrganizationChart").click(function() {
+				 var x = 2000;
+			 	 var y = 1000;
+				 var url = '/emp/organization';
+				 var title = 'organization chart';
+				    
+				    popup(url,title,x,y);
+			})
 			
 			
 			$("#myPage").click(function() {
@@ -149,6 +158,10 @@
 				
 				$("#sort").val(sort);
 				$("#key").val(key);
+				if(isRun == true){
+        			return;
+        		}
+        		isRun = true;
 				var data = $("#asset_search").serializeObject(),dataStr = JSON.stringify(data);
 				
 				$.ajax({
@@ -203,6 +216,7 @@
 					}else{
 						alert(data.msg);
 					}
+					isRun = false;
 				}).fail(function(e) {
 					if(e.status==401)
 						location.href="/"

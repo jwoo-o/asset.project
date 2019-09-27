@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -15,10 +16,12 @@ import org.springframework.stereotype.Service;
 import com.asset.service.dao.AssetDao;
 import com.calendar.service.dao.CalendarDao;
 import com.calendar.vo.CalendarVo;
+import com.core.service.dao.DeptDao;
 import com.core.service.dao.ManagerDao;
 import com.core.util.ManagerUtility;
 import com.core.util.OfficeUtility;
 import com.core.util.PageUtility;
+import com.core.vo.DeptVo;
 import com.core.vo.ManagerDto;
 import com.core.vo.ManagerVo;
 import com.emp.service.EmpService;
@@ -38,6 +41,9 @@ public class EmpServiceImpl implements EmpService {
 	private ManagerDao managerDao;
 	@Inject
 	private CalendarDao calendarDao;
+	@Inject
+	private DeptDao deptDao;
+	
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
@@ -49,7 +55,14 @@ public class EmpServiceImpl implements EmpService {
 		PageUtility.calc(dto);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("total", dao.selectCount(dto));
-		map.put("records", dao.selectList(dto));
+		
+		List<EmpVo> vo = dao.selectList(dto);
+		for (EmpVo empVo : vo) {
+			if(empVo.getFirst_dept()!=1) {
+				empVo.setFirst_dept_nm(empVo.getFirst_dept_nm()+" "+empVo.getFirst_dept_org_nm());
+			}
+		}
+		map.put("records", vo);
 		return map;
 	}
 
@@ -60,9 +73,8 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public void updEmpMdf(EmpVo vo,ManagerDto dto) throws Exception {
+	public Map<String, Object> updEmpMdf(EmpVo vo,ManagerDto dto) throws Exception {
 		// TODO Auto-generated method stub
-		
 		if(dao.exiManager(vo.getEmpNo()).equals("n")) {
 			if(vo.getManager()!=null) {
 				ManagerVo mVo = ManagerUtility.create(vo);
@@ -78,7 +90,7 @@ public class EmpServiceImpl implements EmpService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lstMdfWkrNm", dto.getmName());
 		map.put("empNo", vo.getEmpNo());
-		map.put("division", vo.getDivision());
+		map.put("division", vo.getFirst_dept());
 		map.put("position", vo.getPosition());
 		map.put("name", vo.getName());
 		map.put("office", vo.getOffice());
@@ -90,12 +102,29 @@ public class EmpServiceImpl implements EmpService {
 			map.put("status", "y");
 		}
 		assetDao.updateEmp(map);
-		dao.update(vo);
+		
+		map.clear();
+		DeptVo deptVo = deptDao.selectMgrEmp(vo.getEmpNo());
+		if(deptVo!=null) {
+			if(vo.getBasic_dept()==deptVo.getDept_no()) {
+				dao.update(vo);
+				map.put("msg", "0001");
+			}else {
+				throw new Exception("부서장인 상태에서 부서를 변경 할 수 없습니다");
+			}
+				
+		}else {
+			dao.update(vo);
+			map.put("msg", "0001");
+		}
+		return map;
+		
+		
 		
 	}
 
 	@Override
-	public void delEmpDl(EmpVo vo,ManagerDto dto)  throws Exception {
+	public Map<String, Object> delEmpDl(EmpVo vo,ManagerDto dto)  throws Exception {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lstMdfWkrNm", dto.getmName());
@@ -107,15 +136,23 @@ public class EmpServiceImpl implements EmpService {
 		map.put("name", "");
 		assetDao.updateEmp(map);
 		dao.delete(vo.getEmpNo());
-		if(vo.getManager().equals("y"))
+		if(vo.getManager().equals("y")) {
 			managerDao.deleteMgt(vo.getEmpNo());
+		}
+		map.clear();
+		map.put("msg","0001");
+		
+		return map;
 	}
 
 	@Override
-	public void insEmpRst(EmpVo vo) throws Exception {
+	public Map<String, Object> insEmpRst(EmpVo vo) throws Exception {
 		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
 		OfficeUtility.input(vo);
 		dao.insert(vo);
+		map.put("msg", "0001");
+		return map;
 	}
 
 	@Override
@@ -131,6 +168,7 @@ public class EmpServiceImpl implements EmpService {
 		map.put("records", dao.selectList(dto));
 		map.put("count",dao.selectSeatCount());
 		map.put("ex",calendarDao.selectEx());
+		map.put("msg", "0001");
 		return map;
 	}
 
@@ -150,7 +188,7 @@ public class EmpServiceImpl implements EmpService {
 		FileOutputStream fos = new FileOutputStream(file);
 		fos.write(dto.getProfile().getBytes());
 		fos.close();
-		
+		map.put("msg", "0001");
 		
 		
 		return map;

@@ -10,6 +10,7 @@ public class EmpVo {
 	private String position;
 	private String gender;
 	private String joinDate;
+	private String country;
 	private String pcode;
 	private String dcode;
 	private String status;
@@ -20,6 +21,16 @@ public class EmpVo {
 	private String seat;
 	private String profile_name;
 	private String office_number;
+	private int basic_dept;
+	private String basic_dept_nm;
+	private String basic_dept_org_nm;
+	private int first_dept;
+	private String first_dept_nm;
+	private String first_dept_org_nm;
+	private int second_dept;
+	private int three_dept;
+	private int four_dept;
+	private String color;
 	
 	
 	public String getPcode() {
@@ -124,20 +135,88 @@ public class EmpVo {
 	public void setOffice_number(String office_number) {
 		this.office_number = office_number;
 	}
+	
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	public int getBasic_dept() {
+		return basic_dept;
+	}
+	public void setBasic_dept(int basic_dept) {
+		this.basic_dept = basic_dept;
+	}
+	public int getFirst_dept() {
+		return first_dept;
+	}
+	public void setFirst_dept(int first_dept) {
+		this.first_dept = first_dept;
+	}
+	public int getSecond_dept() {
+		return second_dept;
+	}
+	public void setSecond_dept(int second_dept) {
+		this.second_dept = second_dept;
+	}
+	
+	public int getThree_dept() {
+		return three_dept;
+	}
+	public void setThree_dept(int three_dept) {
+		this.three_dept = three_dept;
+	}
+	public int getFour_dept() {
+		return four_dept;
+	}
+	public void setFour_dept(int four_dept) {
+		this.four_dept = four_dept;
+	}
+	
+	public String getBasic_dept_nm() {
+		return basic_dept_nm;
+	}
+	public void setBasic_dept_nm(String basic_dept_nm) {
+		this.basic_dept_nm = basic_dept_nm;
+	}
+	public String getBasic_dept_org_nm() {
+		return basic_dept_org_nm;
+	}
+	public void setBasic_dept_org_nm(String basic_dept_org_nm) {
+		this.basic_dept_org_nm = basic_dept_org_nm;
+	}
+	public String getFirst_dept_nm() {
+		return first_dept_nm;
+	}
+	public void setFirst_dept_nm(String first_dept_nm) {
+		this.first_dept_nm = first_dept_nm;
+	}
+	public String getFirst_dept_org_nm() {
+		return first_dept_org_nm;
+	}
+	public void setFirst_dept_org_nm(String first_dept_org_nm) {
+		this.first_dept_org_nm = first_dept_org_nm;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
 	@Override
 	public String toString() {
 		return "EmpVo [empNo=" + empNo + ", name=" + name + ", division=" + division + ", position=" + position
-				+ ", gender=" + gender + ", joinDate=" + joinDate + ", pcode=" + pcode + ", dcode=" + dcode
-				+ ", status=" + status + ", email=" + email + ", manager=" + manager + ", auth=" + auth + ", office="
-				+ office + ", seat=" + seat + ", profile_name=" + profile_name + ", office_number=" + office_number
-				+ ", getPcode()=" + getPcode() + ", getDcode()=" + getDcode() + ", getEmpNo()=" + getEmpNo()
-				+ ", getName()=" + getName() + ", getDivision()=" + getDivision() + ", getPosition()=" + getPosition()
-				+ ", getGender()=" + getGender() + ", getJoinDate()=" + getJoinDate() + ", getStatus()=" + getStatus()
-				+ ", getEmail()=" + getEmail() + ", getManager()=" + getManager() + ", getAuth()=" + getAuth()
-				+ ", getOffice()=" + getOffice() + ", getSeat()=" + getSeat() + ", getProfile_name()="
-				+ getProfile_name() + ", getOffice_number()=" + getOffice_number() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", gender=" + gender + ", joinDate=" + joinDate + ", country=" + country + ", pcode=" + pcode
+				+ ", dcode=" + dcode + ", status=" + status + ", email=" + email + ", manager=" + manager + ", auth="
+				+ auth + ", office=" + office + ", seat=" + seat + ", profile_name=" + profile_name + ", office_number="
+				+ office_number + ", basic_dept=" + basic_dept + ", basic_dept_nm=" + basic_dept_nm
+				+ ", basic_dept_org_nm=" + basic_dept_org_nm + ", first_dept=" + first_dept + ", first_dept_nm="
+				+ first_dept_nm + ", first_dept_org_nm=" + first_dept_org_nm + ", second_dept=" + second_dept
+				+ ", three_dept=" + three_dept + ", four_dept=" + four_dept + ", color=" + color + "]";
 	}
+	
+	
 	
 	
 	

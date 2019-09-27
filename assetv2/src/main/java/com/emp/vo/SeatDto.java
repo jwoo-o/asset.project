@@ -6,6 +6,7 @@ public class SeatDto {
 	private String division;
 	private String count;
 	private String office;
+	private String color;
 	
 	public String getdCode() {
 		return dCode;
@@ -31,9 +32,17 @@ public class SeatDto {
 	public void setOffice(String office) {
 		this.office = office;
 	}
+	
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
 	@Override
 	public String toString() {
-		return "SeatDto [dCode=" + dCode + ", division=" + division + ", count=" + count + ", office=" + office + "]";
+		return "SeatDto [dCode=" + dCode + ", division=" + division + ", count=" + count + ", office=" + office
+				+ ", color=" + color + "]";
 	}
 	
 	

@@ -29,7 +29,13 @@ public class CalendarJoinDto {
 	/**부서명*/
 	private String divNm;
 	/**좌석*/
-	private String seat;		
+	private String seat;	
+	
+	private int basic_dept;
+	private int first_dept;
+	private int second_dept;
+	private int three_dept;
+	private int four_dept;
 	/**최초등록작업자이름*/
 	private String fstRgtWkrNm;
 	/**최초등록일시*/
@@ -148,14 +154,47 @@ public class CalendarJoinDto {
 	public void setOffice_number(String office_number) {
 		this.office_number = office_number;
 	}
+	public int getBasic_dept() {
+		return basic_dept;
+	}
+	public void setBasic_dept(int basic_dept) {
+		this.basic_dept = basic_dept;
+	}
+	public int getFirst_dept() {
+		return first_dept;
+	}
+	public void setFirst_dept(int first_dept) {
+		this.first_dept = first_dept;
+	}
+	public int getSecond_dept() {
+		return second_dept;
+	}
+	public void setSecond_dept(int second_dept) {
+		this.second_dept = second_dept;
+	}
+	public int getThree_dept() {
+		return three_dept;
+	}
+	public void setThree_dept(int three_dept) {
+		this.three_dept = three_dept;
+	}
+	public int getFour_dept() {
+		return four_dept;
+	}
+	public void setFour_dept(int four_dept) {
+		this.four_dept = four_dept;
+	}
 	@Override
 	public String toString() {
 		return "CalendarJoinDto [no=" + no + ", name=" + name + ", division=" + division + ", empNo=" + empNo
 				+ ", position=" + position + ", gender=" + gender + ", joinDate=" + joinDate + ", email=" + email
 				+ ", id=" + id + ", ext=" + ext + ", office_number=" + office_number + ", posNm=" + posNm + ", divNm="
-				+ divNm + ", seat=" + seat + ", fstRgtWkrNm=" + fstRgtWkrNm + ", fstRgtDtm=" + fstRgtDtm
-				+ ", lstMdfWkrNm=" + lstMdfWkrNm + ", lstMdfDtm=" + lstMdfDtm + "]";
+				+ divNm + ", seat=" + seat + ", basic_dept=" + basic_dept + ", first_dept=" + first_dept
+				+ ", second_dept=" + second_dept + ", three_dept=" + three_dept + ", four_dept=" + four_dept
+				+ ", fstRgtWkrNm=" + fstRgtWkrNm + ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm=" + lstMdfWkrNm
+				+ ", lstMdfDtm=" + lstMdfDtm + "]";
 	}
+	
 	
 	
 	

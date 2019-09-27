@@ -197,6 +197,7 @@ body {
 	</section>
 </body>
 <script type="text/javascript">
+var isRun = false;
 	$(function () {
 		
 		$("#wkC").val("${map.cmcdGrpm.wkC }").prop("selected", true);
@@ -216,6 +217,10 @@ body {
 		 	}else if($("#vldStC").val()=="U"){
 		 		$("#grpC").val($("#vldStC").next().html())
 		 	}
+		 	if(isRun == true){
+    			return;
+    		}
+    		isRun = true;
 			var data = $("#formInput").serializeObject(),dataStr = JSON.stringify(data);
 			$.ajax({
 				url:"<c:url value='/common/register/proc'/>",
@@ -233,6 +238,7 @@ body {
 						$("#btnDl").show();
 					}
 					alert("Request Success");
+					isRun = false;
 				}else{
 					alert(data.msg);
 				}
@@ -243,6 +249,10 @@ body {
 			})
 		});
 		$("#btnDl").click(function() {
+			if(isRun == true){
+    			return;
+    		}
+    		isRun = true;
 			var data = $("#vldStC").next().html();
 			
 			$.ajax({
@@ -259,6 +269,7 @@ body {
 				}else{
 					alert(data.msg);
 				}
+				isRun = false;
 			}).fail(function(e) {
 				if(e.status == 401){
             		onErrorFunc(e);
@@ -342,6 +353,7 @@ body {
 		
 		$("#btnSvSubC").on('click', function() {
 		 
+			
 			var grpC = $("#grpC").val();
 			var data = [],func = 0;
 			$("#tableBody tr").each(function(i, elt) {
@@ -370,7 +382,10 @@ body {
 				alert("세부코드와 세부코드명은 필수 입력 항목입니다.");
 				return false;
 			}
-			
+			if(isRun == true){
+    			return;
+    		}
+    		isRun = true;
 			$.ajax({
 		   		url : "<c:url value='/common/subRegister/proc'/>"
 				, method : "post"
@@ -381,10 +396,11 @@ body {
 			.done(function(code){
 				if(code.msg=="0001"){
 					alert("Request Success");
-					
+					isRun = false;
 				}else{
 					alert(code.msg);
 				}
+				isRun = false;
 			}).fail(function(e) {
 				if(e.status == 401){
             		onErrorFunc(e);

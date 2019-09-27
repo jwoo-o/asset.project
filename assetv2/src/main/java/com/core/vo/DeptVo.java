@@ -10,10 +10,15 @@ public class DeptVo {
 	private String emp_no;
 	private String use_yn;
 	private String org_no;
+	private String org_nm;
+	private String mgr_org_nm;
+	private String status;
+	private String color;
 	private String fstRgtWkrNm;
 	private String fstRgtDtm;
 	private String lstMdfWkrNm;
 	private String lstMdfDtm;
+	
 	
 	
 	public int getDept_no() {
@@ -82,13 +87,44 @@ public class DeptVo {
 	public void setOrg_no(String org_no) {
 		this.org_no = org_no;
 	}
+	public String getOrg_nm() {
+		return org_nm;
+	}
+	public void setOrg_nm(String org_nm) {
+		this.org_nm = org_nm;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public String getMgr_org_nm() {
+		return mgr_org_nm;
+	}
+	public void setMgr_org_nm(String mgr_org_nm) {
+		this.mgr_org_nm = mgr_org_nm;
+	}
 	@Override
 	public String toString() {
 		return "DeptVo [dept_no=" + dept_no + ", dept_nm=" + dept_nm + ", country=" + country + ", dept_mgr_no="
-				+ dept_mgr_no + ", emp_no=" + emp_no + ", use_yn=" + use_yn + ", org_no=" + org_no + ", fstRgtWkrNm="
+				+ dept_mgr_no + ", emp_no=" + emp_no + ", use_yn=" + use_yn + ", org_no=" + org_no + ", org_nm="
+				+ org_nm + ", mgr_org_nm=" + mgr_org_nm + ", status=" + status + ", color=" + color + ", fstRgtWkrNm="
 				+ fstRgtWkrNm + ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm=" + lstMdfWkrNm + ", lstMdfDtm=" + lstMdfDtm
 				+ "]";
 	}
+	
+	
+	
+	
+	
 	
 	
 	

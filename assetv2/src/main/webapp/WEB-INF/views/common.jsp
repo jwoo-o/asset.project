@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,7 +71,7 @@ body {
 						</h3>
 					</div>
 					<div class="m-tabs">
-						<div class="mtab active" >
+						<div class="mtab" >
 							<a data-link="common">Common</a>
 						</div>
 						<div class="mtab">
@@ -82,14 +83,24 @@ body {
 						<!-- /content -->
 						<div class="box-body">
 							<div class="panel-body">
-								<form class="form-horizontal" id="searchForm" onsubmit="return false">
 									<div class="form-group">
 										<div class="search-group col-md-8 col-sm-12 col-xs-12">
-											<div class="form-inline">
-												<select class="form-control" name="keyword" id="keyword">
-													<option value="GRP_C_NM">그룹코드명</option>
-													<option value="GRP_C">그룹코드</option>
-												</select> <input type="text" class="form-control" name="search">
+											<div class="form-inline search_div" id="common_search_div">
+												<form class="form-horizontal" id="common_search_form" onsubmit="return false">
+													<select class="form-control" name="keyword" id="common_keyword">
+														<option value="GRP_C_NM">그룹코드명</option>
+														<option value="GRP_C">그룹코드</option>
+													</select> <input type="text" class="form-control" name="search">
+												</form>
+											</div>
+											<div class="form-inline search_div" id="dept_search_div" style="display: none">
+												<form class="form-horizontal" id="dept_search_form" onsubmit="return false">
+													<select class="form-control" name="keyword" id="dept_keyword">
+														<option value="dept_nm">부서명</option>
+														<option value="country">사업국가</option>
+														<option value="emp_nm">부서장</option>
+													</select> <input type="text" class="form-control" name="search">
+												</form>
 											</div>
 										</div>
 									</div>
@@ -101,10 +112,9 @@ body {
 											<button type="button" class="btn btn-primary" id="btnSrch">검색</button>
 										</div>
 									</div>
-								</form>
 							</div>
 							<table class="table table-hover text-sm">
-								<thead id="common_thead">
+								<thead id="common_thead" style="display: none">
 									<tr>
 										<td class="tdBack" align="center"><strong class="list_title">그룹코드</strong></td>
 										<td class="tdBack" align="center"><strong class="list_title">그룹코드명</strong></td>
@@ -119,7 +129,6 @@ body {
 										<td class="tdBack" align="center"><strong class="list_title">부서코드</strong></td>
 										<td class="tdBack" align="center"><strong class="list_title">부서명</strong></td>
 										<td class="tdBack" align="center"><strong class="list_title">사업국가</strong></td>
-										<td class="tdBack" align="center"><strong class="list_title">상위부서코드</strong></td>
 										<td class="tdBack" align="center"><strong class="list_title">상위부서명</strong></td>
 										<td class="tdBack" align="center"><strong class="list_title">부서장</strong></td>
 										<td class="tdBack" align="center"><strong class="list_title">최종변경일</strong></td>
@@ -139,14 +148,23 @@ body {
 			</div>
 	</section>
 	
-	
 	<script type="text/javascript">
 	var row = 1;
 	var url = "/common/search/proc";
 	var linkUrl = "common";
+	var country_val = new Array();
+    var country_data = new Array();    
+    '<c:forEach items="${common.country}" var="country">'
+    	country_data.push("${country.cName}");
+    	country_val.push("${country.cCode}");
+    '</c:forEach>'
 	function dataSearch(url){
-		
-		var data = $("#searchForm").serializeObject()
+		var data;
+		if(linkUrl=="common"){
+			data = $("#common_search_form").serializeObject();
+		}else{
+			data = $("#dept_search_form").serializeObject();
+		}		
 		data.next = row;
 		var dataStr = JSON.stringify(data);
 		 	
@@ -178,19 +196,28 @@ body {
 							var emp_no = '';
 							$.each(list, function(i, elt) {
 			                     tag += '<tr>';
-			                     $.each(elt, function(key, val) {
-			                    	
-									if(key=='emp_no'){ 
-			                    		 emp_no = val;
-			                    		 
-			                    	 }else{
-			                    		 if(key=='dept_no'){
-				                    		 dept_no = val;
-				                    	 }
-				                     	tag += '<td align="center">'+val+'</td>'
-			                    	 }	                    	 
-			                     })
-			                     tag += '<td align="center"><a href="/dept/register?dept_no='+dept_no+'&emp_no='+emp_no+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a></td></tr>';
+			                     tag += '<td align="center">'+elt.dept_no+'</td>';
+			                     if(elt.org_nm!="CEO" && elt.org_nm!="Country")
+			                     	tag += '<td align="center">'+elt.dept_nm+' '+elt.org_nm+'</td>';           	
+			                     else
+			                    	 tag += '<td align="center">'+elt.dept_nm+'</td>';
+			                    	 
+			                     if(elt.dept_nm!="CEO")
+			                     	tag += '<td align="center">'+elt.country+'</td>';
+			                     else
+			                    	 tag += '<td align="center"></td>';
+			                    	 
+			                     if(elt.dept_nm=="CEO"){
+			                    	 tag += '<td align="center"></td>';  
+			                     } else if(elt.org_nm=="Country" || elt.mgr_org_nm=="Country"){
+			                    	 tag += '<td align="center">'+elt.dept_mgr_nm+'</td>';
+			                     } else{
+			                    	 tag += '<td align="center">'+elt.dept_mgr_nm+' '+elt.mgr_org_nm+'</td>';
+			                     }       	  
+			                     tag += '<td align="center">'+elt.emp_nm+'</td>';
+			                     tag += '<td align="center">'+elt.lstMdfDtm+'</td>';
+			                     tag += '<td align="center"><a href="/dept/register?dept_no='+elt.dept_no+'&emp_no='+elt.emp_no+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a></td></tr>';
+			                     
 			               })
 						}			
 			 		}else{
@@ -217,43 +244,67 @@ body {
 	}
 	
 		$(function () {
+			$(".search_div").hide();
 			
-	
+			if($(location).attr("pathname").indexOf("common")==-1){
+				
+				url = "/dept/search/proc";	
+				$("#common_thead").hide();
+				$("#dept_thead").show();
+				$("strong:first").html("department");
+				$("#dept_search_div").show();
+				linkUrl = "dept";
+				$(".mtab a").eq(1).parent().addClass("active");
+			 	
+				
+			}else{
+				$("#common_thead").show();
+				$("strong:first").html("common");
+				$("#common_search_div").show();
+				$(".mtab a").eq(0).parent().addClass("active");
+				
+			}
+			
+			dataSearch(url);
+			
+			$("#dept_keyword").on('change',function(){
+				$(this).next().remove();
+				var keyword = $(this).val();
+				var select = $("<select id='dept_search' name ='search' class='form-control'></select>");
+				var input = $('<input id="dept_search" name ="search" type="text" class="form-control" />');
+				if(keyword=='country'){
+					
+					'<c:forEach items="${common.country}" var="country">'
+			    		$(select).append("<option value='${country.cCode}'>${country.cName}</option>");				
+			    	'</c:forEach>'
+					$("#dept_search_form").append(select);
+				}else{
+					$("#dept_search_form").append(input);
+					
+					
+				}		
+			})
+			
+			
 			$(".mtab a").on('click', function() {
 				
 				if(!$(this).parent().hasClass("active")){
 					row = 1;
-					$("#keyword").empty();
 					linkUrl = $(this).data("link");
+					$(".search_div").hide();
 					if(linkUrl=="common"){
 						url = "/common/search/proc";			
-						$("#keyword").append('<option value="GRP_C_NM">그룹코드명</option>');
-						$("#keyword").append('<option value="GRP_C">그룹코드</option>');
 						$("#dept_thead").hide();
 						$("#common_thead").show();
 						$("strong:first").html("common");
-						
+						$("#common_search_div").show();
 					}else{
-						url = "/dept/search/proc";
-						$("#keyword").append('<option value="dept_nm">부서명</option>');
-						$("#keyword").append('<option value="country">사업국가</option>');	
-						$("#keyword").append('<option value="emp_nm">부서장</option>');	
+						url = "/dept/search/proc";	
 						$("#common_thead").hide();
 						$("#dept_thead").show();
 						$("strong:first").html("department");
-						
-						$("#keyword").on('change',function(){
-							$(this).next().remove();
-							var keyword = $(this).val();
-							if(keyword=='country'){
-								
-								
-							}
-							
-							
-						})
-						
-						
+						$("#dept_search_div").show();
+			
 					}
 					$(".mtab").removeClass("active");
 					$(this).parent().addClass("active");
@@ -279,12 +330,11 @@ body {
 				}
 			})
 			$("#btnNext").on('click', function() {
-			 	row++;
 				dataSearch(url);
 				
 			})
 						
-			dataSearch(url);
+			
 		})
 		
 	</script>

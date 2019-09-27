@@ -9,21 +9,38 @@ var isRun = false;
     	$(function () {
     		
     		function frmchk(formName) {
-    			var input=$(formName).find("input");
-    			var select=$(formName).find("select");
-    			for(i=0;i<input.length;i++){
-    				if($(input[i]).val().trim()==""){
-    					if(!(formName=="#regForm" && i>=5 && i<input.length-1)){
-    						return false;
-    					}				
+    			
+    			if(formName=="#regForm"){
+    				
+    				if($("#name").val()=="" || $("#division").val()==""){
+    					return false;
     				}
-    			}
-    			for(i=0;i<select.length;i++){
-    				if($(select[i]).val().trim()==""){
-    					return false;	
+    				if($("#mgr").tagit("assignedTags").join(",")==""){
+    					return false;
     				}
+        			
     			}
-    			return true;
+    			if(formName=="#empForm"){
+    				var input=$(formName).find("input");
+        			var select=$(formName).find("select");
+        			for(i=0;i<input.length-1;i++){		
+        				if($(input[i]).val().trim()==""){
+        						return false;
+        					}				
+        				}
+        			if($("#division").val()=="43"){
+        				if($("#office_number").val().trim()==""){
+        					return false;
+        				}
+        			}
+        			for(i=0;i<select.length;i++){
+        				if($(select[i]).val().trim()==""){
+        					return false;	
+        				}
+        			}
+        		}
+        			
+    			return true;		
     		}
     		function Save() {
             	var url = '/calendar/register/proc';
@@ -40,7 +57,7 @@ var isRun = false;
             		isRun = true;
             		
     	            var data = $("#regForm").serializeObject()
-    	            data.divNm = $("#division option:checked").text();
+    	            data.divNm = $("#first_dept option:checked").text();
     	            data.mgr = [];
     	            var name = $("#mgr").find(".tagit-label");
     	            for(i=0;i<name.length;i++){
@@ -93,7 +110,12 @@ var isRun = false;
             		
             		var data = $("#empForm").serializeObject();
             		data.division = $("#division").val();
-            		data.divNm = $("#division option:checked").text();
+            		data.divNm = $("#first_dept option:checked").text();
+            		data.first_dept = $("#first_dept").val();
+            		data.second_dept = $("#second_dept").val();
+            		data.three_dept = $("#three_dept").val();
+            		data.four_dept = $("#four_dept").val();
+            		data.basic_dept = $("#basic_dept").val();
             		data.posNm = $("#position option:checked").text();
             		data.name = $("#name").val();
             		data.joinDate = $("#start").val();
@@ -170,17 +192,12 @@ var isRun = false;
 	    		$.ajax({
 					url: '/calendar/list/proc', method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8'
 				}).done(function(data) {
-					if(data.msg="0001"){
-						$.each(data, function(i, elt) {
+					$.each(data, function(i, elt) {
 							if(elt.joinYN=='y'){
 								elt.color = '#666666';
-								
 							}
-						})
-						calendar(data);
-					}else{
-						alert(data.msg);
-					}				
+					})
+					calendar(data);		
 				})
     		}
     		function calendar(data){
@@ -203,7 +220,13 @@ var isRun = false;
 					eventClick:function(event,start,end){
 						var mgr = event.mgr.split(",");
 						var mgr_email = event.mgr_email.split(",");
+						var data = {};
+		        		data.second_dept = event.first_dept;
+		        		data.three_dept = event.second_dept;
+		        		data.four_dept = event.three_dept;
+		        		$.deptAjaxData(data,event);
 						$("#division").val(event.division);
+						$("#first_dept").val(event.division).prop("selected",true);
 						$("#addNrein").val(event.addNrein);
 						$("#mgr").tagit("removeAll");
 						if(mgr_data=="" || event.joinYN=='y'){
@@ -213,7 +236,8 @@ var isRun = false;
 							$("#seat").hide();
 							$("#regForm").find("input").prop("readonly",true);
 							$("#mgr").tagit({readOnly: true});
-							$("#division").attr('disabled', 'true');
+							$("#first_dept").attr('disabled', 'true');
+							$(".dept").attr('disabled', 'true');
 							$("#addNrein").attr('disabled', 'true');
 							for(i=0;i<mgr.length;i++){							
 								$("#mgr").tagit("createTag",mgr[i],mgr_email[i]);			
@@ -223,9 +247,13 @@ var isRun = false;
 							$("#btnJoin").show();
 							$("#btnDelete").show();
 							$("#regForm").find("input").prop("readonly",false);
+							$(".dept").empty().attr("disabled", true);
+							$("#second_dept").append("<option value=''>## NONE ##</option>");
+							$("#three_dept").append("<option value=''>## NONE ##</option>");
+							$("#four_dept").append("<option value=''>## NONE ##</option>");
 							$("#mgr").tagit({readOnly: false});
 							$("#seat").show();
-							$("#division").removeAttr("disabled");
+							$("#first_dept").removeAttr("disabled");
 							$("#addNrein").removeAttr("disabled");
 							for(i=0;i<mgr.length;i++){
 								$("#mgr").tagit("createTag", mgr[i],mgr_email[i]);
@@ -271,7 +299,8 @@ var isRun = false;
 							$("#seat").hide();
 							$("#regForm").find("input").prop("readonly",true);
 							$("#mgr").tagit({readOnly: true});
-							$("#division").attr('disabled', 'true');
+							$("#first_dept").attr('disabled', 'true');
+							$(".dept").attr('disabled', 'true');
 							$("#addNrein").attr('disabled', 'true');
 			    		}else{
 			        	$("#btnDelete").hide();
@@ -282,7 +311,11 @@ var isRun = false;
 		                $("#start").val(getTimeStamp(start));
 		                $("#end").val(getTimeStamp(end));
 		                $("#no").val('0');
-		                $("#division").removeAttr("disabled");
+		                $("#first_dept").removeAttr("disabled");
+		                $(".dept").empty().attr("disabled", true);
+						$("#second_dept").append("<option value=''>## NONE ##</option>");
+						$("#three_dept").append("<option value=''>## NONE ##</option>");
+						$("#four_dept").append("<option value=''>## NONE ##</option>");
 						$("#addNrein").removeAttr("disabled");
 		                $("#regForm").find("input").prop("readonly",false);
 		                $("#mgr").tagit("removeAll");
@@ -327,33 +360,79 @@ var isRun = false;
 			 $("#btnDelete").on('click', Delete);
 			 $("#btnSuccess").on('click', Success);
 			 $("#btnJoin").click(function() {
-				 
-				 if($("#division").val()=="7"){
-					 $("#ga_only").show();
-				 }else{
-					 $("#ga_only").hide();
-				 }					 
+ 
 				 empRegist.open('Join Success');
+				 $("#empForm")[0].reset();
 				 regist.close();
 			 })
 			var emp_data = [];
-			$("#division").change(function() {
+			$("#first_dept").change(function() {
+				$("#division").val($(this).val());
 				emp_data.length = 0;
-				var data = { "mgr" : '',"division" : $(this).val()};
-	        	var dataStr = JSON.stringify(data);
-				$.ajax({
-	                method: 'POST',
-	                url: "/emp/mgrSearch/proc",
-	                dataType: "json",
-	                data:dataStr,
-	              	contentType:"application/json; charset=UTF-8"
-		         }).done(function(data) {
-		        	$.each(data, function(i, elt) {
-		        	 emp_data.push({"label":elt.name,"value":elt.email});
-		        	})
-		        	
-		         })
+				if($(this).val()!=""){
+					
+					var data = { "mgr" : '',"division" : $(this).val()};
+		        	var dataStr = JSON.stringify(data);
+					$.ajax({
+		                method: 'POST',
+		                url: "/emp/mgrSearch/proc",
+		                dataType: "json",
+		                data:dataStr,
+		              	contentType:"application/json; charset=UTF-8"
+			         }).done(function(data) {
+			        	$.each(data, function(i, elt) {
+			        	 emp_data.push({"label":elt.name,"value":elt.email});
+			        	})
+			        	
+			         })
+				}
+				
+		         
+		         
+		         var data = {};
+        		data.second_dept = Number($(this).val());
+        		
+        		$("#second_dept,#three_dept,#four_dept").empty();
+        		$("#second_dept,#three_dept,#four_dept").append("<option value=''>## NONE ##</option>");
+        		$("#second_dept,#three_dept,#four_dept").val("").prop("selected",true);
+        		$("#second_dept").attr("disabled",false);
+        		
+        		$("#basic_dept").val($(this).val());
+        		$.deptAjaxData(data);
 			})
+			$("#second_dept").change(function() {
+        	 
+        		var data = {};
+        		data.three_dept = Number($(this).val());
+        		$("#three_dept,#four_dept").empty();
+        		$("#three_dept,#four_dept").append("<option value=''>## NONE ##</option>");
+        		$("#three_dept").val("").prop("selected",true).attr("disabled",false);
+        		
+        		$("#basic_dept").val($(this).val());
+        		$.deptAjaxData(data);
+        		
+        	})
+        	$("#three_dept").change(function() {
+        		
+        		var data = {};
+        		data.four_dept = Number($(this).val());
+        		$("#four_dept").empty();
+        		$("#four_dept").append("<option value=''>## NONE ##</option>");
+        		$("#four_dept").val("").prop("selected",true).attr("disabled",false);	
+        		
+        		$("#basic_dept").val($(this).val());
+        		$.deptAjaxData(data);
+        		
+        	})
+        	$("#four_dept").change(function() {
+        	 	
+        		$("#basic_dept,#ebasic_dept").val($(this).val());
+        		
+        	})
+			
+			
+			
+			
 			
 	         $("#mgr").tagit({
 				
@@ -428,6 +507,97 @@ var isRun = false;
 					return false;
 				}
 			}
+			  $.deptAjaxData = function(data,event){
+	            	var dataStr = JSON.stringify(data);
+	            	$.ajax({
+	        			url:"/dept/emp-edit/search/proc",
+	        			dataType:"json",
+	        			method:"post",
+	        			contentType:"application/json; charset=utf-8",
+	        			data:dataStr
+	        		}).done(function(call) {
+	        		 
+	        			if(call.msg=="0001"){
+	        				
+	        				if(call.first_dept.length>0){
+	        					
+	        					$.each(call.first_dept, function(i, elt) {
+	        						
+	        						if(elt.dept_no!=1){
+	        							$("#first_dept").append("<option value='"+elt.dept_no+"'>"+elt.dept_nm+" "+elt.org_nm+"</option>").attr("disabled", false);
+	                					
+	        						}else{
+	        							$("#first_dept").append("<option value='"+elt.dept_no+"'>"+elt.dept_nm+"</option>").attr("disabled", false);
+	                					
+	        						}
+	            					
+	            				})
+	        				}
+	        				if(call.second_dept.length>0){
+	        					
+		        				$.each(call.second_dept, function(i, elt) {
+		        					if(elt.org_nm!="Country"){
+		        						$("#second_dept").append("<option value='"+elt.dept_no+"'>"+elt.dept_nm+" "+elt.org_nm+"</option>").attr("disabled", false);
+		        					}	
+		        					
+		        				})
+	        				}
+	        				if(call.three_dept.length>0){
+		        				$.each(call.three_dept, function(i, elt) {
+		        					
+		        					$("#three_dept").append("<option value='"+elt.dept_no+"'>"+elt.dept_nm+" "+elt.org_nm+"</option>").attr("disabled", false);
+		        					
+		        				})
+	        				}
+	        				if(call.four_dept.length>0){
+		        				$.each(call.four_dept, function(i, elt) {
+		        				 
+		        					$("#four_dept").append("<option value='"+elt.dept_no+"'>"+elt.dept_nm+" "+elt.org_nm+"</option>").attr("disabled", false);
+		        					
+		        				})
+	        				}
+	        				if(event!=undefined){
+	        					
+	        					if(event.second_dept!=0){
+		        					$("#second_dept").val(event.second_dept).prop("selected",true);
+	        					}else{
+	        						$("#second_dept").val("").prop("selected",true);
+	        					}
+	        					if(event.three_dept!=0){
+	        						$("#three_dept").val(event.three_dept).prop("selected",true);
+	        					}else{
+	        						$("#three_dept").val("").prop("selected",true);
+	        					}
+	        					if(event.four_dept!=0){
+	        						$("#four_dept").val(event.four_dept).prop("selected",true);   
+	        					}else{
+	        						$("#four_dept").val("").prop("selected",true);
+	        					}
+	        					if(mgr_data=="" || event.joinYN=='y'){
+	        						$(".dept").attr("disabled", true);
+	        					}
+	        				}
+	        				
+	        				
+							
+							
+	        				
+
+	        			}else{
+	        				alert(call.msg);
+	        			}
+	        		}).fail(function (e) {
+	                	if(e.status == 401){
+	                		modify.close();
+	        				onErrorFunc(e);
+	                	}
+	                });
+	           	
+	           }
+			
+			
+			
+			
 			calendarData(); 
 			
     	})

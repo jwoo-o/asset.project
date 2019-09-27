@@ -5,7 +5,7 @@
 <mapper namespace="manager">
   <select id="login" resultType="managerVo">
     	select mNo,mName,mId,empNo,auth,dept dcode,
-    	(select DTL_C_NM from CMCDDTLM c where c.GRP_C='division' and c.DTL_C=dept) dept,
+    	IFNULL((SELECT CONCAT(dept_nm,' ', DTL_C_NM) AS dept_nm FROM dept d, CMCDDTLM c where c.GRP_C='organization' and c.DTL_C = d.org_no and dept_mgr_no=2 and d.dept_no = dept),'') dept,
     	(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='position' and c1.DTL_C=position) position,
     	(select office_number from employee e where e.employeeNumber = empNo) office_number
     	from manager where mId = #{mId} and pwd = SHA2(#{pwd},256)
@@ -23,6 +23,6 @@
   	update manager set pwd=#{newPwd} where mId=#{mId} and pwd=#{pwd}
   </update>
   <select id="selectId" resultType="String">
-  	select mId from manager where auth='1' and empno not in('root')
+  	select mId from manager where auth='1' and empNo not in('root')
   </select>
 </mapper>
