@@ -27,6 +27,7 @@
     
     <title>Welcome GIOSIS</title>
     <script type="text/javascript">
+    var isRun = false;
     	$(function(){
     		
     		$("input[type='password']").keypress(function(e){
@@ -42,7 +43,10 @@
     	})
     	
     	$.loginProc = function(){
-    			
+    		if(isRun == true){
+    			return;
+    		}
+    		isRun = true;
     		var data = $("#form-signin").serializeObject(), dataStr = JSON.stringify(data);
     		$.ajax({
     			url:"/login/proc",
@@ -56,6 +60,7 @@
     			}else{
     				alert(data.msg);
     			}
+    			isRun = false;
     		})
     	}	
     		

@@ -12,6 +12,8 @@ public class AssetVo {
 	private String empNo;
 	private String position;
 	private String division;
+	private String div_nm;
+	private String pos_nm;
 	private String buying;
 	private String re_time;
 	private String status;
@@ -29,6 +31,18 @@ public class AssetVo {
 	
 	
 	
+	public String getDiv_nm() {
+		return div_nm;
+	}
+	public void setDiv_nm(String div_nm) {
+		this.div_nm = div_nm;
+	}
+	public String getPos_nm() {
+		return pos_nm;
+	}
+	public void setPos_nm(String pos_nm) {
+		this.pos_nm = pos_nm;
+	}
 	public int getaNo() {
 		return aNo;
 	}
@@ -147,10 +161,12 @@ public class AssetVo {
 	public String toString() {
 		return "AssetVo [aNo=" + aNo + ", assetNo=" + assetNo + ", category=" + category + ", modelNm=" + modelNm
 				+ ", mInch=" + mInch + ", serialNo=" + serialNo + ", userName=" + userName + ", empNo=" + empNo
-				+ ", position=" + position + ", division=" + division + ", buying=" + buying + ", re_time=" + re_time
-				+ ", status=" + status + ", price=" + price + ", note=" + note + ", fstRgtWkrNm=" + fstRgtWkrNm
-				+ ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm=" + lstMdfWkrNm + ", lstMdfDtm=" + lstMdfDtm + "]";
+				+ ", position=" + position + ", division=" + division + ", div_nm=" + div_nm + ", pos_nm=" + pos_nm
+				+ ", buying=" + buying + ", re_time=" + re_time + ", status=" + status + ", price=" + price + ", note="
+				+ note + ", fstRgtWkrNm=" + fstRgtWkrNm + ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm=" + lstMdfWkrNm
+				+ ", lstMdfDtm=" + lstMdfDtm + "]";
 	}
+	
 	
 	
 	

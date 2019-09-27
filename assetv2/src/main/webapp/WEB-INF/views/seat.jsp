@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
- <link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="/css/style.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -88,7 +88,6 @@ p{
 	
 	
 }*/
-var colorList = ["","#DDD9C4","#F2DCDB","#FABF8F","#DA9694","#CCC0DA","#FFFFCC","#FFE400","#DDD9C4","#FFC000", "#CCECFF","#FFC000","#FFCCFF","#CCECFF","#FFCCFF"];
 var popup;
 	$(function () {
 		var url;
@@ -308,7 +307,7 @@ var popup;
 		seatGrid();
 		
 		function seatData(){
-			var data = {"search":''}
+			var data = {"search":"kr","keyword":"country"}
 			var dataStr = JSON.stringify(data);
 			$.ajax({
 				url:"/seat/list/proc",
@@ -323,8 +322,8 @@ var popup;
 					$.each(data.records, function(i, elt) {
 					 	if(elt.seat!=null){
 					 		//alert(elt.name);
-					 		$("#"+elt.seat).append('<p>'+elt.name+'</p><input type="hidden" value="'+elt.empNo+'"><input type="hidden" value="'+elt.division+'"><input type="hidden" value="'+elt.position+'"><input type="hidden" value="'+elt.profile_name+'">');				 		
-					 		$("#"+elt.seat).css("background", colorList[Number(elt.dcode)]);
+					 		$("#"+elt.seat).append('<p>'+elt.name+'</p><input type="hidden" value="'+elt.empNo+'"><input type="hidden" value="'+elt.first_dept_nm+' '+elt.first_dept_org_nm+'"><input type="hidden" value="'+elt.position+'"><input type="hidden" value="'+elt.profile_name+'">');				 		
+					 		$("#"+elt.seat).css("background", elt.color);
 					 		/*$('.employee').dialog({
 				                uiLibrary: 'bootstrap4',
 				                iconsLibrary: 'fontawesome',
@@ -345,9 +344,9 @@ var popup;
 					$.each(data.count, function(i, elt) {
 						
 						if(elt.office=='n3'){						
-							n3_count_tag += "<td align='center' style='background:"+colorList[Number(elt.dCode)]+"'>"+elt.division+"</td><td width='5%' align='center' >"+elt.count+"</td>";
+							n3_count_tag += "<td align='center' style='background:"+elt.color+"'>"+elt.division+"</td><td width='5%' align='center' >"+elt.count+"</td>";
 						}else{
-							n13_count_tag += "<td align='center' style='background:"+colorList[Number(elt.dCode)]+"'>"+elt.division+"</td><td width='5%' align='center' >"+elt.count+"</td>";
+							n13_count_tag += "<td align='center' style='background:"+elt.color+"'>"+elt.division+"</td><td width='5%' align='center' >"+elt.count+"</td>";
 						}
 						if((i+1)%3==0){
 							n3_count_tag +="</tr><tr>";
@@ -363,9 +362,9 @@ var popup;
 						$("#n1300"+(i+58)).append('<p>qx'+i+'</p>').off();
 						$("#n1300"+(i+58)).css("background", "#FFE400");
 					}
-					$("#n30089").append('<p>출장석</p>').off("click");
-					$("#n30122").append('<p>출장석</p>').off("click");
-					$("#n30120").append('<p>테스트석</p>').off("click");
+					//$("#n30089").append('<p>출장석</p>').off("click");
+					//$("#n30122").append('<p>출장석</p>').off("click");
+					//$("#n30120").append('<p>테스트석</p>').off("click");
 					
 					
 			 		

@@ -45,8 +45,8 @@ public class CommonController {
 		return map;
 	}
 	@RequestMapping(value="/common")
-	public void commonView() throws Exception {
-		
+	public void commonView(Model model) throws Exception {
+		model.addAttribute("common", service.selCommonLst());
 		logger.info("{}  common");
 	}
 	

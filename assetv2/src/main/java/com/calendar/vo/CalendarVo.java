@@ -27,6 +27,11 @@ public class CalendarVo {
 	private String divNm;
 	/**관리자*/
 	private String mgr;
+	private int basic_dept;
+	private int first_dept;
+	private int second_dept;
+	private int three_dept;
+	private int four_dept;
 	/**관리자 이메일*/
 	private String mgr_email;	
 	/**입사완료 여부*/
@@ -155,16 +160,36 @@ public class CalendarVo {
 	public void setExt(String ext) {
 		this.ext = ext;
 	}
-	@Override
-	public String toString() {
-		return "CalendarVo [no=" + no + ", name=" + name + ", division=" + division + ", addNrein=" + addNrein
-				+ ", title=" + title + ", start=" + start + ", end=" + end + ", seat=" + seat + ", id=" + id + ", ext="
-				+ ext + ", divNm=" + divNm + ", mgr=" + mgr + ", mgr_email=" + mgr_email + ", joinYN=" + joinYN
-				+ ", fstRgtWkrNm=" + fstRgtWkrNm + ", fstRgtDtm=" + fstRgtDtm + ", lstMdfWkrNm=" + lstMdfWkrNm
-				+ ", lstMdfDtm=" + lstMdfDtm + "]";
+	public int getBasic_dept() {
+		return basic_dept;
 	}
-	
-	
+	public void setBasic_dept(int basic_dept) {
+		this.basic_dept = basic_dept;
+	}
+	public int getFirst_dept() {
+		return first_dept;
+	}
+	public void setFirst_dept(int first_dept) {
+		this.first_dept = first_dept;
+	}
+	public int getSecond_dept() {
+		return second_dept;
+	}
+	public void setSecond_dept(int second_dept) {
+		this.second_dept = second_dept;
+	}
+	public int getThree_dept() {
+		return three_dept;
+	}
+	public void setThree_dept(int three_dept) {
+		this.three_dept = three_dept;
+	}
+	public int getFour_dept() {
+		return four_dept;
+	}
+	public void setFour_dept(int four_dept) {
+		this.four_dept = four_dept;
+	}
 	
 	
 	

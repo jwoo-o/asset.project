@@ -1,6 +1,5 @@
 package com.calendar.controller;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +22,7 @@ import com.calendar.vo.CalendarJoinDto;
 import com.calendar.vo.CalendarVo;
 import com.core.exception.NotAccessException;
 import com.core.service.CommonServie;
+import com.core.service.DeptService;
 import com.core.vo.ManagerDto;
 
 @Controller
@@ -36,9 +36,16 @@ public class CalendarController {
 	@Inject
 	private CalendarService service;
 	
+	@Inject
+	private DeptService dService;
+	
+	
+	
 	@RequestMapping("/calendar")
 	public void joinEmp(Model model) throws Exception {
 		model.addAttribute("common", cService.selCommonLst());
+		model.addAttribute("dept", dService.selDivisionSearch());
+		
 	}
 	@RequestMapping(value="/calendar/register/proc",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> calendarRgtProc(@RequestBody CalendarVo vo,HttpSession session){

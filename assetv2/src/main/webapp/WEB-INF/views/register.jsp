@@ -23,11 +23,28 @@
     <script src="/js/jquery.session.js" type="text/javascript"></script>
     <script src="/js/jquery.serializeObject.js" type="text/javascript"></script>
     <script type="text/javascript">
+		var isRun = false;
 		
 		$(function(){
 			
 			var assetNo;
 			//var mInch = $('<tr height="22" id="inch"><td class="tdBack" align="left" width="15%"><strong class="list_title">종류</strong></td><td align="left">&nbsp;<select class="SelectBox" id="mInch" name="mInch"><option value="">선택하세요</option><option value="0">none</option><option value="1">17인치</option><option value="2">19인치</option><option value="3">24인치</option><option value="4">27인치</option></select></td></tr>');
+			var emp_data = [];
+			var data = { "mgr" : '',"division" : ''};
+        	var dataStr = JSON.stringify(data);
+			$.ajax({
+                method: 'POST',
+                url: "/emp/mgrSearch/proc",
+                dataType: "json",
+                data:dataStr,
+              	contentType:"application/json; charset=UTF-8"
+	         }).done(function(data) {
+	        	$.each(data, function(i, elt) {
+	        	 emp_data.push({"label":elt.name,"value":elt.name,"division":elt.division,"dcode":elt.dcode,"position":elt.position,"pcode":elt.pcode,"empNo":elt.empNo});
+	        	})
+	        	
+	         })
+			
 			var url='/asset/register/proc';
 			if("${vo.assetNo}"!=""){
 				
@@ -110,7 +127,10 @@
 						url = "/asset/deleteY/proc";
 					}
 				}
-				
+				if(isRun == true){
+					return;
+				}
+				isRun = true;
 				var data = {"aNo":"${vo.aNo }"}, dataStr = JSON.stringify(data);
 				
 				$.ajax({
@@ -122,19 +142,27 @@
 				}).done(function(data) {
 					if(data.msg="0001"){
 						alert("Request Success");
+						
 						window.close();
 						$("#searchBt", opener.document).click();
 					}else{
 						alert(data.msg);
 					}
+					isRun = false;
 				})
 			})
-			$("#empdelBt").click(function() {
+			$("#empdelBt").on('click',function() {
+				$("#userName").show();
+				$("#userName_span").html("").hide();
+				$(this).hide();
 				$("#status").val('s').prop("selected", true);
 				$("#empNo").val('');
 				$("#userName").val('');
-				$("#position").val('').prop("selected", true);
-				$("#division").val('').prop("selected", true);		
+				$("#position").val('');
+				$("#division").val('');
+				$("#division_span").html("");
+				$("#empNo_span").html("");
+				$("#position_span").html("");
 			})
 			
 			$("#requestBt").click(function() {
@@ -149,7 +177,10 @@
 					data.note = $("#note").val();
 					
 					var dataStr = JSON.stringify(data);
-					
+					if(isRun == true){
+						return;
+					}
+					isRun = true;
 					
 					$.ajax({
 						url:url,
@@ -160,11 +191,13 @@
 					}).done(function(data) {
 						if(data.msg=="0001"){
 							alert("Request Success");
+							
 							window.close();
 							$("#searchBt", opener.document).click();
 						}else{
 							alert(data.msg);
 						}
+						isRun = false;
 							
 					}).fail(function(e) {
 						onErrorFunc(e);
@@ -172,11 +205,7 @@
 				}
 			})
 			
-			$("#empBt").click(function() {
-				
-					$.empSearch();
-					
-			})
+			
 			$("#btnLocation").click(function() {
 				var x = 2000;
 			 	var y = 1000;
@@ -185,40 +214,34 @@
 				    
 				    popup(url,title,x,y);
 			})
-			$("#userName").keypress(function(e) {
-				if("${mgr.auth}"!=0){
-					if(e.which==13)
-						$.empSearch();
+			
+			
+			$("#userName").autocomplete({
+				delay: 0,
+				minLength: 1,
+				autoFocus: true,
+				source: emp_data,
+				focus: function(event, ui){
+					return false;
+				},
+				select: function(event,ui){
+					$(this).hide();
+					$("#userName_span").html(ui.item.value).show();
+					$("#empdelBt").show();
+					$("#division").val(ui.item.dcode);
+					$("#position").val(ui.item.pcode);
+					$("#empNo").val(ui.item.empNo);
+					$("#division_span").html(ui.item.division);
+					$("#position_span").html(ui.item.position);
+					$("#empNo_span").html(ui.item.empNo);
+					$("#status").val("y").prop("selected",true);
+					
+					return false;
 				}
+				
 			})
 			
-			$.empSearch = function(){
-				
-				var data = {"userName":$("#userName").val()};
-				var dataStr = JSON.stringify(data);
-				
-				
-				$.ajax({
-					url:"/emp/assetSearch/proc",
-					method:"post",
-					dataType:"json",
-					data:dataStr,
-					contentType:"application/json; charset=UTF-8"
-				}).done(function(data) {
-					var emp = data.emp
-					if(emp!=null){
-						$("#empNo").val(emp.empNo);
-						$("#position").val(emp.position).prop("selected", true);
-						$("#division").val(emp.division).prop("selected", true);
-						$("#status").val('y').prop("selected",true);
-					}else{
-						alert("찾는 직원이 없습니다.");
-					}
-						
-				}).fail(function(e) {
-					onErrorFunc(e);
-				})
-			}
+			
 			$.frmchk = function() {
 				var frm=$("#assetForm").find("input");
 				var num=frm.length-1;
@@ -342,40 +365,42 @@
 										</form>
 										
 										<form name="empForm" id="empForm">
+										<input type="hidden" size="10" name="empNo" id="empNo" value="${vo.empNo }">
+										<input type="hidden" size="10" name="position" id="position" value="${vo.position }">
+										<input type="hidden" size="10" name="division" id="division" value="${vo.division }">
 										<table class="table table-bordered text-sm" style="table-layout: fixed;" id="resultTable">
 										<tbody>
 										<tr height="22">
 											<td class="tdBack" align="left" width="15%"><strong class="list_title">이름</strong></td>
-											<td align="left">&nbsp;&nbsp;<input type="text" size="10" name="userName" id="userName" value="${vo.userName }">
-											&nbsp;&nbsp;<input type="button" class="btn bg-navy btn-sm" id="empBt" name="empBt" value="확인">&nbsp;<input type="button" class="btn bg-red btn-sm" id="empdelBt" value="삭제">
+											<td align="left">&nbsp;
+											<c:choose>
+												<c:when test="${not empty vo.userName}">
+													<span id="userName_span" >${vo.userName}</span>
+													<input type="text" size="10" name="userName" id="userName" style="display: none">
+													&nbsp;&nbsp;<input type="button" class="btn bg-red btn-sm" id="empdelBt" value="삭제">
+												</c:when>
+												<c:otherwise>
+													<span id="userName_span" style="display: none"></span>
+													<input type="text" size="10" name="userName" id="userName">
+													&nbsp;&nbsp;<input type="button" class="btn bg-red btn-sm" id="empdelBt" value="삭제" style="display: none">
+												</c:otherwise>
+											</c:choose>
 											</td>
 											
 										</tr>
 										<tr height="22">
 											<td class="tdBack" align="left" ><strong class="list_title">사번</strong></td>
-											<td align="left">&nbsp;&nbsp;<input type="text" size="10" name="empNo" id="empNo" value="${vo.empNo }">
+											<td align="left">&nbsp;&nbsp;<span id="empNo_span">${vo.empNo }</span>
 											</td>
 										</tr>
 										<tr height="22">
 											<td class="tdBack" align="left"><strong class="list_title">직위</strong></td>
-						            		<td align="left" width="80">&nbsp;
-								              	<select class="SelectBox" id="position" name="position">
-								              		<option value=""></option>
-								              		<c:forEach var="position" items="${common.position }">
-									        	 		<option value="${position.cCode }">${position.cName }</option>
-									        	 	</c:forEach>
-								              	</select></td>
+						            		<td align="left" width="80">&nbsp;&nbsp;<span id="position_span">${vo.pos_nm}</span></td>
 										</tr>
 										
 										<tr height="22">
 											<td class="tdBack" align="left"><strong class="list_title">부서</strong></td>
-											<td align="left">&nbsp; 
-							             <select class="SelectBox" id="division" name="division">
-							             		<option value=""></option> 
-								              	<c:forEach var="division" items="${common.division }">
-									        	 	<option value="${division.cCode }">${division.cName }</option>
-									        	 </c:forEach>
-							             </select></td>
+											<td align="left">&nbsp;&nbsp;<span id="division_span">${vo.div_nm}</span></td>
 										</tr>
 										</tbody>
 										</table>
