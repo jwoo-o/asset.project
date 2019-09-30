@@ -106,16 +106,17 @@
 		select dept_no,dept_nm,(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='organization' and c1.DTL_C=org_no) org_nm
 		from dept
 		where
-			<choose>
+			<!-- <choose>
 				<when test="org_no>4">
 					org_no &lt; #{org_no} and org_no &gt; 1
 					and use_yn = 'y'
 				</when>
 				<otherwise>
-					org_no &lt; #{org_no}
-					and use_yn = 'y'
+					
 				</otherwise>
-			</choose>
+			</choose> -->
+			org_no &lt; #{org_no}
+			and use_yn = 'y'
 			<if test="org_no>1">
 				and country = #{country}
 			</if>	 
