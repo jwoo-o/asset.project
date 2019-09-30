@@ -341,6 +341,9 @@
         		$("#three_dept,#ethree_dept").attr("disabled",false);
         		
         		$("#basic_dept,#ebasic_dept").val($(this).val());
+        		if($(this).val()==""){
+        			$("#ebasic_dept").val($("#efirst_dept").val());
+        		}
         		$.deptAjaxData(data);
         		
         	})
@@ -354,12 +357,18 @@
         		$("#four_dept,#efour_dept").attr("disabled",false);
         		
         		$("#basic_dept,#ebasic_dept").val($(this).val());
+        		if($(this).val()==""){
+        			$("#ebasic_dept").val($("#esecond_dept").val());
+        		}
         		$.deptAjaxData(data);
         		
         	})
         	$("#four_dept,#efour_dept").change(function() {
         	 	
         		$("#basic_dept,#ebasic_dept").val($(this).val());
+        		if($(this).val()==""){
+        			$("#ebasic_dept").val($("#ethree_dept").val());
+        		}
         		
         	})
         	$("#country,#ecountry").on("change", function() {
