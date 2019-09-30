@@ -125,5 +125,20 @@ public class DeptController extends CoreController{
 		
 		return map;
 	}
+	@PostMapping("/dept/delete/proc")
+	public @ResponseBody Map<String, Object> deptDeleteProc(@RequestBody DeptViewDto dto,HttpSession session){
+		
+		logger.debug("DeptViewDto : {}",dto);
+		Map<String, Object> map = new HashMap<String, Object>();
+		ManagerDto manager = (ManagerDto) session.getAttribute("mgr");
+		try {
+			map = service.delDept(dto,manager);
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage(),e);
+			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
+		}
+		return map;
+	}
 	
 }

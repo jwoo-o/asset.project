@@ -12,6 +12,7 @@ public class DeptViewDto {
 	private String emp_nm;
 	private String color;
 	private String lstMdfDtm;	
+	private String lstMdfWkrNm;
 	private String emp_no;
 	private String org_no;
 	private int level;
@@ -98,12 +99,19 @@ public class DeptViewDto {
 	public void setColor(String color) {
 		this.color = color;
 	}
+	
+	public String getLstMdfWkrNm() {
+		return lstMdfWkrNm;
+	}
+	public void setLstMdfWkrNm(String lstMdfWkrNm) {
+		this.lstMdfWkrNm = lstMdfWkrNm;
+	}
 	@Override
 	public String toString() {
 		return "DeptViewDto [dept_no=" + dept_no + ", dept_nm=" + dept_nm + ", org_nm=" + org_nm + ", country="
 				+ country + ", dept_mgr_no=" + dept_mgr_no + ", dept_mgr_nm=" + dept_mgr_nm + ", mgr_org_nm="
-				+ mgr_org_nm + ", emp_nm=" + emp_nm + ", color=" + color + ", lstMdfDtm=" + lstMdfDtm + ", emp_no="
-				+ emp_no + ", org_no=" + org_no + ", level=" + level + "]";
+				+ mgr_org_nm + ", emp_nm=" + emp_nm + ", color=" + color + ", lstMdfDtm=" + lstMdfDtm + ", lstMdfWkrNm="
+				+ lstMdfWkrNm + ", emp_no=" + emp_no + ", org_no=" + org_no + ", level=" + level + "]";
 	}
 	
 	
