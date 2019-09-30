@@ -353,8 +353,10 @@ public class DeptServiceImpl extends CoreService implements DeptService {
 			
 			if(dao.delete(dto)>0) {
 				map.put("msg", "0001");
+			}else {
+				map.put("msg", "요청이 실행되지 않았습니다.");
 			}
-			map.put("msg", "요청이 실행되지 않았습니다.");
+			
 		}
 		
 		
