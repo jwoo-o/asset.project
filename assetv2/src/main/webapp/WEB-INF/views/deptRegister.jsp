@@ -255,7 +255,7 @@ var isRun = false;
 		$("#org").on('change', function() {
 			mgr_dept_data.length = 0;
 			emp_data.length = 0;
-			$("#dept_mgr_no").tagit("removeAll");
+			//$("#dept_mgr_no").tagit("removeAll");
 			var org_nm = $("#org option:selected").text();
 			if(org_nm=="선택"){
 				org_nm = "";
