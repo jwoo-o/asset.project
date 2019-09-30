@@ -57,7 +57,7 @@
 					</when>
 					<when test="keyword=='emp_nm'">
 						and emp_no=(select employeeNumber from employee where name=#{search})
-					</when>	
+					</when>
 					<otherwise>
 						and ${keyword} = #{search}
 					</otherwise>				
@@ -137,7 +137,7 @@
 			(select c2.DTL_C_NM from CMCDDTLM c2 where c2.GRP_C='organization' and c2.DTL_C in(select s.org_no from dept s where s.dept_no=fa.dept_mgr_no)) mgr_org_nm
 		from dept fa
 		where
-			fa.dept_no = #{dept_no}
+			fa.dept_no = #{dept_no} and fa.use_yn='y'
 		
 	</select>
 	<select id="selectSubList" resultType="deptViewDto">
@@ -149,7 +149,7 @@
 			ifnull((select name from employee where employeeNumber=fa.emp_no),'') emp_nm
 		from dept fa
 		where
-			fa.dept_mgr_no = #{dept_no} and use_yn='y'
+			fa.dept_mgr_no = #{dept_no} and fa.use_yn='y'
 		
 	</select>
 	
@@ -191,7 +191,7 @@
 	  JOIN dept dept ON fnc.id = dept.dept_no
 	</select>
 	<select id="selectCountry" resultType="int">
-		select dept_no from dept where dept_nm=#{dept_nm}
+		select dept_no from dept where dept_nm=#{dept_nm} and use_yn='y'
 	</select>
 	
 	<select id="selectCEO" resultType="deptViewDto">
@@ -207,11 +207,11 @@
 	</select>
 	
 	<select id="selectDivision" resultType="deptViewDto">
-		select concat(dept_nm,' ',DTL_C_NM) dept_nm,dept_no from dept , CMCDDTLM where GRP_C='organization' and DTL_C = org_no and dept_mgr_no=2
+		select concat(dept_nm,' ',DTL_C_NM) dept_nm,dept_no from dept , CMCDDTLM where GRP_C='organization' and DTL_C = org_no and dept_mgr_no=2 and use_yn='y'
 	</select>
 	
 	<select id="selectMgrEmp" resultType="deptVo">
-		select dept_no from dept where emp_no=#{empNo}
+		select dept_no from dept where emp_no=#{empNo} and use_yn='y'
 	</select>
 	
 	<select id="selectHighLevel" resultType="Map">
@@ -224,6 +224,18 @@
 		dept d1 left join dept d2 on d1.dept_no=d2.dept_mgr_no left join dept d3 on d2.dept_no=d3.dept_mgr_no where d3.dept_no=#{dept_no}
     
 	</select>
+	
+	<update id="delete">
+		update dept 
+		set 
+			use_yn='n',
+			dept_mgr_no=0,
+			emp_no='',
+			lstMdfWkrNm=#{lstMdfWkrNm},
+			lstMdfDtm=now()
+		where
+			dept_no=#{dept_no}
+	</update>
 	
 	
 </mapper>

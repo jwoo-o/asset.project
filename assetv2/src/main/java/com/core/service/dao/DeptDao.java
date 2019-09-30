@@ -96,6 +96,11 @@ public class DeptDao {
 		return session.selectOne("dept.selectHighLevel",dept_no);
 	}
 
+	public int delete(DeptViewDto dto) throws SQLException {
+		// TODO Auto-generated method stub
+		return session.update("dept.delete",dto);
+	}
+
 	
 
 }
