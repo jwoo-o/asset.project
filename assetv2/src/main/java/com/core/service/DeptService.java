@@ -26,4 +26,6 @@ public interface DeptService {
 
 	public List<DeptViewDto> selDivisionSearch() throws Exception;
 
+	public Map<String, Object> delDept(DeptViewDto dto, ManagerDto manager)  throws Exception;
+
 }

@@ -554,14 +554,14 @@ var isRun = false;
     			return;
     		}
     		isRun = true;
-			var data = $("#dept_no").val();
+			var data = {"dept_no":$("#dept_no").val()},dataStr = JSON.stringify(data);
 
 			$.ajax({
 				url : "<c:url value='/dept/delete/proc'/>",
 				contentType : "application/json; charset=utf-8",
 				dataType : "json",
 				method : "post",
-				data : data
+				data : dataStr
 			}).done(function(data) {
 
 				if (data.msg == "0001") {

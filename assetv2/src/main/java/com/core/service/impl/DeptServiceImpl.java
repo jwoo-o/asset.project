@@ -19,6 +19,7 @@ import com.core.vo.DeptVo;
 import com.core.vo.ManagerDto;
 import com.emp.service.dao.EmpDao;
 import com.emp.vo.EmpVo;
+import com.emp.vo.SearchDto;
 
 @Service
 public class DeptServiceImpl extends CoreService implements DeptService {
@@ -327,6 +328,37 @@ public class DeptServiceImpl extends CoreService implements DeptService {
 	public List<DeptViewDto> selDivisionSearch() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectDivision();
+	}
+
+	@Override
+	public Map<String, Object> delDept(DeptViewDto dto, ManagerDto manager) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		dto.setLstMdfWkrNm(manager.getmName());
+		SearchDto searchDto = new SearchDto();
+		
+		searchDto.setPage(0);
+		searchDto.setLimit(10);
+		searchDto.setKeyword("dept");
+		searchDto.setSearch(dto.getDept_no()+"");
+		List<EmpVo> emp_list = new ArrayList<EmpVo>();
+		List<DeptViewDto> dept_list = new ArrayList<DeptViewDto>();
+		emp_list = edao.selectList(searchDto);
+		dept_list = dao.selectSubDept(dto);
+		if(emp_list.size()>0) {
+			map.put("msg", "해당 부서에 부서원들이 있습니다.\n부서원의 부서코드를 변경 후 삭제바랍니다.");
+		}else if(dept_list.size()>0){
+			map.put("msg", "하위부서의 상위부서코드 변경 후 삭제바랍니다.");
+		}else {
+			
+			if(dao.delete(dto)>0) {
+				map.put("msg", "0001");
+			}
+			map.put("msg", "요청이 실행되지 않았습니다.");
+		}
+		
+		
+		return map;
 	}
 
 }
