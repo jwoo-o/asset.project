@@ -455,6 +455,7 @@ var isRun = false;
 								if(dept.org_nm=="Unit"){
 									$("#btnDl").show();
 									$("#org_nm").val(dept.org_nm);
+									$("#dept_nm").attr("readOnly", false);
 								}else{
 									$("#btnDl").hide();
 								}
