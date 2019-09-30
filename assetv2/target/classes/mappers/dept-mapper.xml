@@ -71,8 +71,8 @@
 		update dept 
 		set 
 			dept_mgr_no=#{dept_mgr_no},
+			dept_nm=#{det_nm},
 			org_no=#{org_no},
-			org_nm=#{org_nm},
 			emp_no=#{emp_no},
 			color=#{color},
 			lstMdfWkrNm=#{lstMdfWkrNm},
