@@ -1152,7 +1152,7 @@
       $nodeDiv.data('nodeData', nodeData);
       // append 4 direction arrows or expand/collapse buttons
       var flags = data.relationship || '';
-      if (opts.verticalLevel && level >= opts.verticalLevel) {
+      /*if (opts.verticalLevel && level >= opts.verticalLevel) {
         if ((level + 1) > opts.verticalLevel && Number(flags.substr(2,1))) {
           var icon = level + 1 > opts.visibleLevel ? 'plus' : 'minus';
           $nodeDiv.append('<i class="toggleBtn fa fa-' + icon + '-square"></i>');
@@ -1169,9 +1169,9 @@
           $nodeDiv.append('<i class="edge verticalEdge bottomEdge fa"></i>')
             .children('.title').prepend('<i class="fa '+ opts.parentNodeSymbol + ' symbol"></i>');
         }
-      }
+      }*/
 
-      $nodeDiv.on('mouseenter mouseleave', this.nodeEnterLeaveHandler.bind(this));
+      //$nodeDiv.on('mouseenter mouseleave', this.nodeEnterLeaveHandler.bind(this));
       $nodeDiv.on('click', this.nodeClickHandler.bind(this));
       $nodeDiv.on('click', '.topEdge', this.topEdgeClickHandler.bind(this));
       $nodeDiv.on('click', '.bottomEdge', this.bottomEdgeClickHandler.bind(this));

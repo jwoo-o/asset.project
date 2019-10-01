@@ -61,7 +61,7 @@
 #floor_data{
 
 	
-	left: 1175px;
+	left: 60%;
 	top: 85px;
 	width: 700px;
 	height: 128px;
@@ -77,18 +77,34 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/html2canvas.min.js"></script>
+<script type="text/javascript" src="/js/jspdf.min.js"></script>
 <script type="text/javascript" src="/js/orgchart.js"></script>
 
 <script type="text/javascript">
 
 	$(function () {
+		var oc
 		function orgChartData(country){
     		
     		$.ajax({
 				url: '/emp/organization/proc', method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8',data:country
 			}).done(function(data) {
 					if(data.msg=="0001"){
-						orgChart(data,country);
+						//oc.$chart
+						//$('#org_div').empty();
+						if(oc==undefined){
+							orgChart(data,country);
+						}else{
+							oc.init({'data':data.tree[0]});
+							empData(data,country);
+							var ceo = -($("#1").position().left+90-$("#org_div").width()/2);
+							//.css("-webkit-transform","translate("+ceo+"px, 0px)");
+							$(".orgchart").css('transform', 'matrix(1, 0, 0, 1, ' + ceo + ',0)');
+						}
+						
+						
+						
 					}else{
 						alert(data.msg);
 					}
@@ -114,14 +130,18 @@
 		
 		
 		function orgChart(data,country){
-			$('#org_div').empty();
-			var oc = $('#org_div').orgchart({
+			
+			oc = $('#org_div').orgchart({
 				  'nodeTitle': "dept_nm",
 				  "nodeContent" : "emp_nm",
 				  'nodeId':"dept_no",
 				  'parentId':"dept_mgr_no",
-				  'toggleSiblingsResp':false,
+				  'toggleSiblingsResp':true,
+				  'zoominLimit':2,
 			      'data' :data.tree[0],
+			      //'exportButton':true,
+			      'exportFilename':'organizationchart',
+			      'exportFileextension': 'png',
 			      'zoom':true,
 			      'pan':true,
 			      'draggable': false,
@@ -152,13 +172,33 @@
 			var ceo = -($("#1").position().left+90-$("#org_div").width()/2);
 			//.css("-webkit-transform","translate("+ceo+"px, 0px)");
 			$(".orgchart").css('transform', 'matrix(1, 0, 0, 1, ' + ceo + ',0)');
+			
+			
+			empData(data,country)
+		}
+		
+		
+		
+		
+		$(".btn-country").on('click', function() {
+			 
+			var country = $(this).text();
+			$("#seat_title").text(country);
+			orgChartData(country);
+		})
+		
+		
+		function empData(data,country){
+			
 			$.each(data.emp, function(i, elt) {
 				
 				$("#"+elt.basic_dept).append('<div class="sub_content">'+elt.name+'['+elt.pos_nm+']</div>');
 			})
 			$.each($(".node"), function(i, elt) {
 			 	$(elt).children(".sub_content").last().removeClass("sub_content").addClass("sub_last_content");
-			})
+			})	
+			
+			
 			$("#floor_data").empty();
 			var data_count = 0;
 			$.each(data.count, function(i, elt) {
@@ -178,28 +218,24 @@
 			tag += "</tr></table>";
 			$("#floor_data").append(tag);
 			
-			$(".div_select").on('click', function() {
-			 	
+		
+			
+			
+			$(document).on('click', '.div_select', function(){
 				var id = $(this).data("link");
 				var dept = Number(-($("#"+id).position().left));
 				var translate = $(".orgchart").css("transform");
 				var x = Number(translate.substring(7,translate.length-1).split(",")[4]);
 				
 				$(".orgchart").css('transform', 'matrix(1, 0, 0, 1, ' + (x+dept-90+$("#org_div").width()/2) + ',0)');
-
-			})
-			
-			
+			})	
 			
 		}
-		
-		$(".btn-country").on('click', function() {
-			 
-			var country = $(this).text();
-			orgChartData(country);
+		$("#btn_download").on('click',function(){
+			
+			oc.export($("#seat_title").text()+"-organization", "png");
 		})
 		
-
 		
 	});
 </script>
@@ -214,7 +250,7 @@
 		                  <h3 class="box-title"><strong id="seat_title">kr</strong></h3>
 		                </div><!-- /.box-header -->
 		                <button id="btn_kr" class="btn btn-primary btn-country">kr</button>&nbsp;&nbsp;<button id="btn_sg" class="btn btn-primary btn-country">sg</button>&nbsp;&nbsp;<button id="btn_cn" class="btn btn-primary btn-country">cn</button>&nbsp;&nbsp;<button id="btn_id" class="btn btn-primary btn-country">id</button>&nbsp;&nbsp;<button id="btn_my" class="btn btn-primary btn-country">my</button>
-		     
+		     			<button id="btn_download" class="btn btn-primary" style="left:95%; position: absolute;">download</button>
 		                <div id="org_div" class="org_div" style="height: 700px; width:100%;" ></div>
 						<div id="floor_data"></div>
 					</div>	
