@@ -125,7 +125,21 @@
 		
 		
 		
+		 function textLengthOverCut(txt, len, lastTxt) {
+		        if (len == "" || len == null) { // 기본값
+		            len = 20;
+		        }
+		        if (lastTxt == "" || lastTxt == null) { // 기본값
+		            lastTxt = "...";
+		        }
+		        if (txt.length > len) {
+		            txt = txt.substr(0, len) + lastTxt;
+		        }
+		        return txt;
+		    }
 
+
+		
 		
 		
 		
@@ -192,7 +206,7 @@
 			
 			$.each(data.emp, function(i, elt) {
 				
-				$("#"+elt.basic_dept).append('<div class="sub_content">'+elt.name+'['+elt.pos_nm+']</div>');
+				$("#"+elt.basic_dept).append('<div class="sub_content">'+textLengthOverCut(elt.name,12)+'['+elt.pos_nm+']</div>');
 			})
 			$.each($(".node"), function(i, elt) {
 			 	$(elt).children(".sub_content").last().removeClass("sub_content").addClass("sub_last_content");
