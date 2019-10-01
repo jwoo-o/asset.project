@@ -250,6 +250,21 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.orgchart .node .d_content {
+  box-sizing: border-box;
+  padding: 2px;
+  height: 20px;
+  font-size: 0.625rem;
+  border: 1px solid rgba(155, 124, 201, 0.8);
+  text-align: center;
+  background-color: rgba(213, 213, 221, 0.8);
+  color: #333;
+  font-weight:bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
 .orgchart .node .sub_content {
   box-sizing: border-box;
   padding: 2px;
