@@ -17,6 +17,7 @@
     factory(jQuery, window, document);
   }
 }(function ($, window, document, undefined) {
+  var country;
   var OrgChart = function (elem, opts) {
     this.$chartContainer = $(elem);
     this.opts = opts;
@@ -25,6 +26,8 @@
       'nodeId': 'id',
       'nodeDept':'org_nm',
       'nodePosition':'position',
+      'nodeCountry':'country',
+      'nodeEmpCountry':'emp_country',
       'toggleSiblingsResp': false,
       'visibleLevel': 999,
       'chartClass': '',
@@ -1143,8 +1146,15 @@
       if (opts.nodeTemplate) {
         $nodeDiv.append(opts.nodeTemplate(data));
       } else {
-        $nodeDiv.append('<div class="title">' + data[opts.nodeTitle]+" "+data[opts.nodeDept]  + '</div>')
-          .append(data[opts.nodeContent] !== undefined ? '<div class="content">' + (data[opts.nodeContent]+" ["+data[opts.nodePosition]+']'  || '') + '</div>' : '');
+    	  if(data[opts.nodeCountry]==data[opts.nodeEmpCountry]){
+    		  $nodeDiv.append('<div class="title">' + data[opts.nodeTitle]+" "+data[opts.nodeDept]  + '</div>')
+              .append(data[opts.nodeContent] !== undefined ? '<div class="content">' + (data[opts.nodeContent]+' ['+data[opts.nodePosition]+']'  || '') + '</div>' : '');
+    	  }else{
+    		  $nodeDiv.append('<div class="title">' + data[opts.nodeTitle]+" "+data[opts.nodeDept]  + '</div>')
+              .append(data[opts.nodeContent] !== undefined ? '<div class="d_content">' + (data[opts.nodeContent]+' ['+data[opts.nodePosition]+'] -'+data[opts.nodeEmpCountry]  || '') + '</div>' : '');
+    		  
+    	  }
+       
       }
       //
       var nodeData = $.extend({}, data);
