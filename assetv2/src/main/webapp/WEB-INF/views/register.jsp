@@ -50,8 +50,6 @@
 				
 				$("#category").val("${vo.category}").prop("selected", true);
 				$("#status").val("${vo.status}").prop("selected", true);
-				$("#position").val("${vo.position}").prop("selected", true);
-				$("#division").val("${vo.division}").prop("selected", true);
 				
 				$("#assetForm").find("input").prop('readonly',true);
 				$("#category option").not(":selected").remove();
