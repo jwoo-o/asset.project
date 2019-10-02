@@ -216,7 +216,7 @@
 	</select>
 	
 	<select id="selectMgrEmp" resultType="deptVo">
-		select dept_no from dept where emp_no=#{empNo} and use_yn='y'
+		select dept_no from dept where emp_no=#{empNo} and use_yn='y' and country=#{country}
 	</select>
 	
 	<select id="selectHighLevel" resultType="Map">

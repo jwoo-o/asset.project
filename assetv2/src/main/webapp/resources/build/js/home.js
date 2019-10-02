@@ -27,7 +27,7 @@ var isRun = false;
 			
 			
 			$("#setCommon").click(function() {
-				 var x = 1000;
+				 	var x = 1000;
 				    var y = 900;
 				    var url = '/common';
 				    var title = 'Common Register';

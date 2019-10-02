@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.core.vo.CommonDto;
 import com.core.vo.DeptViewDto;
 import com.core.vo.DeptVo;
+import com.emp.vo.EmpVo;
 
 	
 
@@ -76,9 +77,9 @@ public class DeptDao {
 		return session.selectList("dept.selectDivision");
 	}
 
-	public DeptVo selectMgrEmp(String empNo) {
+	public DeptVo selectMgrEmp(EmpVo vo) {
 		// TODO Auto-generated method stub
-		return session.selectOne("dept.selectMgrEmp",empNo);
+		return session.selectOne("dept.selectMgrEmp",vo);
 	}
 
 	public int selectLevel(DeptVo vo) throws SQLException {
