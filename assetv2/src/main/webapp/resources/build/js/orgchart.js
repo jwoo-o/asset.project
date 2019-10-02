@@ -9,6 +9,19 @@
  * http://www.opensource.org/licenses/MIT
  */
 'use strict';
+function textLengthOverCut(txt, len, lastTxt) {
+    if (len == "" || len == null) { // 기본값
+        len = 20;
+    }
+    if (lastTxt == "" || lastTxt == null) { // 기본값
+        lastTxt = "...";
+    }
+    if (txt.length > len) {
+        txt = txt.substr(0, len) + lastTxt;
+    }
+    return txt;
+}
+
 
 (function (factory) {
   if (typeof module === 'object' && typeof module.exports === 'object') {
@@ -1148,10 +1161,10 @@
       } else {
     	  if(data[opts.nodeCountry]==data[opts.nodeEmpCountry]){
     		  $nodeDiv.append('<div class="title">' + data[opts.nodeTitle]+" "+data[opts.nodeDept]  + '</div>')
-              .append(data[opts.nodeContent] !== undefined ? '<div class="content">' + (data[opts.nodeContent]+' ['+data[opts.nodePosition]+']'  || '') + '</div>' : '');
+              .append(data[opts.nodeContent] !== undefined ? '<div class="content">' + (textLengthOverCut(data[opts.nodeContent], 15, "")+' ['+data[opts.nodePosition]+']'  || '') + '</div>' : '');
     	  }else{
     		  $nodeDiv.append('<div class="title">' + data[opts.nodeTitle]+" "+data[opts.nodeDept]  + '</div>')
-              .append(data[opts.nodeContent] !== undefined ? '<div class="d_content">' + (data[opts.nodeContent]+' ['+data[opts.nodePosition]+'] -'+data[opts.nodeEmpCountry]  || '') + '</div>' : '');
+              .append(data[opts.nodeContent] !== undefined ? '<div class="d_content">' + (textLengthOverCut(data[opts.nodeContent], 15, "")+' ['+data[opts.nodePosition]+'] -'+data[opts.nodeEmpCountry]  || '') + '</div>' : '');
     		  
     	  }
        

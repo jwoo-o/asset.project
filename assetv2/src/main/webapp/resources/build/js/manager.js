@@ -408,8 +408,8 @@
                 uiLibrary: 'bootstrap4',
                 columns: [
                     { field: 'empNo',title: '사번', width: 100, align: 'center' },
-                    { field: 'name',title: '이름', width: 100,sortable: true, align: 'center' },
-                    { field: 'position', title: '직위', sortable: true, align: 'center' },
+                    { field: 'name',title: '이름', sortable: true, align: 'center' },
+                    { field: 'position', title: '직위',width: 200, sortable: true, align: 'center' },
                     { field: 'first_dept_nm', title: '부서', sortable: true, align: 'center' },
                     { field: 'gender', title: '성별', width: 70, align: 'center' },
                     { title: '', field: 'Edit', width: 42, type: 'icon', icon: 'fa fa-pencil', tooltip: 'Edit', events: { 'click': Edit } },
