@@ -80,6 +80,8 @@
 <script type="text/javascript" src="/js/html2canvas.min.js"></script>
 <script type="text/javascript" src="/js/jspdf.min.js"></script>
 <script type="text/javascript" src="/js/orgchart.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+
 
 <script type="text/javascript">
 
@@ -249,6 +251,16 @@
 			
 			oc.export($("#seat_title").text()+"-organization", "png");
 		})
+		$(document).on('click', '.node', function(){
+			var id = $(this).attr("id");
+			var x = 1000;
+		    var y = 900;
+		    var url = '/dept/register?dept_no='+id+'&emp_no=null';
+		    var title = 'Common Register';
+		    
+		    popup(url,title,x,y);
+		})	
+		
 		
 		
 	});

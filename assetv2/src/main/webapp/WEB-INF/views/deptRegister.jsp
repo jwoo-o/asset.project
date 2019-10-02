@@ -193,6 +193,14 @@ var isRun = false;
 	$(function () {
 		var mgr_dept_data = [];
 		var emp_data = [];
+		var openers = false;
+
+		if(opener){
+			if(window.opener.document.URL.search("organization")!=-1){
+				openers = true
+			}
+		}
+		
 		
 
 		$.dataSearchProc = function(data){
@@ -540,7 +548,15 @@ var isRun = false;
 						$("#btnDl").show();
 						$("#dept_no").val(data.dept.dept_no);
 					}else{
-						location.reload();
+						
+						
+						if(openers){
+							var country = $(opener.document).find("#seat_title").text();
+							$("#btn_"+country, opener.document).click();
+							window.close();
+						}else{
+							location.reload();
+						}
 					}
 					
 				} else {

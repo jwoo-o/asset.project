@@ -104,13 +104,13 @@ public class EmpServiceImpl implements EmpService {
 		assetDao.updateEmp(map);
 		
 		map.clear();
-		DeptVo deptVo = deptDao.selectMgrEmp(vo.getEmpNo());
+		DeptVo deptVo = deptDao.selectMgrEmp(vo);
 		if(deptVo!=null) {
 			if(vo.getBasic_dept()==deptVo.getDept_no()) {
 				dao.update(vo);
 				map.put("msg", "0001");
 			}else {
-				throw new Exception("부서장인 상태에서 부서를 변경 할 수 없습니다");
+				throw new Exception(vo.getCountry()+"사업국가 내 부서장인 상태에서는 부서를 변경 할 수 없습니다");
 			}
 				
 		}else {
