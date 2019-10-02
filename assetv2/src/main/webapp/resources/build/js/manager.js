@@ -407,7 +407,7 @@
                 dataSource: {url:'/emp/list/proc'},
                 uiLibrary: 'bootstrap4',
                 columns: [
-                    { field: 'empNo',title: '사번', width: 100, align: 'center' },
+                    { field: 'empNo',title: '사번', width: 100,sortable: true, align: 'center' },
                     { field: 'name',title: '이름', sortable: true, align: 'center' },
                     { field: 'position', title: '직위',width: 200, sortable: true, align: 'center' },
                     { field: 'first_dept_nm', title: '부서', sortable: true, align: 'center' },

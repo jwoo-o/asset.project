@@ -96,6 +96,7 @@ body {
 											<div class="form-inline search_div" id="dept_search_div" style="display: none">
 												<form class="form-horizontal" id="dept_search_form" onsubmit="return false">
 													<select class="form-control" name="keyword" id="dept_keyword">
+														<option value="dept_no">부서코드</option>
 														<option value="dept_nm">부서명</option>
 														<option value="country">사업국가</option>
 														<option value="emp_nm">부서장</option>
@@ -333,9 +334,20 @@ body {
 				dataSearch(url);
 				
 			})
+			
+			$("input[name=search]").keyup(function(e) {
+			 
+				if(e.which==13){
+					
+					$("#data_view_tbody").empty();
+				 	row = 1;
+				 	dataSearch(url);
+				}
+			})
 						
 			
 		})
+		
 		
 	</script>
 </body>
