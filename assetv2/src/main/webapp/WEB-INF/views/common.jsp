@@ -335,8 +335,7 @@ body {
 				
 			})
 			
-			$("input[name=search]").keyup(function(e) {
-			 
+			$(document).on('keyup',"input[name=search]",function(e){
 				if(e.which==13){
 					
 					$("#data_view_tbody").empty();
