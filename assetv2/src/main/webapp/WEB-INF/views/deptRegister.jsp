@@ -124,6 +124,10 @@ body {
 								</div>
 							</div>
 							<div class="button-group pull-right">
+								<button type="button" class="btn btn-default" name="btnBack"
+									id="btnBack" onclick="history.go(-1)">
+									<i class="fa fa-list-ul"></i> 이전페이지
+								</button>
 								<button type="button" class="btn btn-default" name="btnCan"
 									id="btnCan" onclick="location.href='/dept'">
 									<i class="fa fa-list-ul"></i> 목록
