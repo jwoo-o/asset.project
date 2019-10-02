@@ -190,7 +190,7 @@
 	     ,fnc.level
 	  FROM
 	     (SELECT get_group_tree() AS id, @level AS level
-	        FROM (SELECT @start_with:=2, @id:=@start_with, @level:=0) vars
+	        FROM (SELECT @start_with:=1, @id:=@start_with+1, @level:=0) vars
 	          JOIN dept
 	         WHERE @id IS NOT NULL and use_yn='y') fnc
 	  JOIN dept dept ON fnc.id = dept.dept_no
