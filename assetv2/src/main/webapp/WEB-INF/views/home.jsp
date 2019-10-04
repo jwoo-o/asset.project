@@ -35,34 +35,12 @@
 	 			$("#setCommon").remove();
 	 			$("#phoneBook").remove();
 	 		}
-	    	
-	    	
-	    	
 	    })
-    		
-
-
 
     </script>
     <title>GIOSIS</title>
-    <style type="text/css">
-		body{
-			background: #ecf0f5;
-		}
-		#calendar:hover {
-			background-color: #172d44;
-		}
-		#phoneBook:hover {
-			background-color: #172d44;
-		}
-		#OrganizationChart:hover {
-			background-color: #172d44;
-		}
-		
-		
-	</style>
 </head>
-	<body>
+	<body class="content-wrapper2">
 	
 	<header class="main-header" style="background: #2a3f54">
        <!-- Logo -->

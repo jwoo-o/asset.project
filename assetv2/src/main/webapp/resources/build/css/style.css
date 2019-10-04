@@ -43,7 +43,16 @@ body {
 }	
 #mail:hover {	
 	background-color: #172d44;	
-}	
+}
+#calendar:hover {
+	background-color: #172d44;
+}
+#phoneBook:hover {
+	background-color: #172d44;
+}
+#OrganizationChart:hover {
+	background-color: #172d44;
+}
 /* Layout */
 .wrapper {
 	min-height: 100%;

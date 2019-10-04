@@ -560,8 +560,15 @@
             			
             	}
             })
-            $("#s input[id='search']").keypress(function(e) {
+           /* $("#s input[id='search']").keypress(function(e) {
             	
+            	if(e.which==13){
+            		keyword = $("#keyword").val();
+                	search = $("#search").val();
+                    grid.reload({ keyword : keyword, search : search,page : 1 });
+            	}
+            })*/
+            $(document).on('keypress',"#s #search",function(){
             	if(e.which==13){
             		keyword = $("#keyword").val();
                 	search = $("#search").val();
