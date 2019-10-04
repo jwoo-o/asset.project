@@ -568,7 +568,7 @@
                     grid.reload({ keyword : keyword, search : search,page : 1 });
             	}
             })*/
-            $(document).on('keypress',"#s #search",function(){
+            $(document).on('keypress',"#s #search",function(e){
             	if(e.which==13){
             		keyword = $("#keyword").val();
                 	search = $("#search").val();
