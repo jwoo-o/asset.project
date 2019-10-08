@@ -341,15 +341,22 @@ var popup;
 					})
 					n3_count_tag = "<table style='width:100%' border='1'><thead><tr><td align='center' colspan='6'><b>부서별 현황("+$(".n3 p").length+"/"+$(".n3").length+")</b></td></tr><thead><tr>";
 					n13_count_tag = "<table style='width:100%' border='1'><thead><tr><td align='center' colspan='6'><b>부서별 현황("+$(".n13 p").length+"/"+$(".n13").length+")</b></td></tr><thead><tr>";
+					var n3_count = 1;
+					var n13_count = 1;
 					$.each(data.count, function(i, elt) {
 						
 						if(elt.office=='n3'){						
 							n3_count_tag += "<td align='center' style='background:"+elt.color+"'>"+elt.division+"</td><td width='5%' align='center' >"+elt.count+"</td>";
+							n3_count++;
 						}else{
 							n13_count_tag += "<td align='center' style='background:"+elt.color+"'>"+elt.division+"</td><td width='5%' align='center' >"+elt.count+"</td>";
+							n13_count++;
 						}
-						if((i+1)%3==0){
+						if((n3_count%3==0){
 							n3_count_tag +="</tr><tr>";
+		
+						}
+						if(n13_count%3==0){
 							n13_count_tag +="</tr><tr>";
 						}
 					})
