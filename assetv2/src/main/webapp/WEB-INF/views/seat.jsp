@@ -347,18 +347,17 @@ var popup;
 						
 						if(elt.office=='n3'){						
 							n3_count_tag += "<td align='center' style='background:"+elt.color+"'>"+elt.division+"</td><td width='5%' align='center' >"+elt.count+"</td>";
-							n3_count++;
+							if(n3_count++%3==0){
+								n3_count_tag +="</tr><tr>";
+							}
 						}else{
 							n13_count_tag += "<td align='center' style='background:"+elt.color+"'>"+elt.division+"</td><td width='5%' align='center' >"+elt.count+"</td>";
-							n13_count++;
+							if(n13_count++%3==0){
+								n13_count_tag +="</tr><tr>";
+							}
 						}
-						if((n3_count%3==0){
-							n3_count_tag +="</tr><tr>";
-		
-						}
-						if(n13_count%3==0){
-							n13_count_tag +="</tr><tr>";
-						}
+						
+						
 					})
 					n3_count_tag += "</tr></table>";
 					n13_count_tag += "</tr></table>";
@@ -468,19 +467,7 @@ var popup;
 			
 			if(type=="home"){
 				
-				if($(this).children().html()!=undefined){
-					var input = $(this).find("input");
-					$("#name").val($(this).find("p").text());
-					$("#empNo").val($(input[0]).val());
-					$("#position").val($(input[2]).val());
-					$("#division").val($(input[1]).val());
-					if($(input[3]).val()!="null" && $(input[3]).val()!=''){
-						$("#profile").attr("src", "/resources/build/images/profileImage/"+$(input[3]).val());
-					}else{
-						$("#profile").attr("src","/images/profileImage/default_profile.jpg");
-					}
-					popup.open("Info");
-				}
+				
 				
 			}else if(type=="emp"){
 				
@@ -498,10 +485,20 @@ var popup;
 					window.close();
 				}
 				
-			}else if(type.substring("detail")!=-1){
-				$("#location",opener.document).val($(this).attr("id"));
-				//$("#eseat",opener.document).val($(this).attr("id"));				
-				window.close();
+			}else{			
+				if($(this).children().html()!=undefined){
+					var input = $(this).find("input");
+					$("#name").val($(this).find("p").text());
+					$("#empNo").val($(input[0]).val());
+					$("#position").val($(input[2]).val());
+					$("#division").val($(input[1]).val());
+					if($(input[3]).val()!="null" && $(input[3]).val()!=''){
+						$("#profile").attr("src", "/resources/build/images/profileImage/"+$(input[3]).val());
+					}else{
+						$("#profile").attr("src","/images/profileImage/default_profile.jpg");
+					}
+					popup.open("Info");
+				}
 			}
 			
 		})
