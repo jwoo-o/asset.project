@@ -14,6 +14,18 @@
 	<logger name="com.asset.controller">
 		<level value="debug" />
 	</logger>
+	<!-- Application Loggers -->
+	<logger name="com.core.controller">
+		<level value="debug" />
+	</logger>
+	<!-- Application Loggers -->
+	<logger name="com.calendar.controller">
+		<level value="debug" />
+	</logger>
+	<!-- Application Loggers -->
+	<logger name="com.emp.controller">
+		<level value="debug" />
+	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
