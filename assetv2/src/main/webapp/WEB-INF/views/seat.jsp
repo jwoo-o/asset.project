@@ -465,11 +465,7 @@ var popup;
 					break;
 			}*/
 			
-			if(type=="home"){
-				
-				
-				
-			}else if(type=="emp"){
+			if(type=="emp"){
 				
 				if($(this).children().html()==undefined){
 					$(".seat",opener.document).val($(this).attr("id"));
