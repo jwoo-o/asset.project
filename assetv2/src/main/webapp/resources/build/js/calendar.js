@@ -368,6 +368,7 @@ var isRun = false;
 			var emp_data = [];
 			$("#first_dept").change(function() {
 				$("#division").val($(this).val());
+				$("#basic_dept").val($(this).val());
 				emp_data.length = 0;
 				if($(this).val()!=""){
 					
@@ -426,7 +427,7 @@ var isRun = false;
         	})
         	$("#four_dept").change(function() {
         	 	
-        		$("#basic_dept,#ebasic_dept").val($(this).val());
+        		$("#basic_dept").val($(this).val());
         		
         	})
 			
