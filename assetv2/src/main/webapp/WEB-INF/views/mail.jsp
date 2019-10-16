@@ -16,9 +16,17 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
     <style type="text/css">
-    	.input-col{
-    		width: 250px;
-    	}
+    .input-col{
+    	width: 250px;
+    }
+    .ui-autocomplete {
+		  max-height: 200px;
+		  overflow-y: auto;
+		  /* prevent horizontal scrollbar */
+		  overflow-x: hidden;
+		  /* add padding to account for vertical scrollbar */
+		  /* padding-right: 20px; */
+	}
     </style>
 
   	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -33,7 +41,7 @@
     	var calendar_list;
     	var isRun = false;
 		$(function(){
-			
+			var content = "";
 			var $issuer_tr = $("#issuer_tr").tagit({
 				readOnly:true
 			});
@@ -184,7 +192,7 @@
 				}
 			})
 			$("#type").on("change",function() {
-				var content ="안녕하세요 경영지원실입니다.\n\n";
+				content ="안녕하세요 경영지원실입니다.\n\n";
 				$("#ccTags").tagit("removeAll")
 				$("#issuer_tr").tagit("removeAll")
 				$("#toTags").tagit("removeAll");
@@ -268,24 +276,7 @@
 					$("#hr_pass").hide();
 					$("#entry_date").val("");
 					$(".hr").insertAfter($("#email_tbody tr:first-child"));
-					$("#subject").val("[경영지원실] 입사자 제출 서류 안내");
-					content +='입사을 진심으로 축하드립니다.\n\n'
-							+'첨부파일 확인하시고, ';
-						
-						$("#entry_date").on("change", function() {
-						 
-							content += '하기 서류를\n'+$(this).val()+' 까지 제출하여 주시기 바랍니다.\n\n'
-							+'\t1. 명함 신청서(Biz Card)\n'
-							+'\t2. Glosis Introduction\n'
-							+'\t3. 사진파일(jpg파일)\n'
-							+'\t4. 신상명세서\n'
-							+'\t5. <font color="red">영업비밀보호서약서 – 출력본으로 제출. 자필서명 필수</font>\n\n'
-							+'5번에 해당하는 영엉비밀보호서약서는 출력하여\n'
-							+'3층 경영지원실로 제출바라며,\n'
-							+'1(QR코드 포함),3,4번의 서류들은\n이메일로 제출하여 주시기 바랍니다.';
-							
-							$("#content").val(content);
-						})
+					$("#subject").val("[경영지원실] 입사자 제출 서류 안내");		
 					break;
 				case "fail":
 					$(".hr").hide();
@@ -297,6 +288,31 @@
 					$("#content").val("");
 					break;
 				}
+			})
+			$("#entry_date").on("change", function() {
+				if($("#type").val()=="document"){
+					content ='입사을 진심으로 축하드립니다.\n\n'
+						+'첨부파일 확인하시고, ';
+					content += '하기 서류를\n'+$(this).val()+' 까지 제출하여 주시기 바랍니다.\n\n'
+					+'\t1. 명함 신청서(Biz Card)\n'
+					+'\t2. Glosis Introduction\n'
+					+'\t3. 사진파일(jpg파일)\n'
+					+'\t4. 신상명세서\n'
+					+'\t5. <font color="red">영업비밀보호서약서 – 출력본으로 제출. 자필서명 필수</font>\n\n'
+					+'5번에 해당하는 영엉비밀보호서약서는 출력하여\n'
+					+'3층 경영지원실로 제출바라며,\n'
+					+'1(QR코드 포함),3,4번의 서류들은\n이메일로 제출하여 주시기 바랍니다.';
+							
+					$("#content").val(content);
+				}else{
+					content ='Qoo10 경영지원실 입니다.\n'
+						+'최종합격을 진심으로 축하드립니다.\n\n'
+						+'입사일정을 아래와 같이 안내드리오니 확인 부탁드리며,\n'
+						+'해당일에 출근해주시기를 바랍니다.';
+					$("#content").val(content);
+					$("#subject").val("[Qoo10]합격 안내");
+				}
+							
 			})
 			
 			 $("#previewBtn").click(function() {
