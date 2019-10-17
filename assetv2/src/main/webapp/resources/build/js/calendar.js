@@ -229,7 +229,7 @@ var isRun = false;
 						$("#first_dept").val(event.division).prop("selected",true);
 						$("#addNrein").val(event.addNrein);
 						$("#mgr").tagit("removeAll");
-						if(mgr_data=="" || event.joinYN=='y'){
+						if(mgr_data=="" || $("#mgrAuth").val()==0 || event.joinYN=='y'){
 							$("#btnSave").hide();
 							$("#btnJoin").hide();
 							$("#btnDelete").hide();
@@ -292,34 +292,25 @@ var isRun = false;
 						
 					},*/
 			        select:function(start, end){
-			        	if(mgr_data==""){
-				    		$("#btnSave").hide();
-							$("#btnJoin").hide();
-							$("#btnDelete").hide();
-							$("#seat").hide();
-							$("#regForm").find("input").prop("readonly",true);
-							$("#mgr").tagit({readOnly: true});
-							$("#first_dept").attr('disabled', 'true');
-							$(".dept").attr('disabled', 'true');
-							$("#addNrein").attr('disabled', 'true');
-			    		}else{
-			        	$("#btnDelete").hide();
-			        	$("#btnJoin").hide();
-			        	$("#btnSave").show();
-			        	$("#seat").show();
-			        	$("#regForm")[0].reset();
-		                $("#start").val(getTimeStamp(start));
-		                $("#end").val(getTimeStamp(end));
-		                $("#no").val('0');
-		                $("#first_dept").removeAttr("disabled");
-		                $(".dept").empty().attr("disabled", true);
-						$("#second_dept").append("<option value=''>## NONE ##</option>");
-						$("#three_dept").append("<option value=''>## NONE ##</option>");
-						$("#four_dept").append("<option value=''>## NONE ##</option>");
-						$("#addNrein").removeAttr("disabled");
-		                $("#regForm").find("input").prop("readonly",false);
-		                $("#mgr").tagit("removeAll");
-		                regist.open('Join Employee');	
+			        	
+			        	if(mgr_data!="" && $("#mgrAuth").val()!=0){
+				        	$("#btnDelete").hide();
+				        	$("#btnJoin").hide();
+				        	$("#btnSave").show();
+				        	$("#seat").show();
+				        	$("#regForm")[0].reset();
+			                $("#start").val(getTimeStamp(start));
+			                $("#end").val(getTimeStamp(end));
+			                $("#no").val('0');
+			                $("#first_dept").removeAttr("disabled");
+			                $(".dept").empty().attr("disabled", true);
+							$("#second_dept").append("<option value=''>## NONE ##</option>");
+							$("#three_dept").append("<option value=''>## NONE ##</option>");
+							$("#four_dept").append("<option value=''>## NONE ##</option>");
+							$("#addNrein").removeAttr("disabled");
+			                $("#regForm").find("input").prop("readonly",false);
+			                $("#mgr").tagit("removeAll");
+			                regist.open('Join Employee');	
 			    		}
 			        	$('#calendar').fullCalendar('unselect');
 			        }
@@ -574,7 +565,7 @@ var isRun = false;
 	        					}else{
 	        						$("#four_dept").val("").prop("selected",true);
 	        					}
-	        					if(mgr_data=="" || event.joinYN=='y'){
+	        					if(mgr_data=="" || event.joinYN=='y' || $("#mgrAuth").val()==0){
 	        						$(".dept").attr("disabled", true);
 	        					}
 	        				}

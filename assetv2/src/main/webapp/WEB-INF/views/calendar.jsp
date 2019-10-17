@@ -35,7 +35,7 @@
 </head>
 <body  class="content-wrapper2" style="max-height: 870px; max-width: 1000px;">
 	
-		
+		<input type="hidden" id="mgrAuth" value="${mgr.auth }">
 		   <!-- Main content -->
 	       <section class="content">
 			<div class="row">
