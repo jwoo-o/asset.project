@@ -266,7 +266,13 @@
 		    
 		    popup(url,title,x,y);
 		})
-		
+		$(document).on('mouseenter', '.employee', function(){
+    		$(this).css('background-color', 'rgba(255, 217, 250, 0.8)');
+  		})
+  		$(document).on('mouseleave', '.employee', function(){
+  			$(this).css('background-color', 'rgba(255, 255, 255, 1)');
+  		})
+ 		
 		$(document).on('click', '.employee', function(){	
 			$.ajax({
 				url: '/emp/detail/proc', method: 'POST',dataType:'json',contentType:'application/json; charset=UTF-8',data:$(this).attr("id")
