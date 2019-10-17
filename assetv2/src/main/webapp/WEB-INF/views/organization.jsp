@@ -259,12 +259,16 @@
 		})
 		$(document).on('click', '.title', function(){
 			var id = $(this).parent().attr("id");
-			var x = 1000;
-		    var y = 900;
-		    var url = '/dept/register?dept_no='+id+'&emp_no=null';
-		    var title = 'Common Register';
-		    
-		    popup(url,title,x,y);
+			if(id!=undefined){
+				
+				var x = 1000;
+			    var y = 900;
+			    var url = '/dept/register?dept_no='+id+'&emp_no=null';
+			    var title = 'Common Register';
+			    
+			    popup(url,title,x,y);
+			}
+			
 		})
 		$(document).on('mouseenter', '.employee', function(){
     		$(this).css('background-color', 'rgba(255, 217, 250, 0.8)');
