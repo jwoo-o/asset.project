@@ -62,13 +62,33 @@
        
   </select>
   <select id="detail" resultType="empVo">
-  	select employeeNumber as empNo,
-  	name as userName,
-  	division,
-  	position,
-  	gender,
-  	joinDate
-  	from employee where employeeNumber=#{empNo}
+  	select 
+    	e.employeeNumber as empNo,
+    	e.name as name,
+    	(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='position' and c1.DTL_C=position) as position,
+        e.division as dcode,
+        e.position as pcode,
+        e.basic_dept,
+        (select dept_nm from dept where dept_no=e.basic_dept) basic_dept_nm,
+        (select DTL_C_NM from CMCDDTLM c2 where c2.GRP_C='organization' and c2.DTL_C in(select org_no from dept where dept_no=e.basic_dept)) as basic_dept_org_nm,
+        e.first_dept,
+        ifnull((select dept_nm from dept where dept_no=e.first_dept),"") first_dept_nm,
+        ifnull((select DTL_C_NM from CMCDDTLM c3 where c3.GRP_C='organization' and c3.DTL_C in(select org_no from dept where dept_no=e.first_dept)),"") as first_dept_org_nm,
+        e.second_dept,
+        e.three_dept,
+        e.four_dept,
+        e.gender,
+        e.country,
+        e.joinDate,
+        e.status,
+        e.manager,
+        (select auth from manager m where m.empNo=e.employeeNumber) as auth,
+        e.email,
+        e.office,
+        e.seat,
+        e.profile_name,
+        e.office_number
+  		from employee e where e.employeeNumber=#{empNo}
   </select>
   <insert id="insert">
   	insert into employee values(#{empNo},#{name},#{first_dept},#{country},#{position},#{gender},#{joinDate},'y',#{email},'n',#{office},#{seat},null,#{office_number},#{first_dept},#{second_dept},#{three_dept},#{four_dept},#{basic_dept})
@@ -148,7 +168,8 @@
   	select 
   		name,
   		(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='position' and c1.DTL_C=position) as pos_nm,
-  		basic_dept
+  		basic_dept,
+  		employeeNumber empNo
   	from employee
   	where employeeNumber not in(select emp_no from dept where emp_no is not null and country=#{country}) and country=#{country}
     order by position desc,joinDate asc

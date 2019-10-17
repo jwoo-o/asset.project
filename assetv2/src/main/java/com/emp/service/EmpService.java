@@ -20,4 +20,5 @@ public interface EmpService {
 	public List<EmpVo> selMgrList(CalendarVo vo) throws Exception;
 	public Map<String, Object> selSeatList(SearchDto dto) throws Exception;
 	public Map<String, Object> updImgUpload(ProfileDto dto) throws Exception;
+	public Map<String, Object> selEmpDetail(String empNo) throws Exception;
 }

@@ -194,4 +194,19 @@ public class EmpServiceImpl implements EmpService {
 		return map;
 	}
 
+	@Override
+	public Map<String, Object> selEmpDetail(String empNo) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		EmpVo vo = dao.selectEmp(empNo);
+		if(vo!=null) {
+			map.put("msg", "0001");
+			map.put("data", vo);		
+		}else {
+			map.put("msg", "선택한 데이터를 불러오지 못했습니다");
+		}
+		
+		return map;
+	}
+
 }
