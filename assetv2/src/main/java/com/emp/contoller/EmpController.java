@@ -175,8 +175,8 @@ public class EmpController {
 	}
 	
 	@RequestMapping(value="/emp/organization",method=RequestMethod.GET)
-	public String organization() throws Exception{
-	
+	public String organization(Model model) throws Exception{
+		model.addAttribute("common", cService.selCommonLst());
 		return "organization";
 	}
 	@RequestMapping(value="/emp/organization/proc",method=RequestMethod.POST)
@@ -192,6 +192,21 @@ public class EmpController {
 			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
 		}
 		
+		return map;
+	}
+	@RequestMapping(value="/emp/detail/proc",method=RequestMethod.POST)
+	public  @ResponseBody Map<String, Object> empDetailProc(@RequestBody String empNo){
+	
+		logger.debug("empNo : {}",empNo);
+		Map<String, Object> map = new HashMap<String,Object>();
+		try {
+			map = service.selEmpDetail(empNo);
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getMessage(),e);
+			map.put("msg","오류가 발생하였습니다. 관리자에게 문의하세요");
+		}
 		return map;
 	}
 	
