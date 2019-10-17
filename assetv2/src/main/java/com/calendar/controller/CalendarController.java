@@ -149,6 +149,8 @@ public class CalendarController {
 	}
 	@RequestMapping("/calendar/view")
 	public String calendarView(Model model,HttpServletRequest request)throws Exception{
+		model.addAttribute("common", cService.selCommonLst());
+		model.addAttribute("dept", dService.selDivisionSearch());
 		String ip = request.getRemoteAddr();
 		String [] c = ip.split("\\.");
 		logger.debug(ip);
