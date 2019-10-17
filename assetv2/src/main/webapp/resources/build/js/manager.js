@@ -15,7 +15,7 @@
         		data.three_dept = e.data.record.second_dept;
         		data.four_dept = e.data.record.three_dept;
         		
-        		$.deptAjaxData(data,e);
+        		$.deptAjaxData(data,e.data.record);
         		$(".dept").empty().attr("disabled", true);
         		$("#efirst_dept").append("<option value=''>## NONE ##</option>");
 				$("#esecond_dept").append("<option value=''>## NONE ##</option>");
@@ -169,7 +169,16 @@
 	                	if(data.msg=="0001"){
 	                		alert("수정이 완료되었습니다");
 	                		modify.close();
-	                        grid.reload();
+	                		if(grid==undefined){
+	                			
+	    							var country = $(document).find("#seat_title").text();
+	    							$("#btn_"+country).click();
+	    							
+	                		}else{
+	                			grid.reload();
+	                		}
+	                		
+	                        
 	                       
 	                	}else{
 	                		alert(data.msg);
@@ -681,23 +690,23 @@
         				}
         				
         				if(e!=undefined){
-        					if(e.data.record.first_dept!=0){
-        						$("#efirst_dept").val(e.data.record.first_dept).prop("selected",true);
+        					if(e.first_dept!=0){
+        						$("#efirst_dept").val(e.first_dept).prop("selected",true);
         					}else{
         						$("#efirst_dept").val("").prop("selected",true);
         					}
-        					if(e.data.record.second_dept!=0){
-        						$("#esecond_dept").val(e.data.record.second_dept).prop("selected",true);
+        					if(e.second_dept!=0){
+        						$("#esecond_dept").val(e.second_dept).prop("selected",true);
         					}else{
         						$("#esecond_dept").val("").prop("selected",true);
         					}
-        					if(e.data.record.three_dept!=0){
-        						 $("#ethree_dept").val(e.data.record.three_dept).prop("selected",true);
+        					if(e.three_dept!=0){
+        						 $("#ethree_dept").val(e.three_dept).prop("selected",true);
         					}else{
         						$("#ethree_dept").val("").prop("selected",true);
         					}
-        					if(e.data.record.four_dept!=0){
-        						 $("#efour_dept").val(e.data.record.four_dept).prop("selected",true);   
+        					if(e.four_dept!=0){
+        						 $("#efour_dept").val(e.four_dept).prop("selected",true);   
         					}else{
         						$("#efour_dept").val("").prop("selected",true);
         					}
