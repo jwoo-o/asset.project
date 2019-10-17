@@ -227,6 +227,7 @@ var isRun = false;
 		        		$.deptAjaxData(data,event);
 						$("#division").val(event.division);
 						$("#first_dept").val(event.division).prop("selected",true);
+						$("#basic_dept").val(event.basic_dept);
 						$("#addNrein").val(event.addNrein);
 						$("#mgr").tagit("removeAll");
 						if(mgr_data=="" || $("#mgrAuth").val()==0 || event.joinYN=='y'){
