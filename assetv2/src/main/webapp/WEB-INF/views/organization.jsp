@@ -319,7 +319,7 @@
 				            if(data.data.profile_name!=null && data.data.profile_name!=''){
 				            	$("#profile").attr("src", "/resources/build/images/profileImage/"+data.data.profile_name);
 				            }else{
-				            	$("#profile").attr("src","images/profileImage/default_profile.jpg");
+				            	$("#profile").attr("src","/images/profileImage/default_profile.jpg");
 				            }
 				            $("#profile_upload").val('');
 				            if(data.data.manager=='y'){
@@ -392,7 +392,7 @@
             <input type="hidden" id="ebasic_dept" name="basic_dept">
             <input type="hidden" id="edivision" name="division">  
             <div class="form-group" style="text-align: center;">  
-	       		<img alt="사진" src="/images/profileImage/default_profile.jpg" width="150px" height="170px" id="profile">
+	       		<img alt="사진" width="150px" height="170px" id="profile">
 	        </div>
             <div class="form-group">
                 <label for="ename">이름</label>
