@@ -28,4 +28,6 @@ public interface DeptService {
 
 	public Map<String, Object> delDept(DeptViewDto dto, ManagerDto manager)  throws Exception;
 
+	public void selOrgChartDownload() throws Exception;
+
 }
