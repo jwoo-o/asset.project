@@ -363,4 +363,15 @@ public class DeptServiceImpl extends CoreService implements DeptService {
 		return map;
 	}
 
+	@Override
+	public void selOrgChartDownload() throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		
+		map.put("tree", JsonUtil.convertorTreeMap(dao.selectOrgChart(null), 0, "dept_no", "dept_mgr_no", "dept_nm"));
+		map.put("emp", edao.selectOrgList(null));
+		map.put("count", edao.selectEmpCount(null));
+	}
+
 }
