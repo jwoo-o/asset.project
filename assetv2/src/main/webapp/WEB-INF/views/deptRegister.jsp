@@ -335,10 +335,20 @@ var isRun = false;
 
 						if (mgr_nm == ""){		
 							return false;
-						}else if(mgr_dept_data.findIndex(i => i.value==mgr_nm)==-1){
-							alert("상위부서가 확인이 되지 않습니다");
-							$("#dept_mgr_no input").val("").focus();
-							return false;
+						}else{
+							var i;
+							for(i=0;i<mgr_dept_data.length;i++){
+								
+								if(mgr_dept_data[i].value==mgr_nm){
+									break;
+								}
+							}
+							if(i==mgr_dept_data.length){
+								alert("상위부서가 확인이 되지 않습니다");
+								$("#dept_mgr_no input").val("").focus();
+								return false;
+							}
+							
 						}
 						if(mgr_nm==2){
 							$("#color_div").show();
