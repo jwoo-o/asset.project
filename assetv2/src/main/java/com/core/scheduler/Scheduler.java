@@ -24,14 +24,4 @@ public class Scheduler extends CoreController{
 		}
 	}
 	
-	@Scheduled(cron="* * * * * *")
-	public void orgChartScheduler1() {
-		try {
-			service.selOrgChartDownload();
-		}catch (Exception e) {
-			// TODO: handle exception
-			logger.error(e.getMessage(),e);
-		}
-	}
-	
 }
