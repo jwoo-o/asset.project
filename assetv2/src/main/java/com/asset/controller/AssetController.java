@@ -35,30 +35,36 @@ public class AssetController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AssetController.class);
 
+	//자산 service
 	@Inject
 	private AssetService service;
 	
+	//공통코드 service
 	@Inject
 	private CommonServie cService;
 	
 	@Inject
+	
+	//부서코드 service
 	private DeptService dService;
 
 	/**
-	 * Simply selects the home view to render by returning its name.
+	 * 메인 창
 	 */
+
 	@RequestMapping("/home")
 	public void home(Model model) throws Exception {
+		
+		//공통 코드 및 부서 코드
 		model.addAttribute("common",cService.selCommonLst());
 		model.addAttribute("dept", dService.selDivisionSearch());
 		
 	}
-	/**자산 리스트 검색*/
+	/**자산 리스트 검색 ajax 검색*/
 	@RequestMapping(value = "/asset/list/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetLst(@RequestBody AssetSearchDto dto) {
 		logger.debug(dto.toString());
 		
-
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			map.put("list", service.selAssetLst(dto));
@@ -71,12 +77,13 @@ public class AssetController {
 		return map;
 	}
 	
+	//자산 등록페이지
 	@RequestMapping(value = "/asset/register", method = RequestMethod.GET)
 	public String assetRst(Model model) throws Exception{
 		model.addAttribute("common",cService.selCommonLst());
 		return "register";
 	}
-
+	//자산 등록
 	@RequestMapping(value = "/asset/register/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetRst(@RequestBody AssetVo vo, HttpSession session) {
 		logger.debug(vo.toString());
@@ -94,7 +101,7 @@ public class AssetController {
 		return map;
 
 	}
-
+	//자산 세부내용
 	@RequestMapping("/asset/detail")
 	public String assetDtl(@RequestParam int aNo, Model model)throws Exception {
 		AssetDto dto = new AssetDto();
@@ -104,7 +111,7 @@ public class AssetController {
 		model.addAttribute("vo", service.selAssetDtl(dto));
 		return "/register";
 	}
-
+	//자산 수정
 	@RequestMapping(value = "/asset/update/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetMdf(@RequestBody AssetVo vo, HttpSession session) {
 		logger.debug(vo.toString());
@@ -121,6 +128,7 @@ public class AssetController {
 		return map;
 	}
 
+	//자산 폐기처리
 	@RequestMapping(value = "/asset/delete/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetDl(@RequestBody AssetDto dto, HttpSession session) {
 		
@@ -137,6 +145,8 @@ public class AssetController {
 		}
 		return map;
 	}
+	
+	//자산 데이터 db 삭제
 	@RequestMapping(value = "/asset/deleteY/proc", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetDlY(@RequestBody AssetDto dto) {
 
@@ -152,6 +162,8 @@ public class AssetController {
 		}
 		return map;
 	}
+	
+	//자산번호 자동 부여
 	@RequestMapping(value="/asset/noSearch/proc",method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> assetNo(@RequestBody String category){
 		logger.debug(category);
@@ -166,6 +178,9 @@ public class AssetController {
 		}
 		return map;
 	}
+	
+	//자산 chart
+	
 	@RequestMapping("/asset/chart")
 	public String chartView() {
 		return "chart";

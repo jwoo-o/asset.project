@@ -99,7 +99,7 @@ public class EmpController {
 			
 		}catch (Exception e) {
 			// TODO: handle exception
-			if(e.getMessage().equals("부서장인 상태에서 부서를 변경 할 수 없습니다")) {
+			if(e.getMessage().equals("부서장인 상태에서는 부서를 변경 할 수 없습니다")) {
 				map.put("msg", "부서장인 상태에서 부서를 변경 할 수 없습니다");
 				
 			}else {

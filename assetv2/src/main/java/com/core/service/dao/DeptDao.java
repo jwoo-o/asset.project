@@ -58,7 +58,12 @@ public class DeptDao {
 		// TODO Auto-generated method stub
 		return session.selectList("dept.selectOrgChart",country);
 	}
-
+	public List<Map<String, Object>> selectOrgChartAll() throws SQLException {
+		// TODO Auto-generated method stub
+		return session.selectList("dept.selectOrgChartAll");
+	}
+	
+	
 	public List<DeptViewDto> selectDeptSearch() throws SQLException {
 		// TODO Auto-generated method stub 
 		return session.selectList("dept.selectDeptSearch");
@@ -101,6 +106,9 @@ public class DeptDao {
 		// TODO Auto-generated method stub
 		return session.update("dept.delete",dto);
 	}
+
+	
+	
 
 	
 

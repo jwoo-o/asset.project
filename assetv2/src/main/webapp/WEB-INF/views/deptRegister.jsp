@@ -62,7 +62,7 @@ body {
 								<div class="panel-body">
 									<form class="form-horizontal form-label-left" id="formInput"
 										method="post" onsubmit="return false">
-										<input type="hidden" id="dept_no" name="dept_no">
+										<input type="hidden" id="dept_no" name="dept_no" value="${dept_no}">
 										<input type="hidden" id="status" name="status" value="C"/>
 										<input type="hidden" id="mgr_org_nm" name="mgr_org_nm">	
 										<div class="form-group">
@@ -250,8 +250,15 @@ var isRun = false;
 		    			
 		    		}
 		    		if(data.emp_list.length>0){
-		    			$.each(data.emp_list, function(i, elt) {	
-		    				emp_data.push({"label":elt.name,"value":elt.empNo});
+		    			
+		    			$.each(data.emp_list, function(i, elt) {
+		    				if(emp_data.length>0){
+		    					if(emp_data[0].value!=elt.empNo){    					
+		    						emp_data.push({"label":elt.name,"value":elt.empNo});
+		    					}
+		    				}else{
+		    					emp_data.push({"label":elt.name,"value":elt.empNo});
+		    				}
 			        	})	        	
 		    		}else{
 		    			if(emp_data.length==00){
@@ -381,7 +388,7 @@ var isRun = false;
 							$("#emp_no input").val("").focus();
 							return false;
 							
-						}					
+						}		
 						
 					},
 					afterTagAdded: function (event,ui) {
@@ -394,8 +401,10 @@ var isRun = false;
 					}
 				})
 		
-				if(window.location.search!=""){
-					var data = getUrlParams(), dataStr = JSON.stringify(data);
+				
+				if($("#dept_no").val()!=""){
+					
+					var data = {"dept_no":$("#dept_no").val()}, dataStr = JSON.stringify(data);
 					$.ajax({
 						method: 'POST',
 		                url: "/dept/dtl/proc",
@@ -417,8 +426,9 @@ var isRun = false;
 		        					mgr_dept_data.push({"label":dept.dept_mgr_nm+" "+dept.mgr_org_nm,"value":dept.dept_mgr_no});
 		        				}
 							}
-							
-							emp_data.push({"label":dept.emp_nm,"value":dept.emp_no});
+							if(dept.emp_nm!=null){
+								emp_data.push({"label":dept.emp_nm,"value":dept.emp_no});
+							}
 							if(dept.dept_mgr_no==2){
 								$("#color_div").show();
 								$("#seatColor").val(dept.color).prop("selected",true);

@@ -276,6 +276,10 @@
   		$(document).on('mouseleave', '.employee', function(){
   			$(this).css('background-color', 'rgba(255, 255, 255, 1)');
   		})
+  		$(document).on('mouseleave', '.node .content', function(){
+  			$(this).css('background-color', 'rgba(245, 214, 255, 0.8)');
+  		})
+  		
  		
 		$(document).on('click', '.employee', function(){	
 			$.ajax({

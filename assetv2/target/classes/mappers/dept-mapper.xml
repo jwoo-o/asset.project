@@ -161,6 +161,7 @@
 			dept_mgr_no,
 			ifnull(country,"") country,
 			(select name from employee where employeeNumber=emp_no) emp_nm,
+			emp_no,
 			(select DTL_C_NM from CMCDDTLM where GRP_C='position' and DTL_C in(select position from employee where employeeNumber=emp_no)) position,
 			ifnull((select DTL_C_NM from CMCDDTLM where GRP_C='organization' and DTL_C=org_no and not DTL_C_NM="CEO"),"") org_nm,
 			ifnull((select country from employee where employeeNumber=emp_no),"") emp_country
@@ -174,12 +175,26 @@
 			dept_mgr_no,
 			ifnull(country,"") country,
 			(select name from employee where employeeNumber=emp_no) emp_nm,
+			emp_no,
 			(select DTL_C_NM from CMCDDTLM where GRP_C='position' and DTL_C in(select position from employee where employeeNumber=emp_no)) position,
 			ifnull((select DTL_C_NM from CMCDDTLM where GRP_C='organization' and DTL_C=org_no and not DTL_C_NM="Country"),"") org_nm,
 			ifnull((select country from employee where employeeNumber=emp_no),"") emp_country
 		from dept 
 		where 
 			country=#{country} and use_yn='y')
+	</select>
+	<select id="selectOrgChartAll" resultType="Map">
+		select 
+			dept_no,
+			dept_nm,
+			dept_mgr_no,
+			ifnull(country,"") country,
+			(select name from employee where employeeNumber=emp_no) emp_nm,
+			emp_no,
+			(select DTL_C_NM from CMCDDTLM where GRP_C='position' and DTL_C in(select position from employee where employeeNumber=emp_no)) position,
+			ifnull((select DTL_C_NM from CMCDDTLM where GRP_C='organization' and DTL_C=org_no and not DTL_C_NM="CEO" and not DTL_C_NM="Country"),"") org_nm,
+			ifnull((select country from employee where employeeNumber=emp_no),"") emp_country
+		from dept 
 	</select>
 	<select id="selectDeptSearch" resultType="deptViewDto">
 	  SELECT CASE WHEN LEVEL-1 > 0 then CONCAT(CONCAT(REPEAT('', level  - 1),'┗ '), dept.dept_nm)
