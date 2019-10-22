@@ -73,7 +73,7 @@
 						<span class="hidden-xs"><font color="white"><c:out
 									value="${mgr.division }"></c:out></font></span>
 					</li>
-					<li style="padding-top: 1px"><a href="#" id="myPage"
+					<li style="padding-top: 1px"><a id="myPage"
 						title="My page"><span><font color="white"><c:out
 										value="${mgr.mName }"></c:out></font></span></a></li>
 					<li style="padding-top: 2px"><a id="assetChart"
