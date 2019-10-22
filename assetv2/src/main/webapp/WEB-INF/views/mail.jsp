@@ -36,10 +36,12 @@
     <script src="/js/jquery.form.js" type="text/javascript"></script>
     <script src="js/jquery.session.js" type="text/javascript"></script>
     <script src="js/jquery.serializeObject.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
     <script type="text/javascript">
-    
+   
     	var calendar_list;
     	var isRun = false;
+    	var oEditors;
 		$(function(){
 			var content = "";
 			var $issuer_tr = $("#issuer_tr").tagit({
@@ -64,6 +66,7 @@
 			          // 라디오버튼 클릭시 이벤트 발생
 		    $("input:radio[name=task_type]").click(function(){
 		 		$("#content").val("");
+		 		$("#subject").val("");
 		 		$("#ccTags").tagit("removeAll")
 				$("#issuer_tr").tagit("removeAll")
 				$("#toTags").tagit("removeAll");
@@ -88,7 +91,8 @@
 		        	var tag = '<option value=""></option>'
 		        	+'<option value="pass">최종합격 안내</option>'
 		        	+'<option value="document">입사자 제출 서류 안내</option>'
-		        	+'<option value="fail">불합격 통지 안내</option>';
+		        	+'<option value="fail">불합격 통지 안내</option>'
+		        	+'<option value="total">한국법인 전체</option>';
 		        	$("#type").html(tag);
 		        	$(".ga").hide();
 		        	
@@ -147,6 +151,9 @@
 			
 			
 			$("#sendBtn").click(function() {
+				if($("#type").val()=="total"){
+					oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+				}
 				if($.frmchk()){
 					
 					if(isRun == true){
@@ -197,16 +204,19 @@
 				$("#issuer_tr").tagit("removeAll")
 				$("#toTags").tagit("removeAll");
 				$("#content").val("").show();
+				$("#subject").val("");
+				$("iframe").remove();
+			
 				if($(this).val()=="fail"){
 					$("#content").hide();
 				}
+				
 				switch ($(this).val()) {
 				case "ip":
 					content +='신규입사자 관련으로 IP/VOIP 할당 요청드립니다.\n'
 					+'각 부서 관리자께 설정 URL과 함께 안내 부탁드립니다.\n\n\n';
 					$("#content").val(content);
 					$("#issuer_tr").show();
-					$("#content").val()
 					$.ajax({
 						url:"/calendar/ipConfirm/proc",
 						contentType:"application/json; charset=UTF-8",
@@ -233,6 +243,8 @@
 							 }
 							 //$("#ccTags").tagit("createTag", elt.mgr,elt.mgr_email);
 							 $("#ccTags").tagit("createTag", fstRgt.label,fstRgt.value);
+							 $("#toTags").tagit("createTag", "network","network@qoo10.com");
+							 $("#toTags").tagit("createTag", "voip","voip@qoo10.com");
 						 })
 						 $issuer_tr.tagit({
 							 tagLimit:data.list.length,
@@ -247,7 +259,7 @@
 				case "emp_ctf":
 					$("#issuer_tr").hide();
 					content +='명함 제작 및 사원증 제작 완료되어' 
-						+' 안내드리오니,\n 경영지원실에서 수령하시면 되겠습니다.\n\n'
+						+' 안내드리오니,\n경영지원실에서 수령하시면 되겠습니다.\n\n'
 						+'보안 이슈로 인해 사원증의 경우 '
 						+'분실 시 \n“분실 사유서 제출” 및 <font color="red">“재발급 비용 1만원”</font>이\n 부과되오니 관리를 철저히 해주시기 바랍니다.';
 					$("#content").val(content);
@@ -281,6 +293,17 @@
 				case "fail":
 					$(".hr").hide();
 					$("#subject").val("[Qoo10]채용결과 안내");
+					break;
+				case "total":
+					$("#toTags").tagit("createTag", "KR","kr@qoo10.com");
+					$(".hr").hide();
+						oEditors = [];
+						nhn.husky.EZCreator.createInIFrame({
+						 oAppRef: oEditors,
+						 elPlaceHolder: "content",
+						 sSkinURI: "/resources/se2/SmartEditor2Skin.html",
+						 fCreator: "createSEditor2"
+					});
 					break;
 				default:
 					$("#issuer_tr").hide();
@@ -362,12 +385,21 @@
 			}
 				
 		})
+		function submitContents() {
+			 // 에디터의 내용이 textarea에 적용된다.
+			
+			
+			 // 에디터의 내용에 대한 값 검증은 이곳에서
+			 // document.getElementById("ir1").value를 이용해서 처리한다.
+			
+		}
+		
 		
 		
 	</script>
 </head>
 <body>
-	<div class="content-wrapper2" style="width: 500px">
+	<div class="content-wrapper2" style="width: 850px">
 		
 		   <!-- Main content -->
 	       <section class="content">
@@ -383,7 +415,7 @@
 							
 							  <div id="writeDiv">
 										<form id="empForm">
-										<input type="hidden" id="subject">
+										
 										<table class="table table-bordered text-sm" style="table-layout: fixed;" id="inputTable">
 										<thead>
 										<tr height="22">
@@ -418,18 +450,25 @@
 										</tr>
 										<tr height="22">
 											<td class="tdBack" align="left"><strong class="list_title">수신자</strong></td>
-						            		<td align="left" width="80"><div class="input-col"><ul id="toTags" class="auto"></ul></div>	
+						            		<td align="left"><div class="input-col"><ul id="toTags" class="auto"></ul></div>
 									        </td>
 										</tr>
 										
 										<tr height="22">
 											<td class="tdBack" align="left"><strong class="list_title">참조</strong></td>
-						            		<td align="left" width="80"><div class="input-col"><ul id="ccTags" class="auto"></ul></div>
+						            		<td align="left"><div class="input-col"><ul id="ccTags" class="auto"></ul></div>
 									        </td>
+										</tr>
+										<tr height="22" id="subject_tr">
+											<td class="tdBack" align="left" ><strong class="list_title">제목</strong></td>
+											<td align="left">
+												<div class="input-col">
+						            				<input type="text" class="form-control input-sm col-xs-3" id="subject" style="margin-right: 10px;">
+						            			</div>
 										</tr>
 										<tr height="22">
 											<td class="tdBack" align="left"><strong class="list_title">내용</strong></td>
-						            		<td align="left" width="80"><div class="input-col"><textarea id="content" rows="5" class="form-control"></textarea><div align="left"><input type="button" class="btn bg-navy btn-sm" id="previewBtn" value="Preview"></div></div>
+						            		<td align="left"><textarea id="content" rows="10" cols="100"></textarea><div align="left"><input type="button" class="btn bg-navy btn-sm" id="previewBtn" value="Preview"></div>
 									        </td>
 										</tr>
 										<tr height="22" class="hr" style="display: none;">
@@ -462,6 +501,7 @@
 									<br>
 									
 									<div align="right">
+									
 										<button class="btn bg-navy btn-sm" id="sendBtn">Send</button>									
 									</div><br>
 							    </div>

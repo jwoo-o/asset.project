@@ -29,8 +29,7 @@ public class EmailSendServiceImpl implements EmailSendService {
 	Logger logger = LoggerFactory.getLogger(EmailSendServiceImpl.class);
 	
 	@Override
-	public void emailSendProc(String subject, String content, String from, List<String> rcvEmlAddr, String rcvNm,
-			String wkrId) throws Exception {
+	public void emailSendProc(String subject, String content, String from, List<String> rcvEmlAddr) throws Exception {
 		// TODO Auto-generated method stub
 		
 			for (String toAddr : rcvEmlAddr) {

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.core.service.CommonServie;
@@ -33,9 +34,12 @@ public class DeptController extends CoreController{
 	
 	
 	@GetMapping("/dept/register")
-	public String deptRegister(Model model) throws Exception{
+	public String deptRegister(Model model,String dept_no) throws Exception{
 		
 		model.addAttribute("common",cService.selCommonLst());
+		if(dept_no!=null) {
+			model.addAttribute("dept_no", dept_no);
+		}
 		return "deptRegister";
 	}
 	@PostMapping("/dept/dtl/proc")

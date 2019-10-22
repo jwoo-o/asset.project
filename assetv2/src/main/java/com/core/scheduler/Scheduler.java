@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 import com.core.controller.CoreController;
 import com.core.service.DeptService;
 
-@Component
+@Component("cronTask")
 public class Scheduler extends CoreController{
 
 	@Inject
 	private DeptService service;
 	
-	@Scheduled(cron="0 0 * * 0")
+	@Scheduled(cron="0 0 0 ? * MON")
 	public void orgChartScheduler() {
 		try {
 			service.selOrgChartDownload();
@@ -23,4 +23,5 @@ public class Scheduler extends CoreController{
 			logger.error(e.getMessage(),e);
 		}
 	}
+	
 }

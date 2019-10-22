@@ -82,7 +82,7 @@ public class CalendarServiceImpl implements CalendarService {
 						"	    	<img src='https://stcom.image-gmkt.com/css/us/qoo10/front/cm/common/image/logo_qoo10_main.png'>" + 
 						"	    	</div></div></body></html>";
 		*/
-		emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
+		emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list);
 		map.clear();
 		return map;
 	}
@@ -117,6 +117,7 @@ public class CalendarServiceImpl implements CalendarService {
 		return map;
 	}
 
+	//입사 최종 등록(메일,등록)
 	@Override
 	public Map<String, Object> updCalendarJoin(CalendarJoinDto dto, ManagerDto manager) throws Exception {
 		// TODO Auto-generated method stub
@@ -158,13 +159,13 @@ public class CalendarServiceImpl implements CalendarService {
 							"	    	</div></div></body></html>";
 			
 				
-			emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list,manager.getmName(), "system");
+			emailSendService.emailSendProc(subject, content, "ga_kr@qoo10.com",list);
 			
 		}
 					
 		return map;
 	}
-
+	//신규입사시 ip 및 voip 확인메일처리시 list
 	@Override
 	public Map<String, Object> selIpConfirm() throws Exception {
 		// TODO Auto-generated method stub

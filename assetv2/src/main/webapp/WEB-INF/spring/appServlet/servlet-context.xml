@@ -24,6 +24,7 @@
 	<resources location="/resources/" mapping="/resources/**" />
 	<resources location="/resources/build/css/" mapping="/css/**" />
 	<resources location="/resources/build/js/" mapping="/js/**" />
+	<resources location="/resources/build/se2/" mapping="/se2/**" />
 	<resources location="/resources/build/images/"
 		mapping="/images/**" />
 

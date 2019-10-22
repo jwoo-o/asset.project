@@ -4,76 +4,107 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	<import resource="classpath:/spring/scheduler-context.xml"/>
+	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="url" value="jdbc:log4jdbc:mysql://192.168.70.229:3306/assetdb?useSSL=false&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;autoReconnect=true"/>
-		<property name="username" value="asset"/>
-		<property name="password" value="gigi6004"/>
-		<property name="validationQuery" value="SELECT 1"/>
-		<property name="testWhileIdle" value="true"/>
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="url"
+			value="jdbc:log4jdbc:mysql://192.168.70.229:3306/assetdb?useSSL=false&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;autoReconnect=true" />
+		<property name="username" value="asset" />
+		<property name="password" value="gigi6004" />
+		<property name="validationQuery" value="SELECT 1" />
+		<property name="testWhileIdle" value="true" />
 	</bean>
-	
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"/>
-		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
-		<property name="mapperLocations" value="classpath:/mappers/*-mapper.xml"/>
+
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation"
+			value="classpath:/mybatis-config.xml" />
+		<property name="mapperLocations"
+			value="classpath:/mappers/*-mapper.xml" />
 	</bean>
-	
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory"
+			ref="sqlSessionFactory" />
 	</bean>
-	
-	
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="mails.qoo10.com"/>
-		<property name="port" value="25"/>
+
+
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="mails.qoo10.com" />
+		<property name="port" value="25" />
 		<property name="defaultEncoding" value="UTF-8"></property>
 		<property name="javaMailProperties">
 			<props>
-               	<prop key="mail.smtp.auth">false</prop>
-               	<prop key="mail.transport.protocol">smtp</prop>
-               	<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.auth">false</prop>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.debug">true</prop>
 			</props>
 		</property>
 	</bean>
-	
-	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+
+	<bean id="velocityEngine"
+		class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
 		<property name="velocityProperties">
 			<props>
 				<prop key="resource.loader">class</prop>
-				<prop key="class.resource.loader.class">org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader</prop>
+				<prop key="class.resource.loader.class">org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+				</prop>
 			</props>
 		</property>
 	</bean>
-	
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="10485760"/>
+
+	<bean id="templateEngine"
+		class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<!-- ClassLoaderTemplateResolver의 기본 경로는 소스 경로 즉 /WEB-INF/classes 부터 시작이다. -->
+		
+		<property name="templateResolver" ref="templateResolver"></property>
+		
 	</bean>
 	
-	<bean id = "uploadPath" class="java.lang.String">
-	<!-- <beans:constructor-arg value="/volume1/upload/ROOT/resources/build/images\profileImage"> -->
-	<!-- <constructor-arg value="C:\Users\ghkt741\git\asset.project\assetv2\src\main\webapp\resources\build\images\profileImage"> -->
-	<constructor-arg value="/var/webapps/upload/profile_images">
-	</constructor-arg>
+	<bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+		<property name="prefix" value="classpath:/templates/" />
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML5" />
+		<property name="characterEncoding" value="UTF-8" />
+		<property name="cacheable" value="false" />
 	</bean>
-	<bean id = "mailPath" class="java.lang.String">
-		<constructor-arg value="/var/webapps/mail_file"/>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760" />
+	</bean>
+
+	<bean id="uploadPath" class="java.lang.String">
+		<!-- <beans:constructor-arg value="/volume1/upload/ROOT/resources/build/images\profileImage"> -->
+		<!-- <constructor-arg value="C:\Users\ghkt741\git\asset.project\assetv2\src\main\webapp\resources\build\images\profileImage"> -->
+		<constructor-arg
+			value="/var/webapps/upload/profile_images">
+		</constructor-arg>
+	</bean>
+	<bean id="mailPath" class="java.lang.String">
+		<constructor-arg value="/var/webapps/mail_file" />
 	</bean>
 	
-	<context:component-scan base-package="com.asset.service.dao"></context:component-scan>
-	<context:component-scan base-package="com.asset.service.impl"></context:component-scan>
-	<context:component-scan base-package="com.core.service.dao"></context:component-scan>
-	<context:component-scan base-package="com.core.service.impl"></context:component-scan>
-	<context:component-scan base-package="com.emp.service.impl"></context:component-scan>
-	<context:component-scan base-package="com.emp.service.dao"></context:component-scan>
-	<context:component-scan base-package="com.calendar.service.dao"></context:component-scan>
-	<context:component-scan base-package="com.calendar.service.impl"></context:component-scan>
-	
-	
+	<bean id="orgchartPath" class="java.lang.String">
+		<constructor-arg value="/volume1/KR_GA/조직도" />
+	</bean>
+
+	<bean id="cronTask" class="com.core.scheduler.Scheduler" />
+    <task:scheduler id="cronScheduler" pool-size="10" />
+    <task:annotation-driven scheduler="cronScheduler" />
+
+
+	<context:component-scan base-package="com"></context:component-scan>
 </beans>

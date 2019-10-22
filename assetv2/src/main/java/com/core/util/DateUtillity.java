@@ -41,4 +41,14 @@ public class DateUtillity {
 			e.printStackTrace();
 		}
 	}
+	
+	public static String currnetDate() {
+		
+		
+		Date curDate = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		
+		return format.format(curDate);
+		
+	}
 }

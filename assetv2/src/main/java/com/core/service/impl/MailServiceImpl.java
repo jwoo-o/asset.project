@@ -30,7 +30,7 @@ public class MailServiceImpl implements MailService {
 	private CalendarDao dao;
 	
 	@Resource(name="velocityEngine")
-    VelocityEngine velocityEngine;
+    private VelocityEngine velocityEngine;
 	
 	@Resource(name="mailPath")
 	private String mailPath;
@@ -71,15 +71,28 @@ public class MailServiceImpl implements MailService {
 		if(vo.getType().equals("fail")) {
 			sender = "hr_kr@qoo10.com";
 		}
-		String content = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "email_template/mail.vm","UTF-8",map);
-		service.emailGrpSendProc(vo.getSubject(), content, sender, vo.getTo(), vo.getCc(),file_list);
-		if(vo.getList()!=null) {
-			for(CalendarVo data : vo.getList()) {
-				data.setLstMdfWkrNm(dto.getmName());
-				dao.updateIp(data);
+		if(vo.getType().equals("total")) {
+			sender = dto.getmId()+"@qoo10.com";
+			String content = vo.getContent();
+			List<String> list = new ArrayList<String>();
+			String [] to = {"ghkt741@qoo10.com"};
+			for(int i=0;i<to.length;i++) {
+				list.add(to[i].split("@")[0]);
 			}
-			map.clear();
+			service.emailSendProc(vo.getSubject(), content, sender, list);
+			//service.emailGrpSendProc(vo.getSubject(), content, sender,vo.getTo(), vo.getCc(),file_list);
+		}else {	
+			String content = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "email_template/mail.vm","UTF-8",map);
+			service.emailGrpSendProc(vo.getSubject(), content, sender, vo.getTo(), vo.getCc(),file_list);
+			if(vo.getList()!=null) {
+				for(CalendarVo data : vo.getList()) {
+					data.setLstMdfWkrNm(dto.getmName());
+					dao.updateIp(data);
+				}
+				map.clear();
+			}
 		}
+		
 		
 		return map;
 	}
