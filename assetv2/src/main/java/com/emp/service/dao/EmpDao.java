@@ -90,6 +90,15 @@ public class EmpDao {
 		// TODO Auto-generated method stub
 		return session.selectList("emp.selectEmpCount",country);
 	}
+	
+	public List<Map<String, Object>> selectCountryCount() throws SQLException {
+		// TODO Auto-generated method stub
+		return session.selectList("emp.selectCountryCount");
+	}
+	public List<Map<String, Object>> selectOrgListAll() throws SQLException {
+		return session.selectList("emp.selectOrgListAll");
+	}
+	
 
 	//최상위 부서 국가 변경시 조직원 전부 변경
 	public void updateCountry(DeptVo vo) throws SQLException {

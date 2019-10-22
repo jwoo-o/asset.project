@@ -106,8 +106,8 @@ var isRun = false;
 				popup(url, title, x, y);
 			})
 			$("#mail").click(function() {
-				var x = 500;
-				var y = 670;
+				var x = 860;
+				var y = 860;
 				var url = '/mail';
 				var title = 'Mail Send';
 				

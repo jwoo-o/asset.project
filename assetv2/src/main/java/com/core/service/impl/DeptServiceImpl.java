@@ -1,17 +1,25 @@
 package com.core.service.impl;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.thymeleaf.Template;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring4.view.ThymeleafView;
 
 import com.core.service.CoreService;
 import com.core.service.DeptService;
 import com.core.service.dao.DeptDao;
+import com.core.util.DateUtillity;
 import com.core.util.JsonUtil;
 import com.core.vo.CommonDto;
 import com.core.vo.DeptViewDto;
@@ -29,6 +37,12 @@ public class DeptServiceImpl extends CoreService implements DeptService {
 
 	@Inject
 	private EmpDao edao;
+	
+	@Resource(name="templateEngine")
+	private TemplateEngine templateEngine;
+	
+	@Resource(name="orgchartPath")
+	String orgchartPath;
 
 	@Override
 	public Map<String, Object> insDept(DeptVo vo, ManagerDto manager) throws Exception {
@@ -369,9 +383,23 @@ public class DeptServiceImpl extends CoreService implements DeptService {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		
-		map.put("tree", JsonUtil.convertorTreeMap(dao.selectOrgChart(null), 0, "dept_no", "dept_mgr_no", "dept_nm"));
-		map.put("emp", edao.selectOrgList(null));
-		map.put("count", edao.selectEmpCount(null));
+		map.put("tree", JsonUtil.convertorTreeMap(dao.selectOrgChartAll(), 0, "dept_no", "dept_mgr_no", "dept_nm"));
+		map.put("emp", edao.selectOrgListAll());
+		map.put("count", edao.selectCountryCount());
+		
+		Context context = new Context();
+		context.setVariable("data", map);
+		context.setVariable("date", "["+DateUtillity.currnetDate()+"]기준");
+		
+		String data = templateEngine.process("orgchart", context);
+		
+		
+		File file = new File(orgchartPath+"/"+DateUtillity.currnetDate()+"_orgchart.html");
+		//File file = new File("C:\\"+DateUtillity.currnetDate()+"_orgchart.html");
+		FileOutputStream fos = new FileOutputStream(file);
+		fos.write(data.getBytes());
+		fos.close();
+		
 	}
 
 }

@@ -156,11 +156,7 @@
   
   <select id="selectDeptMgr" resultType="empVo">
   	select name,employeeNumber as empNo from employee
-  	where
-  		position &gt; 1
-  	and
-  		employeeNumber not in(select emp_no from dept where emp_no is not null)
-	and country=#{country} 
+  	
 
   </select>
   
@@ -188,6 +184,30 @@
   		country = #{country}
   	group by div_nm)
   </select>
+  
+  <select id="selectOrgListAll" resultType="Map">
+  	select 
+  		name,
+  		(select DTL_C_NM from CMCDDTLM c1 where c1.GRP_C='position' and c1.DTL_C=position) as pos_nm,
+  		basic_dept,
+  		employeeNumber empNo
+  	from employee
+  	where employeeNumber not in(select emp_no from dept where emp_no is not null)
+    order by position desc,joinDate asc
+  </select>
+  
+  <select id="selectCountryCount" resultType="Map">
+  	select (select dept_nm from dept where emp_no=employeeNumber) country,count(*) count,(select dept_no from dept where emp_no=employeeNumber) dept_no
+	from employee where employeeNumber="G00001"
+	union
+	(SELECT country,count(*) count,(select dept_no from dept where dept_nm in(select country from employee sub_e where e.country=sub_e.country)) dept_no
+	FROM 
+		employee e
+	where 
+		not country="" 
+	group by country)
+  </select>
+  
   
   <update id="updateCountry">
   		update employee set country=#{country} where division=#{dept_no}
