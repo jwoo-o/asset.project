@@ -91,7 +91,8 @@
 						contentType:"application/json; charset=UTF-8"
 					}).done(function(data) {
 						if(data.msg=="0001")
-							$("#assetNo").val(data.assetNo);
+							$("#assetNo").val(data.assetNo).attr("readonly",true);
+						
 						else
 							alert(data.msg);
 					})
