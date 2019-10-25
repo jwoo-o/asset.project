@@ -15,7 +15,7 @@ var organization = {
 				oc.export($("#seat_title").text()+"-organization", "png");
 			});
 			$(document).on('click', '.title', function(){			
-				_this.deptPopup();		
+				_this.deptPopup(this);		
 			});
 			$(document).on('mouseenter', '.employee', function(){
 	    		$(this).css('background-color', 'rgba(255, 217, 250, 0.8)');
@@ -148,9 +148,9 @@ var organization = {
 			$("#floor_data").append(tag);
 			
 		},
-		deptPopup : function(){
+		deptPopup : function(_this){
 			
-			var id = $(this).parent().attr("id");
+			var id = $(_this).parent().attr("id");
 			if(id!=undefined){
 				
 				var x = 1000;
