@@ -353,10 +353,25 @@ var seat = {
 					$("#floor_data").append(n3_count_tag);
 					
 					//qx좌석
-					for(var i=1;i<=11;i++){
+					var i;
+					for(i=1;i<=6;i++){
 						$("#n1300"+(i+58)).append('<p>qx'+i+'</p>').off();
 						$("#n1300"+(i+58)).css("background", "#FFE400");
 					}
+					$("#n130069").append('<p>qx'+(++i)+'</p>').off();
+					$("#n130069").css("background", "#FFE400");
+					$("#n130068").append('<p>qx'+(++i)+'</p>').off();
+					$("#n130068").css("background", "#FFE400");
+					
+					$("#n130103").append('<p>qx'+(++i)+'</p>').off();
+					$("#n130103").css("background", "#FFE400");
+					$("#n130104").append('<p>qx'+(++i)+'</p>').off();
+					$("#n130104").css("background", "#FFE400");
+					$("#n130124").append('<p>qx'+(++i)+'</p>').off();
+					$("#n130124").css("background", "#FFE400");
+					$("#n130125").append('<p>qx'+(++i)+'</p>').off();
+					$("#n130125").css("background", "#FFE400");
+					
 					//$("#n30089").append('<p>출장석</p>').off("click");
 					//$("#n30122").append('<p>출장석</p>').off("click");
 					//$("#n30120").append('<p>테스트석</p>').off("click");
