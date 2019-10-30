@@ -104,7 +104,7 @@
     			}
         	}else if(formNames=="mdfForm"){
         		if($("#edivision").val()==43){
-    				if($("#office_number").val().trim()==""){
+    				if($("#eoffice_number").val().trim()==""){
     					alert("GA&ER 부서는 사무실전화번호가 필수 입니다.");
     					return false;
     				}
