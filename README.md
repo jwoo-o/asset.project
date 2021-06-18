@@ -1,5 +1,4 @@
-# 경영지원시스템
-
+# 자산관리 시스템
 ## 프로젝트 환경
 ### 개발 환경
 - JDK(8.0)
@@ -20,21 +19,3 @@
 - fullcalendar.js
 - gijgo-grid.js
 - org-chart.js
-
-
-### 배포환경
-- jenkins
-
-### 형상관리
-- github 로컬
-- svn 운영서버(Synology Nas)
-
-## 스크린샷
-![](https://github.com/ohjinnoo/ohjinnoo.github.io/blob/master/img/portfolio/portfolio1.png)
-![](https://github.com/ohjinnoo/ohjinnoo.github.io/blob/master/img/portfolio/portfolio2.PNG)
-![](https://github.com/ohjinnoo/ohjinnoo.github.io/blob/master/img/portfolio/portfolio3.PNG)
-![](https://github.com/ohjinnoo/ohjinnoo.github.io/blob/master/img/portfolio/portfolio4.PNG)
-![](https://github.com/ohjinnoo/ohjinnoo.github.io/blob/master/img/portfolio/portfolio6.png)
-![](https://github.com/ohjinnoo/ohjinnoo.github.io/blob/master/img/portfolio/portfolio5.png)
-![캡처](https://i.imgur.com/PthwACW.png)
-![캡처](https://i.imgur.com/fQqgxHY.png)
