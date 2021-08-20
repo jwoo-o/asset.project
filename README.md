@@ -1,9 +1,4 @@
 # 자산관리 시스템
-## 프로젝트 환경
-### 개발 환경
-- JDK(8.0)
-- Tomcat(7.0) 운영서버(Synology Nas) 
-- Maria DB 5 운영서버(Synology Nas)
 
 ### 프로그래밍 언어
 - Java(8.0)
